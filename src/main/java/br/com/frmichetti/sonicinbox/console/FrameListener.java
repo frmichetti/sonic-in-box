@@ -6,26 +6,22 @@
  * */
 package br.com.frmichetti.sonicinbox.console;
 
-import br.com.frmichetti.sonicinbox.Start;
 import br.com.frmichetti.sonicinbox.engine.Engine;
 import br.com.frmichetti.sonicinbox.enumeration.ConfigEngine;
 import br.com.frmichetti.sonicinbox.util.Size;
 
 public class FrameListener extends javax.swing.JFrame implements Runnable {
 
-	private static final long serialVersionUID = -8266452496408906017L;
-	
-	private Thread t;	
+	private static final long serialVersionUID = -8266452496408906017L;	
 
     private javax.swing.JProgressBar JPB_Aceleracao;
     
     private javax.swing.JLabel LBL_Aceleracao;
     
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel1;    
+    
 
-    public FrameListener() {
-        
-    	t = new Thread(Start.tgrpConsole, this, "Listener Thread");
+    public FrameListener() {    	
         
         super.addKeyListener(Engine.event);
 
@@ -37,7 +33,7 @@ public class FrameListener extends javax.swing.JFrame implements Runnable {
         
         super.setLocation((Size.MAX_WIDTH - getWidth()) / 2, (Size.MAX_HEIGHT - getHeight()));
 
-        t.start();
+       
     }
 
     private void initComponents() {
@@ -122,7 +118,7 @@ public class FrameListener extends javax.swing.JFrame implements Runnable {
 
             } catch (InterruptedException ex) {
             	
-            	throw new RuntimeException("Falha ao Interromper " + t.getName() + " " + ex.getMessage());
+            	throw new RuntimeException("Falha ao Interromper " + ex.getMessage());
             }
 
         }

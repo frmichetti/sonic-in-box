@@ -14,7 +14,7 @@ import br.com.frmichetti.sonicinbox.enumeration.Orientation;
 
 public class Movimentation implements Runnable {
 
-    private Thread t;
+    private Thread t;    
 
     public Movimentation() {
         t = new Thread(Start.tgrpSonic, this, "Movimentation Thread");
@@ -123,8 +123,10 @@ public class Movimentation implements Runnable {
     public void run() {
 
         while (true) {
-
-            doMove();
+        	
+        	if(Engine.sonic!= null){
+        		doMove();	
+        	}            
 
             try {
 

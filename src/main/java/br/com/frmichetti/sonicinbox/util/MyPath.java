@@ -7,78 +7,34 @@
 package br.com.frmichetti.sonicinbox.util;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class MyPath {
 
-	private final static String MUSICS_OPEN_SHIFT = "http://portfolio-frmichetti.rhcloud.com/proj/java/br.com.frmichetti.sonicinbox/lib/musics/";
+	public final static String MUSICS_OPEN_SHIFT = 
+			"http://portfolio-frmichetti.rhcloud.com/proj/java/sonicinbox/lib/musics/";
 
-	private final static String SPRITES_OPENSHIFT = "http://portfolio-frmichetti.rhcloud.com/proj/java/br.com.frmichetti.sonicinbox/lib/sprites/";
+	public final static String SPRITES_OPENSHIFT = 
+			"http://portfolio-frmichetti.rhcloud.com/proj/java/sonicinbox/lib/sprites/";
 
-	private final static String MUSICS_LOCAL_HOST = "http://127.0.0.1/portfolio/proj/java/br.com.frmichetti.sonicinbox/lib/musics/";
+	public final static String MUSICS_LOCAL_HOST =			
+			"http://localhost/frmichetti/portfolio/php/proj/java/sonicinbox/lib/musics/";			
 
-	private final static String SPRITES_LOCAL_HOST = "http://127.0.0.1/portfolio/proj/java/br.com.frmichetti.sonicinbox/lib/sprites/";
+	public final static String SPRITES_LOCAL_HOST =			
+			"http://localhost/frmichetti/portfolio/php/proj/java/sonicinbox/lib/sprites/";
 
-	public static URL urlMusicsOpenShift,urlSpritesOpenShift,
-	urlMusicsLocalHost,urlSpritesLocalHost,urlMusicsRelative,urlSpritesRelative;
+	public final static String MUSICS_RELATIVE = "file:///META-INF/lib/musics/";
+
+	public final static String SPRITES_RELATIVE = "file:///META-INF/lib/sprites/";	
 
 	public static final String FILE_SEPARATOR = FileSystems.getDefault().getSeparator();
 
-	private MyPath() {
-		// STUB
-	}
+	File fMusics = new File(MUSICS_RELATIVE);
 
-	static {
-
-		System.out.println("[STATIC MyPath]");
-
-		Path path;
-
-		try {
-
-			path = Paths.get(MyPath.class.getProtectionDomain().getCodeSource().getLocation().toURI());			
-
-			System.out.println(path);
-
-		} catch (URISyntaxException e1) {
-
-			throw new RuntimeException("Could not Resolve Path ",e1);
-		}
-
-		try {		
-
-			urlMusicsOpenShift = new URL(MUSICS_OPEN_SHIFT);
-
-			urlSpritesOpenShift = new URL(SPRITES_OPENSHIFT);
-
-			urlMusicsLocalHost = new URL(MUSICS_LOCAL_HOST);
-
-			urlSpritesLocalHost = new URL(SPRITES_LOCAL_HOST);
-
-			String MUSICS_RELATIVE = "./META-INF/lib/musics/";
-
-			String SPRITES_RELATIVE = "./META-INF/lib/sprites/";				
-
-			File fMusics = new File(MUSICS_RELATIVE);
-
-			File fSprites = new File(SPRITES_RELATIVE);
-
-			System.out.println(MUSICS_RELATIVE);
-
-			System.out.println(SPRITES_RELATIVE);
-
-		} catch (MalformedURLException e) {
-
-			throw new RuntimeException("Problema ao Instanciar URLs");
-		}
-
-	}
+	File fSprites = new File(SPRITES_RELATIVE);
 
 	public static String testPath(String caminho) {
 

@@ -28,10 +28,6 @@ public final class Start {
         
         tgrpSonic = new ThreadGroup(tgrpEngine, "Sonic Threads");
         
-        tgrpConsole = new ThreadGroup(tgrpEngine, "Console Threads");
-
-        tgrpConsole.setMaxPriority(Thread.MIN_PRIORITY);
-        
         tgrpEngine.setMaxPriority(Thread.NORM_PRIORITY);
         
         tgrpSonic.setMaxPriority(Thread.MAX_PRIORITY);
@@ -67,33 +63,30 @@ public final class Start {
     }
 
     public void doCreateFrame() {
+        
+            try {
+				SwingUtilities.invokeAndWait(() -> {
 
-        try {
-            SwingUtilities.invokeAndWait(() -> {
+				    new Engine();
+				    
+				    new FrameListener();
 
-                new Engine();
+				    new FrameAnimation();
 
-            });
-        } catch (InterruptedException | InvocationTargetException ex) {
-        	
-        	throw new RuntimeException(ex);
-        	
-        }
+				    new FrameAction();				    
 
-        SwingUtilities.invokeLater(() -> {
-
-            new FrameListener();
-
-            new FrameAnimation();
-
-            new FrameAction();
-
-        });
+				});
+				
+			} catch (InvocationTargetException | InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}    
 
     }
 
     public static void main(String ... args) {
-        new Start();
+        
+    	new Start();
     }
 
 }

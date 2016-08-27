@@ -6,10 +6,12 @@
  * */
 package br.com.frmichetti.sonicinbox.motion;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
-
-import javax.annotation.PostConstruct;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import br.com.frmichetti.sonicinbox.Start;
 import br.com.frmichetti.sonicinbox.enumeration.Action;
@@ -44,9 +46,10 @@ public final class Sonic extends Observable implements Runnable, Observer {
 	
 	private Thread thread;
 	
-	private static Animation animation = new Animation();
+	private Movimentation movimentation = new Movimentation();
 	
-	private static Movimentation movimentation = new Movimentation();
+	public Animation animation = new Animation();
+	
 
 	private Sonic() {
 
@@ -79,6 +82,12 @@ public final class Sonic extends Observable implements Runnable, Observer {
 		setAction(Action.STOP);
 
 		doLoadSprites();
+		
+		ExecutorService executor = Executors.newFixedThreadPool(2);
+		
+		executor.execute(movimentation);
+		
+		executor.execute(animation);				
 
 	}
 
@@ -87,14 +96,12 @@ public final class Sonic extends Observable implements Runnable, Observer {
 		this.ai = ai;
 	}
 
-	@PostConstruct
 	private void doLoadSprites(){
-		sprites = new Sprites(MyPath.urlSpritesOpenShift);
-	}
-
-
-	public static Animation getAnimation() {
-		return animation;
+		try {
+			sprites = new Sprites(new URL(MyPath.SPRITES_OPENSHIFT));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Sprites getSprites() {
@@ -182,7 +189,7 @@ public final class Sonic extends Observable implements Runnable, Observer {
 		this.action = action;
 	}
 
-	public static Movimentation getMovimentacao() {
+	public Movimentation getMovimentation() {
 		return movimentation;
 	}
 

@@ -14,6 +14,7 @@ public abstract class SignBoard implements Runnable {
     public static void substring(String s) throws InterruptedException {
 
         stringBuffer = new StringBuffer(s.length());
+        
         stringBuffer.append(s);
 
         for (int i = 0; i < stringBuffer.length(); i++) {

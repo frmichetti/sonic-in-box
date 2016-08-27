@@ -23,7 +23,7 @@ public class Event implements KeyListener, Runnable {
 
 	private boolean on;
 
-	private Thread thread;
+	private Thread thread;	
 
 	public Event() {
 
@@ -59,14 +59,21 @@ public class Event implements KeyListener, Runnable {
 
 			}
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				
 				Engine.lastkeypress.delete(0, 30);
+				
 				Engine.lastkeypress.append("RIGHT");
+				
 				BTN_Right.setVisible(false);
+				
 				delay();
 
 				if (Engine.sonic.getAction() == Action.STOP && Engine.sonic.getOrientation() == Orientation.LEFT) {
+				
 					Engine.sonic.setOrientation(Orientation.RIGHT);
+					
 					Engine.sonic.doSpeedUp();
+					
 				} else if (Engine.sonic.getAction() == Action.MOVE && Engine.sonic.getOrientation() != Orientation.RIGHT) {
 
 					Engine.sonic.doBrakeUp();
@@ -79,14 +86,21 @@ public class Event implements KeyListener, Runnable {
 			}
 
 			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+								
 				Engine.lastkeypress.delete(0, 30);
+				
 				Engine.lastkeypress.append("LEFT");
+				
 				BTN_Left.setVisible(false);
 
 				delay();
+				
 				if (Engine.sonic.getAction() == Action.STOP && Engine.sonic.getOrientation() == Orientation.RIGHT) {
+				
 					Engine.sonic.setOrientation(Orientation.LEFT);
+					
 					Engine.sonic.doSpeedUp();
+					
 				} else if (Engine.sonic.getAction() == Action.MOVE && Engine.sonic.getOrientation() != Orientation.LEFT) {
 
 					Engine.sonic.doBrakeUp();
@@ -98,25 +112,38 @@ public class Event implements KeyListener, Runnable {
 
 			}
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
+				
 				Engine.lastkeypress.delete(0, 30);
+				
 				Engine.lastkeypress.append("UP");
+				
 				BTN_Up.setVisible(false);
+				
 				if (Engine.sonic.getSpeed() == 0) {
+				
 					Engine.sonic.setAction(Action.LOOK);
+					
 					Engine.sonic.setAction(Action.LOOKING);
 				}
 
 			}
 
 			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+								
 				Engine.lastkeypress.delete(0, 30);
+				
 				Engine.lastkeypress.append("DOWN");
+				
 				BTN_Down.setVisible(false);
-
+				
 				if (Engine.sonic.getSpeed() == 0) {
+					
 					Engine.sonic.setAction(Action.DOWN);
+					
 					Engine.sonic.setAction(Action.DOWNED);
+					
 				} else {
+					
 					Engine.sonic.doSpin(Engine.sonic.getAnimeSpeed());
 				}
 

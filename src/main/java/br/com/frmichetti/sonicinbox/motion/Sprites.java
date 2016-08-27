@@ -18,93 +18,59 @@ import br.com.frmichetti.sonicinbox.enumeration.ConfigSonic;
 
 public final class Sprites {
 
-    public static final String FILE_MASK = "sprite_%s.png";
+	public static final String FILE_MASK = "sprite_%s.png";
 
-    private static ImageIcon[] frames;
+	private  ImageIcon[] frames;   
 
-    private static URL currentURL;
+	private JProgressBar progressBar = new JProgressBar(0, 241);
 
-    private static boolean loaded = false;
+	public Sprites(URL from) {	
 
-    private static JProgressBar progressBar = new JProgressBar(0, 241);
+		System.out.println("Resource Sprites : " + from);
 
-    public Sprites(URL from) {		
+		System.out.println("");
 
-	currentURL = from;
+		doLoadSprites(from);
+	}
 
-	System.out.println(currentURL);
+	private void doLoadSprites(URL from) {
 
-	if (currentURL.getFile().equals("")) {
+		DecimalFormat df = new DecimalFormat("0.##");
 
-	    throw new IllegalArgumentException("Sprites Url is Empty");
+		frames = new ImageIcon[ConfigSonic.MAX_SPRITES.getValue()];
 
+		for (int c = 0; c < frames.length; c++) {
 
-	} else if (currentURL.getFile().isEmpty()){
+			progressBar.setValue(c);
 
-	    throw new IllegalArgumentException("FIle not Found ");
+			try {
 
-	}else {
+				frames[c] = new ImageIcon(new URL(String.format(from.toString() + FILE_MASK, String.valueOf(c))));
 
-	    System.out.println("Resource Sprites : " + currentURL.toString());
+			} catch (MalformedURLException ex) {
 
-	    System.out.println("");
+				throw new RuntimeException("It was not possible load Sprites " + ex);
+			}
 
-	    doLoadSprites(currentURL);
+			System.out.println("Download Sprite (" + progressBar.getValue() + "/" + progressBar.getMaximum() +")");  
 
+			System.out.println(df.format(progressBar.getPercentComplete() * 100)  + "%");
+
+			System.out.println(String.format(from.toString() + FILE_MASK, String.valueOf(c)));
+
+			System.out.println("");
+
+		}
+
+		System.out.println("End Download");
 
 	}
 
-    }
-
-    private void doLoadSprites(URL from) {
-
-	DecimalFormat df = new DecimalFormat("0.##");
-
-	frames = new ImageIcon[ConfigSonic.MAX_SPRITES.getValue()];
-
-	for (int c = 0; c < frames.length; c++) {
-
-	    progressBar.setValue(c);
-
-	    try {
-
-		frames[c] = new ImageIcon(new URL(String.format(from.toString() + FILE_MASK, String.valueOf(c))));
-
-	    } catch (MalformedURLException ex) {
-
-		throw new RuntimeException("It was not possible load Sprites " + ex);
-	    }
-
-	    System.out.println("Download Sprite (" + progressBar.getValue() + "/" + progressBar.getMaximum() +")");  
-
-	    System.out.println(df.format(progressBar.getPercentComplete() * 100)  + "%");
-
-	    System.out.println(String.format(from.toString() + FILE_MASK, String.valueOf(c)));
-
-	    System.out.println("");
-
+	public Image getImage(int indice) {
+		return frames[indice].getImage();
 	}
 
-	System.out.println("End Download");
 
-	loaded = true;
 
-    }
-
-    public Image getImage(int indice) {
-	return frames[indice].getImage();
-    }
-
-    public static URL getCurrentURL() {
-	return currentURL;
-    }
-
-    public static boolean isLoaded() {
-	return loaded;
-    }
-
-    public static double getProgress() {
-	return progressBar.getPercentComplete();
-    }
 
 }

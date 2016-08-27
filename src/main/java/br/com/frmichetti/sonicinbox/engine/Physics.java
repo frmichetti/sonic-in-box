@@ -20,7 +20,7 @@ public class Physics extends Observable implements Runnable, Observer {
 
 	private boolean on;
 
-	private Thread thread;
+	private Thread thread;	
 
 	public Physics() {
 
