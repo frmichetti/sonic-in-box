@@ -42,7 +42,7 @@ public final class Engine extends JFrame implements Runnable {
 
 	public static Event event;
 
-	public Music music;
+	public static Music music;
 
 	private Graphics g, bbg;
 

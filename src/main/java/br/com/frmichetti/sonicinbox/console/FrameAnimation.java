@@ -114,15 +114,13 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 	
 	private javax.swing.JPanel JP_Orientacao;
 	
-	private javax.swing.JSlider JSLD_VelAnimacao;
-	
-	private Engine engine;
+	private javax.swing.JSlider JSLD_VelAnimacao;	
 
 	public FrameAnimation() {		
 		
 		super.setVisible(true);
 		
-		super.addKeyListener(engine.event);
+		super.addKeyListener(Engine.event);
 		
 		initComponents();
 		
@@ -151,7 +149,7 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 	private void doRefreshComponents() {
 
-		if (engine.sonic.getOrientation() == Orientation.RIGHT) {
+		if (Engine.sonic.getOrientation() == Orientation.RIGHT) {
 			
 			BTN_Direita.setVisible(false);
 			
@@ -164,9 +162,9 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 			BTN_Esquerda.setVisible(false);
 		}
 
-		if (engine.sonic.isAi()) {
+		if (Engine.sonic.isAi()) {
 			
-			JSLD_VelAnimacao.setValue(engine.sonic.getAnimeSpeed());
+			JSLD_VelAnimacao.setValue(Engine.sonic.getAnimeSpeed());
 		}
 	}
 
@@ -1077,112 +1075,112 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 	}
 
 	private void BTN_EsperarActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doWait();
+		Engine.sonic.doWait();
 	}
 
 	private void BTN_OlharActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doLook();
+		Engine.sonic.doLook();
 
 	}
 
 	private void BTN_AbaixarActionPerformed(java.awt.event.ActionEvent evt) {
 
-		engine.sonic.doDown();
+		Engine.sonic.doDown();
 	}
 
 	private void BTN_TransformarActionPerformed(java.awt.event.ActionEvent evt) {
 
-		engine.sonic.doTransform();
+		Engine.sonic.doTransform();
 
 
 	}
 
 	private void BTN_Andar1ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doWalk(1);
-		engine.sonic.setAnimeSpeed(1);
+		Engine.sonic.doWalk(1);
+		Engine.sonic.setAnimeSpeed(1);
 	}
 
 	private void BTN_Correr1ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doRun(1);
-		engine.sonic.setAnimeSpeed(1);
+		Engine.sonic.doRun(1);
+		Engine.sonic.setAnimeSpeed(1);
 	}
 
 	private void BTN_Girar0ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doSpin(0);
-		engine.sonic.setAnimeSpeed(0);
+		Engine.sonic.doSpin(0);
+		Engine.sonic.setAnimeSpeed(0);
 	}
 
 	private void BTN_Correr2ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doRun(2);
-		engine.sonic.setAnimeSpeed(2);
+		Engine.sonic.doRun(2);
+		Engine.sonic.setAnimeSpeed(2);
 	}
 
 	private void BTN_Correr3ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doRun(3);
-		engine.sonic.setAnimeSpeed(3);
+		Engine.sonic.doRun(3);
+		Engine.sonic.setAnimeSpeed(3);
 	}
 
 	private void BTN_Correr4ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doRun(4);
-		engine.sonic.setAnimeSpeed(4);
+		Engine.sonic.doRun(4);
+		Engine.sonic.setAnimeSpeed(4);
 	}
 
 	private void BTN_Correr5ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doRun(5);
-		engine.sonic.setAnimeSpeed(5);
+		Engine.sonic.doRun(5);
+		Engine.sonic.setAnimeSpeed(5);
 	}
 
 	private void BTN_Andar2ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doWalk(2);
-		engine.sonic.setAnimeSpeed(2);
+		Engine.sonic.doWalk(2);
+		Engine.sonic.setAnimeSpeed(2);
 	}
 
 	private void BTN_Andar3ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doWalk(3);
-		engine.sonic.setAnimeSpeed(3);
+		Engine.sonic.doWalk(3);
+		Engine.sonic.setAnimeSpeed(3);
 	}
 
 	private void BTN_Andar4ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doWalk(4);
-		engine.sonic.setAnimeSpeed(4);
+		Engine.sonic.doWalk(4);
+		Engine.sonic.setAnimeSpeed(4);
 	}
 
 	private void BTN_Andar5ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doWalk(5);
-		engine.sonic.setAnimeSpeed(5);
+		Engine.sonic.doWalk(5);
+		Engine.sonic.setAnimeSpeed(5);
 	}
 
 	private void BTN_Girar1ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doSpin(1);
-		engine.sonic.setAnimeSpeed(1);
+		Engine.sonic.doSpin(1);
+		Engine.sonic.setAnimeSpeed(1);
 	}
 
 	private void BTN_Girar2ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doSpin(2);
-		engine.sonic.setAnimeSpeed(2);
+		Engine.sonic.doSpin(2);
+		Engine.sonic.setAnimeSpeed(2);
 	}
 
 	private void BTN_Girar3ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doSpin(3);
-		engine.sonic.setAnimeSpeed(3);
+		Engine.sonic.doSpin(3);
+		Engine.sonic.setAnimeSpeed(3);
 	}
 
 	private void BTN_Girar4ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doSpin(4);
-		engine.sonic.setAnimeSpeed(4);
+		Engine.sonic.doSpin(4);
+		Engine.sonic.setAnimeSpeed(4);
 	}
 
 	private void BTN_PararActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doStop();
+		Engine.sonic.doStop();
 
 	}
 
 	private void BTN_EsquerdaActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.setOrientation(Orientation.LEFT);
+		Engine.sonic.setOrientation(Orientation.LEFT);
 	}
 
 	private void BTN_DireitaActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.setOrientation(Orientation.RIGHT);
+		Engine.sonic.setOrientation(Orientation.RIGHT);
 	}
 
 	private void BTN_DireitaMouseDragged(java.awt.event.MouseEvent evt) {
@@ -1192,109 +1190,109 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 	private void JSLD_VelAnimacaoStateChanged(javax.swing.event.ChangeEvent evt) {
 
-		engine.sonic.setAnimeSpeed(JSLD_VelAnimacao.getValue());
+		Engine.sonic.setAnimeSpeed(JSLD_VelAnimacao.getValue());
 
 	}
 
 	private void BTN_Correr0ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doRun(0);
-		engine.sonic.setAnimeSpeed(0);
+		Engine.sonic.doRun(0);
+		Engine.sonic.setAnimeSpeed(0);
 	}
 
 	private void BTN_Correr6ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doRun(6);
-		engine.sonic.setAnimeSpeed(6);
+		Engine.sonic.doRun(6);
+		Engine.sonic.setAnimeSpeed(6);
 	}
 
 	private void BTN_Correr7ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doRun(7);
-		engine.sonic.setAnimeSpeed(7);
+		Engine.sonic.doRun(7);
+		Engine.sonic.setAnimeSpeed(7);
 	}
 
 	private void BTN_Andar7ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doWalk(7);
-		engine.sonic.setAnimeSpeed(7);
+		Engine.sonic.doWalk(7);
+		Engine.sonic.setAnimeSpeed(7);
 	}
 
 	private void BTN_Andar6ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doWalk(6);
-		engine.sonic.setAnimeSpeed(6);
+		Engine.sonic.doWalk(6);
+		Engine.sonic.setAnimeSpeed(6);
 	}
 
 	private void BTN_Andar0ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doWalk(0);
-		engine.sonic.setAnimeSpeed(0);
+		Engine.sonic.doWalk(0);
+		Engine.sonic.setAnimeSpeed(0);
 	}
 
 	private void BTN_Girar5ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doSpin(5);
-		engine.sonic.setAnimeSpeed(5);
+		Engine.sonic.doSpin(5);
+		Engine.sonic.setAnimeSpeed(5);
 	}
 
 	private void BTN_Girar6ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doSpin(6);
-		engine.sonic.setAnimeSpeed(6);
+		Engine.sonic.doSpin(6);
+		Engine.sonic.setAnimeSpeed(6);
 	}
 
 	private void BTN_Girar7ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doSpin(7);
-		engine.sonic.setAnimeSpeed(7);
+		Engine.sonic.doSpin(7);
+		Engine.sonic.setAnimeSpeed(7);
 	}
 
 	private void BTN_Dash0ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doDash(0);
-		engine.sonic.setAnimeSpeed(0);
+		Engine.sonic.doDash(0);
+		Engine.sonic.setAnimeSpeed(0);
 	}
 
 	private void BTN_Dash1ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doDash(1);
-		engine.sonic.setAnimeSpeed(1);
+		Engine.sonic.doDash(1);
+		Engine.sonic.setAnimeSpeed(1);
 	}
 
 	private void BTN_Dash2ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doDash(2);
-		engine.sonic.setAnimeSpeed(2);
+		Engine.sonic.doDash(2);
+		Engine.sonic.setAnimeSpeed(2);
 	}
 
 	private void BTN_Dash3ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doDash(3);
-		engine.sonic.setAnimeSpeed(3);
+		Engine.sonic.doDash(3);
+		Engine.sonic.setAnimeSpeed(3);
 	}
 
 	private void BTN_Dash4ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doDash(4);
-		engine.sonic.setAnimeSpeed(4);
+		Engine.sonic.doDash(4);
+		Engine.sonic.setAnimeSpeed(4);
 	}
 
 	private void BTN_Dash5ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doDash(5);
-		engine.sonic.setAnimeSpeed(5);
+		Engine.sonic.doDash(5);
+		Engine.sonic.setAnimeSpeed(5);
 	}
 
 	private void BTN_Dash6ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doDash(6);
-		engine.sonic.setAnimeSpeed(6);
+		Engine.sonic.doDash(6);
+		Engine.sonic.setAnimeSpeed(6);
 	}
 
 	private void BTN_Dash7ActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doDash(7);
-		engine.sonic.setAnimeSpeed(7);
+		Engine.sonic.doDash(7);
+		Engine.sonic.setAnimeSpeed(7);
 	}
 
 	private void BTN_AbaixadoActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doDowned();
+		Engine.sonic.doDowned();
 	}
 
 	private void BTN_OlhandoActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doLooking();
+		Engine.sonic.doLooking();
 	}
 
 	private void BTN_FreiandoActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doBrakeUp();
+		Engine.sonic.doBrakeUp();
 	}
 
 	private void BTN_EmpurrandoActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.doPush();
+		Engine.sonic.doPush();
 	}
 
 
@@ -1302,7 +1300,7 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 	public void run() {
 		while (isVisible()) {
 
-			doControlButtons(engine.sonic.isAi());
+			doControlButtons(Engine.sonic.isAi());
 
 			doRefreshComponents();
 

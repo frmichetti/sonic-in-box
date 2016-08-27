@@ -42,15 +42,13 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 
 	private javax.swing.JToggleButton JTB_Musica;
 
-	private javax.swing.JSeparator jSeparator2;
-
-	private Engine engine;
+	private javax.swing.JSeparator jSeparator2;	
 
 	public FrameAction() {	
 
 		super.setVisible(true);
 
-		super.addKeyListener(engine.event);
+		super.addKeyListener(Engine.event);
 
 		initComponents();
 
@@ -72,15 +70,15 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 
 	private void doRefreshComponent() {
 
-		JPB_Velocidade.setValue((int) engine.sonic.getSpeed());
+		JPB_Velocidade.setValue((int) Engine.sonic.getSpeed());
 
-		JL_Velocidade.setText(String.valueOf(engine.sonic.getSpeed()));
+		JL_Velocidade.setText(String.valueOf(Engine.sonic.getSpeed()));
 
-		JTBN_SuperSonic.setSelected(engine.sonic.isSuperSonic());
+		JTBN_SuperSonic.setSelected(Engine.sonic.isSuperSonic());
 
-		JTBN_AI.setSelected(engine.sonic.isAi());
+		JTBN_AI.setSelected(Engine.sonic.isAi());
 
-		JTB_Musica.setSelected(engine.music.isOn());
+		JTB_Musica.setSelected(Engine.music.isOn());
 	}
 
 	private void initComponents() {
@@ -350,30 +348,30 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 	}
 
 	private void JTBN_AIActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.sonic.setAi(JTBN_AI.isSelected());
+		Engine.sonic.setAi(JTBN_AI.isSelected());
 	}
 
 	private void BTN_AcelerarActionPerformed(java.awt.event.ActionEvent evt) {
-		if (engine.sonic.isAi()) {
-			engine.sonic.setAction(Action.SPEEDUP);
+		if (Engine.sonic.isAi()) {
+			Engine.sonic.setAction(Action.SPEEDUP);
 		}
 	}
 
 	private void JTB_MusicaActionPerformed(java.awt.event.ActionEvent evt) {
-		engine.music.setOn(JTB_Musica.isSelected());
+		Engine.music.setOn(JTB_Musica.isSelected());
 	}
 
 	private void JTBN_SuperSonicActionPerformed(java.awt.event.ActionEvent evt) {
 		if (JTBN_SuperSonic.isSelected()) {
-			engine.sonic.setSuperSonic(true);
+			Engine.sonic.setSuperSonic(true);
 		} else {
-			engine.sonic.setSuperSonic(false);
+			Engine.sonic.setSuperSonic(false);
 		}
 	}
 
 	private void BTN_FreiarActionPerformed(java.awt.event.ActionEvent evt) {
-		if (engine.sonic.isAi()) {
-			engine.sonic.setAction(Action.BRAKEUP);
+		if (Engine.sonic.isAi()) {
+			Engine.sonic.setAction(Action.BRAKEUP);
 		}
 	}
 
@@ -383,7 +381,7 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 
 			doRefreshComponent();
 
-			doControlButtons(engine.sonic.isAi());
+			doControlButtons(Engine.sonic.isAi());
 
 			try {
 
