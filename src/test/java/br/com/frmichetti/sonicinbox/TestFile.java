@@ -3,9 +3,12 @@ package br.com.frmichetti.sonicinbox;
 import java.io.File;
 import java.net.URL;
 
+import org.junit.Test;
+
 public class TestFile {
 
-	public static void main(String[] args) throws Exception {
+	@Test
+	public void startupPath() throws Exception {
 		
 		URL url = TestFile.class.getResource("./teste.txt");
 		

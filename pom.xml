@@ -1,18 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>frmichetti.com</groupId>
 	<artifactId>sonicinbox</artifactId>
 	<version>1.0</version>
-	<url>http://portfolio-frmichetti.rhcloud.com/</url>
+	<url>http://www.codecode.com.br/</url>
 	<name>sonicinbox</name>
-	<organization>
-		<name>frmichetti.com</name>
-		<url>http://www.codecode.com.br</url>
-	</organization>
 	<description>Threads. Observer, Observable.</description>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -26,11 +20,35 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>br.com.frmichetti.sonicinbox.Start</mainClass>							
+							<mainClass>br.com.frmichetti.sonicinbox.Start</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	
+	<parent>
+		<groupId>br.com.codecode</groupId>
+		<artifactId>master</artifactId>
+		<version>0.0</version>
+	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>org.junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+			<version>4.12</version>
+		</dependency>
+	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit</artifactId>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
+
