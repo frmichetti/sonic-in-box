@@ -35,18 +35,16 @@
 	</parent>
 	<dependencies>
 		<dependency>
-			<groupId>org.junit</groupId>
+			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<scope>test</scope>
 			<version>4.12</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.junit</groupId>
+				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
