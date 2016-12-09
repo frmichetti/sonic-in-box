@@ -11,7 +11,6 @@ import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
 import br.com.codecode.sonicinbox.enumeration.ConfigSonic;
 import br.com.codecode.sonicinbox.enumeration.ConfigSuperSonic;
 import br.com.codecode.sonicinbox.enumeration.Orientation;
-import br.com.codecode.sonicinbox.util.MyPath;
 
 /**
  * Sonic Character
@@ -48,6 +47,8 @@ public final class Sonic extends Observable implements Observer, Runnable {
 	public Animation animation; 
 	
 	private Movimentation movimentation;
+
+	private String from;
 	
 	public static synchronized Sonic getInstance(){
 		if(instance == null){
@@ -62,51 +63,46 @@ public final class Sonic extends Observable implements Observer, Runnable {
 
 		addObserver(this);        
 
-		setW(ConfigSonic.WIDTH.getValue());
+		this.W = ConfigSonic.WIDTH.getValue();
 
-		setH(ConfigSonic.HEIGHT.getValue());
+		this.H = ConfigSonic.HEIGHT.getValue();
 
-		setX(ConfigSonic.SX.getValue());
+		this.X  = ConfigSonic.SX.getValue();
 
-		setY(ConfigSonic.SY.getValue());
+		this.Y = ConfigSonic.SY.getValue();		
 
-		setMass(ConfigSonic.MASS.getValue());
+		this.mass = ConfigSonic.MASS.getValue();
 
-		setResistance(ConfigSonic.RESISTANCE.getValue());
+		this.resistance = ConfigSonic.RESISTANCE.getValue();
 
-		setOrientation(Orientation.RIGHT);
+		this.orientation = Orientation.RIGHT;
 
-		setAnimeSpeed(5);
+		this.animeSpeed = 5;		
 
-		setAi(true);
-
-		setSpeed(0);
-
-		setAcceleration(0);
-
-		setAction(Action.STOP);
-
-		doLoadSprites(MyPath.SPRITES_RELATIVE);
+		this.action = Action.STOP;		
 		
 		animation = new Animation(this);
 		
-		movimentation = new Movimentation(this);
+		movimentation = new Movimentation(this);					
 
+	}
+
+
+	public Sonic(String from,boolean ai) {		
+		this();		
+		this.ai = ai;		
+		this.from = from;		
+		
+		doLoadSprites();
+		
 		ExecutorService executor = Executors.newFixedThreadPool(2);
 
 		executor.execute(movimentation);
 
-		executor.execute(animation);				
-
+		executor.execute(animation);	
 	}
 
-
-	private Sonic(boolean ai) {
-		this();
-		this.ai = ai;
-	}
-
-	private void doLoadSprites(String from) {
+	private void doLoadSprites() {
 		sprites = new Sprites(from);
 	}
 

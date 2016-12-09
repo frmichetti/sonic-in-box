@@ -17,8 +17,12 @@ public final class Sprites {
 	private ImageIcon[] frames;   
 
 	private JProgressBar progressBar = new JProgressBar(0, 241);
+	
+	private Sprites(){};
 
-	public Sprites(String from) {		
+	public Sprites(String from) {	
+		
+		this();
 
 		System.out.println("Resource Sprites : " + from);
 
