@@ -53,9 +53,7 @@ public final class FrameAction extends JFrame implements Runnable {
 	
 	private Thread thread;
 
-	private FrameAction() {
-		
-		System.out.println("FrameAction.FrameAction()");
+	private FrameAction() {		
 		
 		thread = new Thread(this);
 		
@@ -144,7 +142,7 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		btnAccelerate.setForeground(new java.awt.Color(0, 0, 255));
 
-		btnAccelerate.setText("Acelerar");
+		btnAccelerate.setText("SpeedUp");
 
 		btnAccelerate.setFocusable(false);
 
@@ -176,7 +174,7 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		btnLeft.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		btnLeft.setText("RIGHT");
+		btnLeft.setText("Right");
 
 		btnLeft.setEnabled(false);
 
@@ -188,7 +186,7 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		btnDown.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		btnDown.setText("DOWN");
+		btnDown.setText("Down");
 
 		btnDown.setEnabled(false);
 
@@ -200,7 +198,7 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		btnRight.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		btnRight.setText("LEFT");
+		btnRight.setText("Left");
 
 		btnRight.setEnabled(false);
 
@@ -212,7 +210,7 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		btnUp.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		btnUp.setText("UP");
+		btnUp.setText("Up");
 
 		btnUp.setEnabled(false);
 
@@ -226,7 +224,7 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		toggleMusic.setForeground(new java.awt.Color(204, 0, 204));
 
-		toggleMusic.setText("Música");
+		toggleMusic.setText("Music");
 
 		toggleMusic.setFocusable(false);
 
@@ -262,7 +260,7 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		btnBrake.setForeground(new java.awt.Color(0, 0, 255));
 
-		btnBrake.setText("Freiar");
+		btnBrake.setText("BreakUp");
 
 		btnBrake.setFocusable(false);
 
@@ -293,7 +291,7 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-		lblTitle.setText("Velocidade");
+		lblTitle.setText("Speed");
 
 		separator.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
