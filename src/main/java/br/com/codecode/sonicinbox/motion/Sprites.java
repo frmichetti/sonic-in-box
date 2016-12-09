@@ -53,7 +53,7 @@ public final class Sprites {
 
 			System.out.println(df.format(progressBar.getPercentComplete() * 100)  + "%");
 
-			System.out.println(String.format(from + "/" + FILE_MASK, String.valueOf(c)));
+			System.out.println(String.format(from + FILE_MASK, String.valueOf(c)));
 
 			System.out.println("");
 

@@ -48,6 +48,8 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 	private Sonic sonic;
 
 	private FrameAction() {	
+		
+		System.out.println("FrameAction.FrameAction()");
 
 		super.setVisible(true);
 
@@ -61,7 +63,7 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 
 	}
 	
-	public FrameAction(Sonic sonic){
+	public FrameAction(Sonic sonic){		
 		this();
 		this.sonic = sonic;
 	}

@@ -17,6 +17,8 @@ public class FrameListener extends JFrame implements Runnable {
     
 
     public FrameListener() {    	
+    	
+    	System.out.println("FrameListener.FrameListener()");
         
         super.addKeyListener(Engine.event);
 

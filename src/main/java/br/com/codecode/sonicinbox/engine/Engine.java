@@ -28,7 +28,7 @@ public final class Engine extends JFrame implements Runnable {
 
 	private final int FPS = ConfigEngine.FPS.getValue();
 
-	public static StringBuffer lastkeypress = new StringBuffer(30);
+	public static StringBuffer lastkeypress;
 
 	public static Sonic sonic;
 
@@ -44,9 +44,11 @@ public final class Engine extends JFrame implements Runnable {
 
 	private BufferedImage backBuffer;
 
-	public Engine() {
+	public Engine() {		
 
 		super("Sonic in Box v3 [Demo]");
+		
+		System.out.println("Engine.Engine()");
 
 		t = new Thread(Start.tgrpEngine, this, "Engine Thread");
 
@@ -67,6 +69,8 @@ public final class Engine extends JFrame implements Runnable {
 		super.setAlwaysOnTop(true);
 
 		super.requestFocus();
+		
+		lastkeypress = new StringBuffer(30);
 
 		sonic = new Sonic(true);
 

@@ -32,6 +32,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 	private Sonic sonic;
 
 	private FrameAnimation() {		
+		
+		System.out.println("FrameAnimation.FrameAnimation()");
 
 		super.setVisible(true);
 

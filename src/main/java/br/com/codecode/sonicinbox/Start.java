@@ -12,75 +12,77 @@ import br.com.codecode.sonicinbox.engine.Engine;
 
 public final class Start {
 
-    public static ThreadGroup tgrpEngine, tgrpSonic, tgrpConsole;
-    
-    private static Thread t;
+	public static ThreadGroup tgrpEngine, tgrpSonic, tgrpConsole;
 
-    public Start() {
-    	
-        tgrpEngine = new ThreadGroup("Engine Threads");
-        
-        tgrpSonic = new ThreadGroup(tgrpEngine, "Sonic Threads");
-        
-        tgrpEngine.setMaxPriority(Thread.NORM_PRIORITY);
-        
-        tgrpSonic.setMaxPriority(Thread.MAX_PRIORITY);
+	private static Thread t;
 
-        t = Thread.currentThread();
-        
-        t.setName("Thread Sonic In Box");
+	public Start() {
 
-        doChangeTheme();
-        
-        doCreateFrame();
+		tgrpEngine = new ThreadGroup("Engine Threads");
 
-    }
+		tgrpSonic = new ThreadGroup(tgrpEngine, "Sonic Threads");
+
+		tgrpEngine.setMaxPriority(Thread.NORM_PRIORITY);
+
+		tgrpSonic.setMaxPriority(Thread.MAX_PRIORITY);
+
+		t = Thread.currentThread();
+
+		t.setName("Thread Sonic In Box");
+
+		doChangeTheme();
+
+		doCreateFrame();
+
+	}
 
 
-    private void doChangeTheme() {
+	private void doChangeTheme() {
 
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-            	
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-            
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-        	
-            throw new RuntimeException("Não foi Possivel Definir o Tema Nimbus : " + ex.getMessage());
-            
-        }
+		try {
+			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 
-    }
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
 
-    public void doCreateFrame() {
-        
-            try {
-				SwingUtilities.invokeAndWait(() -> {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
 
-				    new Engine();
-				    
-				    new FrameListener();
+			throw new RuntimeException("Não foi Possivel Definir o Tema Nimbus : " + ex.getMessage());
 
-				    new FrameAnimation(Engine.sonic);
+		}
 
-				    new FrameAction(Engine.sonic);				    
+	}
 
-				});
+	public void doCreateFrame() {
+
+		new Engine();
+		
+		try {
+			SwingUtilities.invokeAndWait(()->{
+			
+				new FrameAnimation(Engine.sonic);
+
+				new FrameAction(Engine.sonic);	
+
+				new FrameListener();
+
 				
-			} catch (InvocationTargetException | InterruptedException e) {
+			});
+		} catch (InvocationTargetException | InterruptedException e) {
+			
+			e.printStackTrace();
+		}
 
-				e.printStackTrace();
-			}    
+		
 
-    }
+	}
 
-    public static void main(String ... args) {
-        
-    	new Start();
-    }
+	public static void main(String ... args) {
+
+		new Start();
+	}
 
 }
