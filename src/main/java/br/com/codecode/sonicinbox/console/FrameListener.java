@@ -18,11 +18,15 @@ public class FrameListener extends JFrame implements Runnable {
 
 	private JLabel LBL_Aceleracao, jLabel1;    
 
-	private Sonic sonic;	
+	private Sonic sonic;
+	
+	private Thread t;
 
 	private FrameListener() {    	
 
 		System.out.println("FrameListener.FrameListener()");
+		
+		t = new Thread(this);
 
 		initComponents();		
 
@@ -31,6 +35,8 @@ public class FrameListener extends JFrame implements Runnable {
 		super.setLocation((Size.MAX_WIDTH - getWidth()) / 2, (Size.MAX_HEIGHT - getHeight()));
 		
 		super.setVisible(true);
+		
+		t.start();
 
 	}
 
@@ -38,13 +44,17 @@ public class FrameListener extends JFrame implements Runnable {
 		this();		
 		this.sonic = engine.sonic;	
 
-		super.addKeyListener(engine.event);		
+		super.addKeyListener(engine.event);
+		
+		
 		
 	}
 
 	private void initComponents() {
 
 		JPB_Aceleracao = new JProgressBar();
+		
+		JPB_Aceleracao.setStringPainted(true);		
 
 		jLabel1 = new JLabel();
 
@@ -104,11 +114,13 @@ public class FrameListener extends JFrame implements Runnable {
 	}
 
 
-	private void doRefreshComponents() {
+	private void doRefreshComponents() {		
+		
+		int value = (int) sonic.getAcceleration();		
 
-		JPB_Aceleracao.setValue((int) sonic.getAcceleration());
+		JPB_Aceleracao.setValue(value);
 
-		LBL_Aceleracao.setText(String.valueOf(sonic.getAcceleration()));
+		LBL_Aceleracao.setText(String.valueOf(value));
 	}
 
 	@Override
@@ -118,7 +130,7 @@ public class FrameListener extends JFrame implements Runnable {
 			
 			if (sonic != null){
 				doRefreshComponents();
-			}		
+			}			
 
 			try {
 
@@ -126,7 +138,7 @@ public class FrameListener extends JFrame implements Runnable {
 
 			} catch (InterruptedException ex) {
 
-				throw new RuntimeException("Falha ao Interromper " + ex.getMessage());
+				throw new RuntimeException("Falha ao Interromper ", ex);
 			}
 
 		}
