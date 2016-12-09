@@ -1155,7 +1155,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 	@Override
 	public void run() {
-		while (isVisible()) {
+		
+		while (true) {
 
 			doControlButtons(sonic.isAi());
 
