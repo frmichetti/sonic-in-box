@@ -12,11 +12,11 @@ import br.com.codecode.sonicinbox.enums.ConfigSonic;
 
 public final class Sprites {
 
-	public final String FILE_MASK = "sprite_%s.png";
+	public final String filePattern = "sprite_%s.png";
 
 	private ImageIcon[] frames;   
 
-	private JProgressBar progressBar = new JProgressBar(0, 241);
+	private JProgressBar progressBar = new JProgressBar(0, ConfigSonic.MAX_SPRITES.getValue() -1);
 	
 	private Sprites(){};
 
@@ -45,7 +45,7 @@ public final class Sprites {
 
 				frames[c] = new ImageIcon(ImageIO.read(
 						ClassLoader.class.getResourceAsStream(
-								String.format(from + FILE_MASK, String.valueOf(c)))));
+								String.format(from + filePattern, String.valueOf(c)))));
 						
 
 			} catch (IOException ex) {
@@ -57,7 +57,7 @@ public final class Sprites {
 
 			System.out.println(df.format(progressBar.getPercentComplete() * 100)  + "%");
 
-			System.out.println(String.format(from + FILE_MASK, String.valueOf(c)));
+			System.out.println(String.format(from + filePattern, String.valueOf(c)));
 
 			System.out.println("");
 
