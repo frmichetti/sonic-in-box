@@ -26,8 +26,12 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 	private javax.swing.JSlider JSLD_VelAnimacao;
 
 	private Sonic sonic;
+	
+	private Thread t;
 
 	private FrameAnimation() {
+		
+		t = new Thread(this);
 
 		System.out.println("FrameAnimation.FrameAnimation()");
 		
@@ -38,6 +42,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 		super.setLocation(0, 0);
 		
 		super.setVisible(true);
+		
+		t.start();
 
 	}
 

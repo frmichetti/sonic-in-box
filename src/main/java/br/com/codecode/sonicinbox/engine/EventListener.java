@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import br.com.codecode.sonicinbox.Start;
+import br.com.codecode.sonicinbox.console.FrameAction;
 import br.com.codecode.sonicinbox.enumeration.Action;
 import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
 import br.com.codecode.sonicinbox.enumeration.Orientation;
@@ -62,7 +63,7 @@ public final class EventListener implements KeyListener, Runnable {
 				
 				lastkeypress.append("RIGHT");			
 				
-				//frameAction.BTN_Right.setVisible(false);
+				FrameAction.BTN_Right.setVisible(false);
 				
 				delay();
 
@@ -89,7 +90,7 @@ public final class EventListener implements KeyListener, Runnable {
 				
 				lastkeypress.append("LEFT");
 				
-				//frameAction.BTN_Left.setVisible(false);
+				FrameAction.BTN_Left.setVisible(false);
 
 				delay();
 				
@@ -115,7 +116,7 @@ public final class EventListener implements KeyListener, Runnable {
 				
 				lastkeypress.append("UP");
 				
-				//frameAction.BTN_Up.setVisible(false);
+				FrameAction.BTN_Up.setVisible(false);
 				
 				if (sonic.getSpeed() == 0) {
 				
@@ -132,7 +133,7 @@ public final class EventListener implements KeyListener, Runnable {
 				
 				lastkeypress.append("DOWN");
 				
-				//frameAction.BTN_Down.setVisible(false);
+				FrameAction.BTN_Down.setVisible(false);
 				
 				if (sonic.getSpeed() == 0) {
 					
@@ -159,26 +160,26 @@ public final class EventListener implements KeyListener, Runnable {
 		if (sonic.isAi()) {
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				lastkeypress.delete(0, lastkeypress.length());
-				//frameAction.BTN_Right.setVisible(true);
+				FrameAction.BTN_Right.setVisible(true);
 
 			}
 
 			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				lastkeypress.delete(0, lastkeypress.length());
-				//frameAction.BTN_Left.setVisible(true);
+				FrameAction.BTN_Left.setVisible(true);
 
 			}
 
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
 				lastkeypress.delete(0, lastkeypress.length());
-				//frameAction.BTN_Up.setVisible(true);
+				FrameAction.BTN_Up.setVisible(true);
 				sonic.doStop();
 
 			}
 
 			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 				lastkeypress.delete(0, lastkeypress.length());
-				//frameAction.BTN_Down.setVisible(true);
+				FrameAction.BTN_Down.setVisible(true);
 				sonic.doStop();
 
 			}

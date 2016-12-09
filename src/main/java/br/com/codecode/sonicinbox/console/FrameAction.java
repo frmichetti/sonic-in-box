@@ -29,15 +29,15 @@ public class FrameAction extends JFrame implements Runnable {
 
 	private JButton BTN_Acelerar;
 
-	public JButton BTN_Down;
-
 	private JButton BTN_Freiar;
+	
+	public static JButton BTN_Down;	
 
-	public JButton BTN_Left;
+	public static JButton BTN_Left;
 
-	public JButton BTN_Right;
+	public static JButton BTN_Right;
 
-	public JButton BTN_Up;
+	public static JButton BTN_Up;
 
 	private JLabel JL_Titulo, JL_Velocidade;
 
@@ -50,10 +50,14 @@ public class FrameAction extends JFrame implements Runnable {
 	private Sonic sonic;
 
 	private Music music;	
+	
+	private Thread t;
 
 	private FrameAction() {
 		
 		System.out.println("FrameAction.FrameAction()");
+		
+		t = new Thread(this);
 		
 		initComponents();
 		
@@ -62,6 +66,8 @@ public class FrameAction extends JFrame implements Runnable {
 		super.setLocation((Size.MAX_WIDTH - getWidth()), 0);
 		
 		super.setVisible(true);
+		
+		t.start();
 	}
 
 	public FrameAction(Engine engine){		
