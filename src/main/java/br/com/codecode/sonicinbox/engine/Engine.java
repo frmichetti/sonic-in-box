@@ -28,15 +28,15 @@ public final class Engine extends JFrame implements Runnable {
 
 	private final int FPS = ConfigEngine.FPS.getValue();
 
-	public static StringBuffer lastkeypress;
+	public StringBuffer lastkeypress;
 
-	public static Sonic sonic;
+	public Sonic sonic;	
+
+	public EventListener event;
+
+	public Music music;
 
 	private Physics physics;
-
-	public static Event event;
-
-	public static Music music;
 
 	private Graphics g, bbg;
 
@@ -74,11 +74,11 @@ public final class Engine extends JFrame implements Runnable {
 
 		sonic = new Sonic(MyPath.SPRITES_RELATIVE,true);
 
-		physics = new Physics(sonic, true);
-
-		event = new Event(sonic, true);
+		physics = new Physics(sonic, true);		
 
 		music = new Music(MyPath.MUSICS_RELATIVE);
+		
+		event = new EventListener(this, true);
 
 		super.addKeyListener(event);
 
@@ -289,7 +289,7 @@ public final class Engine extends JFrame implements Runnable {
 
 			} catch (InterruptedException e) {
 
-				throw new RuntimeException("Falha ao Interromper " + t.getName() + " " + e);
+				throw new RuntimeException("Falha ao Interromper " + t.getName(), e);
 			}
 		}
 	}

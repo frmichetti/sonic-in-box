@@ -9,6 +9,10 @@ package br.com.codecode.sonicinbox.console;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
+import javax.swing.JSeparator;
+import javax.swing.JToggleButton;
 
 import br.com.codecode.sonicinbox.engine.Engine;
 import br.com.codecode.sonicinbox.engine.Music;
@@ -24,54 +28,46 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 
 	private JButton BTN_Acelerar;
 
-	public static javax.swing.JButton BTN_Down;
+	public JButton BTN_Down;
 
-	private javax.swing.JButton BTN_Freiar;
+	private JButton BTN_Freiar;
 
-	public static javax.swing.JButton BTN_Left;
+	public JButton BTN_Left;
 
-	public static javax.swing.JButton BTN_Right;
+	public JButton BTN_Right;
 
-	public static javax.swing.JButton BTN_Up;
+	public JButton BTN_Up;
 
-	private javax.swing.JLabel JL_Titulo;
+	private JLabel JL_Titulo, JL_Velocidade;
 
-	private javax.swing.JLabel JL_Velocidade;
+	private JProgressBar JPB_Velocidade;
 
-	private javax.swing.JProgressBar JPB_Velocidade;
+	private JToggleButton JTBN_AI, JTBN_SuperSonic, JTB_Musica;
 
-	private javax.swing.JToggleButton JTBN_AI;
-
-	private javax.swing.JToggleButton JTBN_SuperSonic;
-
-	private javax.swing.JToggleButton JTB_Musica;
-
-	private javax.swing.JSeparator jSeparator2;	
+	private JSeparator jSeparator2;	
 
 	private Sonic sonic;
-	
-	private Music music;
 
-	private FrameAction() {	
+	private Music music;	
 
+	private FrameAction() {
 		System.out.println("FrameAction.FrameAction()");
+	}
 
+	public FrameAction(Engine engine){		
+		this();
+		this.sonic = engine.sonic;
+		this.music = engine.music;		
+		
 		super.setVisible(true);
 
-		super.addKeyListener(Engine.event);
+		super.addKeyListener(engine.event);
 
 		initComponents();
 
 		super.setLocationRelativeTo(null);
 
-		super.setLocation((Size.MAX_WIDTH - getWidth()), 0);	
-
-	}
-
-	public FrameAction(Sonic sonic,Music music){		
-		this();
-		this.sonic = sonic;
-		this.music = music;
+		super.setLocation((Size.MAX_WIDTH - getWidth()), 0);
 	}
 
 	private void doControlButtons(boolean ai) {
@@ -390,6 +386,8 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 	public void run() {
 		
 		while (true) {
+			
+			if(sonic != null)
 
 			doRefreshComponent();
 
@@ -401,7 +399,7 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 
 			} catch (InterruptedException ex) {
 
-				throw new RuntimeException("Falha ao Interromper " + ex);
+				throw new RuntimeException("Falha ao Interromper " , ex);
 
 			}
 		}

@@ -1,9 +1,6 @@
 package br.com.codecode.sonicinbox.engine;
 
-import static br.com.codecode.sonicinbox.console.FrameAction.BTN_Down;
-import static br.com.codecode.sonicinbox.console.FrameAction.BTN_Left;
-import static br.com.codecode.sonicinbox.console.FrameAction.BTN_Right;
-import static br.com.codecode.sonicinbox.console.FrameAction.BTN_Up;
+
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -14,23 +11,26 @@ import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
 import br.com.codecode.sonicinbox.enumeration.Orientation;
 import br.com.codecode.sonicinbox.motion.Sonic;
 
-public class Event implements KeyListener, Runnable {
+public final class EventListener implements KeyListener, Runnable {	
 
 	private boolean on;
 
 	private Thread thread;
 
-	private Sonic sonic;	
+	private Sonic sonic;
+	
+	private StringBuffer lastkeypress;
 
-	private Event() {
+	private EventListener() {
 
-		thread = new Thread(Start.tgrpEngine, this, "Event Thread");
+		thread = new Thread(Start.tgrpEngine, this, "EventListener Thread");
 
 	}
 
-	public Event(Sonic sonic, boolean on) {
+	public EventListener(Engine engine, boolean on) {
 		this();
-		this.sonic = sonic;
+		this.sonic = engine.sonic;
+		this.lastkeypress = engine.lastkeypress;		
 		this.on = on;
 	}
 
@@ -39,6 +39,8 @@ public class Event implements KeyListener, Runnable {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
+		if(sonic != null)
 
 		if (sonic.isAi()) {
 
@@ -56,11 +58,11 @@ public class Event implements KeyListener, Runnable {
 			}
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				
-				Engine.lastkeypress.delete(0, 30);
+				lastkeypress.delete(0, 30);
 				
-				Engine.lastkeypress.append("RIGHT");
+				lastkeypress.append("RIGHT");
 				
-				BTN_Right.setVisible(false);
+				//frameAction.BTN_Right.setVisible(false);
 				
 				delay();
 
@@ -83,11 +85,11 @@ public class Event implements KeyListener, Runnable {
 
 			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 								
-				Engine.lastkeypress.delete(0, 30);
+				lastkeypress.delete(0, 30);
 				
-				Engine.lastkeypress.append("LEFT");
+				lastkeypress.append("LEFT");
 				
-				BTN_Left.setVisible(false);
+				//frameAction.BTN_Left.setVisible(false);
 
 				delay();
 				
@@ -109,11 +111,11 @@ public class Event implements KeyListener, Runnable {
 			}
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
 				
-				Engine.lastkeypress.delete(0, 30);
+				lastkeypress.delete(0, 30);
 				
-				Engine.lastkeypress.append("UP");
+				lastkeypress.append("UP");
 				
-				BTN_Up.setVisible(false);
+				//frameAction.BTN_Up.setVisible(false);
 				
 				if (sonic.getSpeed() == 0) {
 				
@@ -126,11 +128,11 @@ public class Event implements KeyListener, Runnable {
 
 			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 								
-				Engine.lastkeypress.delete(0, 30);
+				lastkeypress.delete(0, 30);
 				
-				Engine.lastkeypress.append("DOWN");
+				lastkeypress.append("DOWN");
 				
-				BTN_Down.setVisible(false);
+				//frameAction.BTN_Down.setVisible(false);
 				
 				if (sonic.getSpeed() == 0) {
 					
@@ -151,29 +153,32 @@ public class Event implements KeyListener, Runnable {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		
+		if(sonic != null)
+			
 		if (sonic.isAi()) {
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-				Engine.lastkeypress.delete(0, Engine.lastkeypress.length());
-				BTN_Right.setVisible(true);
+				lastkeypress.delete(0, lastkeypress.length());
+				//frameAction.BTN_Right.setVisible(true);
 
 			}
 
 			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-				Engine.lastkeypress.delete(0, Engine.lastkeypress.length());
-				BTN_Left.setVisible(true);
+				lastkeypress.delete(0, lastkeypress.length());
+				//frameAction.BTN_Left.setVisible(true);
 
 			}
 
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
-				Engine.lastkeypress.delete(0, Engine.lastkeypress.length());
-				BTN_Up.setVisible(true);
+				lastkeypress.delete(0, lastkeypress.length());
+				//frameAction.BTN_Up.setVisible(true);
 				sonic.doStop();
 
 			}
 
 			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-				Engine.lastkeypress.delete(0, Engine.lastkeypress.length());
-				BTN_Down.setVisible(true);
+				lastkeypress.delete(0, lastkeypress.length());
+				//frameAction.BTN_Down.setVisible(true);
 				sonic.doStop();
 
 			}

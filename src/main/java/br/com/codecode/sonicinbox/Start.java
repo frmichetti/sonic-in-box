@@ -58,33 +58,21 @@ public final class Start {
 
 	public void doCreateFrame() {
 
-		new Engine();
+		Engine e = new Engine();
 
 		try {
-			SwingUtilities.invokeAndWait(() -> {
-				
-				while(Engine.sonic == null){
-					
-					try {
-						
-						Thread.sleep(2_000);
-						
-					} catch (InterruptedException e) {
-						
-						e.printStackTrace();
-					}
-				}
+			SwingUtilities.invokeAndWait(() -> {				
 
-				new FrameAnimation(Engine.sonic);
+				new FrameAnimation(e);
 
-				new FrameAction(Engine.sonic,Engine.music);
+				new FrameAction(e);
 
-				new FrameListener(Engine.sonic);
+				new FrameListener(e);
 
 			});
-		} catch (InvocationTargetException | InterruptedException e) {
+		} catch (InvocationTargetException | InterruptedException ex) {
 
-			e.printStackTrace();
+			ex.printStackTrace();
 		}
 
 	}

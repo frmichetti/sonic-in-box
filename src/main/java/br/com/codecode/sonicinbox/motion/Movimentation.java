@@ -32,7 +32,8 @@ public class Movimentation implements Runnable {
     }
 
     private void doMove(Sonic sonic) {
-        if (sonic.getAction() == Action.STOP) {
+      
+    	if (sonic.getAction() == Action.STOP) {
 
         } else {
             int i = 1;
@@ -133,7 +134,7 @@ public class Movimentation implements Runnable {
 
 
             } catch (InterruptedException ex) {
-            	throw new RuntimeException("Failed to Stop " + t.getName() + " " + ex);
+            	throw new RuntimeException("Failed to Stop " + t.getName(), ex);
             }
         }
 

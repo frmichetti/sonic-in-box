@@ -28,27 +28,27 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 	private javax.swing.JSlider JSLD_VelAnimacao;	
 
-	private Sonic sonic;
+	private Sonic sonic;	
 
 	private FrameAnimation() {		
 
-		System.out.println("FrameAnimation.FrameAnimation()");
+		System.out.println("FrameAnimation.FrameAnimation()");		
 
+	}
+
+	public FrameAnimation(Engine engine){
+		this();
+		this.sonic = engine.sonic;
+		
 		super.setVisible(true);
 
-		super.addKeyListener(Engine.event);
+		super.addKeyListener(engine.event);
 
 		initComponents();
 
 		super.setLocationRelativeTo(null);
 
 		super.setLocation(0, 0);
-
-	}
-
-	public FrameAnimation(Sonic sonic){
-		this();
-		this.sonic = sonic;
 	}
 
 	private void doControlButtons(boolean ai) {
