@@ -11,51 +11,43 @@ import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
 import br.com.codecode.sonicinbox.enumeration.ConfigSonic;
 import br.com.codecode.sonicinbox.enumeration.ConfigSuperSonic;
 import br.com.codecode.sonicinbox.enumeration.Orientation;
+import br.com.codecode.sonicinbox.interfaces.Physicable;
 
 /**
  * Sonic Character
  * @author felipe
  * @since 1.0
  * @version 3.0
+ * @see Observable
+ * @see Physicable
+ * @see Observer
+ * @see Runnable
  */
-public final class Sonic extends Observable implements Observer, Runnable {
-	
-	private static Sonic instance;
+public final class Sonic extends Observable implements Physicable, Observer, Runnable {	
 
-	private boolean ai;
-
-	private int X, Y, W, H;
-
-	private Sprites sprites;
+	private float acceleration, mass, resistance, speed;
 
 	private Action action;
 
-	private Orientation orientation;
+	private boolean ai;
 
-	private float acceleration, mass;
-
-	private float speed;
-
-	private float resistance;
-
-	private boolean superSonic;
+	public Animation animation;
 
 	private int animeSpeed;
 
-	private Thread thread;
+	private String from;
 
-	public Animation animation; 
-	
 	private Movimentation movimentation;
 
-	private String from;
+	private Orientation orientation;
+
+	private Sprites sprites;
+
+	private boolean superSonic; 
 	
-	public static synchronized Sonic getInstance(){
-		if(instance == null){
-			instance = new Sonic();
-		}
-		return instance;
-	}
+	private Thread thread;
+
+	private int X, Y, W, H;
 
 	private Sonic() {		
 
@@ -102,99 +94,147 @@ public final class Sonic extends Observable implements Observer, Runnable {
 		executor.execute(animation);	
 	}
 
+	public Sonic doBrakeUp() {
+		if (getAction() != Action.STOP && getAction() != Action.SPEEDUP && getSpeed() > 10_000 && getAcceleration() > 200) {
+			setAcceleration((int) (getAcceleration() - 120));
+			setChanged();
+			notifyObservers(Action.BRAKEUP);
+
+			if (getSpeed() > 0 && getAcceleration() > 200) {
+				setChanged();
+				notifyObservers(Action.MOVE);
+			} else {
+				setChanged();
+				notifyObservers(Action.STOP);
+			}
+
+		} else if (!isAi()) {
+			setChanged();
+			notifyObservers(Action.BRAKEUP);
+		}
+		return this;
+	}
+
+	public Sonic doDash(int speed) {
+		if (getAction() == Action.DASH && getSpeed() == 0) {
+			setChanged();
+			notifyObservers(Action.DASH);
+		} else if (!isAi()) {
+			setChanged();
+			notifyObservers(Action.DASH);
+		}
+		return this;
+
+	}
+
+	public Sonic doDown() {
+		if (getAction() == Action.DOWN && getSpeed() == 0) {
+			setChanged();
+			notifyObservers(Action.DOWN);
+		} else if (!isAi()) {
+			setChanged();
+			notifyObservers(Action.DOWN);
+		}
+
+		return this;
+
+	}
+
+	public Sonic doDowned() {
+		if (getAction() == Action.DOWNED && getSpeed() == 0) {
+			setChanged();
+			notifyObservers(Action.DOWNED);
+		} else if (!isAi()) {
+			setChanged();
+			notifyObservers(Action.DOWNED);
+		}
+
+		return this;
+	}
+
+	public Sonic doJump() {
+		setChanged();
+		notifyObservers(Action.JUMP);
+		return this;
+	}
+
 	private void doLoadSprites() {
 		sprites = new Sprites(from);
 	}
 
-	public Sprites getSprites() {
-		return sprites;
+	public Sonic doLook() {
+		if (getAction() == Action.LOOK && getSpeed() == 0) {
+			setChanged();
+			notifyObservers(Action.LOOK);
+		} else if (!isAi()) {
+			setChanged();
+			notifyObservers(Action.LOOK);
+		}
+		return this;
+
 	}
 
-	public Orientation getOrientation() {
-		return orientation;
+	public Sonic doLooking() {
+		if (getAction() == Action.LOOKING && getSpeed() == 0) {
+			setChanged();
+			notifyObservers(Action.LOOKING);
+		} else if (!isAi()) {
+			setChanged();
+			notifyObservers(Action.LOOKING);
+		}
+
+		return this;
 
 	}
 
-	public float getSpeed() {
-		return speed;
+	public Sonic doPush() {
+		if (getAction() == Action.STOP) {
+			setChanged();
+			notifyObservers(Action.PUSH);
+		} else if (!isAi()) {
+			setChanged();
+			notifyObservers(Action.PUSH);
+		}
+		return this;
 	}
 
-	public float getAcceleration() {
-		return acceleration;
+	public Sonic doRun(int speed) {
+		if (getAction() == Action.MOVE) {
+			setAnimeSpeed(speed);
+			setChanged();
+			notifyObservers(Action.RUN);
+		} else if (!isAi()) {
+			setChanged();
+			notifyObservers(Action.RUN);
+		}
+
+		return this;
+
 	}
 
-	public float getMass() {
-		return mass;
+	public Sonic doSpeedUp() {
+		if (getAction() != Action.BRAKEUP && getAcceleration() <= 1_700) {
+			setAcceleration((int) (getAcceleration() + 200));
+			setChanged();
+			notifyObservers(Action.MOVE);
+		}
+		return this;
+
 	}
 
-	public int getX() {
-		return X;
-	}
+	public Sonic doSpin(int speed) {
+		if (getAction() == Action.MOVE && getSpeed() > 100) {
+			setAnimeSpeed(speed);
+			setChanged();
+			notifyObservers(Action.SPIN);
+		} else if (!isAi()) {
+			setChanged();
+			notifyObservers(Action.SPIN);
+		}
 
-	public int getY() {
-		return Y;
-	}
+		return this;
 
-	public int getW() {
-		return W;
 	}
-
-	public int getH() {
-		return H;
-	}
-
-	public Enum<?> getAction() {
-		return action;
-	}
-
-	public void setOrientation(Orientation orientation) {
-		this.orientation = orientation;
-	}
-
-	public void setAcceleration(int acceleration) {
-		this.acceleration = acceleration;
-	}
-
-	public void setX(int X) {
-		this.X = X;
-	}
-
-	public void setY(int Y) {
-		this.Y = Y;
-	}
-
-	public void setW(int W) {
-		this.W = W;
-	}
-
-	public void setH(int H) {
-		this.H = H;
-	}
-
-	public void setMass(float mass) {
-		this.mass = mass;
-	}
-
-	public void setAi(boolean ai) {
-		this.ai = ai;
-	}
-
-	public boolean isAi() {
-		return ai;
-	}
-
-	public boolean isSuperSonic() {
-		return superSonic;
-	}
-
-	public void setAction(Action action) {
-		this.action = action;
-	}
-
-	public Movimentation getMovimentation() {
-		return movimentation;
-	}
-
 
 	public Sonic doStop() {
 		if (getAction() != Action.STOP && getSpeed() == 0) {
@@ -203,6 +243,18 @@ public final class Sonic extends Observable implements Observer, Runnable {
 		} else if (!isAi()) {
 			setChanged();
 			notifyObservers(Action.STOP);
+		}
+		return this;
+	}
+
+	public Sonic doTransform() {
+		if (getAction() == Action.TRANSFORM && !isSuperSonic() && getSpeed() == 0) {
+			setChanged();
+			notifyObservers(Action.TRANSFORM);
+
+		} else if (!isAi()) {
+			setChanged();
+			notifyObservers(Action.TRANSFORM);
 		}
 		return this;
 	}
@@ -233,168 +285,111 @@ public final class Sonic extends Observable implements Observer, Runnable {
 		return this;
 	}
 
-	public Sonic doRun(int speed) {
-		if (getAction() == Action.MOVE) {
-			setAnimeSpeed(speed);
-			setChanged();
-			notifyObservers(Action.RUN);
-		} else if (!isAi()) {
-			setChanged();
-			notifyObservers(Action.RUN);
-		}
+	@Override
+	public float getAcceleration() {
+		return acceleration;
+	}
 
-		return this;
+	public Enum<?> getAction() {
+		return action;
+	}
+
+	public int getAnimeSpeed() {
+		return animeSpeed;
+	}
+
+	public int getH() {
+		return H;
+	}
+
+	@Override
+	public float getMass() {
+		return mass;
+	}
+
+	public Movimentation getMovimentation() {
+		return movimentation;
+	}
+
+	public Orientation getOrientation() {
+		return orientation;
 
 	}
 
-	public Sonic doSpin(int speed) {
-		if (getAction() == Action.MOVE && getSpeed() > 100) {
-			setAnimeSpeed(speed);
-			setChanged();
-			notifyObservers(Action.SPIN);
-		} else if (!isAi()) {
-			setChanged();
-			notifyObservers(Action.SPIN);
-		}
 
-		return this;
-
+	@Override
+	public float getResistance() {
+		return resistance;
 	}
 
-	public Sonic doDash(int speed) {
-		if (getAction() == Action.DASH && getSpeed() == 0) {
-			setChanged();
-			notifyObservers(Action.DASH);
-		} else if (!isAi()) {
-			setChanged();
-			notifyObservers(Action.DASH);
-		}
-		return this;
-
+	@Override
+	public float getSpeed() {
+		return speed;
 	}
 
-	public Sonic doLook() {
-		if (getAction() == Action.LOOK && getSpeed() == 0) {
-			setChanged();
-			notifyObservers(Action.LOOK);
-		} else if (!isAi()) {
-			setChanged();
-			notifyObservers(Action.LOOK);
-		}
-		return this;
-
+	public Sprites getSprites() {
+		return sprites;
 	}
 
-	public Sonic doLooking() {
-		if (getAction() == Action.LOOKING && getSpeed() == 0) {
-			setChanged();
-			notifyObservers(Action.LOOKING);
-		} else if (!isAi()) {
-			setChanged();
-			notifyObservers(Action.LOOKING);
-		}
-
-		return this;
-
+	public Thread getThread() {
+		return thread;
 	}
 
-	public Sonic doDown() {
-		if (getAction() == Action.DOWN && getSpeed() == 0) {
-			setChanged();
-			notifyObservers(Action.DOWN);
-		} else if (!isAi()) {
-			setChanged();
-			notifyObservers(Action.DOWN);
-		}
-
-		return this;
-
+	public int getW() {
+		return W;
 	}
 
-	public Sonic doDowned() {
-		if (getAction() == Action.DOWNED && getSpeed() == 0) {
-			setChanged();
-			notifyObservers(Action.DOWNED);
-		} else if (!isAi()) {
-			setChanged();
-			notifyObservers(Action.DOWNED);
-		}
-
-		return this;
+	public int getX() {
+		return X;
 	}
 
-	public Sonic doTransform() {
-		if (getAction() == Action.TRANSFORM && !isSuperSonic() && getSpeed() == 0) {
-			setChanged();
-			notifyObservers(Action.TRANSFORM);
-
-		} else if (!isAi()) {
-			setChanged();
-			notifyObservers(Action.TRANSFORM);
-		}
-		return this;
+	public int getY() {
+		return Y;
 	}
 
-	public Sonic setSuperSonic(boolean superSonic) {
-		this.superSonic = superSonic;
-		if (this.superSonic) {
-			mass = ConfigSuperSonic.MASS.getValue();
-			resistance = ConfigSuperSonic.RESISTENCE.getValue();
-		} else {
-			mass = ConfigSonic.MASS.getValue();
-			resistance = ConfigSonic.RESISTANCE.getValue();
-		}
-		return this;
+	public boolean isAi() {
+		return ai;
 	}
 
-	public Sonic doJump() {
-		setChanged();
-		notifyObservers(Action.JUMP);
-		return this;
+	public boolean isSuperSonic() {
+		return superSonic;
 	}
 
-	public Sonic doPush() {
-		if (getAction() == Action.STOP) {
-			setChanged();
-			notifyObservers(Action.PUSH);
-		} else if (!isAi()) {
-			setChanged();
-			notifyObservers(Action.PUSH);
-		}
-		return this;
-	}
+	@Override
+	public void run() {
 
-	public Sonic doSpeedUp() {
-		if (getAction() != Action.BRAKEUP && getAcceleration() <= 1_700) {
-			setAcceleration((int) (getAcceleration() + 200));
-			setChanged();
-			notifyObservers(Action.MOVE);
-		}
-		return this;
+		while (true) {
 
-	}
+			setAI(isAi());
 
-	public Sonic doBrakeUp() {
-		if (getAction() != Action.STOP && getAction() != Action.SPEEDUP && getSpeed() > 10_000 && getAcceleration() > 200) {
-			setAcceleration((int) (getAcceleration() - 120));
-			setChanged();
-			notifyObservers(Action.BRAKEUP);
+			{
+				try {
 
-			if (getSpeed() > 0 && getAcceleration() > 200) {
-				setChanged();
-				notifyObservers(Action.MOVE);
-			} else {
-				setChanged();
-				notifyObservers(Action.STOP);
+					Thread.sleep(ConfigEngine.FPS.getValue());
+
+				} catch (InterruptedException ex) {
+
+					throw new RuntimeException("Failed to Stop " + thread.getName() + " " + ex);
+
+				}
+
 			}
 
-		} else if (!isAi()) {
-			setChanged();
-			notifyObservers(Action.BRAKEUP);
 		}
-		return this;
 	}
 
+	@Override
+	public void setAcceleration(float acceleration) {
+		this.acceleration = acceleration;
+	}
+
+	public void setAction(Action action) {
+		this.action = action;
+	}
+
+	public void setAi(boolean ai) {
+		this.ai = ai;
+	}
 
 	private void setAI(boolean ai) {
 
@@ -751,31 +746,59 @@ public final class Sonic extends Observable implements Observer, Runnable {
 
 	}
 
-	public float getResistance() {
-		return resistance;
+	public void setAnimeSpeed(int animeSpeed) {
+		this.animeSpeed = animeSpeed;
 	}
 
+	public void setH(int H) {
+		this.H = H;
+	}
+
+
+	@Override
+	public void setMass(float mass) {
+		this.mass = mass;
+	}
+
+	public void setOrientation(Orientation orientation) {
+		this.orientation = orientation;
+	}
+
+	@Override
 	public void setResistance(float resistance) {
 		this.resistance = resistance;
 	}
 
 
+	@Override
 	public synchronized void setSpeed(float speed) {
 		this.speed = speed;
 	}
 
 
-	public int getAnimeSpeed() {
-		return animeSpeed;
+	public Sonic setSuperSonic(boolean superSonic) {
+		this.superSonic = superSonic;
+		if (this.superSonic) {
+			mass = ConfigSuperSonic.MASS.getValue();
+			resistance = ConfigSuperSonic.RESISTENCE.getValue();
+		} else {
+			mass = ConfigSonic.MASS.getValue();
+			resistance = ConfigSonic.RESISTANCE.getValue();
+		}
+		return this;
 	}
 
 
-	public void setAnimeSpeed(int animeSpeed) {
-		this.animeSpeed = animeSpeed;
+	public void setW(int W) {
+		this.W = W;
 	}
 
-	public Thread getThread() {
-		return thread;
+	public void setX(int X) {
+		this.X = X;
+	}
+
+	public void setY(int Y) {
+		this.Y = Y;
 	}
 
 	@Override
@@ -792,29 +815,6 @@ public final class Sonic extends Observable implements Observer, Runnable {
 			System.err.println("Failed to Stop " + thread.getName() + " " + ex);
 		}
 
-	}
-
-	@Override
-	public void run() {
-
-		while (true) {
-
-			setAI(isAi());
-
-			{
-				try {
-
-					Thread.sleep(ConfigEngine.FPS.getValue());
-
-				} catch (InterruptedException ex) {
-
-					throw new RuntimeException("Failed to Stop " + thread.getName() + " " + ex);
-
-				}
-
-			}
-
-		}
 	}
 
 
