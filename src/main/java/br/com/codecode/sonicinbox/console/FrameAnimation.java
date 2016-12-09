@@ -1,12 +1,23 @@
 package br.com.codecode.sonicinbox.console;
 
+
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.LayoutStyle;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
 
 import br.com.codecode.sonicinbox.engine.Engine;
 import br.com.codecode.sonicinbox.enums.ConfigEngine;
@@ -56,21 +67,16 @@ public final class FrameAnimation extends JFrame implements Runnable {
 		
 	}
 
-	private void doControlButtons(boolean ai) {
+	private void doControlButtons(boolean enabled,JButton... buttons) {		
+		
+		if(buttons.length > 0)
 
-		JButton[] btns = { btnDown, btnDowned, btnLook, btnLooking, btnStop, btnWait, btnPush,
-				btnTransform, btnBreaking, btnDashZero, btnDashOne, btnDashTwo, btnDashThree, btnDashFour, btnDashFive,
-				btnDashSix, btnDashSeven, btnWalkZero, btnWalkOne, btnWalkTwo, btnWalkThree, btnWalkFour, btnWalkFive,
-				btnWalkSix, btnWalkSeven, btnRunZero, btnRunOne, btnRunTwo, btnRunThree, btnRunFour, btnRunFive,
-				btnRunSix, btnRunSeven, btnSpinZero, btnSpinOne, btnSpinTwo, btnSpinThree, btnSpinFour, btnSpinFive,
-				btnSpinSix, btnSpinSeven };
+		for (JButton jb : buttons) {
 
-		for (JButton jb : btns) {
-
-			jb.setEnabled(!ai);
+			jb.setEnabled(!enabled);
 		}
 
-		sliderAnimation.setEnabled(!ai);
+		sliderAnimation.setEnabled(!enabled);
 	}
 
 	private void doRefreshComponents() {
@@ -196,7 +202,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		sliderAnimation = new JSlider();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		setTitle("Animation Console");
 
@@ -204,8 +210,8 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		setResizable(false);
 
-		jpRun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Run",
-				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+		jpRun.setBorder(BorderFactory.createTitledBorder(null, "Run",
+				TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
 
 		jpRun.setForeground(Color.blue);
 
@@ -215,17 +221,17 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpRun.setFocusable(false);
 
-		jpRun.setMinimumSize(new java.awt.Dimension(0, 0));
+		jpRun.setMinimumSize(new Dimension(0, 0));
 
-		jpRun.setPreferredSize(new java.awt.Dimension(0, 0));
+		jpRun.setPreferredSize(new Dimension(0, 0));
 
 		jpRun.setRequestFocusEnabled(false);
 
 		jpRun.setVerifyInputWhenFocusTarget(false);
 
-		jpRun.setLayout(new java.awt.GridLayout(1, 0));
+		jpRun.setLayout(new GridLayout(1, 0));
 
-		btnRunZero.setForeground(new java.awt.Color(255, 51, 102));
+		btnRunZero.setForeground(new Color(255, 51, 102));
 
 		btnRunZero.setText("0");
 
@@ -235,7 +241,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpRun.add(btnRunZero);
 
-		btnRunOne.setForeground(new java.awt.Color(255, 51, 102));
+		btnRunOne.setForeground(new Color(255, 51, 102));
 
 		btnRunOne.setText("1");
 
@@ -246,7 +252,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpRun.add(btnRunOne);
 
-		btnRunTwo.setForeground(new java.awt.Color(255, 51, 102));
+		btnRunTwo.setForeground(new Color(255, 51, 102));
 
 		btnRunTwo.setText("2");
 
@@ -257,7 +263,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpRun.add(btnRunTwo);
 
-		btnRunThree.setForeground(new java.awt.Color(255, 51, 102));
+		btnRunThree.setForeground(new Color(255, 51, 102));
 
 		btnRunThree.setText("3");
 
@@ -268,7 +274,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpRun.add(btnRunThree);
 
-		btnRunFour.setForeground(new java.awt.Color(0, 0, 255));
+		btnRunFour.setForeground(new Color(0, 0, 255));
 		btnRunFour.setText("4");
 
 		btnRunFour.addActionListener((evt) -> {
@@ -277,7 +283,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpRun.add(btnRunFour);
 
-		btnRunFive.setForeground(new java.awt.Color(0, 0, 255));
+		btnRunFive.setForeground(new Color(0, 0, 255));
 
 		btnRunFive.setText("5");
 
@@ -287,7 +293,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpRun.add(btnRunFive);
 
-		btnRunSix.setForeground(new java.awt.Color(51, 204, 0));
+		btnRunSix.setForeground(new Color(51, 204, 0));
 
 		btnRunSix.setText("6");
 
@@ -297,7 +303,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpRun.add(btnRunSix);
 
-		btnRunSeven.setForeground(new java.awt.Color(51, 204, 0));
+		btnRunSeven.setForeground(new Color(51, 204, 0));
 
 		btnRunSeven.setText("7");
 
@@ -307,10 +313,10 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpRun.add(btnRunSeven);
 
-		jpWalk.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Walk",
-				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+		jpWalk.setBorder(BorderFactory.createTitledBorder(null, "Walk",
+				TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
 
-		jpWalk.setForeground(java.awt.Color.blue);
+		jpWalk.setForeground(Color.blue);
 
 		jpWalk.setDoubleBuffered(false);
 
@@ -318,17 +324,17 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpWalk.setFocusable(false);
 
-		jpWalk.setMinimumSize(new java.awt.Dimension(0, 0));
+		jpWalk.setMinimumSize(new Dimension(0, 0));
 
-		jpWalk.setPreferredSize(new java.awt.Dimension(0, 0));
+		jpWalk.setPreferredSize(new Dimension(0, 0));
 
 		jpWalk.setRequestFocusEnabled(false);
 
 		jpWalk.setVerifyInputWhenFocusTarget(false);
 
-		jpWalk.setLayout(new java.awt.GridLayout(1, 0));
+		jpWalk.setLayout(new GridLayout(1, 0));
 
-		btnWalkZero.setForeground(new java.awt.Color(255, 51, 102));
+		btnWalkZero.setForeground(new Color(255, 51, 102));
 
 		btnWalkZero.setText("0");
 
@@ -338,7 +344,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpWalk.add(btnWalkZero);
 
-		btnWalkOne.setForeground(new java.awt.Color(255, 51, 102));
+		btnWalkOne.setForeground(new Color(255, 51, 102));
 		btnWalkOne.setText("1");
 
 		btnWalkOne.addActionListener((evt) -> {
@@ -347,7 +353,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpWalk.add(btnWalkOne);
 
-		btnWalkTwo.setForeground(new java.awt.Color(255, 51, 102));
+		btnWalkTwo.setForeground(new Color(255, 51, 102));
 
 		btnWalkTwo.setText("2");
 
@@ -357,7 +363,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpWalk.add(btnWalkTwo);
 
-		btnWalkThree.setForeground(new java.awt.Color(255, 51, 102));
+		btnWalkThree.setForeground(new Color(255, 51, 102));
 
 		btnWalkThree.setText("3");
 
@@ -367,7 +373,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpWalk.add(btnWalkThree);
 
-		btnWalkFour.setForeground(new java.awt.Color(0, 0, 255));
+		btnWalkFour.setForeground(new Color(0, 0, 255));
 
 		btnWalkFour.setText("4");
 
@@ -378,7 +384,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpWalk.add(btnWalkFour);
 
-		btnWalkFive.setForeground(new java.awt.Color(0, 0, 255));
+		btnWalkFive.setForeground(new Color(0, 0, 255));
 
 		btnWalkFive.setText("5");
 
@@ -388,7 +394,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpWalk.add(btnWalkFive);
 
-		btnWalkSix.setForeground(new java.awt.Color(51, 204, 0));
+		btnWalkSix.setForeground(new Color(51, 204, 0));
 
 		btnWalkSix.setText("6");
 
@@ -398,7 +404,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpWalk.add(btnWalkSix);
 
-		btnWalkSeven.setForeground(new java.awt.Color(51, 204, 0));
+		btnWalkSeven.setForeground(new Color(51, 204, 0));
 
 		btnWalkSeven.setText("7");
 
@@ -408,10 +414,10 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpWalk.add(btnWalkSeven);
 
-		jpSpin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Spin",
-				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+		jpSpin.setBorder(BorderFactory.createTitledBorder(null, "Spin",
+				TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
 
-		jpSpin.setForeground(java.awt.Color.blue);
+		jpSpin.setForeground(Color.blue);
 
 		jpSpin.setDoubleBuffered(false);
 
@@ -419,17 +425,17 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpSpin.setFocusable(false);
 
-		jpSpin.setMinimumSize(new java.awt.Dimension(0, 0));
+		jpSpin.setMinimumSize(new Dimension(0, 0));
 
-		jpSpin.setPreferredSize(new java.awt.Dimension(0, 0));
+		jpSpin.setPreferredSize(new Dimension(0, 0));
 
 		jpSpin.setRequestFocusEnabled(false);
 
 		jpSpin.setVerifyInputWhenFocusTarget(false);
 
-		jpSpin.setLayout(new java.awt.GridLayout(1, 0));
+		jpSpin.setLayout(new GridLayout(1, 0));
 
-		btnSpinZero.setForeground(new java.awt.Color(255, 51, 102));
+		btnSpinZero.setForeground(new Color(255, 51, 102));
 
 		btnSpinZero.setText("0");
 
@@ -439,7 +445,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpSpin.add(btnSpinZero);
 
-		btnSpinOne.setForeground(new java.awt.Color(255, 51, 102));
+		btnSpinOne.setForeground(new Color(255, 51, 102));
 
 		btnSpinOne.setText("1");
 
@@ -449,7 +455,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpSpin.add(btnSpinOne);
 
-		btnSpinTwo.setForeground(new java.awt.Color(255, 51, 102));
+		btnSpinTwo.setForeground(new Color(255, 51, 102));
 
 		btnSpinTwo.setText("2");
 
@@ -459,7 +465,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpSpin.add(btnSpinTwo);
 
-		btnSpinThree.setForeground(new java.awt.Color(255, 51, 102));
+		btnSpinThree.setForeground(new Color(255, 51, 102));
 
 		btnSpinThree.setText("3");
 
@@ -469,7 +475,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpSpin.add(btnSpinThree);
 
-		btnSpinFour.setForeground(new java.awt.Color(0, 0, 255));
+		btnSpinFour.setForeground(new Color(0, 0, 255));
 
 		btnSpinFour.setText("4");
 
@@ -479,7 +485,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpSpin.add(btnSpinFour);
 
-		btnSpinFive.setForeground(new java.awt.Color(0, 0, 255));
+		btnSpinFive.setForeground(new Color(0, 0, 255));
 
 		btnSpinFive.setText("5");
 
@@ -489,7 +495,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpSpin.add(btnSpinFive);
 
-		btnSpinSix.setForeground(new java.awt.Color(51, 204, 0));
+		btnSpinSix.setForeground(new Color(51, 204, 0));
 
 		btnSpinSix.setText("6");
 
@@ -499,7 +505,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpSpin.add(btnSpinSix);
 
-		btnSpinSeven.setForeground(new java.awt.Color(51, 204, 0));
+		btnSpinSeven.setForeground(new Color(51, 204, 0));
 		btnSpinSeven.setText("7");
 
 		btnSpinSeven.addActionListener((evt) -> {
@@ -508,10 +514,10 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpSpin.add(btnSpinSeven);
 
-		jpDash.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dash",
-				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+		jpDash.setBorder(BorderFactory.createTitledBorder(null, "Dash",
+				TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
 
-		jpDash.setForeground(java.awt.Color.blue);
+		jpDash.setForeground(Color.blue);
 
 		jpDash.setDoubleBuffered(false);
 
@@ -519,17 +525,17 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpDash.setFocusable(false);
 
-		jpDash.setMinimumSize(new java.awt.Dimension(0, 0));
+		jpDash.setMinimumSize(new Dimension(0, 0));
 
-		jpDash.setPreferredSize(new java.awt.Dimension(0, 0));
+		jpDash.setPreferredSize(new Dimension(0, 0));
 
 		jpDash.setRequestFocusEnabled(false);
 
 		jpDash.setVerifyInputWhenFocusTarget(false);
 
-		jpDash.setLayout(new java.awt.GridLayout(1, 0));
+		jpDash.setLayout(new GridLayout(1, 0));
 
-		btnDashZero.setForeground(new java.awt.Color(255, 51, 102));
+		btnDashZero.setForeground(new Color(255, 51, 102));
 
 		btnDashZero.setText("0");
 
@@ -539,7 +545,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpDash.add(btnDashZero);
 
-		btnDashOne.setForeground(new java.awt.Color(255, 51, 102));
+		btnDashOne.setForeground(new Color(255, 51, 102));
 
 		btnDashOne.setText("1");
 
@@ -549,7 +555,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpDash.add(btnDashOne);
 
-		btnDashTwo.setForeground(new java.awt.Color(255, 51, 102));
+		btnDashTwo.setForeground(new Color(255, 51, 102));
 
 		btnDashTwo.setText("2");
 
@@ -559,7 +565,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpDash.add(btnDashTwo);
 
-		btnDashThree.setForeground(new java.awt.Color(255, 51, 102));
+		btnDashThree.setForeground(new Color(255, 51, 102));
 
 		btnDashThree.setText("3");
 
@@ -569,7 +575,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpDash.add(btnDashThree);
 
-		btnDashFour.setForeground(new java.awt.Color(0, 0, 255));
+		btnDashFour.setForeground(new Color(0, 0, 255));
 
 		btnDashFour.setText("4");
 
@@ -579,7 +585,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpDash.add(btnDashFour);
 
-		btnDashFive.setForeground(new java.awt.Color(0, 0, 255));
+		btnDashFive.setForeground(new Color(0, 0, 255));
 
 		btnDashFive.setText("5");
 
@@ -589,7 +595,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpDash.add(btnDashFive);
 
-		btnDashSix.setForeground(new java.awt.Color(51, 204, 0));
+		btnDashSix.setForeground(new Color(51, 204, 0));
 
 		btnDashSix.setText("6");
 
@@ -599,7 +605,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpDash.add(btnDashSix);
 
-		btnDashSeven.setForeground(new java.awt.Color(51, 204, 0));
+		btnDashSeven.setForeground(new Color(51, 204, 0));
 
 		btnDashSeven.setText("7");
 
@@ -609,8 +615,8 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpDash.add(btnDashSeven);
 
-		jpAction.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actions",
-				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+		jpAction.setBorder(BorderFactory.createTitledBorder(null, "Actions",
+				TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
 
 		jpAction.setDoubleBuffered(false);
 
@@ -618,19 +624,19 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpAction.setFocusable(false);
 
-		jpAction.setLayout(new java.awt.GridLayout(3, 0));
+		jpAction.setLayout(new GridLayout(3, 0));
 
-		btnStop.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnStop.setFont(new Font("Tahoma", 1, 9));
 
-		btnStop.setForeground(new java.awt.Color(102, 255, 0));
+		btnStop.setForeground(new Color(102, 255, 0));
 
 		btnStop.setText("Stop");
 
 		btnStop.setFocusable(false);
 
-		btnStop.setMinimumSize(new java.awt.Dimension(0, 0));
+		btnStop.setMinimumSize(new Dimension(0, 0));
 
-		btnStop.setPreferredSize(new java.awt.Dimension(0, 0));
+		btnStop.setPreferredSize(new Dimension(0, 0));
 
 		btnStop.setRequestFocusEnabled(false);
 
@@ -644,17 +650,17 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		btnStop.getAccessibleContext().setAccessibleDescription("");
 
-		btnWait.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnWait.setFont(new Font("Tahoma", 1, 9));
 
-		btnWait.setForeground(new java.awt.Color(255, 0, 102));
+		btnWait.setForeground(new Color(255, 0, 102));
 
 		btnWait.setText("Wait");
 
 		btnWait.setFocusable(false);
 
-		btnWait.setMinimumSize(new java.awt.Dimension(0, 0));
+		btnWait.setMinimumSize(new Dimension(0, 0));
 
-		btnWait.setPreferredSize(new java.awt.Dimension(0, 0));
+		btnWait.setPreferredSize(new Dimension(0, 0));
 
 		btnWait.setRequestFocusEnabled(false);
 
@@ -668,17 +674,17 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		btnWait.getAccessibleContext().setAccessibleDescription("");
 
-		btnTransform.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnTransform.setFont(new Font("Tahoma", 1, 9));
 
-		btnTransform.setForeground(new java.awt.Color(255, 51, 0));
+		btnTransform.setForeground(new Color(255, 51, 0));
 
 		btnTransform.setText("Transform");
 
 		btnTransform.setFocusable(false);
 
-		btnTransform.setMinimumSize(new java.awt.Dimension(0, 0));
+		btnTransform.setMinimumSize(new Dimension(0, 0));
 
-		btnTransform.setPreferredSize(new java.awt.Dimension(0, 0));
+		btnTransform.setPreferredSize(new Dimension(0, 0));
 
 		btnTransform.setRequestFocusEnabled(false);
 
@@ -692,21 +698,21 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		btnTransform.getAccessibleContext().setAccessibleDescription("");
 
-		btnDown.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnDown.setFont(new Font("Tahoma", 1, 9));
 
-		btnDown.setForeground(new java.awt.Color(0, 204, 255));
+		btnDown.setForeground(new Color(0, 204, 255));
 
 		btnDown.setText("Down");
 
 		btnDown.setFocusable(false);
 
-		btnDown.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		btnDown.setHorizontalTextPosition(SwingConstants.CENTER);
 
-		btnDown.setMaximumSize(new java.awt.Dimension(0, 0));
+		btnDown.setMaximumSize(new Dimension(0, 0));
 
-		btnDown.setMinimumSize(new java.awt.Dimension(0, 0));
+		btnDown.setMinimumSize(new Dimension(0, 0));
 
-		btnDown.setPreferredSize(new java.awt.Dimension(200, 200));
+		btnDown.setPreferredSize(new Dimension(200, 200));
 
 		btnDown.setRequestFocusEnabled(false);
 
@@ -720,9 +726,9 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		btnDown.getAccessibleContext().setAccessibleDescription("");
 
-		btnDowned.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnDowned.setFont(new Font("Tahoma", 1, 9));
 
-		btnDowned.setForeground(new java.awt.Color(0, 204, 255));
+		btnDowned.setForeground(new Color(0, 204, 255));
 
 		btnDowned.setText("Downed");
 
@@ -732,9 +738,9 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpAction.add(btnDowned);
 
-		btnPush.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnPush.setFont(new Font("Tahoma", 1, 9));
 
-		btnPush.setForeground(new java.awt.Color(153, 0, 153));
+		btnPush.setForeground(new Color(153, 0, 153));
 
 		btnPush.setText("Push");
 
@@ -744,17 +750,17 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpAction.add(btnPush);
 
-		btnLook.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnLook.setFont(new Font("Tahoma", 1, 9));
 
-		btnLook.setForeground(new java.awt.Color(0, 204, 204));
+		btnLook.setForeground(new Color(0, 204, 204));
 
 		btnLook.setText("Look");
 
 		btnLook.setFocusable(false);
 
-		btnLook.setMinimumSize(new java.awt.Dimension(0, 0));
+		btnLook.setMinimumSize(new Dimension(0, 0));
 
-		btnLook.setPreferredSize(new java.awt.Dimension(0, 0));
+		btnLook.setPreferredSize(new Dimension(0, 0));
 
 		btnLook.setRequestFocusEnabled(false);
 
@@ -768,9 +774,9 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		btnLook.getAccessibleContext().setAccessibleDescription("");
 
-		btnLooking.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnLooking.setFont(new Font("Tahoma", 1, 9));
 
-		btnLooking.setForeground(new java.awt.Color(0, 204, 204));
+		btnLooking.setForeground(new Color(0, 204, 204));
 
 		btnLooking.setText("Looking");
 
@@ -780,9 +786,9 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpAction.add(btnLooking);
 
-		btnBreaking.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnBreaking.setFont(new Font("Tahoma", 1, 9));
 
-		btnBreaking.setForeground(new java.awt.Color(255, 0, 51));
+		btnBreaking.setForeground(new Color(255, 0, 51));
 
 		btnBreaking.setText("Breaking");
 
@@ -792,8 +798,8 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpAction.add(btnBreaking);
 
-		jpOrientation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Orientation",
-				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+		jpOrientation.setBorder(BorderFactory.createTitledBorder(null, "Orientation",
+				TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
 
 		jpOrientation.setDoubleBuffered(false);
 
@@ -801,23 +807,23 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		jpOrientation.setFocusable(false);
 
-		jpOrientation.setLayout(new java.awt.GridLayout(1, 0));
+		jpOrientation.setLayout(new GridLayout(1, 0));
 
-		btnLeft.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnLeft.setFont(new Font("Tahoma", 1, 9));
 
-		btnLeft.setForeground(new java.awt.Color(51, 51, 255));
+		btnLeft.setForeground(new Color(51, 51, 255));
 
 		btnLeft.setText("Left");
 
 		btnLeft.setFocusable(false);
 
-		btnLeft.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		btnLeft.setHorizontalTextPosition(SwingConstants.CENTER);
 
-		btnLeft.setMaximumSize(new java.awt.Dimension(0, 0));
+		btnLeft.setMaximumSize(new Dimension(0, 0));
 
-		btnLeft.setMinimumSize(new java.awt.Dimension(0, 0));
+		btnLeft.setMinimumSize(new Dimension(0, 0));
 
-		btnLeft.setPreferredSize(new java.awt.Dimension(200, 200));
+		btnLeft.setPreferredSize(new Dimension(200, 200));
 
 		btnLeft.setRequestFocusEnabled(false);
 
@@ -831,17 +837,17 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		btnLeft.getAccessibleContext().setAccessibleDescription("");
 
-		btnRight.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnRight.setFont(new Font("Tahoma", 1, 9));
 
-		btnRight.setForeground(new java.awt.Color(51, 51, 255));
+		btnRight.setForeground(new Color(51, 51, 255));
 
 		btnRight.setText("Right");
 
 		btnRight.setFocusable(false);
 
-		btnRight.setMinimumSize(new java.awt.Dimension(0, 0));
+		btnRight.setMinimumSize(new Dimension(0, 0));
 
-		btnRight.setPreferredSize(new java.awt.Dimension(0, 0));
+		btnRight.setPreferredSize(new Dimension(0, 0));
 
 		btnRight.setRequestFocusEnabled(false);
 
@@ -856,7 +862,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		btnRight.getAccessibleContext().setAccessibleDescription("");
 
-		sliderAnimation.setForeground(java.awt.Color.blue);
+		sliderAnimation.setForeground(Color.blue);
 
 		sliderAnimation.setMajorTickSpacing(1);
 
@@ -870,17 +876,17 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		sliderAnimation.setSnapToTicks(true);
 
-		sliderAnimation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Animation Speed",
-				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION,
-				new java.awt.Font("Tahoma", 0, 10)));
+		sliderAnimation.setBorder(BorderFactory.createTitledBorder(null, "Animation Speed",
+				TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+				new Font("Tahoma", 0, 10)));
 
 		sliderAnimation.setEnabled(false);
 
 		sliderAnimation.setFocusable(false);
 
-		sliderAnimation.setMinimumSize(new java.awt.Dimension(0, 0));
+		sliderAnimation.setMinimumSize(new Dimension(0, 0));
 
-		sliderAnimation.setPreferredSize(new java.awt.Dimension(0, 0));
+		sliderAnimation.setPreferredSize(new Dimension(0, 0));
 
 		sliderAnimation.setRequestFocusEnabled(false);
 
@@ -891,42 +897,42 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 		});
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		GroupLayout layout = new GroupLayout(getContentPane());
 
 		getContentPane().setLayout(layout);
 
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-								.addComponent(jpAction, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-								.addComponent(jpOrientation, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-								.addComponent(jpDash, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jpSpin, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jpWalk, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jpRun, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(sliderAnimation, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+								.addComponent(jpAction, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+								.addComponent(jpOrientation, GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+								.addComponent(jpDash, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(jpSpin, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(jpWalk, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(jpRun, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(sliderAnimation, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addContainerGap()));
 
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
-						.addComponent(jpRun, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(jpWalk, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(jpSpin, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(jpDash, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(jpAction, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(jpOrientation, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(sliderAnimation, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)));
+						.addComponent(jpRun, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jpWalk, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jpSpin, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jpDash, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jpAction, GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jpOrientation, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(sliderAnimation, GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)));
 
 		jpRun.getAccessibleContext().setAccessibleDescription("");
 
@@ -1027,7 +1033,7 @@ public final class FrameAnimation extends JFrame implements Runnable {
 		sonic.setOrientation(Orientation.RIGHT);
 	}
 
-	private void JSLD_VelAnimacaoStateChanged(javax.swing.event.ChangeEvent evt) {
+	private void JSLD_VelAnimacaoStateChanged(ChangeEvent evt) {
 		sonic.setAnimeSpeed(sliderAnimation.getValue());
 	}
 
@@ -1121,8 +1127,15 @@ public final class FrameAnimation extends JFrame implements Runnable {
 		while (true) {
 
 			if (sonic != null) {
+				
+				JButton[] btns = { btnDown, btnDowned, btnLook, btnLooking, btnStop, btnWait, btnPush,
+						btnTransform, btnBreaking, btnDashZero, btnDashOne, btnDashTwo, btnDashThree, btnDashFour, btnDashFive,
+						btnDashSix, btnDashSeven, btnWalkZero, btnWalkOne, btnWalkTwo, btnWalkThree, btnWalkFour, btnWalkFive,
+						btnWalkSix, btnWalkSeven, btnRunZero, btnRunOne, btnRunTwo, btnRunThree, btnRunFour, btnRunFive,
+						btnRunSix, btnRunSeven, btnSpinZero, btnSpinOne, btnSpinTwo, btnSpinThree, btnSpinFour, btnSpinFive,
+						btnSpinSix, btnSpinSeven };
 
-				doControlButtons(sonic.isAi());
+				doControlButtons(sonic.isAi(),btns);
 
 				doRefreshComponents();
 			}

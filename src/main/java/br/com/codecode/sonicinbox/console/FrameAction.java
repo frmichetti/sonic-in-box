@@ -6,14 +6,23 @@
  * */
 package br.com.codecode.sonicinbox.console;
 
+
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JSeparator;
 import javax.swing.JToggleButton;
+import javax.swing.LayoutStyle;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import br.com.codecode.sonicinbox.engine.Engine;
 import br.com.codecode.sonicinbox.engine.Music;
@@ -27,17 +36,9 @@ public final class FrameAction extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = 1370653725906464274L;    
 
-	private JButton btnAccelerate;
-
-	private JButton btnBrake;
+	private JButton btnAccelerate, btnBrake;
 	
-	public static JButton btnDown;	
-
-	public static JButton btnLeft;
-
-	public static JButton btnRight;
-
-	public static JButton btnUp;
+	public static JButton btnDown, btnLeft, btnRight, btnUp;
 
 	private JLabel lblTitle, lblSpeed;
 
@@ -102,45 +103,45 @@ public final class FrameAction extends JFrame implements Runnable {
 
 	private void initComponents() {
 
-		btnAccelerate = new javax.swing.JButton();
+		btnAccelerate = new JButton();
 
-		toggleAi = new javax.swing.JToggleButton();
+		toggleAi = new JToggleButton();
 
-		btnLeft = new javax.swing.JButton();
+		btnLeft = new JButton();
 
-		btnDown = new javax.swing.JButton();
+		btnDown = new JButton();
 
-		btnRight = new javax.swing.JButton();
+		btnRight = new JButton();
 
-		btnUp = new javax.swing.JButton();
+		btnUp = new JButton();
 
-		toggleMusic = new javax.swing.JToggleButton();
+		toggleMusic = new JToggleButton();
 
-		toggleSuperSonic = new javax.swing.JToggleButton();
+		toggleSuperSonic = new JToggleButton();
 
-		btnBrake = new javax.swing.JButton();
+		btnBrake = new JButton();
 
-		progressBar = new javax.swing.JProgressBar();
+		progressBar = new JProgressBar();
 
-		lblSpeed = new javax.swing.JLabel();
+		lblSpeed = new JLabel();
 
-		lblTitle = new javax.swing.JLabel();
+		lblTitle = new JLabel();
 
-		separator = new javax.swing.JSeparator();
+		separator = new JSeparator();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		setTitle("Action Console");
 
 		setAlwaysOnTop(true);
 
-		setLocation(new java.awt.Point(1347, 0));
+		setLocation(new Point(1347, 0));
 
 		setResizable(false);
 
-		btnAccelerate.setFont(new java.awt.Font("Tahoma", 1, 14));
+		btnAccelerate.setFont(new Font("Tahoma", 1, 14));
 
-		btnAccelerate.setForeground(new java.awt.Color(0, 0, 255));
+		btnAccelerate.setForeground(new Color(0, 0, 255));
 
 		btnAccelerate.setText("SpeedUp");
 
@@ -155,9 +156,9 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		});
 
-		toggleAi.setFont(new java.awt.Font("Tahoma", 1, 14));
+		toggleAi.setFont(new Font("Tahoma", 1, 14));
 
-		toggleAi.setForeground(new java.awt.Color(255, 0, 102));
+		toggleAi.setForeground(new Color(255, 0, 102));
 
 		toggleAi.setText("A.I.");
 
@@ -172,7 +173,7 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		});
 
-		btnLeft.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnLeft.setFont(new Font("Tahoma", 1, 9));
 
 		btnLeft.setText("Right");
 
@@ -184,7 +185,7 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		btnLeft.setVerifyInputWhenFocusTarget(false);
 
-		btnDown.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnDown.setFont(new Font("Tahoma", 1, 9));
 
 		btnDown.setText("Down");
 
@@ -196,7 +197,7 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		btnDown.setVerifyInputWhenFocusTarget(false);
 
-		btnRight.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnRight.setFont(new Font("Tahoma", 1, 9));
 
 		btnRight.setText("Left");
 
@@ -208,7 +209,7 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		btnRight.setVerifyInputWhenFocusTarget(false);
 
-		btnUp.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnUp.setFont(new Font("Tahoma", 1, 9));
 
 		btnUp.setText("Up");
 
@@ -220,9 +221,9 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		btnUp.setVerifyInputWhenFocusTarget(false);
 
-		toggleMusic.setFont(new java.awt.Font("Tahoma", 1, 14));
+		toggleMusic.setFont(new Font("Tahoma", 1, 14));
 
-		toggleMusic.setForeground(new java.awt.Color(204, 0, 204));
+		toggleMusic.setForeground(new Color(204, 0, 204));
 
 		toggleMusic.setText("Music");
 
@@ -237,9 +238,9 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		});
 
-		toggleSuperSonic.setFont(new java.awt.Font("Tahoma", 1, 14));
+		toggleSuperSonic.setFont(new Font("Tahoma", 1, 14));
 
-		toggleSuperSonic.setForeground(new java.awt.Color(255, 204, 0));
+		toggleSuperSonic.setForeground(new Color(255, 204, 0));
 
 		toggleSuperSonic.setText("Super Sonic");
 
@@ -256,9 +257,9 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		});
 
-		btnBrake.setFont(new java.awt.Font("Tahoma", 1, 14));
+		btnBrake.setFont(new Font("Tahoma", 1, 14));
 
-		btnBrake.setForeground(new java.awt.Color(0, 0, 255));
+		btnBrake.setForeground(new Color(0, 0, 255));
 
 		btnBrake.setText("BreakUp");
 
@@ -279,82 +280,82 @@ public final class FrameAction extends JFrame implements Runnable {
 
 		progressBar.setFocusable(false);
 
-		lblSpeed.setFont(new java.awt.Font("Tahoma", 0, 10));
+		lblSpeed.setFont(new Font("Tahoma", 0, 10));
 
-		lblSpeed.setForeground(new java.awt.Color(0, 204, 255));
+		lblSpeed.setForeground(new Color(0, 204, 255));
 
-		lblSpeed.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		lblSpeed.setHorizontalAlignment(SwingConstants.CENTER);
 
-		lblTitle.setFont(new java.awt.Font("Tahoma", 1, 9));
+		lblTitle.setFont(new Font("Tahoma", 1, 9));
 
-		lblTitle.setForeground(new java.awt.Color(51, 51, 255));
+		lblTitle.setForeground(new Color(51, 51, 255));
 
-		lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 
 		lblTitle.setText("Speed");
 
-		separator.setOrientation(javax.swing.SwingConstants.VERTICAL);
+		separator.setOrientation(SwingConstants.VERTICAL);
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
 						.addContainerGap()
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(toggleAi, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-								.addComponent(toggleMusic, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-								.addComponent(btnAccelerate, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-								.addComponent(btnBrake, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-								.addComponent(toggleSuperSonic, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addComponent(toggleAi, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+								.addComponent(toggleMusic, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+								.addComponent(btnAccelerate, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+								.addComponent(btnBrake, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+								.addComponent(toggleSuperSonic, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
 								.addGroup(layout.createSequentialGroup()
-										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 												.addGroup(layout.createSequentialGroup()
-														.addComponent(btnLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+														.addComponent(btnLeft, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 														.addGap(5, 5, 5)
-														.addComponent(btnRight, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
-												.addComponent(btnUp, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-												.addComponent(btnDown, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+														.addComponent(btnRight, GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
+												.addComponent(btnUp, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+												.addComponent(btnDown, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
 										.addGap(2, 2, 2)))
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 						.addComponent(separator)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-								.addComponent(lblSpeed, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(progressBar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+								.addComponent(lblSpeed, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(progressBar, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
 						.addGap(25, 25, 25))
 				);
 		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
 						.addContainerGap()
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup()
-										.addComponent(toggleMusic, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(toggleAi, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(btnAccelerate, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(btnBrake, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(toggleSuperSonic, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+										.addComponent(toggleMusic, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(toggleAi, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+										.addComponent(btnAccelerate, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(btnBrake, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(toggleSuperSonic, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
 										.addGap(30, 30, 30)
-										.addComponent(btnUp, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(btnLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(btnRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(btnDown, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+										.addComponent(btnUp, GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+												.addComponent(btnLeft, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(btnRight, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(btnDown, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
 								.addGroup(layout.createSequentialGroup()
-										.addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(lblSpeed, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
-								.addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE))
+										.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(lblSpeed, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(progressBar, GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
+								.addComponent(separator, GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE))
 						.addContainerGap())
 				);
 
