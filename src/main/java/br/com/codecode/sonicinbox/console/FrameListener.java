@@ -114,8 +114,10 @@ public class FrameListener extends JFrame implements Runnable {
 	public void run() {
 
 		while (true) {
-
-			doRefreshComponents();
+			
+			if (sonic != null){
+				doRefreshComponents();
+			}		
 
 			try {
 

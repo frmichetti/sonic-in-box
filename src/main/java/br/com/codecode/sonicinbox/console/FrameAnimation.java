@@ -1157,10 +1157,13 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 	public void run() {
 		
 		while (true) {
+			
+			if(sonic != null){
+				
+				doControlButtons(sonic.isAi());
 
-			doControlButtons(sonic.isAi());
-
-			doRefreshComponents();
+				doRefreshComponents();
+			}			
 
 			try {
 

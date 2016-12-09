@@ -28,7 +28,7 @@ public final class EventListener implements KeyListener, Runnable {
 	}
 
 	public EventListener(Engine engine, boolean on) {
-		this();
+		this();		
 		this.sonic = engine.sonic;
 		this.lastkeypress = engine.lastkeypress;		
 		this.on = on;
@@ -60,7 +60,7 @@ public final class EventListener implements KeyListener, Runnable {
 				
 				lastkeypress.delete(0, 30);
 				
-				lastkeypress.append("RIGHT");
+				lastkeypress.append("RIGHT");			
 				
 				//frameAction.BTN_Right.setVisible(false);
 				
@@ -204,11 +204,8 @@ public final class EventListener implements KeyListener, Runnable {
 			} while (i < 7_000);
 
 		}
-	}    
+	}   
 
-	public Thread getThread() {
-		return thread;
-	}
 
 	@Override
 	public void run() {

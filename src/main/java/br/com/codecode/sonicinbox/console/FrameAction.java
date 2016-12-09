@@ -9,6 +9,7 @@ package br.com.codecode.sonicinbox.console;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JSeparator;
@@ -22,7 +23,7 @@ import br.com.codecode.sonicinbox.motion.Sonic;
 import br.com.codecode.sonicinbox.util.Size;
 
 
-public class FrameAction extends javax.swing.JFrame implements Runnable {
+public class FrameAction extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = 1370653725906464274L;    
 
@@ -387,11 +388,12 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 		
 		while (true) {
 			
-			if(sonic != null)
+			if(sonic != null){
+				
+				doRefreshComponent();
 
-			doRefreshComponent();
-
-			doControlButtons(sonic.isAi());
+				doControlButtons(sonic.isAi());
+			}			
 
 			try {
 
@@ -404,4 +406,5 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 			}
 		}
 	}
+	
 }
