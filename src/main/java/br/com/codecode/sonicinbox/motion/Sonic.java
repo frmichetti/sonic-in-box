@@ -1,7 +1,5 @@
 package br.com.codecode.sonicinbox.motion;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.ExecutorService;
@@ -15,35 +13,40 @@ import br.com.codecode.sonicinbox.enumeration.ConfigSuperSonic;
 import br.com.codecode.sonicinbox.enumeration.Orientation;
 import br.com.codecode.sonicinbox.util.MyPath;
 
-
-public final class Sonic extends Observable implements Runnable, Observer {
+/**
+ * Sonic Character
+ * @author felipe
+ * @since 1.0
+ * @version 3.0
+ */
+public final class Sonic extends Observable implements Observer, Runnable {
 
 	private boolean ai;
-	
+
 	private int X, Y, W, H;
-	
+
 	private Sprites sprites;
-	
+
 	private Action action;
-	
+
 	private Orientation orientation;
-	
+
 	private float acceleration, mass;
-	
+
 	private float speed;
-	
+
 	private float resistance;
-	
+
 	private boolean superSonic;
-	
+
 	private int animeSpeed;
-	
+
 	private Thread thread;
-	
+
 	private Movimentation movimentation = new Movimentation();
-	
+
 	public Animation animation = new Animation();
-	
+
 
 	private Sonic() {
 
@@ -52,50 +55,48 @@ public final class Sonic extends Observable implements Runnable, Observer {
 		addObserver(this);        
 
 		setW(ConfigSonic.WIDTH.getValue());
-		
+
 		setH(ConfigSonic.HEIGHT.getValue());
-		
+
 		setX(ConfigSonic.SX.getValue());
-		
+
 		setY(ConfigSonic.SY.getValue());
-		
+
 		setMass(ConfigSonic.MASS.getValue());
-		
+
 		setResistance(ConfigSonic.RESISTANCE.getValue());
 
 		setOrientation(Orientation.RIGHT);
-		
+
 		setAnimeSpeed(5);
-		
+
 		setAi(false);
-		
+
 		setSpeed(0);
-		
+
 		setAcceleration(0);
-		
+
 		setAction(Action.STOP);
 
 		doLoadSprites();
-		
+
 		ExecutorService executor = Executors.newFixedThreadPool(2);
-		
+
 		executor.execute(movimentation);
-		
+
 		executor.execute(animation);				
 
 	}
 
-	public Sonic(boolean ai)  {
+	public Sonic(boolean ai) {
 		this();
 		this.ai = ai;
 	}
 
-	private void doLoadSprites(){
-		try {
-			sprites = new Sprites(new URL(MyPath.SPRITES_OPENSHIFT));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+	private void doLoadSprites() {
+
+		sprites = new Sprites(MyPath.SPRITES_RELATIVE);
+
 	}
 
 	public Sprites getSprites() {
@@ -395,15 +396,15 @@ public final class Sonic extends Observable implements Runnable, Observer {
 			switch ((Action) getAction()) {
 
 			case STOP: {
-				
+
 				assert (getAction() != Action.MOVE) : "Parado com Velocidade > 0, Velocidade == " + getSpeed();
 			}
 			break;
 
 			case WAIT: {
-				
+
 				assert (getSpeed() == 0) : "Ação Proibida";
-				
+
 				doWait();
 
 			}
@@ -412,38 +413,38 @@ public final class Sonic extends Observable implements Runnable, Observer {
 			case DOWN: {
 
 				assert (getSpeed() == 0) : "Ação Proibida";
-				
+
 				doDown();
 
 			}
 			case DOWNED: {
 
 				assert (getSpeed() == 0) : "Ação Proibida";
-				
+
 				doDowned();
 
 			}
 			break;
 
 			case LOOK: {
-				
+
 				assert (getSpeed() == 0) : "Ação Proibida";
-				
+
 				doLook();
 
 			}
 			case LOOKING: {
-				
+
 				assert (getSpeed() == 0) : "Ação Proibida";
-				
+
 				doLooking();
 
 			}
 			break;
 			case PUSH: {
-				
+
 				assert (getSpeed() == 0) : "Ação Proibida";
-				
+
 				doPush();
 
 			}
@@ -452,83 +453,83 @@ public final class Sonic extends Observable implements Runnable, Observer {
 			case SPIN: {
 
 				if (getSpeed() > 0 && getSpeed() < 8) {
-					
+
 					doSpin(8);
 
 				} else if (getSpeed() >= 8 && getSpeed() < 20) {
-					
+
 					doSpin(7);
 
 				} else if (getSpeed() >= 20 && getSpeed() < 60) {
-					
+
 					doSpin(6);
 
 				} else if (getSpeed() >= 60 && getSpeed() < 100) {
-					
+
 					doSpin(5);
 
 				} else if (getSpeed() >= 100 && getSpeed() < 10_000) {
-					
+
 					doSpin(4);
 
 				} else if (getSpeed() >= 10_000 && getSpeed() < 20_000) {
-					
+
 					doSpin(3);
 
 				} else if (getSpeed() >= 20_000 && getSpeed() < 30_000) {
-					
+
 					doSpin(2);
 
 				} else if (getSpeed() >= 30_000 && getSpeed() < 40_000) {
-					
+
 					doSpin(1);
 
 				} else if (getSpeed() >= 40_000 && getSpeed() < 50_000) {
-					
+
 					doSpin(5);
 
 				} else if (getSpeed() >= 50_000 && getSpeed() < 60_000) {
-					
+
 					doSpin(4);
 
 				} else if (getSpeed() >= 60_000 && getSpeed() < 70_000) {
-					
+
 					doSpin(3);
 
 				} else if (getSpeed() >= 70_000 && getSpeed() < 80_000) {
-					
+
 					doSpin(2);
 
 				} else if (getSpeed() >= 80_000 && getSpeed() < 90_000) {
-					
+
 					doSpin(1);
 
 				} else if (getSpeed() >= 90_000 && getSpeed() < 100_000) {
-					
+
 					doSpin(0);
 
 				} else if (getSpeed() >= 100_000 && getSpeed() < 110_000) {
-					
+
 					doSpin(0);
 
 				} else if (getSpeed() >= 110_000 && getSpeed() < 120_000) {
-					
+
 					doSpin(0);
 
 				} else if (getSpeed() >= 120_000 && getSpeed() < 130_000) {
-					
+
 					doSpin(0);
 
 				} else if (getSpeed() >= 130_000) {
-					
+
 					doSpin(0);
 
 				} else if (getSpeed() == 0) {
-					
+
 					doStop();
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.STOP);
 
 				}
@@ -537,35 +538,35 @@ public final class Sonic extends Observable implements Runnable, Observer {
 			break;
 
 			case TRANSFORM: {
-				
+
 				doTransform();
 			}
 
 			break;
 
 			case DASH: {
-				
+
 				doDash(0);
 			}
 			break;
 
 			case BRAKEUP: {
-				
+
 				assert (getAction() == Action.MOVE && getSpeed() > 0) : "Ação Proibida - FREIANDO PARADO";
-				
+
 				doBrakeUp();
-				
+
 				setChanged();
-				
+
 				notifyObservers(Action.MOVE);
 
 			}
 			break;
 
 			case SPEEDUP: {
-				
+
 				assert (getAction() != Action.BRAKEUP) : "Ação Proibida";
-				
+
 				doSpeedUp();
 
 			}
@@ -573,155 +574,155 @@ public final class Sonic extends Observable implements Runnable, Observer {
 
 			case MOVE: {
 				if (getSpeed() > 0 && getSpeed() < 8) {
-					
+
 					doWalk(8);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 8 && getSpeed() < 20) {
-					
+
 					doWalk(7);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 20 && getSpeed() < 60) {
-					
+
 					doWalk(6);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 60 && getSpeed() < 100) {
-					
+
 					doWalk(5);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 100 && getSpeed() < 10_000) {
-					
+
 					doWalk(4);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 10_000 && getSpeed() < 20_000) {
-					
+
 					doWalk(3);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 20_000 && getSpeed() < 30_000) {
-					
+
 					doWalk(2);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 30_000 && getSpeed() < 40_000) {
-					
+
 					doWalk(1);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 40_000 && getSpeed() < 50_000) {
-					
+
 					doRun(5);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 50_000 && getSpeed() < 60_000) {
-					
+
 					doRun(4);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 60_000 && getSpeed() < 70_000) {
-					
+
 					doRun(3);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 70_000 && getSpeed() < 80_000) {
-					
+
 					doRun(2);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 80_000 && getSpeed() < 90_000) {
-					
+
 					doRun(1);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 90_000 && getSpeed() < 100_000) {
-					
+
 					doRun(0);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 100_000 && getSpeed() < 110_000) {
-					
+
 					doRun(0);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 110_000 && getSpeed() < 120_000) {
-					
+
 					doRun(0);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 120_000 && getSpeed() < 130_000) {
-					
+
 					doRun(0);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() >= 130_000) {
-					
+
 					doRun(0);
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.MOVE);
-					
+
 				} else if (getSpeed() == 0) {
-					
+
 					doStop();
-					
+
 					setChanged();
-					
+
 					notifyObservers(Action.STOP);
 
 				}
@@ -765,22 +766,22 @@ public final class Sonic extends Observable implements Runnable, Observer {
 	public void setAnimeSpeed(int animeSpeed) {
 		this.animeSpeed = animeSpeed;
 	}
-	
+
 	public Thread getThread() {
 		return thread;
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		
+
 		setAction((Action) arg);
-		
+
 		try {
-			
+
 			Thread.sleep(ConfigEngine.FPS.getValue());
-			
+
 		} catch (InterruptedException ex) {
-			
+
 			System.err.println("Failed to Stop " + thread.getName() + " " + ex);
 		}
 
@@ -790,18 +791,18 @@ public final class Sonic extends Observable implements Runnable, Observer {
 	public void run() {
 
 		while (true) {
-			
+
 			setAI(isAi());
-			
+
 			{
 				try {
 
 					Thread.sleep(ConfigEngine.FPS.getValue());
 
 				} catch (InterruptedException ex) {
-					
+
 					throw new RuntimeException("Failed to Stop " + thread.getName() + " " + ex);
-					
+
 				}
 
 			}

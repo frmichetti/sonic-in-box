@@ -12,7 +12,6 @@ import javax.sound.midi.Sequencer;
 import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.util.MyPath;
 
-
 public class Music implements Runnable {
 
 	@SuppressWarnings("unused")

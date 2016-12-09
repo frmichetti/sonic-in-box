@@ -20,7 +20,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>br.com.frmichetti.sonicinbox.Start</mainClass>
+							<mainClass>br.com.codecode.sonicinbox.Start</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

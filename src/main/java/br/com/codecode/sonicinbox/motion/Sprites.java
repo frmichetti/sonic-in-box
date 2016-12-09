@@ -1,10 +1,10 @@
 package br.com.codecode.sonicinbox.motion;
 
 import java.awt.Image;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.IOException;
 import java.text.DecimalFormat;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JProgressBar;
 
@@ -12,13 +12,13 @@ import br.com.codecode.sonicinbox.enumeration.ConfigSonic;
 
 public final class Sprites {
 
-	public static final String FILE_MASK = "sprite_%s.png";
+	public final String FILE_MASK = "sprite_%s.png";
 
 	private ImageIcon[] frames;   
 
 	private JProgressBar progressBar = new JProgressBar(0, 241);
 
-	public Sprites(URL from) {	
+	public Sprites(String from) {		
 
 		System.out.println("Resource Sprites : " + from);
 
@@ -27,7 +27,7 @@ public final class Sprites {
 		doLoadSprites(from);
 	}
 
-	private void doLoadSprites(URL from) {
+	private void doLoadSprites(String from) {
 
 		DecimalFormat df = new DecimalFormat("0.##");
 
@@ -39,9 +39,12 @@ public final class Sprites {
 
 			try {
 
-				frames[c] = new ImageIcon(new URL(String.format(from.toString() + FILE_MASK, String.valueOf(c))));
+				frames[c] = new ImageIcon(ImageIO.read(
+						ClassLoader.class.getResourceAsStream(
+								String.format(from + FILE_MASK, String.valueOf(c)))));
+						
 
-			} catch (MalformedURLException ex) {
+			} catch (IOException ex) {
 
 				throw new RuntimeException("It was not possible load Sprites " + ex);
 			}
