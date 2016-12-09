@@ -1123,22 +1123,22 @@ public final class FrameAnimation extends JFrame implements Runnable {
 
 	@Override
 	public void run() {
+		
+		JButton[] btns = { btnDown, btnDowned, btnLook, btnLooking, btnStop, btnWait, btnPush,
+				btnTransform, btnBreaking, btnDashZero, btnDashOne, btnDashTwo, btnDashThree, btnDashFour, btnDashFive,
+				btnDashSix, btnDashSeven, btnWalkZero, btnWalkOne, btnWalkTwo, btnWalkThree, btnWalkFour, btnWalkFive,
+				btnWalkSix, btnWalkSeven, btnRunZero, btnRunOne, btnRunTwo, btnRunThree, btnRunFour, btnRunFive,
+				btnRunSix, btnRunSeven, btnSpinZero, btnSpinOne, btnSpinTwo, btnSpinThree, btnSpinFour, btnSpinFive,
+				btnSpinSix, btnSpinSeven };
 
 		while (true) {
 
-			if (sonic != null) {
-				
-				JButton[] btns = { btnDown, btnDowned, btnLook, btnLooking, btnStop, btnWait, btnPush,
-						btnTransform, btnBreaking, btnDashZero, btnDashOne, btnDashTwo, btnDashThree, btnDashFour, btnDashFive,
-						btnDashSix, btnDashSeven, btnWalkZero, btnWalkOne, btnWalkTwo, btnWalkThree, btnWalkFour, btnWalkFive,
-						btnWalkSix, btnWalkSeven, btnRunZero, btnRunOne, btnRunTwo, btnRunThree, btnRunFour, btnRunFive,
-						btnRunSix, btnRunSeven, btnSpinZero, btnSpinOne, btnSpinTwo, btnSpinThree, btnSpinFour, btnSpinFive,
-						btnSpinSix, btnSpinSeven };
+			if (sonic != null)				
 
 				doControlButtons(sonic.isAi(),btns);
 
 				doRefreshComponents();
-			}
+			
 
 			try {
 

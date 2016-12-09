@@ -78,11 +78,11 @@ public final class FrameAction extends JFrame implements Runnable {
 		
 	}
 
-	private void doControlButtons(boolean ai) {
+	private void doControlButtons(boolean ai,JButton... buttons) {
 
-		JButton[] btns = {btnAccelerate, btnBrake};
+		if(buttons.length > 0)
 
-		for (JButton btn : btns) {
+		for (JButton btn : buttons) {
 			btn.setEnabled(ai);
 		}
 
@@ -393,14 +393,16 @@ public final class FrameAction extends JFrame implements Runnable {
 	@Override
 	public void run() {
 		
+		JButton[] btns = {btnAccelerate, btnBrake};
+		
 		while (true) {
 			
-			if(sonic != null){
+			if(sonic != null)
 				
 				doRefreshComponent();
 
-				doControlButtons(sonic.isAi());
-			}			
+				doControlButtons(sonic.isAi(),btns);
+						
 
 			try {
 

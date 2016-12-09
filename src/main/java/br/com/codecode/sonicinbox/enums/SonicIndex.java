@@ -2,14 +2,15 @@ package br.com.codecode.sonicinbox.enums;
 
 /**
  * Index of Actions Sprites for Sonic
+ * 
  * @author felipe
  * @since 1.0
  * @version 1.0
  */
 public enum SonicIndex {
 
-	STOP(0, 0),WAIT(0, 12),LOOK(13, 14),LOOKING(14, 14),DOWN(15, 16),DOWNED(16, 16),BREAKUP(173, 175),PUSH(197, 200),
-	WALK(17, 24),RUN(25, 28),JUMP(),SPIN(41, 45),DASH(46, 51),TRANSFORM(206, 210);
+	STOP(0, 0), WAIT(0, 12), LOOK(13, 14), LOOKING(14, 14), DOWN(15, 16), DOWNED(16, 16), BREAKUP(173, 175), PUSH(197,
+			200), WALK(17, 24), RUN(25, 28), JUMP(), SPIN(41, 45), DASH(46, 51), TRANSFORM(206, 210);
 
 	private int init;
 
@@ -25,18 +26,12 @@ public enum SonicIndex {
 		this.end = 0;
 	}
 
-
 	public int getInit() {
 		return init;
 	}
 
-
 	public int getEnd() {
 		return end;
 	}
-
-
-
-
 
 }

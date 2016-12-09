@@ -2,41 +2,42 @@ package br.com.codecode.sonicinbox.enums;
 
 /**
  * Index of Actions Sprites for Super Sonic
+ * 
  * @author felipe
  * @since 1.0
  * @version 1.0
  */
 public enum SuperSonicIndex {
 
-    SS_STOP(211, 213),SS_WAIT(239, 241),SS_LOOK(),SS_LOOKING(),SS_DOWN(214, 214),SS_DOWNED(214, 214),SS_BREAKUP(),SS_PUSH(235, 238),
-    SS_WALK(216, 222),SS_RUN(223, 224),SS_JUMP(),SS_SPIN(),SS_DASH();
-	
-    private int init;
-    
-    private int end;
+	SS_STOP(211, 213), SS_WAIT(239, 241), SS_LOOK(), SS_LOOKING(), SS_DOWN(214, 214), SS_DOWNED(214,
+			214), SS_BREAKUP(), SS_PUSH(235, 238), SS_WALK(216, 222), SS_RUN(223, 224), SS_JUMP(), SS_SPIN(), SS_DASH();
 
-    private SuperSonicIndex(int init, int end) {
-        this.init = init;
-        this.end = end;
-    }
+	private int init;
 
-    private SuperSonicIndex() {
-        this.init = 0;
-        this.end = 0;
-    }
+	private int end;
 
-    /**
-     * @return the init
-     */
-    public int getInit() {
-        return init;
-    }
+	private SuperSonicIndex(int init, int end) {
+		this.init = init;
+		this.end = end;
+	}
 
-    /**
-     * @return the end
-     */
-    public int getEnd() {
-        return end;
-    }
+	private SuperSonicIndex() {
+		this.init = 0;
+		this.end = 0;
+	}
+
+	/**
+	 * @return the init
+	 */
+	public int getInit() {
+		return init;
+	}
+
+	/**
+	 * @return the end
+	 */
+	public int getEnd() {
+		return end;
+	}
 
 }
