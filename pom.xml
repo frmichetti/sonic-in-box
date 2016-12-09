@@ -48,5 +48,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<inceptionYear>2015</inceptionYear>
 </project>
 
