@@ -1,10 +1,13 @@
 package br.com.codecode.sonicinbox.console;
 
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+
 import br.com.codecode.sonicinbox.engine.Engine;
 import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
 import br.com.codecode.sonicinbox.util.Size;
 
-public class FrameListener extends javax.swing.JFrame implements Runnable {
+public class FrameListener extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = -8266452496408906017L;	
 
@@ -36,7 +39,7 @@ public class FrameListener extends javax.swing.JFrame implements Runnable {
         
         LBL_Aceleracao = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         setTitle("Console Key Listener ");
         

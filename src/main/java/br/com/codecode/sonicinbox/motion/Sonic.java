@@ -43,10 +43,9 @@ public final class Sonic extends Observable implements Observer, Runnable {
 
 	private Thread thread;
 
-	public Animation animation = new Animation(this);
+	public Animation animation; 
 	
-	private Movimentation movimentation = new Movimentation(this);
-
+	private Movimentation movimentation;
 
 	private Sonic() {
 
@@ -79,6 +78,10 @@ public final class Sonic extends Observable implements Observer, Runnable {
 		setAction(Action.STOP);
 
 		doLoadSprites(MyPath.SPRITES_RELATIVE);
+		
+		animation = new Animation(this);
+		
+		movimentation = new Movimentation(this);
 
 		ExecutorService executor = Executors.newFixedThreadPool(2);
 

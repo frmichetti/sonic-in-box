@@ -65,9 +65,9 @@ public final class Start {
 				    
 				    new FrameListener();
 
-				    new FrameAnimation();
+				    new FrameAnimation(Engine.sonic);
 
-				    new FrameAction();				    
+				    new FrameAction(Engine.sonic);				    
 
 				});
 				

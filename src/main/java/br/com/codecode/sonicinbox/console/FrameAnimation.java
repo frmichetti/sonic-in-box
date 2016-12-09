@@ -1,16 +1,23 @@
 package br.com.codecode.sonicinbox.console;
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+
 import javax.swing.JButton;
 
 import br.com.codecode.sonicinbox.engine.Engine;
 import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
 import br.com.codecode.sonicinbox.enumeration.Orientation;
+import br.com.codecode.sonicinbox.motion.Sonic;
 
 public final class FrameAnimation extends javax.swing.JFrame implements Runnable {
 
 	private static final long serialVersionUID = -7339748933268786433L;	
 
-	private javax.swing.JButton BTN_Abaixado, BTN_Abaixar, BTN_Andar0, BTN_Andar1,
+	private JButton BTN_Abaixado, BTN_Abaixar, BTN_Andar0, BTN_Andar1,
 	BTN_Andar2, BTN_Andar3, BTN_Andar4, BTN_Andar5, BTN_Andar6, BTN_Andar7, BTN_Correr0,
 	BTN_Correr1, BTN_Correr2, BTN_Correr3, BTN_Correr4, BTN_Correr5, BTN_Correr6, BTN_Correr7,
 	BTN_Dash0, BTN_Dash1, BTN_Dash2, BTN_Dash3, BTN_Dash4, BTN_Dash5, BTN_Dash6, BTN_Dash7,
@@ -21,8 +28,10 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 	private javax.swing.JPanel JP_Acao, JP_Andar, JP_Correr, JP_Dash, JP_Girar, JP_Orientacao;
 
 	private javax.swing.JSlider JSLD_VelAnimacao;	
+	
+	private Sonic sonic;
 
-	public FrameAnimation() {		
+	private FrameAnimation() {		
 
 		super.setVisible(true);
 
@@ -34,6 +43,11 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		super.setLocation(0, 0);
 
+	}
+	
+	public FrameAnimation(Sonic sonic){
+		this();
+		this.sonic = sonic;
 	}
 
 	private void doControlButtons(boolean ai) {
@@ -55,7 +69,7 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 	private void doRefreshComponents() {
 
-		if (Engine.sonic.getOrientation() == Orientation.RIGHT) {
+		if (sonic.getOrientation() == Orientation.RIGHT) {
 
 			BTN_Direita.setVisible(false);
 
@@ -68,9 +82,9 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 			BTN_Esquerda.setVisible(false);
 		}
 
-		if (Engine.sonic.isAi()) {
+		if (sonic.isAi()) {
 
-			JSLD_VelAnimacao.setValue(Engine.sonic.getAnimeSpeed());
+			JSLD_VelAnimacao.setValue(sonic.getAnimeSpeed());
 		}
 	}
 
@@ -78,101 +92,101 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		JP_Correr = new javax.swing.JPanel();
 
-		BTN_Correr0 = new javax.swing.JButton();
+		BTN_Correr0 = new JButton();
 
-		BTN_Correr1 = new javax.swing.JButton();
+		BTN_Correr1 = new JButton();
 
-		BTN_Correr2 = new javax.swing.JButton();
+		BTN_Correr2 = new JButton();
 
-		BTN_Correr3 = new javax.swing.JButton();
+		BTN_Correr3 = new JButton();
 
-		BTN_Correr4 = new javax.swing.JButton();
+		BTN_Correr4 = new JButton();
 
-		BTN_Correr5 = new javax.swing.JButton();
+		BTN_Correr5 = new JButton();
 
-		BTN_Correr6 = new javax.swing.JButton();
+		BTN_Correr6 = new JButton();
 
-		BTN_Correr7 = new javax.swing.JButton();
+		BTN_Correr7 = new JButton();
 
 		JP_Andar = new javax.swing.JPanel();
 
-		BTN_Andar0 = new javax.swing.JButton();
+		BTN_Andar0 = new JButton();
 
-		BTN_Andar1 = new javax.swing.JButton();
+		BTN_Andar1 = new JButton();
 
-		BTN_Andar2 = new javax.swing.JButton();
+		BTN_Andar2 = new JButton();
 
-		BTN_Andar3 = new javax.swing.JButton();
+		BTN_Andar3 = new JButton();
 
-		BTN_Andar4 = new javax.swing.JButton();
+		BTN_Andar4 = new JButton();
 
-		BTN_Andar5 = new javax.swing.JButton();
+		BTN_Andar5 = new JButton();
 
-		BTN_Andar6 = new javax.swing.JButton();
+		BTN_Andar6 = new JButton();
 
-		BTN_Andar7 = new javax.swing.JButton();
+		BTN_Andar7 = new JButton();
 
 		JP_Girar = new javax.swing.JPanel();
 
-		BTN_Girar0 = new javax.swing.JButton();
+		BTN_Girar0 = new JButton();
 
-		BTN_Girar1 = new javax.swing.JButton();
+		BTN_Girar1 = new JButton();
 
-		BTN_Girar2 = new javax.swing.JButton();
+		BTN_Girar2 = new JButton();
 
-		BTN_Girar3 = new javax.swing.JButton();
+		BTN_Girar3 = new JButton();
 
-		BTN_Girar4 = new javax.swing.JButton();
+		BTN_Girar4 = new JButton();
 
-		BTN_Girar5 = new javax.swing.JButton();
+		BTN_Girar5 = new JButton();
 
-		BTN_Girar6 = new javax.swing.JButton();
+		BTN_Girar6 = new JButton();
 
-		BTN_Girar7 = new javax.swing.JButton();
+		BTN_Girar7 = new JButton();
 
 		JP_Dash = new javax.swing.JPanel();
 
-		BTN_Dash0 = new javax.swing.JButton();
+		BTN_Dash0 = new JButton();
 
-		BTN_Dash1 = new javax.swing.JButton();
+		BTN_Dash1 = new JButton();
 
-		BTN_Dash2 = new javax.swing.JButton();
+		BTN_Dash2 = new JButton();
 
-		BTN_Dash3 = new javax.swing.JButton();
+		BTN_Dash3 = new JButton();
 
-		BTN_Dash4 = new javax.swing.JButton();
+		BTN_Dash4 = new JButton();
 
-		BTN_Dash5 = new javax.swing.JButton();
+		BTN_Dash5 = new JButton();
 
-		BTN_Dash6 = new javax.swing.JButton();
+		BTN_Dash6 = new JButton();
 
-		BTN_Dash7 = new javax.swing.JButton();
+		BTN_Dash7 = new JButton();
 
 		JP_Acao = new javax.swing.JPanel();
 
-		BTN_Parar = new javax.swing.JButton();
+		BTN_Parar = new JButton();
 
-		BTN_Esperar = new javax.swing.JButton();
+		BTN_Esperar = new JButton();
 
-		BTN_Transformar = new javax.swing.JButton();
+		BTN_Transformar = new JButton();
 
-		BTN_Abaixar = new javax.swing.JButton();
+		BTN_Abaixar = new JButton();
 
-		BTN_Abaixado = new javax.swing.JButton();
+		BTN_Abaixado = new JButton();
 
-		BTN_Empurrando = new javax.swing.JButton();
+		BTN_Empurrando = new JButton();
 
-		BTN_Olhar = new javax.swing.JButton();
+		BTN_Olhar = new JButton();
 
-		BTN_Olhando = new javax.swing.JButton();
+		BTN_Olhando = new JButton();
 
-		BTN_Freiando = new javax.swing.JButton();
+		BTN_Freiando = new JButton();
 
 		JP_Orientacao = new javax.swing.JPanel();
 
-		BTN_Esquerda = new javax.swing.JButton();
+		BTN_Esquerda = new JButton();
 
-		BTN_Direita = new javax.swing.JButton();
+		BTN_Direita = new JButton();
 
 		JSLD_VelAnimacao = new javax.swing.JSlider();
 
@@ -186,7 +200,7 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		JP_Correr.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correr", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-		JP_Correr.setForeground(java.awt.Color.blue);
+		JP_Correr.setForeground(Color.blue);
 
 		JP_Correr.setDoubleBuffered(false);
 
@@ -208,8 +222,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Correr0.setText("0");
 
-		BTN_Correr0.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Correr0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Correr0ActionPerformed(evt);
 			}
 		});
@@ -220,8 +234,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Correr1.setText("1");
 
-		BTN_Correr1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Correr1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Correr1ActionPerformed(evt);
 			}
 		});
@@ -232,8 +246,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Correr2.setText("2");
 
-		BTN_Correr2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Correr2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Correr2ActionPerformed(evt);
 			}
 		});
@@ -242,8 +256,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Correr3.setForeground(new java.awt.Color(255, 51, 102));
 		BTN_Correr3.setText("3");
-		BTN_Correr3.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Correr3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Correr3ActionPerformed(evt);
 			}
 		});
@@ -251,8 +265,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Correr4.setForeground(new java.awt.Color(0, 0, 255));
 		BTN_Correr4.setText("4");
-		BTN_Correr4.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Correr4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Correr4ActionPerformed(evt);
 			}
 		});
@@ -262,8 +276,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Correr5.setText("5");
 
-		BTN_Correr5.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Correr5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Correr5ActionPerformed(evt);
 			}
 		});
@@ -273,8 +287,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Correr6.setText("6");
 
-		BTN_Correr6.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Correr6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Correr6ActionPerformed(evt);
 			}
 		});
@@ -284,8 +298,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Correr7.setText("7");
 
-		BTN_Correr7.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Correr7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Correr7ActionPerformed(evt);
 			}
 		});
@@ -315,8 +329,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Andar0.setText("0");
 
-		BTN_Andar0.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Andar0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Andar0ActionPerformed(evt);
 			}
 		});
@@ -324,8 +338,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Andar1.setForeground(new java.awt.Color(255, 51, 102));
 		BTN_Andar1.setText("1");
-		BTN_Andar1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Andar1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Andar1ActionPerformed(evt);
 			}
 		});
@@ -335,8 +349,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Andar2.setText("2");
 
-		BTN_Andar2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Andar2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Andar2ActionPerformed(evt);
 			}
 		});
@@ -346,8 +360,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Andar3.setText("3");
 
-		BTN_Andar3.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Andar3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Andar3ActionPerformed(evt);
 			}
 		});
@@ -357,8 +371,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Andar4.setText("4");
 
-		BTN_Andar4.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Andar4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Andar4ActionPerformed(evt);
 			}
 		});
@@ -369,8 +383,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Andar5.setText("5");
 
-		BTN_Andar5.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Andar5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Andar5ActionPerformed(evt);
 			}
 		});
@@ -380,8 +394,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Andar6.setText("6");
 
-		BTN_Andar6.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Andar6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Andar6ActionPerformed(evt);
 			}
 		});
@@ -391,8 +405,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Andar7.setText("7");
 
-		BTN_Andar7.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Andar7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Andar7ActionPerformed(evt);
 			}
 		});
@@ -423,8 +437,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Girar0.setText("0");
 
-		BTN_Girar0.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Girar0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Girar0ActionPerformed(evt);
 			}
 		});
@@ -435,8 +449,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Girar1.setText("1");
 
-		BTN_Girar1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Girar1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Girar1ActionPerformed(evt);
 			}
 		});
@@ -447,8 +461,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Girar2.setText("2");
 
-		BTN_Girar2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Girar2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Girar2ActionPerformed(evt);
 			}
 		});
@@ -459,8 +473,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Girar3.setText("3");
 
-		BTN_Girar3.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Girar3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Girar3ActionPerformed(evt);
 			}
 		});
@@ -471,8 +485,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Girar4.setText("4");
 
-		BTN_Girar4.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Girar4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Girar4ActionPerformed(evt);
 			}
 		});
@@ -483,8 +497,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Girar5.setText("5");
 
-		BTN_Girar5.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Girar5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Girar5ActionPerformed(evt);
 			}
 		});
@@ -495,8 +509,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Girar6.setText("6");
 
-		BTN_Girar6.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Girar6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Girar6ActionPerformed(evt);
 			}
 		});
@@ -505,8 +519,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Girar7.setForeground(new java.awt.Color(51, 204, 0));
 		BTN_Girar7.setText("7");
-		BTN_Girar7.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Girar7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Girar7ActionPerformed(evt);
 			}
 		});
@@ -537,8 +551,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Dash0.setText("0");
 
-		BTN_Dash0.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Dash0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Dash0ActionPerformed(evt);
 			}
 		});
@@ -549,8 +563,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Dash1.setText("1");
 
-		BTN_Dash1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Dash1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Dash1ActionPerformed(evt);
 			}
 		});
@@ -561,8 +575,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Dash2.setText("2");
 
-		BTN_Dash2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Dash2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Dash2ActionPerformed(evt);
 			}
 		});
@@ -573,8 +587,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Dash3.setText("3");
 
-		BTN_Dash3.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Dash3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Dash3ActionPerformed(evt);
 			}
 		});
@@ -585,8 +599,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Dash4.setText("4");
 
-		BTN_Dash4.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Dash4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Dash4ActionPerformed(evt);
 			}
 		});
@@ -596,8 +610,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Dash5.setText("5");
 
-		BTN_Dash5.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Dash5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Dash5ActionPerformed(evt);
 			}
 		});
@@ -608,8 +622,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Dash6.setText("6");
 
-		BTN_Dash6.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Dash6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Dash6ActionPerformed(evt);
 			}
 		});
@@ -620,8 +634,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Dash7.setText("7");
 
-		BTN_Dash7.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Dash7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_Dash7ActionPerformed(evt);
 			}
 		});
@@ -654,8 +668,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Parar.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Parar.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Parar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_PararActionPerformed(evt);
 			}
 		});
@@ -680,8 +694,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Esperar.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Esperar.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Esperar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_EsperarActionPerformed(evt);
 			}
 		});
@@ -706,8 +720,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Transformar.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Transformar.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Transformar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_TransformarActionPerformed(evt);
 			}
 		});
@@ -736,8 +750,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Abaixar.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Abaixar.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Abaixar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_AbaixarActionPerformed(evt);
 			}
 		});
@@ -752,8 +766,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Abaixado.setText("Abaixado");
 
-		BTN_Abaixado.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Abaixado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_AbaixadoActionPerformed(evt);
 			}
 		});
@@ -765,8 +779,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Empurrando.setText("Empurrando");
 
-		BTN_Empurrando.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Empurrando.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_EmpurrandoActionPerformed(evt);
 			}
 		});
@@ -789,8 +803,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Olhar.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Olhar.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Olhar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_OlharActionPerformed(evt);
 			}
 		});
@@ -805,8 +819,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Olhando.setText("Olhando");
 
-		BTN_Olhando.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Olhando.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_OlhandoActionPerformed(evt);
 			}
 		});
@@ -819,8 +833,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Freiando.setText("Freiando");
 
-		BTN_Freiando.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Freiando.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_FreiandoActionPerformed(evt);
 			}
 		});
@@ -857,8 +871,8 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Esquerda.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Esquerda.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Esquerda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_EsquerdaActionPerformed(evt);
 			}
 		});
@@ -883,14 +897,14 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 		BTN_Direita.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Direita.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseDragged(java.awt.event.MouseEvent evt) {
+		BTN_Direita.addMouseMotionListener(new MouseMotionAdapter() {
+			public void mouseDragged(MouseEvent evt) {
 				BTN_DireitaMouseDragged(evt);
 			}
 		});
 
-		BTN_Direita.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		BTN_Direita.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				BTN_DireitaActionPerformed(evt);
 			}
 		});
@@ -980,225 +994,225 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 		pack();
 	}
 
-	private void BTN_EsperarActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doWait();
+	private void BTN_EsperarActionPerformed(ActionEvent evt) {
+		sonic.doWait();
 	}
 
-	private void BTN_OlharActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doLook();
-
-	}
-
-	private void BTN_AbaixarActionPerformed(java.awt.event.ActionEvent evt) {
-
-		Engine.sonic.doDown();
-	}
-
-	private void BTN_TransformarActionPerformed(java.awt.event.ActionEvent evt) {
-
-		Engine.sonic.doTransform();
-
+	private void BTN_OlharActionPerformed(ActionEvent evt) {
+		sonic.doLook();
 
 	}
 
-	private void BTN_Andar1ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doWalk(1);
-		Engine.sonic.setAnimeSpeed(1);
+	private void BTN_AbaixarActionPerformed(ActionEvent evt) {
+
+		sonic.doDown();
 	}
 
-	private void BTN_Correr1ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doRun(1);
-		Engine.sonic.setAnimeSpeed(1);
-	}
+	private void BTN_TransformarActionPerformed(ActionEvent evt) {
 
-	private void BTN_Girar0ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doSpin(0);
-		Engine.sonic.setAnimeSpeed(0);
-	}
+		sonic.doTransform();
 
-	private void BTN_Correr2ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doRun(2);
-		Engine.sonic.setAnimeSpeed(2);
-	}
-
-	private void BTN_Correr3ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doRun(3);
-		Engine.sonic.setAnimeSpeed(3);
-	}
-
-	private void BTN_Correr4ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doRun(4);
-		Engine.sonic.setAnimeSpeed(4);
-	}
-
-	private void BTN_Correr5ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doRun(5);
-		Engine.sonic.setAnimeSpeed(5);
-	}
-
-	private void BTN_Andar2ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doWalk(2);
-		Engine.sonic.setAnimeSpeed(2);
-	}
-
-	private void BTN_Andar3ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doWalk(3);
-		Engine.sonic.setAnimeSpeed(3);
-	}
-
-	private void BTN_Andar4ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doWalk(4);
-		Engine.sonic.setAnimeSpeed(4);
-	}
-
-	private void BTN_Andar5ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doWalk(5);
-		Engine.sonic.setAnimeSpeed(5);
-	}
-
-	private void BTN_Girar1ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doSpin(1);
-		Engine.sonic.setAnimeSpeed(1);
-	}
-
-	private void BTN_Girar2ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doSpin(2);
-		Engine.sonic.setAnimeSpeed(2);
-	}
-
-	private void BTN_Girar3ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doSpin(3);
-		Engine.sonic.setAnimeSpeed(3);
-	}
-
-	private void BTN_Girar4ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doSpin(4);
-		Engine.sonic.setAnimeSpeed(4);
-	}
-
-	private void BTN_PararActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doStop();
 
 	}
 
-	private void BTN_EsquerdaActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.setOrientation(Orientation.LEFT);
+	private void BTN_Andar1ActionPerformed(ActionEvent evt) {
+		sonic.doWalk(1);
+		sonic.setAnimeSpeed(1);
 	}
 
-	private void BTN_DireitaActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.setOrientation(Orientation.RIGHT);
+	private void BTN_Correr1ActionPerformed(ActionEvent evt) {
+		sonic.doRun(1);
+		sonic.setAnimeSpeed(1);
 	}
 
-	private void BTN_DireitaMouseDragged(java.awt.event.MouseEvent evt) {
+	private void BTN_Girar0ActionPerformed(ActionEvent evt) {
+		sonic.doSpin(0);
+		sonic.setAnimeSpeed(0);
+	}
+
+	private void BTN_Correr2ActionPerformed(ActionEvent evt) {
+		sonic.doRun(2);
+		sonic.setAnimeSpeed(2);
+	}
+
+	private void BTN_Correr3ActionPerformed(ActionEvent evt) {
+		sonic.doRun(3);
+		sonic.setAnimeSpeed(3);
+	}
+
+	private void BTN_Correr4ActionPerformed(ActionEvent evt) {
+		sonic.doRun(4);
+		sonic.setAnimeSpeed(4);
+	}
+
+	private void BTN_Correr5ActionPerformed(ActionEvent evt) {
+		sonic.doRun(5);
+		sonic.setAnimeSpeed(5);
+	}
+
+	private void BTN_Andar2ActionPerformed(ActionEvent evt) {
+		sonic.doWalk(2);
+		sonic.setAnimeSpeed(2);
+	}
+
+	private void BTN_Andar3ActionPerformed(ActionEvent evt) {
+		sonic.doWalk(3);
+		sonic.setAnimeSpeed(3);
+	}
+
+	private void BTN_Andar4ActionPerformed(ActionEvent evt) {
+		sonic.doWalk(4);
+		sonic.setAnimeSpeed(4);
+	}
+
+	private void BTN_Andar5ActionPerformed(ActionEvent evt) {
+		sonic.doWalk(5);
+		sonic.setAnimeSpeed(5);
+	}
+
+	private void BTN_Girar1ActionPerformed(ActionEvent evt) {
+		sonic.doSpin(1);
+		sonic.setAnimeSpeed(1);
+	}
+
+	private void BTN_Girar2ActionPerformed(ActionEvent evt) {
+		sonic.doSpin(2);
+		sonic.setAnimeSpeed(2);
+	}
+
+	private void BTN_Girar3ActionPerformed(ActionEvent evt) {
+		sonic.doSpin(3);
+		sonic.setAnimeSpeed(3);
+	}
+
+	private void BTN_Girar4ActionPerformed(ActionEvent evt) {
+		sonic.doSpin(4);
+		sonic.setAnimeSpeed(4);
+	}
+
+	private void BTN_PararActionPerformed(ActionEvent evt) {
+		sonic.doStop();
+
+	}
+
+	private void BTN_EsquerdaActionPerformed(ActionEvent evt) {
+		sonic.setOrientation(Orientation.LEFT);
+	}
+
+	private void BTN_DireitaActionPerformed(ActionEvent evt) {
+		sonic.setOrientation(Orientation.RIGHT);
+	}
+
+	private void BTN_DireitaMouseDragged(MouseEvent evt) {
 
 	}
 
 
 	private void JSLD_VelAnimacaoStateChanged(javax.swing.event.ChangeEvent evt) {
 
-		Engine.sonic.setAnimeSpeed(JSLD_VelAnimacao.getValue());
+		sonic.setAnimeSpeed(JSLD_VelAnimacao.getValue());
 
 	}
 
-	private void BTN_Correr0ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doRun(0);
-		Engine.sonic.setAnimeSpeed(0);
+	private void BTN_Correr0ActionPerformed(ActionEvent evt) {
+		sonic.doRun(0);
+		sonic.setAnimeSpeed(0);
 	}
 
-	private void BTN_Correr6ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doRun(6);
-		Engine.sonic.setAnimeSpeed(6);
+	private void BTN_Correr6ActionPerformed(ActionEvent evt) {
+		sonic.doRun(6);
+		sonic.setAnimeSpeed(6);
 	}
 
-	private void BTN_Correr7ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doRun(7);
-		Engine.sonic.setAnimeSpeed(7);
+	private void BTN_Correr7ActionPerformed(ActionEvent evt) {
+		sonic.doRun(7);
+		sonic.setAnimeSpeed(7);
 	}
 
-	private void BTN_Andar7ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doWalk(7);
-		Engine.sonic.setAnimeSpeed(7);
+	private void BTN_Andar7ActionPerformed(ActionEvent evt) {
+		sonic.doWalk(7);
+		sonic.setAnimeSpeed(7);
 	}
 
-	private void BTN_Andar6ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doWalk(6);
-		Engine.sonic.setAnimeSpeed(6);
+	private void BTN_Andar6ActionPerformed(ActionEvent evt) {
+		sonic.doWalk(6);
+		sonic.setAnimeSpeed(6);
 	}
 
-	private void BTN_Andar0ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doWalk(0);
-		Engine.sonic.setAnimeSpeed(0);
+	private void BTN_Andar0ActionPerformed(ActionEvent evt) {
+		sonic.doWalk(0);
+		sonic.setAnimeSpeed(0);
 	}
 
-	private void BTN_Girar5ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doSpin(5);
-		Engine.sonic.setAnimeSpeed(5);
+	private void BTN_Girar5ActionPerformed(ActionEvent evt) {
+		sonic.doSpin(5);
+		sonic.setAnimeSpeed(5);
 	}
 
-	private void BTN_Girar6ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doSpin(6);
-		Engine.sonic.setAnimeSpeed(6);
+	private void BTN_Girar6ActionPerformed(ActionEvent evt) {
+		sonic.doSpin(6);
+		sonic.setAnimeSpeed(6);
 	}
 
-	private void BTN_Girar7ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doSpin(7);
-		Engine.sonic.setAnimeSpeed(7);
+	private void BTN_Girar7ActionPerformed(ActionEvent evt) {
+		sonic.doSpin(7);
+		sonic.setAnimeSpeed(7);
 	}
 
-	private void BTN_Dash0ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doDash(0);
-		Engine.sonic.setAnimeSpeed(0);
+	private void BTN_Dash0ActionPerformed(ActionEvent evt) {
+		sonic.doDash(0);
+		sonic.setAnimeSpeed(0);
 	}
 
-	private void BTN_Dash1ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doDash(1);
-		Engine.sonic.setAnimeSpeed(1);
+	private void BTN_Dash1ActionPerformed(ActionEvent evt) {
+		sonic.doDash(1);
+		sonic.setAnimeSpeed(1);
 	}
 
-	private void BTN_Dash2ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doDash(2);
-		Engine.sonic.setAnimeSpeed(2);
+	private void BTN_Dash2ActionPerformed(ActionEvent evt) {
+		sonic.doDash(2);
+		sonic.setAnimeSpeed(2);
 	}
 
-	private void BTN_Dash3ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doDash(3);
-		Engine.sonic.setAnimeSpeed(3);
+	private void BTN_Dash3ActionPerformed(ActionEvent evt) {
+		sonic.doDash(3);
+		sonic.setAnimeSpeed(3);
 	}
 
-	private void BTN_Dash4ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doDash(4);
-		Engine.sonic.setAnimeSpeed(4);
+	private void BTN_Dash4ActionPerformed(ActionEvent evt) {
+		sonic.doDash(4);
+		sonic.setAnimeSpeed(4);
 	}
 
-	private void BTN_Dash5ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doDash(5);
-		Engine.sonic.setAnimeSpeed(5);
+	private void BTN_Dash5ActionPerformed(ActionEvent evt) {
+		sonic.doDash(5);
+		sonic.setAnimeSpeed(5);
 	}
 
-	private void BTN_Dash6ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doDash(6);
-		Engine.sonic.setAnimeSpeed(6);
+	private void BTN_Dash6ActionPerformed(ActionEvent evt) {
+		sonic.doDash(6);
+		sonic.setAnimeSpeed(6);
 	}
 
-	private void BTN_Dash7ActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doDash(7);
-		Engine.sonic.setAnimeSpeed(7);
+	private void BTN_Dash7ActionPerformed(ActionEvent evt) {
+		sonic.doDash(7);
+		sonic.setAnimeSpeed(7);
 	}
 
-	private void BTN_AbaixadoActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doDowned();
+	private void BTN_AbaixadoActionPerformed(ActionEvent evt) {
+		sonic.doDowned();
 	}
 
-	private void BTN_OlhandoActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doLooking();
+	private void BTN_OlhandoActionPerformed(ActionEvent evt) {
+		sonic.doLooking();
 	}
 
-	private void BTN_FreiandoActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doBrakeUp();
+	private void BTN_FreiandoActionPerformed(ActionEvent evt) {
+		sonic.doBrakeUp();
 	}
 
-	private void BTN_EmpurrandoActionPerformed(java.awt.event.ActionEvent evt) {
-		Engine.sonic.doPush();
+	private void BTN_EmpurrandoActionPerformed(ActionEvent evt) {
+		sonic.doPush();
 	}
 
 
@@ -1206,7 +1220,7 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 	public void run() {
 		while (isVisible()) {
 
-			doControlButtons(Engine.sonic.isAi());
+			doControlButtons(sonic.isAi());
 
 			doRefreshComponents();
 
