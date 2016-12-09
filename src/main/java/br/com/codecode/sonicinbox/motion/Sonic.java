@@ -43,9 +43,9 @@ public final class Sonic extends Observable implements Observer, Runnable {
 
 	private Thread thread;
 
-	private Movimentation movimentation = new Movimentation();
-
-	public Animation animation = new Animation();
+	public Animation animation = new Animation(this);
+	
+	private Movimentation movimentation = new Movimentation(this);
 
 
 	private Sonic() {
@@ -78,7 +78,7 @@ public final class Sonic extends Observable implements Observer, Runnable {
 
 		setAction(Action.STOP);
 
-		doLoadSprites();
+		doLoadSprites(MyPath.SPRITES_RELATIVE);
 
 		ExecutorService executor = Executors.newFixedThreadPool(2);
 
@@ -93,10 +93,8 @@ public final class Sonic extends Observable implements Observer, Runnable {
 		this.ai = ai;
 	}
 
-	private void doLoadSprites() {
-
-		sprites = new Sprites(MyPath.SPRITES_RELATIVE);
-
+	private void doLoadSprites(String from) {
+		sprites = new Sprites(from);
 	}
 
 	public Sprites getSprites() {
@@ -403,7 +401,7 @@ public final class Sonic extends Observable implements Observer, Runnable {
 
 			case WAIT: {
 
-				assert (getSpeed() == 0) : "Ação Proibida";
+				assert (getSpeed() == 0) : "Forbidden";
 
 				doWait();
 
@@ -412,14 +410,14 @@ public final class Sonic extends Observable implements Observer, Runnable {
 
 			case DOWN: {
 
-				assert (getSpeed() == 0) : "Ação Proibida";
+				assert (getSpeed() == 0) : "Forbidden";
 
 				doDown();
 
 			}
 			case DOWNED: {
 
-				assert (getSpeed() == 0) : "Ação Proibida";
+				assert (getSpeed() == 0) : "Forbidden";
 
 				doDowned();
 
@@ -428,14 +426,14 @@ public final class Sonic extends Observable implements Observer, Runnable {
 
 			case LOOK: {
 
-				assert (getSpeed() == 0) : "Ação Proibida";
+				assert (getSpeed() == 0) : "Forbidden";
 
 				doLook();
 
 			}
 			case LOOKING: {
 
-				assert (getSpeed() == 0) : "Ação Proibida";
+				assert (getSpeed() == 0) : "Forbidden";
 
 				doLooking();
 
@@ -443,7 +441,7 @@ public final class Sonic extends Observable implements Observer, Runnable {
 			break;
 			case PUSH: {
 
-				assert (getSpeed() == 0) : "Ação Proibida";
+				assert (getSpeed() == 0) : "Forbidden";
 
 				doPush();
 
@@ -552,7 +550,7 @@ public final class Sonic extends Observable implements Observer, Runnable {
 
 			case BRAKEUP: {
 
-				assert (getAction() == Action.MOVE && getSpeed() > 0) : "Ação Proibida - FREIANDO PARADO";
+				assert (getAction() == Action.MOVE && getSpeed() > 0) : "Forbidden - FREIANDO PARADO";
 
 				doBrakeUp();
 
@@ -565,7 +563,7 @@ public final class Sonic extends Observable implements Observer, Runnable {
 
 			case SPEEDUP: {
 
-				assert (getAction() != Action.BRAKEUP) : "Ação Proibida";
+				assert (getAction() != Action.BRAKEUP) : "Forbidden";
 
 				doSpeedUp();
 

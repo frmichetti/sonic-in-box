@@ -7,6 +7,7 @@ import java.util.Observer;
 
 import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.enumeration.ConfigPhysics;
+import br.com.codecode.sonicinbox.motion.Sonic;
 
 public class Physics extends Observable implements Runnable, Observer {
 
@@ -15,8 +16,10 @@ public class Physics extends Observable implements Runnable, Observer {
 	private boolean on;
 
 	private Thread thread;	
+	
+	private Sonic sonic;
 
-	public Physics() {
+	private Physics() {
 
 		thread = new Thread(Start.tgrpEngine, this, "Physics Thread");
 
@@ -24,10 +27,12 @@ public class Physics extends Observable implements Runnable, Observer {
 
 	}
 
-	public Physics(boolean on) {
+	public Physics(Sonic sonic,boolean on) {
 
-		this();
-
+		this();		
+		
+		this.sonic = sonic;
+		
 		this.on = on;
 	}
 
@@ -44,23 +49,23 @@ public class Physics extends Observable implements Runnable, Observer {
 		return res;
 	}
 
-	public void doApplyPhysics() {
+	public void doApplyPhysics(Sonic sonic) {
 
-		if (Engine.sonic.getSpeed() > 0 && Engine.sonic.getSpeed() < 60) {
+		if (sonic.getSpeed() > 0 && sonic.getSpeed() < 60) {
 
-			Engine.sonic.setAcceleration((int) (Engine.sonic.getAcceleration() - (getResistance() / 10)));
+			sonic.setAcceleration((int) (sonic.getAcceleration() - (getResistance() / 10)));
 
-		} else if (Engine.sonic.getSpeed() > 60 && Engine.sonic.getSpeed() < 100) {
+		} else if (sonic.getSpeed() > 60 && sonic.getSpeed() < 100) {
 
-			Engine.sonic.setAcceleration((int) (Engine.sonic.getAcceleration() - (getResistance() / 3)));
+			sonic.setAcceleration((int) (sonic.getAcceleration() - (getResistance() / 3)));
 
-		} else if (Engine.sonic.getSpeed() > 100 && Engine.sonic.getSpeed() < 160) {
+		} else if (sonic.getSpeed() > 100 && sonic.getSpeed() < 160) {
 
-			Engine.sonic.setAcceleration((int) (Engine.sonic.getAcceleration() - (getResistance() / 2)));
+			sonic.setAcceleration((int) (sonic.getAcceleration() - (getResistance() / 2)));
 
-		} else if (Engine.sonic.getSpeed() > 160) {
+		} else if (sonic.getSpeed() > 160) {
 
-			Engine.sonic.setAcceleration((int) (Engine.sonic.getAcceleration() - getResistance()));
+			sonic.setAcceleration((int) (sonic.getAcceleration() - getResistance()));
 
 		}
 
@@ -71,11 +76,11 @@ public class Physics extends Observable implements Runnable, Observer {
 	}
 
 	public float getResistance() {
-		return Engine.sonic.getResistance();
+		return sonic.getResistance();
 	}
 
 	public synchronized void setSpeed(float speed) {
-		Engine.sonic.setSpeed(speed);
+		sonic.setSpeed(speed);
 	}
 
 	@Override
@@ -101,11 +106,11 @@ public class Physics extends Observable implements Runnable, Observer {
 
 		while (isOn()) {
 
-			doCalculateSpeed(Engine.sonic.getAcceleration(), Engine.sonic.getMass());
+			doCalculateSpeed(sonic.getAcceleration(), sonic.getMass());
 
-			doApplyPhysics();
+			doApplyPhysics(sonic);
 
-			assert (Engine.sonic.getSpeed() >= 0) : "VELOCIDADE NAO PERMITIDA " + Engine.sonic.getSpeed();
+			assert (sonic.getSpeed() >= 0) : "VELOCIDADE NAO PERMITIDA " + sonic.getSpeed();
 
 			try {
 				

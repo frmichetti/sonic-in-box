@@ -53,18 +53,20 @@ public final class Sprites {
 
 			System.out.println(df.format(progressBar.getPercentComplete() * 100)  + "%");
 
-			System.out.println(String.format(from.toString() + FILE_MASK, String.valueOf(c)));
+			System.out.println(String.format(from + "/" + FILE_MASK, String.valueOf(c)));
 
 			System.out.println("");
 
 		}
 
 		System.out.println("End Download");
+		
+		System.out.println("");
 
 	}
 
-	public Image getImage(int indice) {
-		return frames[indice].getImage();
+	public Image getImage(int index) {
+		return frames[index].getImage();
 	}
 
 

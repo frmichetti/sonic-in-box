@@ -70,9 +70,9 @@ public final class Engine extends JFrame implements Runnable {
 
 		sonic = new Sonic(true);
 
-		physics = new Physics(true);
+		physics = new Physics(sonic, true);
 
-		event = new Event(true);
+		event = new Event(sonic, true);
 
 		music = new Music(MyPath.MUSICS_RELATIVE);
 

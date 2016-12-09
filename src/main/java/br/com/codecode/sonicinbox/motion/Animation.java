@@ -22,7 +22,6 @@ import static br.com.codecode.sonicinbox.enumeration.SuperSonicIndex.SS_WAIT;
 import static br.com.codecode.sonicinbox.enumeration.SuperSonicIndex.SS_WALK;
 
 import br.com.codecode.sonicinbox.Start;
-import br.com.codecode.sonicinbox.engine.Engine;
 import br.com.codecode.sonicinbox.enumeration.Action;
 
 public class Animation implements Runnable {
@@ -37,10 +36,17 @@ public class Animation implements Runnable {
 
 	private Thread thread;
 
-	public Animation() {
+	private Sonic sonic;
+
+	private Animation() {
 
 		thread = new Thread(Start.tgrpSonic, this, "Animation Thread");
 
+	}
+	
+	public Animation(Sonic sonic){
+		this();
+		this.sonic = sonic;
 	}
 
 	private void doChangeFrames(Sonic sonic, int initFrame, int finalFrame, int animeSpeed) {
@@ -323,7 +329,7 @@ public class Animation implements Runnable {
 
 		while (true) {
 
-			doAnimate(Engine.sonic);
+			doAnimate(sonic);
 
 			try {
 

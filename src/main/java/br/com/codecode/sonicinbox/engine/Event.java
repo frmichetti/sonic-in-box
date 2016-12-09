@@ -12,21 +12,25 @@ import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.enumeration.Action;
 import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
 import br.com.codecode.sonicinbox.enumeration.Orientation;
+import br.com.codecode.sonicinbox.motion.Sonic;
 
 public class Event implements KeyListener, Runnable {
 
 	private boolean on;
 
-	private Thread thread;	
+	private Thread thread;
 
-	public Event() {
+	private Sonic sonic;	
+
+	private Event() {
 
 		thread = new Thread(Start.tgrpEngine, this, "Event Thread");
 
 	}
 
-	public Event(boolean on) {
+	public Event(Sonic sonic, boolean on) {
 		this();
+		this.sonic = sonic;
 		this.on = on;
 	}
 
@@ -38,17 +42,17 @@ public class Event implements KeyListener, Runnable {
 	@Override
 	public void keyPressed(KeyEvent e) {
 
-		if (Engine.sonic.isAi()) {
+		if (sonic.isAi()) {
 
 			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 
-				if (Engine.sonic.isSuperSonic()) {
+				if (sonic.isSuperSonic()) {
 
-					Engine.sonic.setSuperSonic(false);
+					sonic.setSuperSonic(false);
 
 				} else {
 
-					Engine.sonic.setSuperSonic(true);
+					sonic.setSuperSonic(true);
 				}
 
 			}
@@ -62,19 +66,19 @@ public class Event implements KeyListener, Runnable {
 				
 				delay();
 
-				if (Engine.sonic.getAction() == Action.STOP && Engine.sonic.getOrientation() == Orientation.LEFT) {
+				if (sonic.getAction() == Action.STOP && sonic.getOrientation() == Orientation.LEFT) {
 				
-					Engine.sonic.setOrientation(Orientation.RIGHT);
+					sonic.setOrientation(Orientation.RIGHT);
 					
-					Engine.sonic.doSpeedUp();
+					sonic.doSpeedUp();
 					
-				} else if (Engine.sonic.getAction() == Action.MOVE && Engine.sonic.getOrientation() != Orientation.RIGHT) {
+				} else if (sonic.getAction() == Action.MOVE && sonic.getOrientation() != Orientation.RIGHT) {
 
-					Engine.sonic.doBrakeUp();
+					sonic.doBrakeUp();
 
 				} else {
 
-					Engine.sonic.doSpeedUp();
+					sonic.doSpeedUp();
 				}
 
 			}
@@ -89,19 +93,19 @@ public class Event implements KeyListener, Runnable {
 
 				delay();
 				
-				if (Engine.sonic.getAction() == Action.STOP && Engine.sonic.getOrientation() == Orientation.RIGHT) {
+				if (sonic.getAction() == Action.STOP && sonic.getOrientation() == Orientation.RIGHT) {
 				
-					Engine.sonic.setOrientation(Orientation.LEFT);
+					sonic.setOrientation(Orientation.LEFT);
 					
-					Engine.sonic.doSpeedUp();
+					sonic.doSpeedUp();
 					
-				} else if (Engine.sonic.getAction() == Action.MOVE && Engine.sonic.getOrientation() != Orientation.LEFT) {
+				} else if (sonic.getAction() == Action.MOVE && sonic.getOrientation() != Orientation.LEFT) {
 
-					Engine.sonic.doBrakeUp();
+					sonic.doBrakeUp();
 
 				} else {
 
-					Engine.sonic.doSpeedUp();
+					sonic.doSpeedUp();
 				}
 
 			}
@@ -113,11 +117,11 @@ public class Event implements KeyListener, Runnable {
 				
 				BTN_Up.setVisible(false);
 				
-				if (Engine.sonic.getSpeed() == 0) {
+				if (sonic.getSpeed() == 0) {
 				
-					Engine.sonic.setAction(Action.LOOK);
+					sonic.setAction(Action.LOOK);
 					
-					Engine.sonic.setAction(Action.LOOKING);
+					sonic.setAction(Action.LOOKING);
 				}
 
 			}
@@ -130,15 +134,15 @@ public class Event implements KeyListener, Runnable {
 				
 				BTN_Down.setVisible(false);
 				
-				if (Engine.sonic.getSpeed() == 0) {
+				if (sonic.getSpeed() == 0) {
 					
-					Engine.sonic.setAction(Action.DOWN);
+					sonic.setAction(Action.DOWN);
 					
-					Engine.sonic.setAction(Action.DOWNED);
+					sonic.setAction(Action.DOWNED);
 					
 				} else {
 					
-					Engine.sonic.doSpin(Engine.sonic.getAnimeSpeed());
+					sonic.doSpin(sonic.getAnimeSpeed());
 				}
 
 			}
@@ -149,7 +153,7 @@ public class Event implements KeyListener, Runnable {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (Engine.sonic.isAi()) {
+		if (sonic.isAi()) {
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				Engine.lastkeypress.delete(0, Engine.lastkeypress.length());
 				BTN_Right.setVisible(true);
@@ -165,14 +169,14 @@ public class Event implements KeyListener, Runnable {
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
 				Engine.lastkeypress.delete(0, Engine.lastkeypress.length());
 				BTN_Up.setVisible(true);
-				Engine.sonic.doStop();
+				sonic.doStop();
 
 			}
 
 			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 				Engine.lastkeypress.delete(0, Engine.lastkeypress.length());
 				BTN_Down.setVisible(true);
-				Engine.sonic.doStop();
+				sonic.doStop();
 
 			}
 		}
@@ -190,7 +194,7 @@ public class Event implements KeyListener, Runnable {
 	private void delay() {
 		int i = 0;
 
-		if (Engine.sonic.getSpeed() == 0) {
+		if (sonic.getSpeed() == 0) {
 
 			do {
 				i++;
