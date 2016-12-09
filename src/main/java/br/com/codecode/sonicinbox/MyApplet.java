@@ -1,8 +1,6 @@
-package br.com.codecode;
+package br.com.codecode.sonicinbox;
 
 import java.applet.Applet;
-
-import br.com.codecode.sonicinbox.Start;
 
 public class MyApplet extends Applet{
 

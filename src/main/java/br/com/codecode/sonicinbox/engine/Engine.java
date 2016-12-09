@@ -26,9 +26,8 @@ public final class Engine extends JFrame implements Runnable {
 	private final int windowHeight = ConfigEngine.HEIGHT.getValue();
 
 	private final int FPS = ConfigEngine.FPS.getValue();
-	
-	static 
-	public StringBuffer lastkeypress = new StringBuffer(30);
+		
+	public static StringBuffer lastkeypress = new StringBuffer(30);
 
 	public static Sonic sonic;
 
