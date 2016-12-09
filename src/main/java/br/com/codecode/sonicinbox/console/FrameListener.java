@@ -24,7 +24,13 @@ public class FrameListener extends JFrame implements Runnable {
 
 		System.out.println("FrameListener.FrameListener()");
 
-		initComponents();
+		initComponents();		
+
+		super.setLocationRelativeTo(null);
+
+		super.setLocation((Size.MAX_WIDTH - getWidth()) / 2, (Size.MAX_HEIGHT - getHeight()));
+		
+		super.setVisible(true);
 
 	}
 
@@ -33,12 +39,7 @@ public class FrameListener extends JFrame implements Runnable {
 		this.sonic = engine.sonic;	
 
 		super.addKeyListener(engine.event);		
-
-		super.setVisible(true);
-
-		super.setLocationRelativeTo(null);
-
-		super.setLocation((Size.MAX_WIDTH - getWidth()) / 2, (Size.MAX_HEIGHT - getHeight()));
+		
 	}
 
 	private void initComponents() {

@@ -52,23 +52,25 @@ public class FrameAction extends JFrame implements Runnable {
 	private Music music;	
 
 	private FrameAction() {
+		
 		System.out.println("FrameAction.FrameAction()");
+		
+		initComponents();
+		
+		super.setLocationRelativeTo(null);
+
+		super.setLocation((Size.MAX_WIDTH - getWidth()), 0);
+		
+		super.setVisible(true);
 	}
 
 	public FrameAction(Engine engine){		
 		this();
 		this.sonic = engine.sonic;
 		this.music = engine.music;		
+
+		super.addKeyListener(engine.event);	
 		
-		super.setVisible(true);
-
-		super.addKeyListener(engine.event);
-
-		initComponents();
-
-		super.setLocationRelativeTo(null);
-
-		super.setLocation((Size.MAX_WIDTH - getWidth()), 0);
 	}
 
 	private void doControlButtons(boolean ai) {
