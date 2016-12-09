@@ -10,10 +10,8 @@ public enum ConfigPhysics {
 		this.value = value;
 	}
 
-	public float getValor() {
+	public float getValue() {
 		return value;
 	}
-
-
 
 }

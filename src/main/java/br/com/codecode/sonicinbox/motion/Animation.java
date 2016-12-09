@@ -135,6 +135,7 @@ public class Animation implements Runnable {
 
 		}
 		break;
+		
 		case DOWNED: {
 
 			if (sonic.isSuperSonic()) {
@@ -165,6 +166,7 @@ public class Animation implements Runnable {
 
 		}
 		break;
+		
 		case LOOKING: {
 
 			if (sonic.isSuperSonic()) {
@@ -179,6 +181,7 @@ public class Animation implements Runnable {
 
 		}
 		break;
+		
 		case BRAKEUP: {
 
 			if (sonic.isSuperSonic()) {
@@ -225,6 +228,7 @@ public class Animation implements Runnable {
 		}
 
 		break;
+		
 		case SPIN: {
 
 			if (sonic.isSuperSonic()) {
@@ -263,6 +267,7 @@ public class Animation implements Runnable {
 
 		}
 		break;
+		
 		case DASH: {
 			if (sonic.isSuperSonic()) {
 
@@ -275,12 +280,16 @@ public class Animation implements Runnable {
 			}
 		}
 		break;
+		
 		case SPEEDUP:
 			break;
+		
 		case MOVE:
 			break;
+		
 		case JUMP:
 			break;
+		
 		default:
 			break;
 
@@ -328,8 +337,8 @@ public class Animation implements Runnable {
 	public void run() {
 
 		while (true) {
-
-			doAnimate(sonic);
+			if(sonic != null)			
+				doAnimate(sonic);
 
 			try {
 

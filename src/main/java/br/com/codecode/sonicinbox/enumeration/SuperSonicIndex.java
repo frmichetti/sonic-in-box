@@ -1,5 +1,11 @@
 package br.com.codecode.sonicinbox.enumeration;
 
+/**
+ * Index of Actions Sprites for Super Sonic
+ * @author felipe
+ * @since 1.0
+ * @version 1.0
+ */
 public enum SuperSonicIndex {
 
     SS_STOP(211, 213),SS_WAIT(239, 241),SS_LOOK(),SS_LOOKING(),SS_DOWN(214, 214),SS_DOWNED(214, 214),SS_BREAKUP(),SS_PUSH(235, 238),

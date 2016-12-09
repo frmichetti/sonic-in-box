@@ -7,17 +7,27 @@ import java.util.Observer;
 
 import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.enumeration.ConfigPhysics;
+import br.com.codecode.sonicinbox.interfaces.Physicable;
 import br.com.codecode.sonicinbox.motion.Sonic;
-
+/**
+ * This Class Apply Physics on Physicable Characters
+ * @author felipe
+ * @see Physicable
+ * @see Observable
+ * @see Runnable
+ * @see Observer  
+ * @since 1.0
+ * @version 1.1
+ */
 public class Physics extends Observable implements Runnable, Observer {
 
-	private final float gravity = ConfigPhysics.GRAVITY.getValor();
+	private final float gravity = ConfigPhysics.GRAVITY.getValue();
 
 	private boolean on;
 
 	private Thread thread;	
 	
-	private Sonic sonic;
+	private Physicable sonic;
 
 	private Physics() {
 
@@ -49,7 +59,9 @@ public class Physics extends Observable implements Runnable, Observer {
 		return res;
 	}
 
-	public void doApplyPhysics(Sonic sonic) {
+	public void doApplyPhysics(Physicable sonic) {
+		
+		doCalculateSpeed(sonic.getAcceleration(), sonic.getMass());
 
 		if (sonic.getSpeed() > 0 && sonic.getSpeed() < 60) {
 
@@ -105,12 +117,10 @@ public class Physics extends Observable implements Runnable, Observer {
 	public void run() {
 
 		while (isOn()) {
+			
+			if(sonic != null)			
 
-			doCalculateSpeed(sonic.getAcceleration(), sonic.getMass());
-
-			doApplyPhysics(sonic);
-
-			assert (sonic.getSpeed() >= 0) : "VELOCIDADE NAO PERMITIDA " + sonic.getSpeed();
+			doApplyPhysics(sonic);			
 
 			try {
 				

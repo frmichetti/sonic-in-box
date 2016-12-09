@@ -1,5 +1,11 @@
 package br.com.codecode.sonicinbox.enumeration;
 
+/**
+ * Index of Actions Sprites for Sonic
+ * @author felipe
+ * @since 1.0
+ * @version 1.0
+ */
 public enum SonicIndex {
 
 	STOP(0, 0),WAIT(0, 12),LOOK(13, 14),LOOKING(14, 14),DOWN(15, 16),DOWNED(16, 16),BREAKUP(173, 175),PUSH(197, 200),

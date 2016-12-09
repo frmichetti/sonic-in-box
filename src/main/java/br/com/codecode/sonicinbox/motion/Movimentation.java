@@ -31,7 +31,7 @@ public class Movimentation implements Runnable {
         }
     }
 
-    private void doMove() {
+    private void doMove(Sonic sonic) {
         if (sonic.getAction() == Action.STOP) {
 
         } else {
@@ -43,8 +43,8 @@ public class Movimentation implements Runnable {
             } else {
                 i = (i * (-1));
 
-            }
-            assert (sonic.getAction() != Action.MOVE) : "MOVENDO STOP PELA TELA";
+            } 
+            
 
             if (sonic.isAi() && sonic.getAcceleration() > 1) {
 
@@ -124,9 +124,8 @@ public class Movimentation implements Runnable {
 
         while (true) {
         	
-        	if(sonic!= null){
-        		doMove();	
-        	}            
+        	if(sonic!= null)
+        		doMove(sonic);	        	
 
             try {
 
@@ -138,10 +137,6 @@ public class Movimentation implements Runnable {
             }
         }
 
-    }
-
-    public Thread getThread() {
-        return t;
-    }
+    }   
 
 }
