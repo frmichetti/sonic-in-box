@@ -12,7 +12,7 @@ import br.com.codecode.sonicinbox.engine.Engine;
 
 public final class Start {
 
-	public static ThreadGroup tgrpEngine, tgrpSonic, tgrpConsole;
+	public static ThreadGroup tgrpEngine, tgrpSonic;
 
 	private Thread t;
 
@@ -38,8 +38,9 @@ public final class Start {
 
 	private void doChangeTheme() {
 
-		try {
-			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		try {			
+			
+			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {				
 
 				if ("Nimbus".equals(info.getName())) {
 					UIManager.setLookAndFeel(info.getClassName());
@@ -50,18 +51,19 @@ public final class Start {
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| javax.swing.UnsupportedLookAndFeelException ex) {
 
-			throw new RuntimeException("Não foi Possivel Definir o Tema Nimbus : " + ex.getMessage());
+			throw new RuntimeException(ex);
 
 		}
 
 	}
 
-	public void doCreateFrame() {
-
-		Engine e = new Engine();
+	public void doCreateFrame() {		
 
 		try {
-			SwingUtilities.invokeAndWait(() -> {				
+			
+			SwingUtilities.invokeAndWait(() -> {
+				
+				Engine e = new Engine();
 
 				new FrameAnimation(e);
 
@@ -72,7 +74,7 @@ public final class Start {
 			});
 		} catch (InvocationTargetException | InterruptedException ex) {
 
-			ex.printStackTrace();
+			throw new RuntimeException(ex);
 		}
 
 	}

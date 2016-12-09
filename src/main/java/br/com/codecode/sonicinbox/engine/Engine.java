@@ -46,9 +46,7 @@ public final class Engine extends JFrame implements Runnable {
 
 	public Engine() {		
 
-		super("Sonic in Box v3 [Demo]");
-		
-		System.out.println("Engine.Engine()");
+		super("Sonic in Box v3 [Demo]");		
 
 		thread = new Thread(Start.tgrpEngine, this, "Engine Thread");
 
