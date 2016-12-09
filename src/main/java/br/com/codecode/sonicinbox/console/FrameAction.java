@@ -6,6 +6,8 @@
  * */
 package br.com.codecode.sonicinbox.console;
 
+import java.awt.event.ActionEvent;
+
 import javax.swing.JButton;
 
 import br.com.codecode.sonicinbox.engine.Engine;
@@ -44,11 +46,11 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 	private javax.swing.JToggleButton JTB_Musica;
 
 	private javax.swing.JSeparator jSeparator2;	
-	
+
 	private Sonic sonic;
 
 	private FrameAction() {	
-		
+
 		System.out.println("FrameAction.FrameAction()");
 
 		super.setVisible(true);
@@ -62,7 +64,7 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 		super.setLocation((Size.MAX_WIDTH - getWidth()), 0);	
 
 	}
-	
+
 	public FrameAction(Sonic sonic){		
 		this();
 		this.sonic = sonic;
@@ -141,10 +143,9 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 
 		BTN_Acelerar.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Acelerar.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				BTN_AcelerarActionPerformed(evt);
-			}
+		BTN_Acelerar.addActionListener((evt) -> {
+			BTN_AcelerarActionPerformed(evt);
+
 		});
 
 		JTBN_AI.setFont(new java.awt.Font("Tahoma", 1, 14));
@@ -159,10 +160,9 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 
 		JTBN_AI.setVerifyInputWhenFocusTarget(false);
 
-		JTBN_AI.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				JTBN_AIActionPerformed(evt);
-			}
+		JTBN_AI.addActionListener((evt) -> {
+			JTBN_AIActionPerformed(evt);
+
 		});
 
 		BTN_Left.setFont(new java.awt.Font("Tahoma", 1, 9));
@@ -225,10 +225,9 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 
 		JTB_Musica.setVerifyInputWhenFocusTarget(false);
 
-		JTB_Musica.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				JTB_MusicaActionPerformed(evt);
-			}
+		JTB_Musica.addActionListener((evt) -> {
+			JTB_MusicaActionPerformed(evt);
+
 		});
 
 		JTBN_SuperSonic.setFont(new java.awt.Font("Tahoma", 1, 14));
@@ -245,10 +244,9 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 
 		JTBN_SuperSonic.setVerifyInputWhenFocusTarget(false);
 
-		JTBN_SuperSonic.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				JTBN_SuperSonicActionPerformed(evt);
-			}
+		JTBN_SuperSonic.addActionListener((evt) -> {
+			JTBN_SuperSonicActionPerformed(evt);
+
 		});
 
 		BTN_Freiar.setFont(new java.awt.Font("Tahoma", 1, 14));
@@ -263,10 +261,9 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 
 		BTN_Freiar.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Freiar.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				BTN_FreiarActionPerformed(evt);
-			}
+		BTN_Freiar.addActionListener((evt) -> {
+			BTN_FreiarActionPerformed(evt);
+
 		});
 
 		JPB_Velocidade.setMaximum(130000);
@@ -357,21 +354,21 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 		pack();
 	}
 
-	private void JTBN_AIActionPerformed(java.awt.event.ActionEvent evt) {
+	private void JTBN_AIActionPerformed(ActionEvent evt) {
 		sonic.setAi(JTBN_AI.isSelected());
 	}
 
-	private void BTN_AcelerarActionPerformed(java.awt.event.ActionEvent evt) {
+	private void BTN_AcelerarActionPerformed(ActionEvent evt) {
 		if (sonic.isAi()) {
 			sonic.setAction(Action.SPEEDUP);
 		}
 	}
 
-	private void JTB_MusicaActionPerformed(java.awt.event.ActionEvent evt) {
+	private void JTB_MusicaActionPerformed(ActionEvent evt) {
 		Engine.music.setOn(JTB_Musica.isSelected());
 	}
 
-	private void JTBN_SuperSonicActionPerformed(java.awt.event.ActionEvent evt) {
+	private void JTBN_SuperSonicActionPerformed(ActionEvent evt) {
 		if (JTBN_SuperSonic.isSelected()) {
 			sonic.setSuperSonic(true);
 		} else {
@@ -379,7 +376,7 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 		}
 	}
 
-	private void BTN_FreiarActionPerformed(java.awt.event.ActionEvent evt) {
+	private void BTN_FreiarActionPerformed(ActionEvent evt) {
 		if (sonic.isAi()) {
 			sonic.setAction(Action.BRAKEUP);
 		}
@@ -387,7 +384,8 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 
 	@Override
 	public void run() {
-		while (isVisible()) {
+		
+		while (true) {
 
 			doRefreshComponent();
 
