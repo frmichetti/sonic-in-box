@@ -142,7 +142,7 @@ public final class Engine extends JFrame implements Runnable {
 
 			bbg2d.drawString("Mass : " + String.valueOf(sonic.getMass()), x, y+=20);
 
-			bbg2d.drawString("Resistance : " + String.valueOf(physics.getResistance()), x, y+=20);
+			bbg2d.drawString("Resistance : " + String.valueOf(sonic.getResistance()), x, y+=20);
 
 			bbg2d.drawString("Gravity : " + String.valueOf(physics.getGravity()), x, y+=20);
 		}
@@ -171,11 +171,11 @@ public final class Engine extends JFrame implements Runnable {
 
 			bbg2d.drawString("---------Thread Animation------------", x, y+=20);
 
-			bbg2d.drawString("Init Frame : " + String.valueOf(sonic.animation.getInitFrame()), x, y+=20);
+			bbg2d.drawString("Init Frame : " + String.valueOf(sonic.getInitFrame()), x, y+=20);
 
-			bbg2d.drawString("End Frame : " + String.valueOf(sonic.animation.getFinalFrame()), x, y+=20);
+			bbg2d.drawString("End Frame : " + String.valueOf(sonic.getFinalFrame()), x, y+=20);
 
-			bbg2d.drawString("Current Frame : " + String.valueOf(sonic.animation.getCurrentFrame()), x, y+=20);
+			bbg2d.drawString("Current Frame : " + String.valueOf(sonic.getCurrentFrame()), x, y+=20);
 
 			bbg2d.drawString("Anime Speed : " + String.valueOf(sonic.getAnimeSpeed()), x, y+=20);
 		}
@@ -256,12 +256,12 @@ public final class Engine extends JFrame implements Runnable {
 
 			if (sonic.getOrientation() == Orientation.RIGHT) {
 
-				bbg2d.drawImage(sonic.getSprites().getImage(sonic.animation.getCurrentFrame()),
+				bbg2d.drawImage(sonic.getSprites().getImage(sonic.getCurrentFrame()),
 						sonic.getX(), sonic.getY(), sonic.getW(), sonic.getH(), null);
 
 			} else {
 
-				bbg2d.drawImage(sonic.getSprites().getImage(sonic.animation.getCurrentFrame()),
+				bbg2d.drawImage(sonic.getSprites().getImage(sonic.getCurrentFrame()),
 						sonic.getX() + 290, sonic.getY(), -sonic.getW(), sonic.getH(), null);
 			}
 

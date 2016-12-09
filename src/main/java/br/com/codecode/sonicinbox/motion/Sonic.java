@@ -31,7 +31,7 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 
 	private boolean ai;
 
-	public Animation animation;
+	private Animation animation;
 
 	private int animeSpeed;
 
@@ -50,10 +50,10 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 	private int X, Y, W, H;
 
 	private Sonic() {		
-
-		thread = new Thread(Start.tgrpSonic, this, "Sonic Thread");
-
-		addObserver(this);        
+		
+		super.addObserver(this);
+		
+		this.thread = new Thread(Start.tgrpSonic, this, "Sonic Thread");		        
 
 		this.W = ConfigSonic.WIDTH.getValue();
 
@@ -73,9 +73,9 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 
 		this.action = Action.STOP;		
 		
-		animation = new Animation(this);
+		this.animation = new Animation(this);
 		
-		movimentation = new Movimentation(this);					
+		this.movimentation = new Movimentation(this);					
 
 	}
 
@@ -298,9 +298,22 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 		return animeSpeed;
 	}
 
+	public int getCurrentFrame() {		
+		return animation.getCurrentFrame();
+	}
+
+	public int getFinalFrame() {		
+		return animation.getFinalFrame();
+	}
+
 	public int getH() {
 		return H;
 	}
+
+	public int getInitFrame() {		
+		return animation.getInitFrame();
+	}
+
 
 	@Override
 	public float getMass() {
@@ -315,7 +328,6 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 		return orientation;
 
 	}
-
 
 	@Override
 	public float getResistance() {
@@ -390,6 +402,7 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 	public void setAi(boolean ai) {
 		this.ai = ai;
 	}
+
 
 	private void setAI(boolean ai) {
 
@@ -760,21 +773,21 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 		this.mass = mass;
 	}
 
+
 	public void setOrientation(Orientation orientation) {
 		this.orientation = orientation;
 	}
+
 
 	@Override
 	public void setResistance(float resistance) {
 		this.resistance = resistance;
 	}
 
-
 	@Override
 	public synchronized void setSpeed(float speed) {
 		this.speed = speed;
 	}
-
 
 	public Sonic setSuperSonic(boolean superSonic) {
 		this.superSonic = superSonic;
@@ -788,18 +801,20 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 		return this;
 	}
 
-
 	public void setW(int W) {
 		this.W = W;
 	}
+
 
 	public void setX(int X) {
 		this.X = X;
 	}
 
+
 	public void setY(int Y) {
 		this.Y = Y;
 	}
+
 
 	@Override
 	public void update(Observable o, Object arg) {

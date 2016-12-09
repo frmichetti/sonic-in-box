@@ -8,7 +8,6 @@ import java.util.Observer;
 import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.enumeration.ConfigPhysics;
 import br.com.codecode.sonicinbox.interfaces.Physicable;
-import br.com.codecode.sonicinbox.motion.Sonic;
 /**
  * This Class Apply Physics on Physicable Characters
  * @author felipe
@@ -27,7 +26,7 @@ public class Physics extends Observable implements Runnable, Observer {
 
 	private Thread thread;	
 	
-	private Physicable sonic;
+	private Physicable physicable;
 
 	private Physics() {
 
@@ -37,11 +36,11 @@ public class Physics extends Observable implements Runnable, Observer {
 
 	}
 
-	public Physics(Sonic sonic,boolean on) {
+	public Physics(Physicable physicable,boolean on) {
 
 		this();		
 		
-		this.sonic = sonic;
+		this.physicable = physicable;
 		
 		this.on = on;
 	}
@@ -59,25 +58,25 @@ public class Physics extends Observable implements Runnable, Observer {
 		return res;
 	}
 
-	public void doApplyPhysics(Physicable sonic) {
+	public void doApplyPhysics(Physicable physicable) {
 		
-		doCalculateSpeed(sonic.getAcceleration(), sonic.getMass());
+		doCalculateSpeed(physicable.getAcceleration(), physicable.getMass());
 
-		if (sonic.getSpeed() > 0 && sonic.getSpeed() < 60) {
+		if (physicable.getSpeed() > 0 && physicable.getSpeed() < 60) {
 
-			sonic.setAcceleration((int) (sonic.getAcceleration() - (getResistance() / 10)));
+			physicable.setAcceleration((int) (physicable.getAcceleration() - (physicable.getResistance() / 10)));
 
-		} else if (sonic.getSpeed() > 60 && sonic.getSpeed() < 100) {
+		} else if (physicable.getSpeed() > 60 && physicable.getSpeed() < 100) {
 
-			sonic.setAcceleration((int) (sonic.getAcceleration() - (getResistance() / 3)));
+			physicable.setAcceleration((int) (physicable.getAcceleration() - (physicable.getResistance() / 3)));
 
-		} else if (sonic.getSpeed() > 100 && sonic.getSpeed() < 160) {
+		} else if (physicable.getSpeed() > 100 && physicable.getSpeed() < 160) {
 
-			sonic.setAcceleration((int) (sonic.getAcceleration() - (getResistance() / 2)));
+			physicable.setAcceleration((int) (physicable.getAcceleration() - (physicable.getResistance() / 2)));
 
-		} else if (sonic.getSpeed() > 160) {
+		} else if (physicable.getSpeed() > 160) {
 
-			sonic.setAcceleration((int) (sonic.getAcceleration() - getResistance()));
+			physicable.setAcceleration((int) (physicable.getAcceleration() - physicable.getResistance()));
 
 		}
 
@@ -87,17 +86,11 @@ public class Physics extends Observable implements Runnable, Observer {
 		return gravity;
 	}
 
-	public float getResistance() {
-		return sonic.getResistance();
-	}
-
-	public synchronized void setSpeed(float speed) {
-		sonic.setSpeed(speed);
-	}
+	
 
 	@Override
 	public void update(Observable o, Object arg) {
-		setSpeed((float) arg);
+		physicable.setSpeed((float) arg);
 	}
 
 	public boolean isOn() {
@@ -109,18 +102,14 @@ public class Physics extends Observable implements Runnable, Observer {
 	}
 
 
-	public Thread getThread() {
-		return thread;
-	}
-
 	@Override
 	public void run() {
 
 		while (isOn()) {
 			
-			if(sonic != null)			
+			if(physicable != null)			
 
-			doApplyPhysics(sonic);			
+			doApplyPhysics(physicable);			
 
 			try {
 				
