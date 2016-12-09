@@ -5,16 +5,16 @@ import java.awt.event.KeyListener;
 
 import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.console.FrameAction;
-import br.com.codecode.sonicinbox.enumeration.Action;
-import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
-import br.com.codecode.sonicinbox.enumeration.Orientation;
+import br.com.codecode.sonicinbox.enums.Action;
+import br.com.codecode.sonicinbox.enums.ConfigEngine;
+import br.com.codecode.sonicinbox.enums.Orientation;
 import br.com.codecode.sonicinbox.motion.Sonic;
 
 public final class EventListener implements KeyListener, Runnable {	
 
 	private boolean on;
 
-	private Thread thread;
+	protected Thread thread;
 
 	private Sonic sonic;
 	
@@ -213,7 +213,7 @@ public final class EventListener implements KeyListener, Runnable {
 				Thread.sleep(ConfigEngine.FPS.getValue());
 
 			} catch (InterruptedException ex) {
-				throw new RuntimeException("Falha ao Interromper " + thread.getName() + " " + ex);
+				throw new RuntimeException(ex);
 			}
 
 		}

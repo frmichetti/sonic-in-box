@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.codecode.sonicinbox.enumeration.ConfigSonic;
+import br.com.codecode.sonicinbox.enums.ConfigSonic;
 import br.com.codecode.sonicinbox.util.MyPath;
 
 

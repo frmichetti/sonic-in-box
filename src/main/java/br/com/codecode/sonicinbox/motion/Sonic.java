@@ -6,11 +6,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import br.com.codecode.sonicinbox.Start;
-import br.com.codecode.sonicinbox.enumeration.Action;
-import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
-import br.com.codecode.sonicinbox.enumeration.ConfigSonic;
-import br.com.codecode.sonicinbox.enumeration.ConfigSuperSonic;
-import br.com.codecode.sonicinbox.enumeration.Orientation;
+import br.com.codecode.sonicinbox.enums.Action;
+import br.com.codecode.sonicinbox.enums.ConfigEngine;
+import br.com.codecode.sonicinbox.enums.ConfigSonic;
+import br.com.codecode.sonicinbox.enums.ConfigSuperSonic;
+import br.com.codecode.sonicinbox.enums.Orientation;
 import br.com.codecode.sonicinbox.interfaces.Physicable;
 
 /**

@@ -1,12 +1,12 @@
 package br.com.codecode.sonicinbox.engine;
 
-import static br.com.codecode.sonicinbox.enumeration.ConfigEngine.FPS;
+import static br.com.codecode.sonicinbox.enums.ConfigEngine.FPS;
 
 import java.util.Observable;
 import java.util.Observer;
 
 import br.com.codecode.sonicinbox.Start;
-import br.com.codecode.sonicinbox.enumeration.ConfigPhysics;
+import br.com.codecode.sonicinbox.enums.ConfigPhysics;
 import br.com.codecode.sonicinbox.interfaces.Physicable;
 /**
  * This Class Apply Physics on Physicable Characters
@@ -18,13 +18,13 @@ import br.com.codecode.sonicinbox.interfaces.Physicable;
  * @since 1.0
  * @version 1.1
  */
-public class Physics extends Observable implements Runnable, Observer {
+public final class Physics extends Observable implements Runnable, Observer {
 
 	private final float gravity = ConfigPhysics.GRAVITY.getValue();
 
 	private boolean on;
 
-	private Thread thread;	
+	protected Thread thread;	
 	
 	private Physicable physicable;
 
@@ -117,7 +117,7 @@ public class Physics extends Observable implements Runnable, Observer {
 
 			} catch (InterruptedException ex) {
 
-				throw new RuntimeException("Falha ao Interromper " + thread.getName() + " " + ex);
+				throw new RuntimeException(ex);
 			}
 
 		}

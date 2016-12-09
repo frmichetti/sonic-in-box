@@ -6,11 +6,11 @@ import javax.swing.JProgressBar;
 import javax.swing.WindowConstants;
 
 import br.com.codecode.sonicinbox.engine.Engine;
-import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
+import br.com.codecode.sonicinbox.enums.ConfigEngine;
 import br.com.codecode.sonicinbox.motion.Sonic;
 import br.com.codecode.sonicinbox.util.Size;
 
-public class FrameListener extends JFrame implements Runnable {
+public final class FrameListener extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = -8266452496408906017L;	
 
@@ -20,13 +20,11 @@ public class FrameListener extends JFrame implements Runnable {
 
 	private Sonic sonic;
 	
-	private Thread t;
+	private Thread thread;
 
-	private FrameListener() {    	
-
-		System.out.println("FrameListener.FrameListener()");
+	private FrameListener() {		
 		
-		t = new Thread(this);
+		thread = new Thread(this);
 
 		initComponents();		
 
@@ -36,7 +34,7 @@ public class FrameListener extends JFrame implements Runnable {
 		
 		super.setVisible(true);
 		
-		t.start();
+		thread.start();
 
 	}
 
@@ -44,10 +42,7 @@ public class FrameListener extends JFrame implements Runnable {
 		this();		
 		this.sonic = engine.sonic;	
 
-		super.addKeyListener(engine.event);
-		
-		
-		
+		super.addKeyListener(engine.event);		
 	}
 
 	private void initComponents() {
@@ -62,7 +57,7 @@ public class FrameListener extends JFrame implements Runnable {
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-		setTitle("Console Key Listener ");
+		setTitle("Listener Console ");
 
 		setAlwaysOnTop(true);
 
@@ -138,7 +133,7 @@ public class FrameListener extends JFrame implements Runnable {
 
 			} catch (InterruptedException ex) {
 
-				throw new RuntimeException("Falha ao Interromper ", ex);
+				throw new RuntimeException(ex);
 			}
 
 		}

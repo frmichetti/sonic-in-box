@@ -10,7 +10,7 @@ import javax.sound.midi.Sequencer;
 
 import br.com.codecode.sonicinbox.Start;
 
-public class Music implements Runnable {
+public final class Music implements Runnable {
 
 	@SuppressWarnings("unused")
 	private final String MUSIC_TITLE_SCREEN = "title-screen.mid";
@@ -96,9 +96,6 @@ public class Music implements Runnable {
 		}
 	}    
 
-	public Thread getThread() {
-		return thread;
-	}
 
 	@Override
 	public void run() {
@@ -111,7 +108,7 @@ public class Music implements Runnable {
 
 		} catch (InterruptedException ex) {
 
-			throw new RuntimeException("Falha ao Interromper " + thread.getName() + " " + ex);
+			throw new RuntimeException(ex);
 		}
 
 	}

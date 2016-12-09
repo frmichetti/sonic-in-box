@@ -1,4 +1,4 @@
-package br.com.codecode.sonicinbox.enumeration;
+package br.com.codecode.sonicinbox.enums;
 
 public enum ConfigPhysics {
 

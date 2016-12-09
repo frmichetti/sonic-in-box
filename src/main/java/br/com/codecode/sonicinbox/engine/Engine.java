@@ -10,8 +10,8 @@ import java.util.concurrent.Executors;
 import javax.swing.JFrame;
 
 import br.com.codecode.sonicinbox.Start;
-import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
-import br.com.codecode.sonicinbox.enumeration.Orientation;
+import br.com.codecode.sonicinbox.enums.ConfigEngine;
+import br.com.codecode.sonicinbox.enums.Orientation;
 import br.com.codecode.sonicinbox.motion.Sonic;
 import br.com.codecode.sonicinbox.util.MyPath;
 import br.com.codecode.sonicinbox.util.Size;
@@ -20,7 +20,7 @@ public final class Engine extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = -5571398930053263036L;
 
-	private Thread t;
+	private Thread thread;
 
 	private final int windowWidth = ConfigEngine.WIDTH.getValue();
 
@@ -50,7 +50,7 @@ public final class Engine extends JFrame implements Runnable {
 		
 		System.out.println("Engine.Engine()");
 
-		t = new Thread(Start.tgrpEngine, this, "Engine Thread");
+		thread = new Thread(Start.tgrpEngine, this, "Engine Thread");
 
 		super.setSize(windowWidth, windowHeight);
 
@@ -289,7 +289,7 @@ public final class Engine extends JFrame implements Runnable {
 
 			} catch (InterruptedException e) {
 
-				throw new RuntimeException("Falha ao Interromper " + t.getName(), e);
+				throw new RuntimeException(e);
 			}
 		}
 	}
@@ -304,7 +304,7 @@ public final class Engine extends JFrame implements Runnable {
 
 		executor.execute(music);	
 
-		t.start();
+		thread.start();
 	}
 
 }

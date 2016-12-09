@@ -1,28 +1,28 @@
 package br.com.codecode.sonicinbox.motion;
 
-import static br.com.codecode.sonicinbox.enumeration.ConfigEngine.FPS;
-import static br.com.codecode.sonicinbox.enumeration.SonicIndex.BREAKUP;
-import static br.com.codecode.sonicinbox.enumeration.SonicIndex.DASH;
-import static br.com.codecode.sonicinbox.enumeration.SonicIndex.DOWN;
-import static br.com.codecode.sonicinbox.enumeration.SonicIndex.DOWNED;
-import static br.com.codecode.sonicinbox.enumeration.SonicIndex.LOOK;
-import static br.com.codecode.sonicinbox.enumeration.SonicIndex.LOOKING;
-import static br.com.codecode.sonicinbox.enumeration.SonicIndex.PUSH;
-import static br.com.codecode.sonicinbox.enumeration.SonicIndex.RUN;
-import static br.com.codecode.sonicinbox.enumeration.SonicIndex.SPIN;
-import static br.com.codecode.sonicinbox.enumeration.SonicIndex.STOP;
-import static br.com.codecode.sonicinbox.enumeration.SonicIndex.TRANSFORM;
-import static br.com.codecode.sonicinbox.enumeration.SonicIndex.WAIT;
-import static br.com.codecode.sonicinbox.enumeration.SonicIndex.WALK;
-import static br.com.codecode.sonicinbox.enumeration.SuperSonicIndex.SS_DOWNED;
-import static br.com.codecode.sonicinbox.enumeration.SuperSonicIndex.SS_PUSH;
-import static br.com.codecode.sonicinbox.enumeration.SuperSonicIndex.SS_RUN;
-import static br.com.codecode.sonicinbox.enumeration.SuperSonicIndex.SS_STOP;
-import static br.com.codecode.sonicinbox.enumeration.SuperSonicIndex.SS_WAIT;
-import static br.com.codecode.sonicinbox.enumeration.SuperSonicIndex.SS_WALK;
+import static br.com.codecode.sonicinbox.enums.ConfigEngine.FPS;
+import static br.com.codecode.sonicinbox.enums.SonicIndex.BREAKUP;
+import static br.com.codecode.sonicinbox.enums.SonicIndex.DASH;
+import static br.com.codecode.sonicinbox.enums.SonicIndex.DOWN;
+import static br.com.codecode.sonicinbox.enums.SonicIndex.DOWNED;
+import static br.com.codecode.sonicinbox.enums.SonicIndex.LOOK;
+import static br.com.codecode.sonicinbox.enums.SonicIndex.LOOKING;
+import static br.com.codecode.sonicinbox.enums.SonicIndex.PUSH;
+import static br.com.codecode.sonicinbox.enums.SonicIndex.RUN;
+import static br.com.codecode.sonicinbox.enums.SonicIndex.SPIN;
+import static br.com.codecode.sonicinbox.enums.SonicIndex.STOP;
+import static br.com.codecode.sonicinbox.enums.SonicIndex.TRANSFORM;
+import static br.com.codecode.sonicinbox.enums.SonicIndex.WAIT;
+import static br.com.codecode.sonicinbox.enums.SonicIndex.WALK;
+import static br.com.codecode.sonicinbox.enums.SuperSonicIndex.SS_DOWNED;
+import static br.com.codecode.sonicinbox.enums.SuperSonicIndex.SS_PUSH;
+import static br.com.codecode.sonicinbox.enums.SuperSonicIndex.SS_RUN;
+import static br.com.codecode.sonicinbox.enums.SuperSonicIndex.SS_STOP;
+import static br.com.codecode.sonicinbox.enums.SuperSonicIndex.SS_WAIT;
+import static br.com.codecode.sonicinbox.enums.SuperSonicIndex.SS_WALK;
 
 import br.com.codecode.sonicinbox.Start;
-import br.com.codecode.sonicinbox.enumeration.Action;
+import br.com.codecode.sonicinbox.enums.Action;
 
 public class Animation implements Runnable {
 

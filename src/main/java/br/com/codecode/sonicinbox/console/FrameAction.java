@@ -17,13 +17,13 @@ import javax.swing.JToggleButton;
 
 import br.com.codecode.sonicinbox.engine.Engine;
 import br.com.codecode.sonicinbox.engine.Music;
-import br.com.codecode.sonicinbox.enumeration.Action;
-import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
+import br.com.codecode.sonicinbox.enums.Action;
+import br.com.codecode.sonicinbox.enums.ConfigEngine;
 import br.com.codecode.sonicinbox.motion.Sonic;
 import br.com.codecode.sonicinbox.util.Size;
 
 
-public class FrameAction extends JFrame implements Runnable {
+public final class FrameAction extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = 1370653725906464274L;    
 
@@ -51,13 +51,13 @@ public class FrameAction extends JFrame implements Runnable {
 
 	private Music music;	
 	
-	private Thread t;
+	private Thread thread;
 
 	private FrameAction() {
 		
 		System.out.println("FrameAction.FrameAction()");
 		
-		t = new Thread(this);
+		thread = new Thread(this);
 		
 		initComponents();
 		
@@ -67,7 +67,7 @@ public class FrameAction extends JFrame implements Runnable {
 		
 		super.setVisible(true);
 		
-		t.start();
+		thread.start();
 	}
 
 	public FrameAction(Engine engine){		

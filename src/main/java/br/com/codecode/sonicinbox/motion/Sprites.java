@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JProgressBar;
 
-import br.com.codecode.sonicinbox.enumeration.ConfigSonic;
+import br.com.codecode.sonicinbox.enums.ConfigSonic;
 
 public final class Sprites {
 

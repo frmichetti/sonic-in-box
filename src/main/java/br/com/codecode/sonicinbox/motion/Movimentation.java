@@ -1,9 +1,9 @@
 package br.com.codecode.sonicinbox.motion;
 
 import br.com.codecode.sonicinbox.Start;
-import br.com.codecode.sonicinbox.enumeration.Action;
-import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
-import br.com.codecode.sonicinbox.enumeration.Orientation;
+import br.com.codecode.sonicinbox.enums.Action;
+import br.com.codecode.sonicinbox.enums.ConfigEngine;
+import br.com.codecode.sonicinbox.enums.Orientation;
 
 public class Movimentation implements Runnable {
 

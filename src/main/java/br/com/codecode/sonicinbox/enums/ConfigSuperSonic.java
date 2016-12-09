@@ -1,8 +1,9 @@
-package br.com.codecode.sonicinbox.enumeration;
+package br.com.codecode.sonicinbox.enums;
 
 
 public enum ConfigSuperSonic {
-    WIDTH(300), HEIGHT(300), MASS(100), RESISTENCE(2), ANIME_SPEED(5), SX(300), SY(200);
+    
+	WIDTH(300), HEIGHT(300), MASS(100), RESISTENCE(2), ANIME_SPEED(5), SX(300), SY(200);
 
     private final int value;
 
