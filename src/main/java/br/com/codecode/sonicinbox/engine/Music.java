@@ -15,13 +15,13 @@ import br.com.codecode.sonicinbox.util.MyPath;
 public class Music implements Runnable {
 
 	@SuppressWarnings("unused")
-	private final String MUSICA_TITLE_SCREEN = "title-screen.mid";
+	private final String MUSIC_TITLE_SCREEN = "title-screen.mid";
 	@SuppressWarnings("unused")
-	private final String MUSICA_AQUATIC_RUIN_ZONE = "aquatic-ruin-zone-2-.mid";
+	private final String MUSIC_AQUATIC_RUIN_ZONE = "aquatic-ruin-zone-2-.mid";
 	@SuppressWarnings("unused")
-	private final String MUSICA_FINAL_BOSS = "final-boss.mid";
+	private final String MUSIC_FINAL_BOSS = "final-boss.mid";
 	
-	private final String MUSICA_CHEMICAL_PLANT = "chemical-plant-zone-13-.mid";
+	private final String MUSIC_CHEMICAL_PLANT = "chemical-plant-zone-13-.mid";
 
 	private boolean on;
 
@@ -29,7 +29,7 @@ public class Music implements Runnable {
 
 	private Thread thread;    
 
-	private String currentURL = MyPath.MUSICS_OPEN_SHIFT;
+	private String currentURL = MyPath.MUSICS_RELATIVE;
 
 	public Music() {
 
@@ -102,7 +102,7 @@ public class Music implements Runnable {
 
 			try {
 				
-				URL u = new URL(currentURL + MUSICA_CHEMICAL_PLANT);
+				URL u = new URL(currentURL + MUSIC_CHEMICAL_PLANT);
 				
 				doPlayMidi(u, 100);
 				

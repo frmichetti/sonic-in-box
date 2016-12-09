@@ -4,13 +4,7 @@ import java.nio.file.FileSystems;
 
 public final class MyPath {
 	
-	private MyPath(){}
-	
-	private final static String server = "http://portfolio-frmichetti.rhcloud.com/";
-
-	public final static String MUSICS_OPEN_SHIFT = server + "proj/java/sonicinbox/lib/musics/";
-
-	public final static String SPRITES_OPENSHIFT = server +	"proj/java/sonicinbox/lib/sprites/";	
+	private MyPath(){}		
 
 	public final static String MUSICS_RELATIVE = "/META-INF/lib/musics/";
 
