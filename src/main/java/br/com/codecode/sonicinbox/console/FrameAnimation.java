@@ -4,26 +4,27 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
 import br.com.codecode.sonicinbox.engine.Engine;
 import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
 import br.com.codecode.sonicinbox.enumeration.Orientation;
 import br.com.codecode.sonicinbox.motion.Sonic;
 
-public final class FrameAnimation extends javax.swing.JFrame implements Runnable {
+public final class FrameAnimation extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = -7339748933268786433L;
 
-	private JButton BTN_Abaixado, BTN_Abaixar, BTN_Andar0, BTN_Andar1, BTN_Andar2, BTN_Andar3, BTN_Andar4, BTN_Andar5,
-			BTN_Andar6, BTN_Andar7, BTN_Correr0, BTN_Correr1, BTN_Correr2, BTN_Correr3, BTN_Correr4, BTN_Correr5,
-			BTN_Correr6, BTN_Correr7, BTN_Dash0, BTN_Dash1, BTN_Dash2, BTN_Dash3, BTN_Dash4, BTN_Dash5, BTN_Dash6,
-			BTN_Dash7, BTN_Direita, BTN_Empurrando, BTN_Esperar, BTN_Esquerda, BTN_Freiando, BTN_Girar0, BTN_Girar1,
-			BTN_Girar2, BTN_Girar3, BTN_Girar4, BTN_Girar5, BTN_Girar6, BTN_Girar7, BTN_Olhando, BTN_Olhar, BTN_Parar,
-			BTN_Transformar;
+	private JButton btnDowned, btnDown, btnWalkZero, btnWalkOne, btnWalkTwo, btnWalkThree, btnWalkFour, btnWalkFive,
+			btnWalkSix, btnWalkSeven, btnRunZero, btnRunOne, btnRunTwo, btnRunThree, btnRunFour, btnRunFive,
+			btnRunSix, btnRunSeven, btnDashZero, btnDashOne, btnDashTwo, btnDashThree, btnDashFour, btnDashFive, btnDashSix,
+			btnDashSeven, btnRight, btnPush, btnWait, btnLeft, btnBreaking, btnSpinZero, btnSpinOne,
+			btnSpinTwo, btnSpinThree, btnSpinFour, btnSpinFive, btnSpinSix, btnSpinSeven, btnLooking, btnLook, btnStop,
+			btnTransform;
 
-	private javax.swing.JPanel JP_Acao, JP_Andar, JP_Correr, JP_Dash, JP_Girar, JP_Orientacao;
+	private javax.swing.JPanel jpAction, jpWalk, jpRun, jpDash, jpSpin, jpOrientation;
 
-	private javax.swing.JSlider JSLD_VelAnimacao;
+	private javax.swing.JSlider sliderAnimation;
 
 	private Sonic sonic;
 	
@@ -57,835 +58,835 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 	private void doControlButtons(boolean ai) {
 
-		JButton[] btns = { BTN_Abaixar, BTN_Abaixado, BTN_Olhar, BTN_Olhando, BTN_Parar, BTN_Esperar, BTN_Empurrando,
-				BTN_Transformar, BTN_Freiando, BTN_Dash0, BTN_Dash1, BTN_Dash2, BTN_Dash3, BTN_Dash4, BTN_Dash5,
-				BTN_Dash6, BTN_Dash7, BTN_Andar0, BTN_Andar1, BTN_Andar2, BTN_Andar3, BTN_Andar4, BTN_Andar5,
-				BTN_Andar6, BTN_Andar7, BTN_Correr0, BTN_Correr1, BTN_Correr2, BTN_Correr3, BTN_Correr4, BTN_Correr5,
-				BTN_Correr6, BTN_Correr7, BTN_Girar0, BTN_Girar1, BTN_Girar2, BTN_Girar3, BTN_Girar4, BTN_Girar5,
-				BTN_Girar6, BTN_Girar7 };
+		JButton[] btns = { btnDown, btnDowned, btnLook, btnLooking, btnStop, btnWait, btnPush,
+				btnTransform, btnBreaking, btnDashZero, btnDashOne, btnDashTwo, btnDashThree, btnDashFour, btnDashFive,
+				btnDashSix, btnDashSeven, btnWalkZero, btnWalkOne, btnWalkTwo, btnWalkThree, btnWalkFour, btnWalkFive,
+				btnWalkSix, btnWalkSeven, btnRunZero, btnRunOne, btnRunTwo, btnRunThree, btnRunFour, btnRunFive,
+				btnRunSix, btnRunSeven, btnSpinZero, btnSpinOne, btnSpinTwo, btnSpinThree, btnSpinFour, btnSpinFive,
+				btnSpinSix, btnSpinSeven };
 
 		for (JButton jb : btns) {
 
 			jb.setEnabled(!ai);
 		}
 
-		JSLD_VelAnimacao.setEnabled(!ai);
+		sliderAnimation.setEnabled(!ai);
 	}
 
 	private void doRefreshComponents() {
 
 		if (sonic.getOrientation() == Orientation.RIGHT) {
 
-			BTN_Direita.setVisible(false);
+			btnRight.setVisible(false);
 
-			BTN_Esquerda.setVisible(true);
+			btnLeft.setVisible(true);
 
 		} else {
 
-			BTN_Direita.setVisible(true);
+			btnRight.setVisible(true);
 
-			BTN_Esquerda.setVisible(false);
+			btnLeft.setVisible(false);
 		}
 
 		if (sonic.isAi()) {
 
-			JSLD_VelAnimacao.setValue(sonic.getAnimeSpeed());
+			sliderAnimation.setValue(sonic.getAnimeSpeed());
 		}
 	}
 
 	private void initComponents() {
 
-		JP_Correr = new javax.swing.JPanel();
+		jpRun = new javax.swing.JPanel();
 
-		BTN_Correr0 = new JButton();
+		btnRunZero = new JButton();
 
-		BTN_Correr1 = new JButton();
+		btnRunOne = new JButton();
 
-		BTN_Correr2 = new JButton();
+		btnRunTwo = new JButton();
 
-		BTN_Correr3 = new JButton();
+		btnRunThree = new JButton();
 
-		BTN_Correr4 = new JButton();
+		btnRunFour = new JButton();
 
-		BTN_Correr5 = new JButton();
+		btnRunFive = new JButton();
 
-		BTN_Correr6 = new JButton();
+		btnRunSix = new JButton();
 
-		BTN_Correr7 = new JButton();
+		btnRunSeven = new JButton();
 
-		JP_Andar = new javax.swing.JPanel();
+		jpWalk = new javax.swing.JPanel();
 
-		BTN_Andar0 = new JButton();
+		btnWalkZero = new JButton();
 
-		BTN_Andar1 = new JButton();
+		btnWalkOne = new JButton();
 
-		BTN_Andar2 = new JButton();
+		btnWalkTwo = new JButton();
 
-		BTN_Andar3 = new JButton();
+		btnWalkThree = new JButton();
 
-		BTN_Andar4 = new JButton();
+		btnWalkFour = new JButton();
 
-		BTN_Andar5 = new JButton();
+		btnWalkFive = new JButton();
 
-		BTN_Andar6 = new JButton();
+		btnWalkSix = new JButton();
 
-		BTN_Andar7 = new JButton();
+		btnWalkSeven = new JButton();
 
-		JP_Girar = new javax.swing.JPanel();
+		jpSpin = new javax.swing.JPanel();
 
-		BTN_Girar0 = new JButton();
+		btnSpinZero = new JButton();
 
-		BTN_Girar1 = new JButton();
+		btnSpinOne = new JButton();
 
-		BTN_Girar2 = new JButton();
+		btnSpinTwo = new JButton();
 
-		BTN_Girar3 = new JButton();
+		btnSpinThree = new JButton();
 
-		BTN_Girar4 = new JButton();
+		btnSpinFour = new JButton();
 
-		BTN_Girar5 = new JButton();
+		btnSpinFive = new JButton();
 
-		BTN_Girar6 = new JButton();
+		btnSpinSix = new JButton();
 
-		BTN_Girar7 = new JButton();
+		btnSpinSeven = new JButton();
 
-		JP_Dash = new javax.swing.JPanel();
+		jpDash = new javax.swing.JPanel();
 
-		BTN_Dash0 = new JButton();
+		btnDashZero = new JButton();
 
-		BTN_Dash1 = new JButton();
+		btnDashOne = new JButton();
 
-		BTN_Dash2 = new JButton();
+		btnDashTwo = new JButton();
 
-		BTN_Dash3 = new JButton();
+		btnDashThree = new JButton();
 
-		BTN_Dash4 = new JButton();
+		btnDashFour = new JButton();
 
-		BTN_Dash5 = new JButton();
+		btnDashFive = new JButton();
 
-		BTN_Dash6 = new JButton();
+		btnDashSix = new JButton();
 
-		BTN_Dash7 = new JButton();
+		btnDashSeven = new JButton();
 
-		JP_Acao = new javax.swing.JPanel();
+		jpAction = new javax.swing.JPanel();
 
-		BTN_Parar = new JButton();
+		btnStop = new JButton();
 
-		BTN_Esperar = new JButton();
+		btnWait = new JButton();
 
-		BTN_Transformar = new JButton();
+		btnTransform = new JButton();
 
-		BTN_Abaixar = new JButton();
+		btnDown = new JButton();
 
-		BTN_Abaixado = new JButton();
+		btnDowned = new JButton();
 
-		BTN_Empurrando = new JButton();
+		btnPush = new JButton();
 
-		BTN_Olhar = new JButton();
+		btnLook = new JButton();
 
-		BTN_Olhando = new JButton();
+		btnLooking = new JButton();
 
-		BTN_Freiando = new JButton();
+		btnBreaking = new JButton();
 
-		JP_Orientacao = new javax.swing.JPanel();
+		jpOrientation = new javax.swing.JPanel();
 
-		BTN_Esquerda = new JButton();
+		btnLeft = new JButton();
 
-		BTN_Direita = new JButton();
+		btnRight = new JButton();
 
-		JSLD_VelAnimacao = new javax.swing.JSlider();
+		sliderAnimation = new javax.swing.JSlider();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		setTitle("Console Animação");
+		setTitle("Animation Console");
 
 		setAlwaysOnTop(true);
 
 		setResizable(false);
 
-		JP_Correr.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correr",
+		jpRun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correr",
 				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-		JP_Correr.setForeground(Color.blue);
+		jpRun.setForeground(Color.blue);
 
-		JP_Correr.setDoubleBuffered(false);
+		jpRun.setDoubleBuffered(false);
 
-		JP_Correr.setEnabled(false);
+		jpRun.setEnabled(false);
 
-		JP_Correr.setFocusable(false);
+		jpRun.setFocusable(false);
 
-		JP_Correr.setMinimumSize(new java.awt.Dimension(0, 0));
+		jpRun.setMinimumSize(new java.awt.Dimension(0, 0));
 
-		JP_Correr.setPreferredSize(new java.awt.Dimension(0, 0));
+		jpRun.setPreferredSize(new java.awt.Dimension(0, 0));
 
-		JP_Correr.setRequestFocusEnabled(false);
+		jpRun.setRequestFocusEnabled(false);
 
-		JP_Correr.setVerifyInputWhenFocusTarget(false);
+		jpRun.setVerifyInputWhenFocusTarget(false);
 
-		JP_Correr.setLayout(new java.awt.GridLayout(1, 0));
+		jpRun.setLayout(new java.awt.GridLayout(1, 0));
 
-		BTN_Correr0.setForeground(new java.awt.Color(255, 51, 102));
+		btnRunZero.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Correr0.setText("0");
+		btnRunZero.setText("0");
 
-		BTN_Correr0.addActionListener((evt) -> {
+		btnRunZero.addActionListener((evt) -> {
 			BTN_Correr0ActionPerformed(evt);
 		});
 
-		JP_Correr.add(BTN_Correr0);
+		jpRun.add(btnRunZero);
 
-		BTN_Correr1.setForeground(new java.awt.Color(255, 51, 102));
+		btnRunOne.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Correr1.setText("1");
+		btnRunOne.setText("1");
 
-		BTN_Correr1.addActionListener((evt) -> {
+		btnRunOne.addActionListener((evt) -> {
 			BTN_Correr1ActionPerformed(evt);
 
 		});
 
-		JP_Correr.add(BTN_Correr1);
+		jpRun.add(btnRunOne);
 
-		BTN_Correr2.setForeground(new java.awt.Color(255, 51, 102));
+		btnRunTwo.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Correr2.setText("2");
+		btnRunTwo.setText("2");
 
-		BTN_Correr2.addActionListener((evt) -> {
+		btnRunTwo.addActionListener((evt) -> {
 			BTN_Correr2ActionPerformed(evt);
 
 		});
 
-		JP_Correr.add(BTN_Correr2);
+		jpRun.add(btnRunTwo);
 
-		BTN_Correr3.setForeground(new java.awt.Color(255, 51, 102));
+		btnRunThree.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Correr3.setText("3");
+		btnRunThree.setText("3");
 
-		BTN_Correr3.addActionListener((evt) -> {
+		btnRunThree.addActionListener((evt) -> {
 			BTN_Correr3ActionPerformed(evt);
 
 		});
 
-		JP_Correr.add(BTN_Correr3);
+		jpRun.add(btnRunThree);
 
-		BTN_Correr4.setForeground(new java.awt.Color(0, 0, 255));
-		BTN_Correr4.setText("4");
+		btnRunFour.setForeground(new java.awt.Color(0, 0, 255));
+		btnRunFour.setText("4");
 
-		BTN_Correr4.addActionListener((evt) -> {
+		btnRunFour.addActionListener((evt) -> {
 			BTN_Correr4ActionPerformed(evt);
 		});
 
-		JP_Correr.add(BTN_Correr4);
+		jpRun.add(btnRunFour);
 
-		BTN_Correr5.setForeground(new java.awt.Color(0, 0, 255));
+		btnRunFive.setForeground(new java.awt.Color(0, 0, 255));
 
-		BTN_Correr5.setText("5");
+		btnRunFive.setText("5");
 
-		BTN_Correr5.addActionListener((evt) -> {
+		btnRunFive.addActionListener((evt) -> {
 			BTN_Correr5ActionPerformed(evt);
 		});
 
-		JP_Correr.add(BTN_Correr5);
+		jpRun.add(btnRunFive);
 
-		BTN_Correr6.setForeground(new java.awt.Color(51, 204, 0));
+		btnRunSix.setForeground(new java.awt.Color(51, 204, 0));
 
-		BTN_Correr6.setText("6");
+		btnRunSix.setText("6");
 
-		BTN_Correr6.addActionListener((evt) -> {
+		btnRunSix.addActionListener((evt) -> {
 			BTN_Correr6ActionPerformed(evt);
 		});
 
-		JP_Correr.add(BTN_Correr6);
+		jpRun.add(btnRunSix);
 
-		BTN_Correr7.setForeground(new java.awt.Color(51, 204, 0));
+		btnRunSeven.setForeground(new java.awt.Color(51, 204, 0));
 
-		BTN_Correr7.setText("7");
+		btnRunSeven.setText("7");
 
-		BTN_Correr7.addActionListener((evt) -> {
+		btnRunSeven.addActionListener((evt) -> {
 			BTN_Correr7ActionPerformed(evt);
 		});
 
-		JP_Correr.add(BTN_Correr7);
+		jpRun.add(btnRunSeven);
 
-		JP_Andar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Andar",
+		jpWalk.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Andar",
 				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-		JP_Andar.setForeground(java.awt.Color.blue);
+		jpWalk.setForeground(java.awt.Color.blue);
 
-		JP_Andar.setDoubleBuffered(false);
+		jpWalk.setDoubleBuffered(false);
 
-		JP_Andar.setEnabled(false);
+		jpWalk.setEnabled(false);
 
-		JP_Andar.setFocusable(false);
+		jpWalk.setFocusable(false);
 
-		JP_Andar.setMinimumSize(new java.awt.Dimension(0, 0));
+		jpWalk.setMinimumSize(new java.awt.Dimension(0, 0));
 
-		JP_Andar.setPreferredSize(new java.awt.Dimension(0, 0));
+		jpWalk.setPreferredSize(new java.awt.Dimension(0, 0));
 
-		JP_Andar.setRequestFocusEnabled(false);
+		jpWalk.setRequestFocusEnabled(false);
 
-		JP_Andar.setVerifyInputWhenFocusTarget(false);
+		jpWalk.setVerifyInputWhenFocusTarget(false);
 
-		JP_Andar.setLayout(new java.awt.GridLayout(1, 0));
+		jpWalk.setLayout(new java.awt.GridLayout(1, 0));
 
-		BTN_Andar0.setForeground(new java.awt.Color(255, 51, 102));
+		btnWalkZero.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Andar0.setText("0");
+		btnWalkZero.setText("0");
 
-		BTN_Andar0.addActionListener((evt) -> {
+		btnWalkZero.addActionListener((evt) -> {
 			BTN_Andar0ActionPerformed(evt);
 		});
 
-		JP_Andar.add(BTN_Andar0);
+		jpWalk.add(btnWalkZero);
 
-		BTN_Andar1.setForeground(new java.awt.Color(255, 51, 102));
-		BTN_Andar1.setText("1");
+		btnWalkOne.setForeground(new java.awt.Color(255, 51, 102));
+		btnWalkOne.setText("1");
 
-		BTN_Andar1.addActionListener((evt) -> {
+		btnWalkOne.addActionListener((evt) -> {
 			BTN_Andar1ActionPerformed(evt);
 		});
 
-		JP_Andar.add(BTN_Andar1);
+		jpWalk.add(btnWalkOne);
 
-		BTN_Andar2.setForeground(new java.awt.Color(255, 51, 102));
+		btnWalkTwo.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Andar2.setText("2");
+		btnWalkTwo.setText("2");
 
-		BTN_Andar2.addActionListener((evt) -> {
+		btnWalkTwo.addActionListener((evt) -> {
 			BTN_Andar2ActionPerformed(evt);
 		});
 
-		JP_Andar.add(BTN_Andar2);
+		jpWalk.add(btnWalkTwo);
 
-		BTN_Andar3.setForeground(new java.awt.Color(255, 51, 102));
+		btnWalkThree.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Andar3.setText("3");
+		btnWalkThree.setText("3");
 
-		BTN_Andar3.addActionListener((evt) -> {
+		btnWalkThree.addActionListener((evt) -> {
 			BTN_Andar3ActionPerformed(evt);
 		});
 
-		JP_Andar.add(BTN_Andar3);
+		jpWalk.add(btnWalkThree);
 
-		BTN_Andar4.setForeground(new java.awt.Color(0, 0, 255));
+		btnWalkFour.setForeground(new java.awt.Color(0, 0, 255));
 
-		BTN_Andar4.setText("4");
+		btnWalkFour.setText("4");
 
-		BTN_Andar4.addActionListener((evt) -> {
+		btnWalkFour.addActionListener((evt) -> {
 			BTN_Andar4ActionPerformed(evt);
 
 		});
 
-		JP_Andar.add(BTN_Andar4);
+		jpWalk.add(btnWalkFour);
 
-		BTN_Andar5.setForeground(new java.awt.Color(0, 0, 255));
+		btnWalkFive.setForeground(new java.awt.Color(0, 0, 255));
 
-		BTN_Andar5.setText("5");
+		btnWalkFive.setText("5");
 
-		BTN_Andar5.addActionListener((evt) -> {
+		btnWalkFive.addActionListener((evt) -> {
 			BTN_Andar5ActionPerformed(evt);
 		});
 
-		JP_Andar.add(BTN_Andar5);
+		jpWalk.add(btnWalkFive);
 
-		BTN_Andar6.setForeground(new java.awt.Color(51, 204, 0));
+		btnWalkSix.setForeground(new java.awt.Color(51, 204, 0));
 
-		BTN_Andar6.setText("6");
+		btnWalkSix.setText("6");
 
-		BTN_Andar6.addActionListener((evt) -> {
+		btnWalkSix.addActionListener((evt) -> {
 			BTN_Andar6ActionPerformed(evt);
 		});
 
-		JP_Andar.add(BTN_Andar6);
+		jpWalk.add(btnWalkSix);
 
-		BTN_Andar7.setForeground(new java.awt.Color(51, 204, 0));
+		btnWalkSeven.setForeground(new java.awt.Color(51, 204, 0));
 
-		BTN_Andar7.setText("7");
+		btnWalkSeven.setText("7");
 
-		BTN_Andar7.addActionListener((evt) -> {
+		btnWalkSeven.addActionListener((evt) -> {
 			BTN_Andar7ActionPerformed(evt);
 		});
 
-		JP_Andar.add(BTN_Andar7);
+		jpWalk.add(btnWalkSeven);
 
-		JP_Girar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Girar",
+		jpSpin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Girar",
 				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-		JP_Girar.setForeground(java.awt.Color.blue);
+		jpSpin.setForeground(java.awt.Color.blue);
 
-		JP_Girar.setDoubleBuffered(false);
+		jpSpin.setDoubleBuffered(false);
 
-		JP_Girar.setEnabled(false);
+		jpSpin.setEnabled(false);
 
-		JP_Girar.setFocusable(false);
+		jpSpin.setFocusable(false);
 
-		JP_Girar.setMinimumSize(new java.awt.Dimension(0, 0));
+		jpSpin.setMinimumSize(new java.awt.Dimension(0, 0));
 
-		JP_Girar.setPreferredSize(new java.awt.Dimension(0, 0));
+		jpSpin.setPreferredSize(new java.awt.Dimension(0, 0));
 
-		JP_Girar.setRequestFocusEnabled(false);
+		jpSpin.setRequestFocusEnabled(false);
 
-		JP_Girar.setVerifyInputWhenFocusTarget(false);
+		jpSpin.setVerifyInputWhenFocusTarget(false);
 
-		JP_Girar.setLayout(new java.awt.GridLayout(1, 0));
+		jpSpin.setLayout(new java.awt.GridLayout(1, 0));
 
-		BTN_Girar0.setForeground(new java.awt.Color(255, 51, 102));
+		btnSpinZero.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Girar0.setText("0");
+		btnSpinZero.setText("0");
 
-		BTN_Girar0.addActionListener((evt) -> {
+		btnSpinZero.addActionListener((evt) -> {
 			BTN_Girar0ActionPerformed(evt);
 		});
 
-		JP_Girar.add(BTN_Girar0);
+		jpSpin.add(btnSpinZero);
 
-		BTN_Girar1.setForeground(new java.awt.Color(255, 51, 102));
+		btnSpinOne.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Girar1.setText("1");
+		btnSpinOne.setText("1");
 
-		BTN_Girar1.addActionListener((evt) -> {
+		btnSpinOne.addActionListener((evt) -> {
 			BTN_Girar1ActionPerformed(evt);
 		});
 
-		JP_Girar.add(BTN_Girar1);
+		jpSpin.add(btnSpinOne);
 
-		BTN_Girar2.setForeground(new java.awt.Color(255, 51, 102));
+		btnSpinTwo.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Girar2.setText("2");
+		btnSpinTwo.setText("2");
 
-		BTN_Girar2.addActionListener((evt) -> {
+		btnSpinTwo.addActionListener((evt) -> {
 			BTN_Girar2ActionPerformed(evt);
 		});
 
-		JP_Girar.add(BTN_Girar2);
+		jpSpin.add(btnSpinTwo);
 
-		BTN_Girar3.setForeground(new java.awt.Color(255, 51, 102));
+		btnSpinThree.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Girar3.setText("3");
+		btnSpinThree.setText("3");
 
-		BTN_Girar3.addActionListener((evt) -> {
+		btnSpinThree.addActionListener((evt) -> {
 			BTN_Girar3ActionPerformed(evt);
 		});
 
-		JP_Girar.add(BTN_Girar3);
+		jpSpin.add(btnSpinThree);
 
-		BTN_Girar4.setForeground(new java.awt.Color(0, 0, 255));
+		btnSpinFour.setForeground(new java.awt.Color(0, 0, 255));
 
-		BTN_Girar4.setText("4");
+		btnSpinFour.setText("4");
 
-		BTN_Girar4.addActionListener((evt) -> {
+		btnSpinFour.addActionListener((evt) -> {
 			BTN_Girar4ActionPerformed(evt);
 		});
 
-		JP_Girar.add(BTN_Girar4);
+		jpSpin.add(btnSpinFour);
 
-		BTN_Girar5.setForeground(new java.awt.Color(0, 0, 255));
+		btnSpinFive.setForeground(new java.awt.Color(0, 0, 255));
 
-		BTN_Girar5.setText("5");
+		btnSpinFive.setText("5");
 
-		BTN_Girar5.addActionListener((evt) -> {
+		btnSpinFive.addActionListener((evt) -> {
 			BTN_Girar5ActionPerformed(evt);
 		});
 
-		JP_Girar.add(BTN_Girar5);
+		jpSpin.add(btnSpinFive);
 
-		BTN_Girar6.setForeground(new java.awt.Color(51, 204, 0));
+		btnSpinSix.setForeground(new java.awt.Color(51, 204, 0));
 
-		BTN_Girar6.setText("6");
+		btnSpinSix.setText("6");
 
-		BTN_Girar6.addActionListener((evt) -> {
+		btnSpinSix.addActionListener((evt) -> {
 			BTN_Girar6ActionPerformed(evt);
 		});
 
-		JP_Girar.add(BTN_Girar6);
+		jpSpin.add(btnSpinSix);
 
-		BTN_Girar7.setForeground(new java.awt.Color(51, 204, 0));
-		BTN_Girar7.setText("7");
+		btnSpinSeven.setForeground(new java.awt.Color(51, 204, 0));
+		btnSpinSeven.setText("7");
 
-		BTN_Girar7.addActionListener((evt) -> {
+		btnSpinSeven.addActionListener((evt) -> {
 			BTN_Girar7ActionPerformed(evt);
 		});
 
-		JP_Girar.add(BTN_Girar7);
+		jpSpin.add(btnSpinSeven);
 
-		JP_Dash.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dash",
+		jpDash.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dash",
 				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-		JP_Dash.setForeground(java.awt.Color.blue);
+		jpDash.setForeground(java.awt.Color.blue);
 
-		JP_Dash.setDoubleBuffered(false);
+		jpDash.setDoubleBuffered(false);
 
-		JP_Dash.setEnabled(false);
+		jpDash.setEnabled(false);
 
-		JP_Dash.setFocusable(false);
+		jpDash.setFocusable(false);
 
-		JP_Dash.setMinimumSize(new java.awt.Dimension(0, 0));
+		jpDash.setMinimumSize(new java.awt.Dimension(0, 0));
 
-		JP_Dash.setPreferredSize(new java.awt.Dimension(0, 0));
+		jpDash.setPreferredSize(new java.awt.Dimension(0, 0));
 
-		JP_Dash.setRequestFocusEnabled(false);
+		jpDash.setRequestFocusEnabled(false);
 
-		JP_Dash.setVerifyInputWhenFocusTarget(false);
+		jpDash.setVerifyInputWhenFocusTarget(false);
 
-		JP_Dash.setLayout(new java.awt.GridLayout(1, 0));
+		jpDash.setLayout(new java.awt.GridLayout(1, 0));
 
-		BTN_Dash0.setForeground(new java.awt.Color(255, 51, 102));
+		btnDashZero.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Dash0.setText("0");
+		btnDashZero.setText("0");
 
-		BTN_Dash0.addActionListener((evt) -> {
+		btnDashZero.addActionListener((evt) -> {
 			BTN_Dash0ActionPerformed(evt);
 		});
 
-		JP_Dash.add(BTN_Dash0);
+		jpDash.add(btnDashZero);
 
-		BTN_Dash1.setForeground(new java.awt.Color(255, 51, 102));
+		btnDashOne.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Dash1.setText("1");
+		btnDashOne.setText("1");
 
-		BTN_Dash1.addActionListener((evt) -> {
+		btnDashOne.addActionListener((evt) -> {
 			BTN_Dash1ActionPerformed(evt);
 		});
 
-		JP_Dash.add(BTN_Dash1);
+		jpDash.add(btnDashOne);
 
-		BTN_Dash2.setForeground(new java.awt.Color(255, 51, 102));
+		btnDashTwo.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Dash2.setText("2");
+		btnDashTwo.setText("2");
 
-		BTN_Dash2.addActionListener((evt) -> {
+		btnDashTwo.addActionListener((evt) -> {
 			BTN_Dash2ActionPerformed(evt);
 		});
 
-		JP_Dash.add(BTN_Dash2);
+		jpDash.add(btnDashTwo);
 
-		BTN_Dash3.setForeground(new java.awt.Color(255, 51, 102));
+		btnDashThree.setForeground(new java.awt.Color(255, 51, 102));
 
-		BTN_Dash3.setText("3");
+		btnDashThree.setText("3");
 
-		BTN_Dash3.addActionListener((evt) -> {
+		btnDashThree.addActionListener((evt) -> {
 			BTN_Dash3ActionPerformed(evt);
 		});
 
-		JP_Dash.add(BTN_Dash3);
+		jpDash.add(btnDashThree);
 
-		BTN_Dash4.setForeground(new java.awt.Color(0, 0, 255));
+		btnDashFour.setForeground(new java.awt.Color(0, 0, 255));
 
-		BTN_Dash4.setText("4");
+		btnDashFour.setText("4");
 
-		BTN_Dash4.addActionListener((evt) -> {
+		btnDashFour.addActionListener((evt) -> {
 			BTN_Dash4ActionPerformed(evt);
 		});
 
-		JP_Dash.add(BTN_Dash4);
+		jpDash.add(btnDashFour);
 
-		BTN_Dash5.setForeground(new java.awt.Color(0, 0, 255));
+		btnDashFive.setForeground(new java.awt.Color(0, 0, 255));
 
-		BTN_Dash5.setText("5");
+		btnDashFive.setText("5");
 
-		BTN_Dash5.addActionListener((evt) -> {
+		btnDashFive.addActionListener((evt) -> {
 			BTN_Dash5ActionPerformed(evt);
 		});
 
-		JP_Dash.add(BTN_Dash5);
+		jpDash.add(btnDashFive);
 
-		BTN_Dash6.setForeground(new java.awt.Color(51, 204, 0));
+		btnDashSix.setForeground(new java.awt.Color(51, 204, 0));
 
-		BTN_Dash6.setText("6");
+		btnDashSix.setText("6");
 
-		BTN_Dash6.addActionListener((evt) -> {
+		btnDashSix.addActionListener((evt) -> {
 			BTN_Dash6ActionPerformed(evt);
 		});
 
-		JP_Dash.add(BTN_Dash6);
+		jpDash.add(btnDashSix);
 
-		BTN_Dash7.setForeground(new java.awt.Color(51, 204, 0));
+		btnDashSeven.setForeground(new java.awt.Color(51, 204, 0));
 
-		BTN_Dash7.setText("7");
+		btnDashSeven.setText("7");
 
-		BTN_Dash7.addActionListener((evt) -> {
+		btnDashSeven.addActionListener((evt) -> {
 			BTN_Dash7ActionPerformed(evt);
 		});
 
-		JP_Dash.add(BTN_Dash7);
+		jpDash.add(btnDashSeven);
 
-		JP_Acao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ações",
+		jpAction.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ações",
 				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-		JP_Acao.setDoubleBuffered(false);
+		jpAction.setDoubleBuffered(false);
 
-		JP_Acao.setEnabled(false);
+		jpAction.setEnabled(false);
 
-		JP_Acao.setFocusable(false);
+		jpAction.setFocusable(false);
 
-		JP_Acao.setLayout(new java.awt.GridLayout(3, 0));
+		jpAction.setLayout(new java.awt.GridLayout(3, 0));
 
-		BTN_Parar.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnStop.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Parar.setForeground(new java.awt.Color(102, 255, 0));
+		btnStop.setForeground(new java.awt.Color(102, 255, 0));
 
-		BTN_Parar.setText("Parar");
+		btnStop.setText("Parar");
 
-		BTN_Parar.setFocusable(false);
+		btnStop.setFocusable(false);
 
-		BTN_Parar.setMinimumSize(new java.awt.Dimension(0, 0));
+		btnStop.setMinimumSize(new java.awt.Dimension(0, 0));
 
-		BTN_Parar.setPreferredSize(new java.awt.Dimension(0, 0));
+		btnStop.setPreferredSize(new java.awt.Dimension(0, 0));
 
-		BTN_Parar.setRequestFocusEnabled(false);
+		btnStop.setRequestFocusEnabled(false);
 
-		BTN_Parar.setVerifyInputWhenFocusTarget(false);
+		btnStop.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Parar.addActionListener((evt) -> {
+		btnStop.addActionListener((evt) -> {
 			BTN_PararActionPerformed(evt);
 		});
 
-		JP_Acao.add(BTN_Parar);
+		jpAction.add(btnStop);
 
-		BTN_Parar.getAccessibleContext().setAccessibleDescription("");
+		btnStop.getAccessibleContext().setAccessibleDescription("");
 
-		BTN_Esperar.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnWait.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Esperar.setForeground(new java.awt.Color(255, 0, 102));
+		btnWait.setForeground(new java.awt.Color(255, 0, 102));
 
-		BTN_Esperar.setText("Esperar");
+		btnWait.setText("Esperar");
 
-		BTN_Esperar.setFocusable(false);
+		btnWait.setFocusable(false);
 
-		BTN_Esperar.setMinimumSize(new java.awt.Dimension(0, 0));
+		btnWait.setMinimumSize(new java.awt.Dimension(0, 0));
 
-		BTN_Esperar.setPreferredSize(new java.awt.Dimension(0, 0));
+		btnWait.setPreferredSize(new java.awt.Dimension(0, 0));
 
-		BTN_Esperar.setRequestFocusEnabled(false);
+		btnWait.setRequestFocusEnabled(false);
 
-		BTN_Esperar.setVerifyInputWhenFocusTarget(false);
+		btnWait.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Esperar.addActionListener((evt) -> {
+		btnWait.addActionListener((evt) -> {
 			BTN_EsperarActionPerformed(evt);
 		});
 
-		JP_Acao.add(BTN_Esperar);
+		jpAction.add(btnWait);
 
-		BTN_Esperar.getAccessibleContext().setAccessibleDescription("");
+		btnWait.getAccessibleContext().setAccessibleDescription("");
 
-		BTN_Transformar.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnTransform.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Transformar.setForeground(new java.awt.Color(255, 51, 0));
+		btnTransform.setForeground(new java.awt.Color(255, 51, 0));
 
-		BTN_Transformar.setText("Transformar");
+		btnTransform.setText("Transformar");
 
-		BTN_Transformar.setFocusable(false);
+		btnTransform.setFocusable(false);
 
-		BTN_Transformar.setMinimumSize(new java.awt.Dimension(0, 0));
+		btnTransform.setMinimumSize(new java.awt.Dimension(0, 0));
 
-		BTN_Transformar.setPreferredSize(new java.awt.Dimension(0, 0));
+		btnTransform.setPreferredSize(new java.awt.Dimension(0, 0));
 
-		BTN_Transformar.setRequestFocusEnabled(false);
+		btnTransform.setRequestFocusEnabled(false);
 
-		BTN_Transformar.setVerifyInputWhenFocusTarget(false);
+		btnTransform.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Transformar.addActionListener((evt) -> {
+		btnTransform.addActionListener((evt) -> {
 			BTN_TransformarActionPerformed(evt);
 		});
 
-		JP_Acao.add(BTN_Transformar);
+		jpAction.add(btnTransform);
 
-		BTN_Transformar.getAccessibleContext().setAccessibleDescription("");
+		btnTransform.getAccessibleContext().setAccessibleDescription("");
 
-		BTN_Abaixar.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnDown.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Abaixar.setForeground(new java.awt.Color(0, 204, 255));
+		btnDown.setForeground(new java.awt.Color(0, 204, 255));
 
-		BTN_Abaixar.setText("Abaixar");
+		btnDown.setText("Abaixar");
 
-		BTN_Abaixar.setFocusable(false);
+		btnDown.setFocusable(false);
 
-		BTN_Abaixar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		btnDown.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-		BTN_Abaixar.setMaximumSize(new java.awt.Dimension(0, 0));
+		btnDown.setMaximumSize(new java.awt.Dimension(0, 0));
 
-		BTN_Abaixar.setMinimumSize(new java.awt.Dimension(0, 0));
+		btnDown.setMinimumSize(new java.awt.Dimension(0, 0));
 
-		BTN_Abaixar.setPreferredSize(new java.awt.Dimension(200, 200));
+		btnDown.setPreferredSize(new java.awt.Dimension(200, 200));
 
-		BTN_Abaixar.setRequestFocusEnabled(false);
+		btnDown.setRequestFocusEnabled(false);
 
-		BTN_Abaixar.setVerifyInputWhenFocusTarget(false);
+		btnDown.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Abaixar.addActionListener((evt) -> {
+		btnDown.addActionListener((evt) -> {
 			BTN_AbaixarActionPerformed(evt);
 		});
 
-		JP_Acao.add(BTN_Abaixar);
+		jpAction.add(btnDown);
 
-		BTN_Abaixar.getAccessibleContext().setAccessibleDescription("");
+		btnDown.getAccessibleContext().setAccessibleDescription("");
 
-		BTN_Abaixado.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnDowned.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Abaixado.setForeground(new java.awt.Color(0, 204, 255));
+		btnDowned.setForeground(new java.awt.Color(0, 204, 255));
 
-		BTN_Abaixado.setText("Abaixado");
+		btnDowned.setText("Abaixado");
 
-		BTN_Abaixado.addActionListener((evt) -> {
+		btnDowned.addActionListener((evt) -> {
 			BTN_AbaixadoActionPerformed(evt);
 		});
 
-		JP_Acao.add(BTN_Abaixado);
+		jpAction.add(btnDowned);
 
-		BTN_Empurrando.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnPush.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Empurrando.setForeground(new java.awt.Color(153, 0, 153));
+		btnPush.setForeground(new java.awt.Color(153, 0, 153));
 
-		BTN_Empurrando.setText("Empurrando");
+		btnPush.setText("Empurrando");
 
-		BTN_Empurrando.addActionListener((evt) -> {
+		btnPush.addActionListener((evt) -> {
 			BTN_EmpurrandoActionPerformed(evt);
 		});
 
-		JP_Acao.add(BTN_Empurrando);
+		jpAction.add(btnPush);
 
-		BTN_Olhar.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnLook.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Olhar.setForeground(new java.awt.Color(0, 204, 204));
+		btnLook.setForeground(new java.awt.Color(0, 204, 204));
 
-		BTN_Olhar.setText("Olhar");
+		btnLook.setText("Olhar");
 
-		BTN_Olhar.setFocusable(false);
+		btnLook.setFocusable(false);
 
-		BTN_Olhar.setMinimumSize(new java.awt.Dimension(0, 0));
+		btnLook.setMinimumSize(new java.awt.Dimension(0, 0));
 
-		BTN_Olhar.setPreferredSize(new java.awt.Dimension(0, 0));
+		btnLook.setPreferredSize(new java.awt.Dimension(0, 0));
 
-		BTN_Olhar.setRequestFocusEnabled(false);
+		btnLook.setRequestFocusEnabled(false);
 
-		BTN_Olhar.setVerifyInputWhenFocusTarget(false);
+		btnLook.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Olhar.addActionListener((evt) -> {
+		btnLook.addActionListener((evt) -> {
 			BTN_OlharActionPerformed(evt);
 		});
 
-		JP_Acao.add(BTN_Olhar);
+		jpAction.add(btnLook);
 
-		BTN_Olhar.getAccessibleContext().setAccessibleDescription("");
+		btnLook.getAccessibleContext().setAccessibleDescription("");
 
-		BTN_Olhando.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnLooking.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Olhando.setForeground(new java.awt.Color(0, 204, 204));
+		btnLooking.setForeground(new java.awt.Color(0, 204, 204));
 
-		BTN_Olhando.setText("Olhando");
+		btnLooking.setText("Olhando");
 
-		BTN_Olhando.addActionListener((evt) -> {
+		btnLooking.addActionListener((evt) -> {
 			BTN_OlhandoActionPerformed(evt);
 		});
 
-		JP_Acao.add(BTN_Olhando);
+		jpAction.add(btnLooking);
 
-		BTN_Freiando.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnBreaking.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Freiando.setForeground(new java.awt.Color(255, 0, 51));
+		btnBreaking.setForeground(new java.awt.Color(255, 0, 51));
 
-		BTN_Freiando.setText("Freiando");
+		btnBreaking.setText("Freiando");
 
-		BTN_Freiando.addActionListener((evt) -> {
+		btnBreaking.addActionListener((evt) -> {
 			BTN_FreiandoActionPerformed(evt);
 		});
 
-		JP_Acao.add(BTN_Freiando);
+		jpAction.add(btnBreaking);
 
-		JP_Orientacao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Orientação",
+		jpOrientation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Orientação",
 				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-		JP_Orientacao.setDoubleBuffered(false);
+		jpOrientation.setDoubleBuffered(false);
 
-		JP_Orientacao.setEnabled(false);
+		jpOrientation.setEnabled(false);
 
-		JP_Orientacao.setFocusable(false);
+		jpOrientation.setFocusable(false);
 
-		JP_Orientacao.setLayout(new java.awt.GridLayout(1, 0));
+		jpOrientation.setLayout(new java.awt.GridLayout(1, 0));
 
-		BTN_Esquerda.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnLeft.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Esquerda.setForeground(new java.awt.Color(51, 51, 255));
+		btnLeft.setForeground(new java.awt.Color(51, 51, 255));
 
-		BTN_Esquerda.setText("Esquerda");
+		btnLeft.setText("Esquerda");
 
-		BTN_Esquerda.setFocusable(false);
+		btnLeft.setFocusable(false);
 
-		BTN_Esquerda.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		btnLeft.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-		BTN_Esquerda.setMaximumSize(new java.awt.Dimension(0, 0));
+		btnLeft.setMaximumSize(new java.awt.Dimension(0, 0));
 
-		BTN_Esquerda.setMinimumSize(new java.awt.Dimension(0, 0));
+		btnLeft.setMinimumSize(new java.awt.Dimension(0, 0));
 
-		BTN_Esquerda.setPreferredSize(new java.awt.Dimension(200, 200));
+		btnLeft.setPreferredSize(new java.awt.Dimension(200, 200));
 
-		BTN_Esquerda.setRequestFocusEnabled(false);
+		btnLeft.setRequestFocusEnabled(false);
 
-		BTN_Esquerda.setVerifyInputWhenFocusTarget(false);
+		btnLeft.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Esquerda.addActionListener((evt) -> {
+		btnLeft.addActionListener((evt) -> {
 			BTN_EsquerdaActionPerformed(evt);
 		});
 
-		JP_Orientacao.add(BTN_Esquerda);
+		jpOrientation.add(btnLeft);
 
-		BTN_Esquerda.getAccessibleContext().setAccessibleDescription("");
+		btnLeft.getAccessibleContext().setAccessibleDescription("");
 
-		BTN_Direita.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnRight.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Direita.setForeground(new java.awt.Color(51, 51, 255));
+		btnRight.setForeground(new java.awt.Color(51, 51, 255));
 
-		BTN_Direita.setText("Direita");
+		btnRight.setText("Direita");
 
-		BTN_Direita.setFocusable(false);
+		btnRight.setFocusable(false);
 
-		BTN_Direita.setMinimumSize(new java.awt.Dimension(0, 0));
+		btnRight.setMinimumSize(new java.awt.Dimension(0, 0));
 
-		BTN_Direita.setPreferredSize(new java.awt.Dimension(0, 0));
+		btnRight.setPreferredSize(new java.awt.Dimension(0, 0));
 
-		BTN_Direita.setRequestFocusEnabled(false);
+		btnRight.setRequestFocusEnabled(false);
 
-		BTN_Direita.setVerifyInputWhenFocusTarget(false);		
+		btnRight.setVerifyInputWhenFocusTarget(false);		
 
-		BTN_Direita.addActionListener((evt) -> {
+		btnRight.addActionListener((evt) -> {
 			BTN_DireitaActionPerformed(evt);
 
 		});
 
-		JP_Orientacao.add(BTN_Direita);
+		jpOrientation.add(btnRight);
 
-		BTN_Direita.getAccessibleContext().setAccessibleDescription("");
+		btnRight.getAccessibleContext().setAccessibleDescription("");
 
-		JSLD_VelAnimacao.setForeground(java.awt.Color.blue);
+		sliderAnimation.setForeground(java.awt.Color.blue);
 
-		JSLD_VelAnimacao.setMajorTickSpacing(1);
+		sliderAnimation.setMajorTickSpacing(1);
 
-		JSLD_VelAnimacao.setMaximum(9);
+		sliderAnimation.setMaximum(9);
 
-		JSLD_VelAnimacao.setMinorTickSpacing(1);
+		sliderAnimation.setMinorTickSpacing(1);
 
-		JSLD_VelAnimacao.setPaintLabels(true);
+		sliderAnimation.setPaintLabels(true);
 
-		JSLD_VelAnimacao.setPaintTicks(true);
+		sliderAnimation.setPaintTicks(true);
 
-		JSLD_VelAnimacao.setSnapToTicks(true);
+		sliderAnimation.setSnapToTicks(true);
 
-		JSLD_VelAnimacao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Velocidade da Animação",
+		sliderAnimation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Velocidade da Animação",
 				javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION,
 				new java.awt.Font("Tahoma", 0, 10)));
 
-		JSLD_VelAnimacao.setEnabled(false);
+		sliderAnimation.setEnabled(false);
 
-		JSLD_VelAnimacao.setFocusable(false);
+		sliderAnimation.setFocusable(false);
 
-		JSLD_VelAnimacao.setMinimumSize(new java.awt.Dimension(0, 0));
+		sliderAnimation.setMinimumSize(new java.awt.Dimension(0, 0));
 
-		JSLD_VelAnimacao.setPreferredSize(new java.awt.Dimension(0, 0));
+		sliderAnimation.setPreferredSize(new java.awt.Dimension(0, 0));
 
-		JSLD_VelAnimacao.setRequestFocusEnabled(false);
+		sliderAnimation.setRequestFocusEnabled(false);
 
-		JSLD_VelAnimacao.setVerifyInputWhenFocusTarget(false);
+		sliderAnimation.setVerifyInputWhenFocusTarget(false);
 
-		JSLD_VelAnimacao.addChangeListener((evt) -> {
+		sliderAnimation.addChangeListener((evt) -> {
 			JSLD_VelAnimacaoStateChanged(evt);
 
 		});
@@ -897,43 +898,43 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-								.addComponent(JP_Acao, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-								.addComponent(JP_Orientacao, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-								.addComponent(JP_Dash, javax.swing.GroupLayout.DEFAULT_SIZE,
+								.addComponent(jpAction, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+								.addComponent(jpOrientation, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+								.addComponent(jpDash, javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(JP_Girar, javax.swing.GroupLayout.DEFAULT_SIZE,
+								.addComponent(jpSpin, javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(JP_Andar, javax.swing.GroupLayout.DEFAULT_SIZE,
+								.addComponent(jpWalk, javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(JP_Correr, javax.swing.GroupLayout.DEFAULT_SIZE,
+								.addComponent(jpRun, javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(JSLD_VelAnimacao, javax.swing.GroupLayout.DEFAULT_SIZE,
+								.addComponent(sliderAnimation, javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addContainerGap()));
 
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
-						.addComponent(JP_Correr, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+						.addComponent(jpRun, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(JP_Andar, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+						.addComponent(jpWalk, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(JP_Girar, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+						.addComponent(jpSpin, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(JP_Dash, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+						.addComponent(jpDash, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(JP_Acao, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+						.addComponent(jpAction, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(JP_Orientacao, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+						.addComponent(jpOrientation, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(JSLD_VelAnimacao, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)));
+						.addComponent(sliderAnimation, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)));
 
-		JP_Correr.getAccessibleContext().setAccessibleDescription("");
+		jpRun.getAccessibleContext().setAccessibleDescription("");
 
-		JP_Andar.getAccessibleContext().setAccessibleDescription("");
+		jpWalk.getAccessibleContext().setAccessibleDescription("");
 
-		JP_Girar.getAccessibleContext().setAccessibleDescription("");
+		jpSpin.getAccessibleContext().setAccessibleDescription("");
 
-		JSLD_VelAnimacao.getAccessibleContext().setAccessibleDescription("");
+		sliderAnimation.getAccessibleContext().setAccessibleDescription("");
 
 		pack();
 	}
@@ -1042,7 +1043,7 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 	}
 
 	private void JSLD_VelAnimacaoStateChanged(javax.swing.event.ChangeEvent evt) {
-		sonic.setAnimeSpeed(JSLD_VelAnimacao.getValue());
+		sonic.setAnimeSpeed(sliderAnimation.getValue());
 	}
 
 	private void BTN_Correr0ActionPerformed(ActionEvent evt) {
@@ -1164,7 +1165,7 @@ public final class FrameAnimation extends javax.swing.JFrame implements Runnable
 
 			} catch (InterruptedException ex) {
 
-				throw new RuntimeException("Falha ao Interromper " + ex.getMessage());
+				throw new RuntimeException(ex);
 			}
 
 		}

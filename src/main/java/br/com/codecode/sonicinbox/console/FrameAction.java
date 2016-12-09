@@ -27,25 +27,25 @@ public class FrameAction extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = 1370653725906464274L;    
 
-	private JButton BTN_Acelerar;
+	private JButton btnAccelerate;
 
-	private JButton BTN_Freiar;
+	private JButton btnBrake;
 	
-	public static JButton BTN_Down;	
+	public static JButton btnDown;	
 
-	public static JButton BTN_Left;
+	public static JButton btnLeft;
 
-	public static JButton BTN_Right;
+	public static JButton btnRight;
 
-	public static JButton BTN_Up;
+	public static JButton btnUp;
 
-	private JLabel JL_Titulo, JL_Velocidade;
+	private JLabel lblTitle, lblSpeed;
 
-	private JProgressBar JPB_Velocidade;
+	private JProgressBar progressBar;
 
-	private JToggleButton JTBN_AI, JTBN_SuperSonic, JTB_Musica;
+	private JToggleButton toggleAi, toggleSuperSonic, toggleMusic;
 
-	private JSeparator jSeparator2;	
+	private JSeparator separator;	
 
 	private Sonic sonic;
 
@@ -81,7 +81,7 @@ public class FrameAction extends JFrame implements Runnable {
 
 	private void doControlButtons(boolean ai) {
 
-		JButton[] btns = {BTN_Acelerar, BTN_Freiar};
+		JButton[] btns = {btnAccelerate, btnBrake};
 
 		for (JButton btn : btns) {
 			btn.setEnabled(ai);
@@ -91,48 +91,48 @@ public class FrameAction extends JFrame implements Runnable {
 
 	private void doRefreshComponent() {
 
-		JPB_Velocidade.setValue((int) sonic.getSpeed());
+		progressBar.setValue((int) sonic.getSpeed());
 
-		JL_Velocidade.setText(String.valueOf(sonic.getSpeed()));
+		lblSpeed.setText(String.valueOf(sonic.getSpeed()));
 
-		JTBN_SuperSonic.setSelected(sonic.isSuperSonic());
+		toggleSuperSonic.setSelected(sonic.isSuperSonic());
 
-		JTBN_AI.setSelected(sonic.isAi());
+		toggleAi.setSelected(sonic.isAi());
 
-		JTB_Musica.setSelected(music.isOn());
+		toggleMusic.setSelected(music.isOn());
 	}
 
 	private void initComponents() {
 
-		BTN_Acelerar = new javax.swing.JButton();
+		btnAccelerate = new javax.swing.JButton();
 
-		JTBN_AI = new javax.swing.JToggleButton();
+		toggleAi = new javax.swing.JToggleButton();
 
-		BTN_Left = new javax.swing.JButton();
+		btnLeft = new javax.swing.JButton();
 
-		BTN_Down = new javax.swing.JButton();
+		btnDown = new javax.swing.JButton();
 
-		BTN_Right = new javax.swing.JButton();
+		btnRight = new javax.swing.JButton();
 
-		BTN_Up = new javax.swing.JButton();
+		btnUp = new javax.swing.JButton();
 
-		JTB_Musica = new javax.swing.JToggleButton();
+		toggleMusic = new javax.swing.JToggleButton();
 
-		JTBN_SuperSonic = new javax.swing.JToggleButton();
+		toggleSuperSonic = new javax.swing.JToggleButton();
 
-		BTN_Freiar = new javax.swing.JButton();
+		btnBrake = new javax.swing.JButton();
 
-		JPB_Velocidade = new javax.swing.JProgressBar();
+		progressBar = new javax.swing.JProgressBar();
 
-		JL_Velocidade = new javax.swing.JLabel();
+		lblSpeed = new javax.swing.JLabel();
 
-		JL_Titulo = new javax.swing.JLabel();
+		lblTitle = new javax.swing.JLabel();
 
-		jSeparator2 = new javax.swing.JSeparator();
+		separator = new javax.swing.JSeparator();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		setTitle("Console Ação");
+		setTitle("Action Console");
 
 		setAlwaysOnTop(true);
 
@@ -140,162 +140,162 @@ public class FrameAction extends JFrame implements Runnable {
 
 		setResizable(false);
 
-		BTN_Acelerar.setFont(new java.awt.Font("Tahoma", 1, 14));
+		btnAccelerate.setFont(new java.awt.Font("Tahoma", 1, 14));
 
-		BTN_Acelerar.setForeground(new java.awt.Color(0, 0, 255));
+		btnAccelerate.setForeground(new java.awt.Color(0, 0, 255));
 
-		BTN_Acelerar.setText("Acelerar");
+		btnAccelerate.setText("Acelerar");
 
-		BTN_Acelerar.setFocusable(false);
+		btnAccelerate.setFocusable(false);
 
-		BTN_Acelerar.setRequestFocusEnabled(false);
+		btnAccelerate.setRequestFocusEnabled(false);
 
-		BTN_Acelerar.setVerifyInputWhenFocusTarget(false);
+		btnAccelerate.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Acelerar.addActionListener((evt) -> {
+		btnAccelerate.addActionListener((evt) -> {
 			BTN_AcelerarActionPerformed(evt);
 
 		});
 
-		JTBN_AI.setFont(new java.awt.Font("Tahoma", 1, 14));
+		toggleAi.setFont(new java.awt.Font("Tahoma", 1, 14));
 
-		JTBN_AI.setForeground(new java.awt.Color(255, 0, 102));
+		toggleAi.setForeground(new java.awt.Color(255, 0, 102));
 
-		JTBN_AI.setText("A.I.");
+		toggleAi.setText("A.I.");
 
-		JTBN_AI.setFocusable(false);
+		toggleAi.setFocusable(false);
 
-		JTBN_AI.setRequestFocusEnabled(false);
+		toggleAi.setRequestFocusEnabled(false);
 
-		JTBN_AI.setVerifyInputWhenFocusTarget(false);
+		toggleAi.setVerifyInputWhenFocusTarget(false);
 
-		JTBN_AI.addActionListener((evt) -> {
+		toggleAi.addActionListener((evt) -> {
 			JTBN_AIActionPerformed(evt);
 
 		});
 
-		BTN_Left.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnLeft.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Left.setText("RIGHT");
+		btnLeft.setText("RIGHT");
 
-		BTN_Left.setEnabled(false);
+		btnLeft.setEnabled(false);
 
-		BTN_Left.setFocusable(false);
+		btnLeft.setFocusable(false);
 
-		BTN_Left.setRequestFocusEnabled(false);
+		btnLeft.setRequestFocusEnabled(false);
 
-		BTN_Left.setVerifyInputWhenFocusTarget(false);
+		btnLeft.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Down.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnDown.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Down.setText("DOWN");
+		btnDown.setText("DOWN");
 
-		BTN_Down.setEnabled(false);
+		btnDown.setEnabled(false);
 
-		BTN_Down.setFocusable(false);
+		btnDown.setFocusable(false);
 
-		BTN_Down.setRequestFocusEnabled(false);
+		btnDown.setRequestFocusEnabled(false);
 
-		BTN_Down.setVerifyInputWhenFocusTarget(false);
+		btnDown.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Right.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnRight.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Right.setText("LEFT");
+		btnRight.setText("LEFT");
 
-		BTN_Right.setEnabled(false);
+		btnRight.setEnabled(false);
 
-		BTN_Right.setFocusable(false);
+		btnRight.setFocusable(false);
 
-		BTN_Right.setRequestFocusEnabled(false);
+		btnRight.setRequestFocusEnabled(false);
 
-		BTN_Right.setVerifyInputWhenFocusTarget(false);
+		btnRight.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Up.setFont(new java.awt.Font("Tahoma", 1, 9));
+		btnUp.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		BTN_Up.setText("UP");
+		btnUp.setText("UP");
 
-		BTN_Up.setEnabled(false);
+		btnUp.setEnabled(false);
 
-		BTN_Up.setFocusable(false);
+		btnUp.setFocusable(false);
 
-		BTN_Up.setRequestFocusEnabled(false);
+		btnUp.setRequestFocusEnabled(false);
 
-		BTN_Up.setVerifyInputWhenFocusTarget(false);
+		btnUp.setVerifyInputWhenFocusTarget(false);
 
-		JTB_Musica.setFont(new java.awt.Font("Tahoma", 1, 14));
+		toggleMusic.setFont(new java.awt.Font("Tahoma", 1, 14));
 
-		JTB_Musica.setForeground(new java.awt.Color(204, 0, 204));
+		toggleMusic.setForeground(new java.awt.Color(204, 0, 204));
 
-		JTB_Musica.setText("Música");
+		toggleMusic.setText("Música");
 
-		JTB_Musica.setFocusable(false);
+		toggleMusic.setFocusable(false);
 
-		JTB_Musica.setRequestFocusEnabled(false);
+		toggleMusic.setRequestFocusEnabled(false);
 
-		JTB_Musica.setVerifyInputWhenFocusTarget(false);
+		toggleMusic.setVerifyInputWhenFocusTarget(false);
 
-		JTB_Musica.addActionListener((evt) -> {
+		toggleMusic.addActionListener((evt) -> {
 			JTB_MusicaActionPerformed(evt);
 
 		});
 
-		JTBN_SuperSonic.setFont(new java.awt.Font("Tahoma", 1, 14));
+		toggleSuperSonic.setFont(new java.awt.Font("Tahoma", 1, 14));
 
-		JTBN_SuperSonic.setForeground(new java.awt.Color(255, 204, 0));
+		toggleSuperSonic.setForeground(new java.awt.Color(255, 204, 0));
 
-		JTBN_SuperSonic.setText("Super Sonic");
+		toggleSuperSonic.setText("Super Sonic");
 
-		JTBN_SuperSonic.setFocusable(false);
+		toggleSuperSonic.setFocusable(false);
 
-		JTBN_SuperSonic.setOpaque(true);
+		toggleSuperSonic.setOpaque(true);
 
-		JTBN_SuperSonic.setRequestFocusEnabled(false);
+		toggleSuperSonic.setRequestFocusEnabled(false);
 
-		JTBN_SuperSonic.setVerifyInputWhenFocusTarget(false);
+		toggleSuperSonic.setVerifyInputWhenFocusTarget(false);
 
-		JTBN_SuperSonic.addActionListener((evt) -> {
+		toggleSuperSonic.addActionListener((evt) -> {
 			JTBN_SuperSonicActionPerformed(evt);
 
 		});
 
-		BTN_Freiar.setFont(new java.awt.Font("Tahoma", 1, 14));
+		btnBrake.setFont(new java.awt.Font("Tahoma", 1, 14));
 
-		BTN_Freiar.setForeground(new java.awt.Color(0, 0, 255));
+		btnBrake.setForeground(new java.awt.Color(0, 0, 255));
 
-		BTN_Freiar.setText("Freiar");
+		btnBrake.setText("Freiar");
 
-		BTN_Freiar.setFocusable(false);
+		btnBrake.setFocusable(false);
 
-		BTN_Freiar.setRequestFocusEnabled(false);
+		btnBrake.setRequestFocusEnabled(false);
 
-		BTN_Freiar.setVerifyInputWhenFocusTarget(false);
+		btnBrake.setVerifyInputWhenFocusTarget(false);
 
-		BTN_Freiar.addActionListener((evt) -> {
+		btnBrake.addActionListener((evt) -> {
 			BTN_FreiarActionPerformed(evt);
 
 		});
 
-		JPB_Velocidade.setMaximum(130000);
+		progressBar.setMaximum(130000);
 
-		JPB_Velocidade.setOrientation(1);
+		progressBar.setOrientation(1);
 
-		JPB_Velocidade.setFocusable(false);
+		progressBar.setFocusable(false);
 
-		JL_Velocidade.setFont(new java.awt.Font("Tahoma", 0, 10));
+		lblSpeed.setFont(new java.awt.Font("Tahoma", 0, 10));
 
-		JL_Velocidade.setForeground(new java.awt.Color(0, 204, 255));
+		lblSpeed.setForeground(new java.awt.Color(0, 204, 255));
 
-		JL_Velocidade.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		lblSpeed.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-		JL_Titulo.setFont(new java.awt.Font("Tahoma", 1, 9));
+		lblTitle.setFont(new java.awt.Font("Tahoma", 1, 9));
 
-		JL_Titulo.setForeground(new java.awt.Color(51, 51, 255));
+		lblTitle.setForeground(new java.awt.Color(51, 51, 255));
 
-		JL_Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-		JL_Titulo.setText("Velocidade");
+		lblTitle.setText("Velocidade");
 
-		jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+		separator.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -304,27 +304,27 @@ public class FrameAction extends JFrame implements Runnable {
 				.addGroup(layout.createSequentialGroup()
 						.addContainerGap()
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(JTBN_AI, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-								.addComponent(JTB_Musica, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-								.addComponent(BTN_Acelerar, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-								.addComponent(BTN_Freiar, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-								.addComponent(JTBN_SuperSonic, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+								.addComponent(toggleAi, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+								.addComponent(toggleMusic, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+								.addComponent(btnAccelerate, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+								.addComponent(btnBrake, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+								.addComponent(toggleSuperSonic, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
 								.addGroup(layout.createSequentialGroup()
 										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 												.addGroup(layout.createSequentialGroup()
-														.addComponent(BTN_Left, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+														.addComponent(btnLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 														.addGap(5, 5, 5)
-														.addComponent(BTN_Right, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
-												.addComponent(BTN_Up, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-												.addComponent(BTN_Down, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+														.addComponent(btnRight, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
+												.addComponent(btnUp, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+												.addComponent(btnDown, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
 										.addGap(2, 2, 2)))
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addComponent(jSeparator2)
+						.addComponent(separator)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-								.addComponent(JL_Velocidade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(JPB_Velocidade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(JL_Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
+								.addComponent(lblSpeed, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(progressBar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
 						.addGap(25, 25, 25))
 				);
 		layout.setVerticalGroup(
@@ -333,30 +333,30 @@ public class FrameAction extends JFrame implements Runnable {
 						.addContainerGap()
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup()
-										.addComponent(JTB_Musica, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+										.addComponent(toggleMusic, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(JTBN_AI, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+										.addComponent(toggleAi, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(BTN_Acelerar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+										.addComponent(btnAccelerate, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(BTN_Freiar, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+										.addComponent(btnBrake, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(JTBN_SuperSonic, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+										.addComponent(toggleSuperSonic, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
 										.addGap(30, 30, 30)
-										.addComponent(BTN_Up, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+										.addComponent(btnUp, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(BTN_Left, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(BTN_Right, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+												.addComponent(btnLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(btnRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(BTN_Down, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+										.addComponent(btnDown, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
 								.addGroup(layout.createSequentialGroup()
-										.addComponent(JL_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+										.addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(JL_Velocidade, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+										.addComponent(lblSpeed, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(JPB_Velocidade, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
-								.addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE))
+										.addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
+								.addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE))
 						.addContainerGap())
 				);
 
@@ -364,7 +364,7 @@ public class FrameAction extends JFrame implements Runnable {
 	}
 
 	private void JTBN_AIActionPerformed(ActionEvent evt) {
-		sonic.setAi(JTBN_AI.isSelected());
+		sonic.setAi(toggleAi.isSelected());
 	}
 
 	private void BTN_AcelerarActionPerformed(ActionEvent evt) {
@@ -374,11 +374,11 @@ public class FrameAction extends JFrame implements Runnable {
 	}
 
 	private void JTB_MusicaActionPerformed(ActionEvent evt) {
-		music.setOn(JTB_Musica.isSelected());
+		music.setOn(toggleMusic.isSelected());
 	}
 
 	private void JTBN_SuperSonicActionPerformed(ActionEvent evt) {
-		if (JTBN_SuperSonic.isSelected()) {
+		if (toggleSuperSonic.isSelected()) {
 			sonic.setSuperSonic(true);
 		} else {
 			sonic.setSuperSonic(false);
@@ -409,7 +409,7 @@ public class FrameAction extends JFrame implements Runnable {
 
 			} catch (InterruptedException ex) {
 
-				throw new RuntimeException("Falha ao Interromper " , ex);
+				throw new RuntimeException(ex);
 
 			}
 		}

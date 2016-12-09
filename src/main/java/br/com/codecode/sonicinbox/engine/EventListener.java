@@ -1,7 +1,5 @@
 package br.com.codecode.sonicinbox.engine;
 
-
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -63,7 +61,7 @@ public final class EventListener implements KeyListener, Runnable {
 				
 				lastkeypress.append("RIGHT");			
 				
-				FrameAction.BTN_Right.setVisible(false);
+				FrameAction.btnRight.setVisible(false);
 				
 				delay();
 
@@ -90,7 +88,7 @@ public final class EventListener implements KeyListener, Runnable {
 				
 				lastkeypress.append("LEFT");
 				
-				FrameAction.BTN_Left.setVisible(false);
+				FrameAction.btnLeft.setVisible(false);
 
 				delay();
 				
@@ -116,7 +114,7 @@ public final class EventListener implements KeyListener, Runnable {
 				
 				lastkeypress.append("UP");
 				
-				FrameAction.BTN_Up.setVisible(false);
+				FrameAction.btnUp.setVisible(false);
 				
 				if (sonic.getSpeed() == 0) {
 				
@@ -133,7 +131,7 @@ public final class EventListener implements KeyListener, Runnable {
 				
 				lastkeypress.append("DOWN");
 				
-				FrameAction.BTN_Down.setVisible(false);
+				FrameAction.btnDown.setVisible(false);
 				
 				if (sonic.getSpeed() == 0) {
 					
@@ -160,26 +158,26 @@ public final class EventListener implements KeyListener, Runnable {
 		if (sonic.isAi()) {
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				lastkeypress.delete(0, lastkeypress.length());
-				FrameAction.BTN_Right.setVisible(true);
+				FrameAction.btnRight.setVisible(true);
 
 			}
 
 			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				lastkeypress.delete(0, lastkeypress.length());
-				FrameAction.BTN_Left.setVisible(true);
+				FrameAction.btnLeft.setVisible(true);
 
 			}
 
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
 				lastkeypress.delete(0, lastkeypress.length());
-				FrameAction.BTN_Up.setVisible(true);
+				FrameAction.btnUp.setVisible(true);
 				sonic.doStop();
 
 			}
 
 			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 				lastkeypress.delete(0, lastkeypress.length());
-				FrameAction.BTN_Down.setVisible(true);
+				FrameAction.btnDown.setVisible(true);
 				sonic.doStop();
 
 			}

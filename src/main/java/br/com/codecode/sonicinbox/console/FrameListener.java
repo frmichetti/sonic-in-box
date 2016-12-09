@@ -14,9 +14,9 @@ public class FrameListener extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = -8266452496408906017L;	
 
-	private JProgressBar JPB_Aceleracao;
+	private JProgressBar progress;
 
-	private JLabel LBL_Aceleracao, jLabel1;    
+	private JLabel lblAccelation, jLabel1;    
 
 	private Sonic sonic;
 	
@@ -52,13 +52,13 @@ public class FrameListener extends JFrame implements Runnable {
 
 	private void initComponents() {
 
-		JPB_Aceleracao = new JProgressBar();
+		progress = new JProgressBar();
 		
-		JPB_Aceleracao.setStringPainted(true);		
+		progress.setStringPainted(true);		
 
 		jLabel1 = new JLabel();
 
-		LBL_Aceleracao = new JLabel();
+		lblAccelation = new JLabel();
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,11 +70,11 @@ public class FrameListener extends JFrame implements Runnable {
 
 		setResizable(false);
 
-		JPB_Aceleracao.setMaximum(2000);
+		progress.setMaximum(2000);
 
-		JPB_Aceleracao.setFocusable(false);
+		progress.setFocusable(false);
 
-		JPB_Aceleracao.setStringPainted(true);
+		progress.setStringPainted(true);
 
 		jLabel1.setFont(new java.awt.Font("Tahoma", 1, 9)); 
 
@@ -82,9 +82,9 @@ public class FrameListener extends JFrame implements Runnable {
 
 		jLabel1.setText("Aceleração");
 
-		LBL_Aceleracao.setFont(new java.awt.Font("Tahoma", 0, 9));
+		lblAccelation.setFont(new java.awt.Font("Tahoma", 0, 9));
 
-		LBL_Aceleracao.setForeground(new java.awt.Color(0, 204, 255));
+		lblAccelation.setForeground(new java.awt.Color(0, 204, 255));
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 
@@ -92,11 +92,11 @@ public class FrameListener extends JFrame implements Runnable {
 
 		layout.setHorizontalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(JPB_Aceleracao, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addComponent(progress, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
 				.addGroup(layout.createSequentialGroup()
 						.addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(LBL_Aceleracao, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblAccelation, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
 				);
 
 		layout.setVerticalGroup(
@@ -105,9 +105,9 @@ public class FrameListener extends JFrame implements Runnable {
 						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(LBL_Aceleracao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addComponent(lblAccelation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(JPB_Aceleracao, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addComponent(progress, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
 				);
 
 		pack();
@@ -118,9 +118,9 @@ public class FrameListener extends JFrame implements Runnable {
 		
 		int value = (int) sonic.getAcceleration();		
 
-		JPB_Aceleracao.setValue(value);
+		progress.setValue(value);
 
-		LBL_Aceleracao.setText(String.valueOf(value));
+		lblAccelation.setText(String.valueOf(value));
 	}
 
 	@Override
