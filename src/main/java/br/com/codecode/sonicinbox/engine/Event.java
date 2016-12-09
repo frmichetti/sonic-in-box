@@ -207,7 +207,7 @@ public class Event implements KeyListener, Runnable {
 
 	@Override
 	public void run() {
-		while (isOn()) {
+		while (true) {
 			try {
 				Thread.sleep(ConfigEngine.FPS.getValue());
 

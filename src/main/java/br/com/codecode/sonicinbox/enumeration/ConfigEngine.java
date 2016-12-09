@@ -1,11 +1,12 @@
 package br.com.codecode.sonicinbox.enumeration;
 
 public enum ConfigEngine {
-    FPS(1000 / 60), WIDTH(1024), HEIGHT(768);
+   
+	FPS(1000 / 60), WIDTH(1024), HEIGHT(768);
 
     private int value;
 
-    ConfigEngine(int value) {
+    private ConfigEngine(int value) {
         this.value = value;
     }
 

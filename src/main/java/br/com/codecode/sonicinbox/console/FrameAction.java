@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
 import br.com.codecode.sonicinbox.engine.Engine;
+import br.com.codecode.sonicinbox.engine.Music;
 import br.com.codecode.sonicinbox.enumeration.Action;
 import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
 import br.com.codecode.sonicinbox.motion.Sonic;
@@ -48,6 +49,8 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 	private javax.swing.JSeparator jSeparator2;	
 
 	private Sonic sonic;
+	
+	private Music music;
 
 	private FrameAction() {	
 
@@ -65,9 +68,10 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 
 	}
 
-	public FrameAction(Sonic sonic){		
+	public FrameAction(Sonic sonic,Music music){		
 		this();
 		this.sonic = sonic;
+		this.music = music;
 	}
 
 	private void doControlButtons(boolean ai) {
@@ -90,7 +94,7 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 
 		JTBN_AI.setSelected(sonic.isAi());
 
-		JTB_Musica.setSelected(Engine.music.isOn());
+		JTB_Musica.setSelected(music.isOn());
 	}
 
 	private void initComponents() {
@@ -365,7 +369,7 @@ public class FrameAction extends javax.swing.JFrame implements Runnable {
 	}
 
 	private void JTB_MusicaActionPerformed(ActionEvent evt) {
-		Engine.music.setOn(JTB_Musica.isSelected());
+		music.setOn(JTB_Musica.isSelected());
 	}
 
 	private void JTBN_SuperSonicActionPerformed(ActionEvent evt) {

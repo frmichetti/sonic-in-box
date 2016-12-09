@@ -77,7 +77,7 @@ public final class Start {
 
 				new FrameAnimation(Engine.sonic);
 
-				new FrameAction(Engine.sonic);
+				new FrameAction(Engine.sonic,Engine.music);
 
 				new FrameListener(Engine.sonic);
 
