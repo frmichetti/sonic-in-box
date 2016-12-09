@@ -1,16 +1,14 @@
 package br.com.codecode.sonicinbox.engine;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
 
 import br.com.codecode.sonicinbox.Start;
-import br.com.codecode.sonicinbox.util.MyPath;
 
 public class Music implements Runnable {
 
@@ -20,7 +18,7 @@ public class Music implements Runnable {
 	private final String MUSIC_AQUATIC_RUIN_ZONE = "aquatic-ruin-zone-2-.mid";
 	@SuppressWarnings("unused")
 	private final String MUSIC_FINAL_BOSS = "final-boss.mid";
-	
+
 	private final String MUSIC_CHEMICAL_PLANT = "chemical-plant-zone-13-.mid";
 
 	private boolean on;
@@ -29,39 +27,44 @@ public class Music implements Runnable {
 
 	private Thread thread;    
 
-	private String currentURL = MyPath.MUSICS_RELATIVE;
+	private String currentURL;
 
-	public Music() {
+	private Music() {
 
 		thread = new Thread(Start.tgrpEngine, this, "Music Thread");
 
 		thread.setPriority(Thread.MIN_PRIORITY);		
-		
+
 		on = true;
+	}
+	
+	public Music(String from){
+		this();
+		this.currentURL = from;
 	}
 
 
-	public void doPlayMidi(URL from, int loop) {
-		
+	public void doPlayMidi(String from, int loop) {
+
 		Sequence midi = null;
-		
+
 		try {
-			
-			player = javax.sound.midi.MidiSystem.getSequencer();
-			
-			midi = javax.sound.midi.MidiSystem.getSequence(from);
-			
+
+			player = MidiSystem.getSequencer();
+
+			midi = MidiSystem.getSequence(ClassLoader.class.getResourceAsStream(from));
+
 			player.open();
-			
+
 			player.setSequence(midi);
-			
+
 		} catch (MidiUnavailableException | InvalidMidiDataException | IOException e) {
-			
+
 			e.printStackTrace();
 		}
-	
+
 		player.setLoopCount(loop);
-		
+
 		player.start();
 
 	}
@@ -100,17 +103,7 @@ public class Music implements Runnable {
 	@Override
 	public void run() {
 
-			try {
-				
-				URL u = new URL(currentURL + MUSIC_CHEMICAL_PLANT);
-				
-				doPlayMidi(u, 100);
-				
-			} catch (MalformedURLException e) {
-								
-				e.printStackTrace();
-			}			
-	
+		doPlayMidi(currentURL + MUSIC_CHEMICAL_PLANT, 100);
 
 		try {
 

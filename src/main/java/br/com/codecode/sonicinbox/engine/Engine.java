@@ -13,6 +13,7 @@ import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
 import br.com.codecode.sonicinbox.enumeration.Orientation;
 import br.com.codecode.sonicinbox.motion.Sonic;
+import br.com.codecode.sonicinbox.util.MyPath;
 import br.com.codecode.sonicinbox.util.Size;
 
 public final class Engine extends JFrame implements Runnable {
@@ -73,7 +74,7 @@ public final class Engine extends JFrame implements Runnable {
 
 		event = new Event(true);
 
-		music = new Music();
+		music = new Music(MyPath.MUSICS_RELATIVE);
 
 		super.addKeyListener(event);
 
