@@ -14,24 +14,4 @@ public class MyApplet extends Applet{
 		new Start();
 	}
 
-	@Override
-	public void start() {
-		
-		super.start();
-	}
-
-	@Override
-	public void stop() {
-		
-		super.stop();
-	}
-
-	@Override
-	public void destroy() {
-		
-		super.destroy();
-	}
-	
-	
-
 }

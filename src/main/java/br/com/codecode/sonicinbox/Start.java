@@ -67,22 +67,16 @@ public final class Start {
 
 				new FrameAction(Engine.sonic);	
 
-				new FrameListener();
+				new FrameListener(Engine.sonic);
 
 				
 			});
 		} catch (InvocationTargetException | InterruptedException e) {
 			
 			e.printStackTrace();
-		}
-
-		
+		}		
 
 	}
 
-	public static void main(String ... args) {
-
-		new Start();
-	}
 
 }

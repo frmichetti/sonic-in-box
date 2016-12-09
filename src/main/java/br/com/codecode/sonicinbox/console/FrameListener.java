@@ -1,22 +1,26 @@
 package br.com.codecode.sonicinbox.console;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import javax.swing.WindowConstants;
 
 import br.com.codecode.sonicinbox.engine.Engine;
 import br.com.codecode.sonicinbox.enumeration.ConfigEngine;
+import br.com.codecode.sonicinbox.motion.Sonic;
 import br.com.codecode.sonicinbox.util.Size;
 
 public class FrameListener extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = -8266452496408906017L;	
 
-    private javax.swing.JProgressBar JPB_Aceleracao;
+    private JProgressBar JPB_Aceleracao;
     
-    private javax.swing.JLabel LBL_Aceleracao, jLabel1;    
+    private JLabel LBL_Aceleracao, jLabel1;    
     
+    private Sonic sonic;    
 
-    public FrameListener() {    	
+    private FrameListener() {    	
     	
     	System.out.println("FrameListener.FrameListener()");
         
@@ -29,17 +33,21 @@ public class FrameListener extends JFrame implements Runnable {
         super.setLocationRelativeTo(null);
         
         super.setLocation((Size.MAX_WIDTH - getWidth()) / 2, (Size.MAX_HEIGHT - getHeight()));
-
        
+    }
+    
+    public FrameListener(Sonic sonic){
+    	this();
+    	this.sonic = sonic;
     }
 
     private void initComponents() {
 
-        JPB_Aceleracao = new javax.swing.JProgressBar();
+        JPB_Aceleracao = new JProgressBar();
         
-        jLabel1 = new javax.swing.JLabel();
+        jLabel1 = new JLabel();
         
-        LBL_Aceleracao = new javax.swing.JLabel();
+        LBL_Aceleracao = new JLabel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
@@ -97,9 +105,9 @@ public class FrameListener extends JFrame implements Runnable {
 
     private void doRefreshComponents() {
     	
-        JPB_Aceleracao.setValue((int) Engine.sonic.getAcceleration());
+        JPB_Aceleracao.setValue((int) sonic.getAcceleration());
         
-        LBL_Aceleracao.setText(String.valueOf(Engine.sonic.getAcceleration()));
+        LBL_Aceleracao.setText(String.valueOf(sonic.getAcceleration()));
     }
 
     @Override
