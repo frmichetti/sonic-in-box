@@ -10,25 +10,29 @@ import javax.swing.JProgressBar;
 
 import br.com.codecode.sonicinbox.enums.ConfigSonic;
 
-public final class Sprites {
+public final class Sprites implements Runnable {
 
 	public final String filePattern = "sprite_%s.png";
 
 	private ImageIcon[] frames;   
 
 	private JProgressBar progressBar = new JProgressBar(0, ConfigSonic.MAX_SPRITES.getValue() -1);
+
+	private String from;
 	
 	private Sprites(){};
 
 	public Sprites(String from) {	
 		
 		this();
+		
+		this.from = from;
 
 		System.out.println("Resource Sprites : " + from);
 
 		System.out.println("");
 
-		doLoadSprites(from);
+		
 	}
 
 	private void doLoadSprites(String from) {
@@ -50,7 +54,7 @@ public final class Sprites {
 
 			} catch (IOException ex) {
 
-				throw new RuntimeException("It was not possible load Sprites " + ex);
+				throw new RuntimeException(ex);
 			}
 
 			System.out.println("Download Sprite (" + progressBar.getValue() + "/" + progressBar.getMaximum() +")");  
@@ -73,7 +77,10 @@ public final class Sprites {
 		return frames[index].getImage();
 	}
 
-
+	@Override
+	public void run() {
+		doLoadSprites(from);		
+	}
 
 
 }

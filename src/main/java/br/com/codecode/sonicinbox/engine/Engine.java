@@ -254,12 +254,12 @@ public final class Engine extends JFrame implements Runnable {
 
 			if (sonic.getOrientation() == Orientation.RIGHT) {
 
-				bbg2d.drawImage(sonic.getSprites().getImage(sonic.getCurrentFrame()),
+				bbg2d.drawImage(sonic.getImage(sonic.getCurrentFrame()),
 						sonic.getX(), sonic.getY(), sonic.getW(), sonic.getH(), null);
 
 			} else {
 
-				bbg2d.drawImage(sonic.getSprites().getImage(sonic.getCurrentFrame()),
+				bbg2d.drawImage(sonic.getImage(sonic.getCurrentFrame()),
 						sonic.getX() + 290, sonic.getY(), -sonic.getW(), sonic.getH(), null);
 			}
 

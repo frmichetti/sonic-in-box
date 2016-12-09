@@ -1,9 +1,11 @@
 package br.com.codecode.sonicinbox.motion;
 
+import java.awt.Image;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.enums.Action;
@@ -44,15 +46,15 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 	private Sprites sprites;
 
 	private boolean superSonic; 
-	
+
 	private Thread thread;
 
 	private int X, Y, W, H;
 
 	private Sonic() {		
-		
+
 		super.addObserver(this);
-		
+
 		this.thread = new Thread(Start.tgrpSonic, this, "Sonic Thread");		        
 
 		this.W = ConfigSonic.WIDTH.getValue();
@@ -72,9 +74,9 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 		this.animeSpeed = 5;		
 
 		this.action = Action.STOP;		
-		
+
 		this.animation = new Animation(this);
-		
+
 		this.movimentation = new Movimentation(this);					
 
 	}
@@ -84,9 +86,9 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 		this();		
 		this.ai = ai;		
 		this.from = from;		
-		
+
 		doLoadSprites();
-		
+
 		ExecutorService executor = Executors.newFixedThreadPool(2);
 
 		executor.execute(movimentation);
@@ -159,7 +161,23 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 	}
 
 	private void doLoadSprites() {
+
 		sprites = new Sprites(from);
+
+		ExecutorService taskExecutor = Executors.newFixedThreadPool(1);
+
+		taskExecutor.execute(sprites);
+
+		taskExecutor.shutdown();
+
+		try {
+			
+			taskExecutor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+			
+		} catch (InterruptedException e){
+			throw new RuntimeException(e);
+		}
+
 	}
 
 	public Sonic doLook() {
@@ -337,11 +355,7 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 	@Override
 	public float getSpeed() {
 		return speed;
-	}
-
-	public Sprites getSprites() {
-		return sprites;
-	}
+	}	
 
 	public Thread getThread() {
 		return thread;
@@ -381,7 +395,7 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 
 				} catch (InterruptedException ex) {
 
-					throw new RuntimeException("Failed to Stop " + thread.getName() + " " + ex);
+					throw new RuntimeException("Failed to Stop " + thread.getName() , ex);
 
 				}
 
@@ -563,6 +577,7 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 
 				doDash(0);
 			}
+			
 			break;
 
 			case BRAKEUP: {
@@ -814,6 +829,10 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 	public void setY(int Y) {
 		this.Y = Y;
 	}
+	
+	public Image getImage(int index) {
+		return sprites.getImage(index);
+	}
 
 
 	@Override
@@ -827,7 +846,7 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 
 		} catch (InterruptedException ex) {
 
-			System.err.println("Failed to Stop " + thread.getName() + " " + ex);
+			throw new RuntimeException(ex);
 		}
 
 	}
