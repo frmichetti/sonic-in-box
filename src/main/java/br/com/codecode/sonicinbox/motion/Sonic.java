@@ -20,6 +20,8 @@ import br.com.codecode.sonicinbox.util.MyPath;
  * @version 3.0
  */
 public final class Sonic extends Observable implements Observer, Runnable {
+	
+	private static Sonic instance;
 
 	private boolean ai;
 
@@ -46,8 +48,15 @@ public final class Sonic extends Observable implements Observer, Runnable {
 	public Animation animation; 
 	
 	private Movimentation movimentation;
+	
+	public static synchronized Sonic getInstance(){
+		if(instance == null){
+			instance = new Sonic();
+		}
+		return instance;
+	}
 
-	private Sonic() {
+	private Sonic() {		
 
 		thread = new Thread(Start.tgrpSonic, this, "Sonic Thread");
 
@@ -69,7 +78,7 @@ public final class Sonic extends Observable implements Observer, Runnable {
 
 		setAnimeSpeed(5);
 
-		setAi(false);
+		setAi(true);
 
 		setSpeed(0);
 
@@ -91,7 +100,8 @@ public final class Sonic extends Observable implements Observer, Runnable {
 
 	}
 
-	public Sonic(boolean ai) {
+
+	private Sonic(boolean ai) {
 		this();
 		this.ai = ai;
 	}

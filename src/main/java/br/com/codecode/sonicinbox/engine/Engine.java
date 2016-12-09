@@ -72,7 +72,7 @@ public final class Engine extends JFrame implements Runnable {
 		
 		lastkeypress = new StringBuffer(30);
 
-		sonic = new Sonic(true);
+		sonic = Sonic.getInstance();
 
 		physics = new Physics(sonic, true);
 

@@ -14,7 +14,7 @@ public final class Start {
 
 	public static ThreadGroup tgrpEngine, tgrpSonic, tgrpConsole;
 
-	private static Thread t;
+	private Thread t;
 
 	public Start() {
 
@@ -36,7 +36,6 @@ public final class Start {
 
 	}
 
-
 	private void doChangeTheme() {
 
 		try {
@@ -48,7 +47,8 @@ public final class Start {
 				}
 			}
 
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| javax.swing.UnsupportedLookAndFeelException ex) {
 
 			throw new RuntimeException("Não foi Possivel Definir o Tema Nimbus : " + ex.getMessage());
 
@@ -59,28 +59,38 @@ public final class Start {
 	public void doCreateFrame() {
 
 		new Engine();
-		
+
 		try {
-			SwingUtilities.invokeAndWait(()->{
-			
+			SwingUtilities.invokeAndWait(() -> {
+				
+				while(Engine.sonic == null){
+					
+					try {
+						
+						Thread.sleep(2_000);
+						
+					} catch (InterruptedException e) {
+						
+						e.printStackTrace();
+					}
+				}
+
 				new FrameAnimation(Engine.sonic);
 
-				new FrameAction(Engine.sonic);	
+				new FrameAction(Engine.sonic);
 
 				new FrameListener(Engine.sonic);
 
-				
 			});
 		} catch (InvocationTargetException | InterruptedException e) {
-			
+
 			e.printStackTrace();
-		}		
+		}
 
 	}
-	
-	public static void main(String ... args) {
+
+	public static void main(String... args) {
 		new Start();
 	}
-
 
 }

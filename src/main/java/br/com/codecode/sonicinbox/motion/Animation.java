@@ -49,7 +49,7 @@ public class Animation implements Runnable {
 		this.sonic = sonic;
 	}
 
-	private void doChangeFrames(Sonic sonic, int initFrame, int finalFrame, int animeSpeed) {
+	private void doChangeFrames(int initFrame, int finalFrame, int animeSpeed) {
 
 		this.initFrame = initFrame;
 
@@ -65,7 +65,7 @@ public class Animation implements Runnable {
 
 	private void doAnimate(Sonic sonic) {
 
-		doSwitchAction(sonic);
+		doSwitchAction();
 
 		animeSpeed++;
 
@@ -84,7 +84,7 @@ public class Animation implements Runnable {
 
 	}
 
-	private void doSwitchAction(Sonic sonic) {
+	private void doSwitchAction() {
 
 		switch ((Action) sonic.getAction()) {
 
@@ -92,12 +92,12 @@ public class Animation implements Runnable {
 
 			if (sonic.isSuperSonic()) {
 
-				doChangeFrames(sonic,SS_STOP.getInit(),
+				doChangeFrames(SS_STOP.getInit(),
 						SS_STOP.getEnd(),
 						(sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
 			} else {
 
-				doChangeFrames(sonic,STOP.getInit(),
+				doChangeFrames(STOP.getInit(),
 						STOP.getEnd(), (sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
 
 			}
@@ -109,12 +109,12 @@ public class Animation implements Runnable {
 
 			if (sonic.isSuperSonic()) {
 
-				doChangeFrames(sonic,SS_WAIT.getInit(),
+				doChangeFrames(SS_WAIT.getInit(),
 						SS_WAIT.getEnd(),
 						(sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
 			} else {
 
-				doChangeFrames(sonic,WAIT.getInit(),
+				doChangeFrames(WAIT.getInit(),
 						WAIT.getEnd(),
 						(sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
 
@@ -128,7 +128,7 @@ public class Animation implements Runnable {
 			if (sonic.isSuperSonic()) {
 
 			} else {
-				doChangeFrames(sonic,DOWN.getInit(),
+				doChangeFrames(DOWN.getInit(),
 						DOWN.getEnd(),
 						(sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
 			}
@@ -139,13 +139,13 @@ public class Animation implements Runnable {
 
 			if (sonic.isSuperSonic()) {
 
-				doChangeFrames(sonic,SS_DOWNED.getInit(),
+				doChangeFrames(SS_DOWNED.getInit(),
 						SS_DOWNED.getEnd(),
 						(sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
 
 			} else {
 
-				doChangeFrames(sonic,DOWNED.getInit(),
+				doChangeFrames(DOWNED.getInit(),
 						DOWNED.getEnd(),
 						(sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
 
@@ -159,7 +159,7 @@ public class Animation implements Runnable {
 
 			} else {
 
-				doChangeFrames(sonic,LOOK.getInit(), LOOK.getEnd(),
+				doChangeFrames(LOOK.getInit(), LOOK.getEnd(),
 						(sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
 			}
 
@@ -171,7 +171,7 @@ public class Animation implements Runnable {
 
 			} else {
 
-				doChangeFrames(sonic,LOOKING.getInit(),
+				doChangeFrames(LOOKING.getInit(),
 						LOOKING.getEnd(),
 						(sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
 
@@ -184,7 +184,7 @@ public class Animation implements Runnable {
 			if (sonic.isSuperSonic()) {
 
 			} else {
-				doChangeFrames(sonic,BREAKUP.getInit(),
+				doChangeFrames(BREAKUP.getInit(),
 						BREAKUP.getEnd(),
 						(sonic.isAi() ? 7 : sonic.getAnimeSpeed()));
 			}
@@ -195,13 +195,13 @@ public class Animation implements Runnable {
 		case WALK: {
 			if (sonic.isSuperSonic()) {
 
-				doChangeFrames(sonic,SS_WALK.getInit(),
+				doChangeFrames(SS_WALK.getInit(),
 						SS_WALK.getEnd(),
 						sonic.getAnimeSpeed());
 
 			} else {
 
-				doChangeFrames(sonic,WALK.getInit(),
+				doChangeFrames(WALK.getInit(),
 						WALK.getEnd(),
 						sonic.getAnimeSpeed());
 
@@ -212,13 +212,13 @@ public class Animation implements Runnable {
 		case RUN: {
 			if (sonic.isSuperSonic()) {
 
-				doChangeFrames(sonic,SS_RUN.getInit(),
+				doChangeFrames(SS_RUN.getInit(),
 						SS_RUN.getEnd(),
 						sonic.getAnimeSpeed());
 
 			} else {
 
-				doChangeFrames(sonic,RUN.getInit(),
+				doChangeFrames(RUN.getInit(),
 						RUN.getEnd(),
 						sonic.getAnimeSpeed());
 			}
@@ -231,7 +231,7 @@ public class Animation implements Runnable {
 
 			} else {
 
-				doChangeFrames(sonic,SPIN.getInit(),
+				doChangeFrames(SPIN.getInit(),
 						SPIN.getEnd(),
 						sonic.getAnimeSpeed());
 
@@ -242,7 +242,7 @@ public class Animation implements Runnable {
 
 		case TRANSFORM: {
 
-			doChangeFrames(sonic,TRANSFORM.getInit(),
+			doChangeFrames(TRANSFORM.getInit(),
 					TRANSFORM.getEnd(),
 					(sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
 
@@ -252,11 +252,11 @@ public class Animation implements Runnable {
 		case PUSH: {
 
 			if (sonic.isSuperSonic()) {
-				doChangeFrames(sonic,SS_PUSH.getInit(),
+				doChangeFrames(SS_PUSH.getInit(),
 						SS_PUSH.getEnd(),
 						(sonic.isAi() ? 9 : sonic.getAnimeSpeed()));
 			} else {
-				doChangeFrames(sonic,PUSH.getInit(),
+				doChangeFrames(PUSH.getInit(),
 						PUSH.getEnd(),
 						(sonic.isAi() ? 9 : sonic.getAnimeSpeed()));
 			}
@@ -268,7 +268,7 @@ public class Animation implements Runnable {
 
 			} else {
 
-				doChangeFrames(sonic,DASH.getInit(),
+				doChangeFrames(DASH.getInit(),
 						DASH.getEnd(),
 						sonic.getAnimeSpeed());
 
