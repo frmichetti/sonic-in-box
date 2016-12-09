@@ -12,7 +12,7 @@ A Sonic Java 'Game' written in Java
 
 Screen Capture
 ----
-[![See on Youtube](https://github.com/frmichetti/sonic-in-box/blob/master/sonic.gif)](https://www.youtube.com/playlist?list=PLDzyDVZ4JbDjkNNXy164lkYRphAnbyA7K)
+[![See on Youtube](https://github.com/frmichetti/sonic-in-box/blob/master/sonic.gif)](https://youtu.be/cw36vmkttKA?list=PLDzyDVZ4JbDjkNNXy164lkYRphAnbyA7K)
 
 License
 ----
