@@ -5,7 +5,9 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public abstract class Size {
+public class Size {
+    
+    private Size(){};
 
     public static GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 

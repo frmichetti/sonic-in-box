@@ -1,10 +1,12 @@
 package br.com.codecode.sonicinbox.util;
 
-public abstract class SignBoard implements Runnable {
+public class SignBoard {    
+    
+    private SignBoard(){}
 
     private static StringBuffer stringBuffer;
 
-    public static void substring(String s) throws InterruptedException {
+    public static void substring(String s) {
 
 	stringBuffer = new StringBuffer(s.length());
 
@@ -12,13 +14,7 @@ public abstract class SignBoard implements Runnable {
 
 	for (int i = 0; i < stringBuffer.length(); i++) {
 
-	    s = stringBuffer.substring(i);
-
-	    System.out.println(s);
-
-	    Thread.sleep(1000);
-
-	    System.out.println(s);
+	    s = stringBuffer.substring(i);	    
 	}
 
     }

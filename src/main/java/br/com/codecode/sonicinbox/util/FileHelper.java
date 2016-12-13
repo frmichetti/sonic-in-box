@@ -1,17 +1,21 @@
 package br.com.codecode.sonicinbox.util;
 
+import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 
-public abstract class File {
+public class FileHelper {    
+    
+    private FileHelper(){}
 
-    static java.io.File f;
+    private static File f;
 
-    public static java.io.File[] getFiles(Path caminho) {
+    public static File[] getFiles(Path path) {
 
-	f = caminho.toFile();
+	f = path.toFile();
+	
 	if (f.exists() && f.isDirectory() && f.canRead()) {
 	    return f.listFiles();
 	}
@@ -19,9 +23,9 @@ public abstract class File {
 	return null;
     }
 
-    public static java.io.File[] getFiles(String caminho) {
+    public static File[] getFiles(String caminho) {
 
-	f = new java.io.File(caminho);
+	f = new File(caminho);
 
 	if (f.exists() && f.isDirectory() && f.canRead()) {
 	    return f.listFiles();
@@ -31,9 +35,9 @@ public abstract class File {
 
     }
 
-    public static java.io.File[] getFiles(URL caminho) throws URISyntaxException {
+    public static File[] getFiles(URL path) throws URISyntaxException {
 
-	f = new java.io.File(caminho.toURI());
+	f = new File(path.toURI());
 
 	if (f.exists() && f.isDirectory() && f.canRead()) {
 	    return f.listFiles();
@@ -42,9 +46,10 @@ public abstract class File {
 	return null;
     }
 
-    public static java.io.File[] getFiles(URI caminho) {
+    public static File[] getFiles(URI path) {
 
-	f = new java.io.File(caminho);
+	f = new File(path);
+	
 	if (f.exists() && f.isDirectory() && f.canRead()) {
 	    return f.listFiles();
 	}

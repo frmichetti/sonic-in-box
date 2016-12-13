@@ -4,8 +4,7 @@ import java.nio.file.FileSystems;
 
 public final class MyPath {
 
-    private MyPath() {
-    }
+    private MyPath(){}
 
     public final static String MUSICS_RELATIVE = "/META-INF/lib/musics/";
 

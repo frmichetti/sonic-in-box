@@ -22,7 +22,6 @@ import javax.swing.event.ChangeEvent;
 
 import br.com.codecode.sonicinbox.engine.Engine;
 import br.com.codecode.sonicinbox.enums.Action;
-import br.com.codecode.sonicinbox.enums.ConfigEngine;
 import br.com.codecode.sonicinbox.enums.Orientation;
 import br.com.codecode.sonicinbox.interfaces.Physicable;
 import br.com.codecode.sonicinbox.motion.Sonic;
@@ -1181,17 +1180,8 @@ public final class FrameAnimation extends JFrame implements Runnable, Observer {
 		doControlButtons(sonic.isAi(), btns);	    	
 	    
 	    	doRefreshComponents();
-
-	    try {
-
-		Thread.sleep(ConfigEngine.FPS.getValue());
-
-	    } catch (InterruptedException ex) {
-
-		throw new RuntimeException(ex);
-	    }
-
 	}
+	   
     }
 
     @Override

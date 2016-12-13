@@ -26,7 +26,6 @@ import javax.swing.WindowConstants;
 import br.com.codecode.sonicinbox.engine.Engine;
 import br.com.codecode.sonicinbox.engine.Music;
 import br.com.codecode.sonicinbox.enums.Action;
-import br.com.codecode.sonicinbox.enums.ConfigEngine;
 import br.com.codecode.sonicinbox.interfaces.Physicable;
 import br.com.codecode.sonicinbox.motion.Sonic;
 import br.com.codecode.sonicinbox.util.Size;
@@ -393,7 +392,7 @@ public final class FrameAction extends JFrame implements Runnable, Observer {
 
 	JButton[] btns = { btnAccelerate, btnBrake };
 
-	while (true) {
+	while (this.isVisible()) {
 
 	    if (sonic != null)		
 
@@ -402,16 +401,7 @@ public final class FrameAction extends JFrame implements Runnable, Observer {
 	    	doRefreshComponent();
 
 	    	doControlButtons(sonic.isAi(), btns);
-
-	    try {
-
-		Thread.sleep(ConfigEngine.FPS.getValue());
-
-	    } catch (InterruptedException ex) {
-
-		throw new RuntimeException(ex);
-
-	    }
+	   
 	}
     }
 
