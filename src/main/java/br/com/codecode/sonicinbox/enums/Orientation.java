@@ -8,5 +8,5 @@ package br.com.codecode.sonicinbox.enums;
  * @version 1.0
  */
 public enum Orientation {
-	RIGHT, LEFT;
+    RIGHT, LEFT;
 }

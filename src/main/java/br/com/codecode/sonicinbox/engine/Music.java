@@ -12,107 +12,106 @@ import br.com.codecode.sonicinbox.Start;
 
 public final class Music implements Runnable {
 
-	@SuppressWarnings("unused")
-	private final String MUSIC_TITLE_SCREEN = "title-screen.mid";
-	@SuppressWarnings("unused")
-	private final String MUSIC_AQUATIC_RUIN_ZONE = "aquatic-ruin-zone-2-.mid";
-	@SuppressWarnings("unused")
-	private final String MUSIC_FINAL_BOSS = "final-boss.mid";
+    @SuppressWarnings("unused")
+    private final String MUSIC_TITLE_SCREEN = "title-screen.mid";
 
-	private final String MUSIC_CHEMICAL_PLANT = "chemical-plant-zone-13-.mid";
+    @SuppressWarnings("unused")
+    private final String MUSIC_AQUATIC_RUIN_ZONE = "aquatic-ruin-zone-2-.mid";
 
-	private boolean on;
+    @SuppressWarnings("unused")
+    private final String MUSIC_FINAL_BOSS = "final-boss.mid";
 
-	private Sequencer player;
+    private final String MUSIC_CHEMICAL_PLANT = "chemical-plant-zone-13-.mid";
 
-	private Thread thread;    
+    private boolean on;
 
-	private String currentURL;
+    private Sequencer player;
 
-	private Music() {
+    private Thread thread;
 
-		thread = new Thread(Start.tgrpEngine, this, "Music Thread");
+    private String currentURL;
 
-		thread.setPriority(Thread.MIN_PRIORITY);		
+    private Music() {
 
-		on = true;
-	}
-	
-	public Music(String from){
-		this();
-		this.currentURL = from;
-	}
+	thread = new Thread(Start.tgrpEngine, this, "Music Thread");
 
+	thread.setPriority(Thread.MIN_PRIORITY);
 
-	public void doPlayMidi(String from, int loop) {
+	on = true;
+    }
 
-		Sequence midi = null;
+    public Music(String from) {
+	this();
+	this.currentURL = from;
+    }
 
-		try {
+    public void doPlayMidi(String from, int loop) {
 
-			player = MidiSystem.getSequencer();
+	Sequence midi = null;
 
-			midi = MidiSystem.getSequence(ClassLoader.class.getResourceAsStream(from));
+	try {
 
-			player.open();
+	    player = MidiSystem.getSequencer();
 
-			player.setSequence(midi);
+	    midi = MidiSystem.getSequence(ClassLoader.class.getResourceAsStream(from));
 
-		} catch (MidiUnavailableException | InvalidMidiDataException | IOException e) {
+	    player.open();
 
-			e.printStackTrace();
-		}
+	    player.setSequence(midi);
 
-		player.setLoopCount(loop);
+	} catch (MidiUnavailableException | InvalidMidiDataException | IOException e) {
 
-		player.start();
-
+	    e.printStackTrace();
 	}
 
-	public void resume() {
-		if (player.isOpen() && player.isRunning()) {
-			player.stop();
+	player.setLoopCount(loop);
 
-		} else if (player.isOpen() && !player.isRunning()) {
-			player.start();
-		}
+	player.start();
+
+    }
+
+    public void resume() {
+
+	if (player.isOpen() && player.isRunning()) {
+	    player.stop();
+
+	} else if (player.isOpen() && !player.isRunning()) {
+	    player.start();
+	}
+    }
+
+    public boolean isOn() {
+
+	return on;
+    }
+
+    public void setOn(boolean on) {
+
+	this.on = on;
+
+	if (this.on) {
+
+	    player.start();
+
+	} else {
+
+	    player.stop();
+	}
+    }
+
+    @Override
+    public void run() {
+
+	doPlayMidi(currentURL + MUSIC_CHEMICAL_PLANT, 100);
+
+	try {
+
+	    Thread.sleep(1000);
+
+	} catch (InterruptedException ex) {
+
+	    throw new RuntimeException(ex);
 	}
 
-	public boolean isOn() {
-		return on;
-	}
-
-	public void setOn(boolean on) {
-
-		this.on = on;
-
-		if (this.on) {
-
-			player.start();
-
-		} else {
-
-			player.stop();
-		}
-	}    
-
-
-	@Override
-	public void run() {
-
-		doPlayMidi(currentURL + MUSIC_CHEMICAL_PLANT, 100);
-
-		try {
-
-			Thread.sleep(1000);               
-
-		} catch (InterruptedException ex) {
-
-			throw new RuntimeException(ex);
-		}
-
-	}
+    }
 }
-
-
-

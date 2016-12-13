@@ -12,75 +12,74 @@ import br.com.codecode.sonicinbox.enums.ConfigSonic;
 
 public final class Sprites implements Runnable {
 
-	public final String filePattern = "sprite_%s.png";
+    public final String filePattern = "sprite_%s.png";
 
-	private ImageIcon[] frames;   
+    private ImageIcon[] frames;
 
-	private JProgressBar progressBar = new JProgressBar(0, ConfigSonic.MAX_SPRITES.getValue() -1);
+    private JProgressBar progressBar = new JProgressBar(0, ConfigSonic.MAX_SPRITES.getValue() - 1);
 
-	private String from;
-	
-	private Sprites(){};
+    private String from;
 
-	public Sprites(String from) {	
-		
-		this();
-		
-		this.from = from;
+    private Sprites() {
+    };
 
-		System.out.println("Resource Sprites : " + from);
+    public Sprites(String from) {
 
-		System.out.println("");
+	this();
 
-		
-	}
+	this.from = from;
 
-	private void doLoadSprites(String from) {
+	System.out.println("Resource Sprites : " + from);
 
-		DecimalFormat df = new DecimalFormat("0.##");
+	System.out.println("");
 
-		frames = new ImageIcon[ConfigSonic.MAX_SPRITES.getValue()];
+    }
 
-		for (int c = 0; c < frames.length; c++) {
+    private void doLoadSprites(String from) {
 
-			progressBar.setValue(c);
+	DecimalFormat df = new DecimalFormat("0.##");
 
-			try {
+	frames = new ImageIcon[ConfigSonic.MAX_SPRITES.getValue()];
 
-				frames[c] = new ImageIcon(ImageIO.read(
-						ClassLoader.class.getResourceAsStream(
-								String.format(from + filePattern, String.valueOf(c)))));
-						
+	for (int c = 0; c < frames.length; c++) {
 
-			} catch (IOException ex) {
+	    progressBar.setValue(c);
 
-				throw new RuntimeException(ex);
-			}
+	    try {
 
-			System.out.println("Download Sprite (" + progressBar.getValue() + "/" + progressBar.getMaximum() +")");  
+		frames[c] = new ImageIcon(ImageIO.read(
+			ClassLoader.class.getResourceAsStream(String.format(from + filePattern, String.valueOf(c)))));
 
-			System.out.println(df.format(progressBar.getPercentComplete() * 100)  + "%");
+	    } catch (IOException ex) {
 
-			System.out.println(String.format(from + filePattern, String.valueOf(c)));
+		throw new RuntimeException(ex);
+	    }
 
-			System.out.println("");
+	    System.out.println("Download Sprite (" + progressBar.getValue() + "/" + progressBar.getMaximum() + ")");
 
-		}
+	    System.out.println(df.format(progressBar.getPercentComplete() * 100) + "%");
 
-		System.out.println("End Download");
-		
-		System.out.println("");
+	    System.out.println(String.format(from + filePattern, String.valueOf(c)));
+
+	    System.out.println("");
 
 	}
 
-	public Image getImage(int index) {
-		return frames[index].getImage();
-	}
+	System.out.println("End Download");
 
-	@Override
-	public void run() {
-		doLoadSprites(from);		
-	}
+	System.out.println("");
 
+    }
+
+    public Image getImage(int index) {
+
+	return frames[index].getImage();
+    }
+
+    @Override
+    public void run() {
+
+	doLoadSprites(from);
+    }
 
 }

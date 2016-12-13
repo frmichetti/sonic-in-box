@@ -1,26 +1,25 @@
 package br.com.codecode.sonicinbox.util;
 
-
 public abstract class SignBoard implements Runnable {
 
     private static StringBuffer stringBuffer;
 
     public static void substring(String s) throws InterruptedException {
 
-        stringBuffer = new StringBuffer(s.length());
-        
-        stringBuffer.append(s);
+	stringBuffer = new StringBuffer(s.length());
 
-        for (int i = 0; i < stringBuffer.length(); i++) {
+	stringBuffer.append(s);
 
-            s = stringBuffer.substring(i);
+	for (int i = 0; i < stringBuffer.length(); i++) {
 
-            System.out.println(s);
+	    s = stringBuffer.substring(i);
 
-            Thread.sleep(1000);
+	    System.out.println(s);
 
-            System.out.println(s);
-        }
+	    Thread.sleep(1000);
+
+	    System.out.println(s);
+	}
 
     }
 

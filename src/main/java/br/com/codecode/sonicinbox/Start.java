@@ -12,75 +12,76 @@ import br.com.codecode.sonicinbox.engine.Engine;
 
 public final class Start {
 
-	public static ThreadGroup tgrpEngine, tgrpSonic;
+    public static ThreadGroup tgrpEngine, tgrpSonic;
 
-	private Thread t;
+    private Thread t;
 
-	public Start() {
+    public Start() {
 
-		tgrpEngine = new ThreadGroup("Engine Threads");
+	tgrpEngine = new ThreadGroup("Engine Threads");
 
-		tgrpSonic = new ThreadGroup(tgrpEngine, "Sonic Threads");
+	tgrpSonic = new ThreadGroup(tgrpEngine, "Sonic Threads");
 
-		tgrpEngine.setMaxPriority(Thread.NORM_PRIORITY);
+	tgrpEngine.setMaxPriority(Thread.NORM_PRIORITY);
 
-		tgrpSonic.setMaxPriority(Thread.MAX_PRIORITY);
+	tgrpSonic.setMaxPriority(Thread.MAX_PRIORITY);
 
-		t = Thread.currentThread();
+	t = Thread.currentThread();
 
-		t.setName("Thread Sonic In Box");
+	t.setName("Thread Sonic In Box");
 
-		doChangeTheme();
+	doChangeTheme();
 
-		doCreateFrame();
+	doCreateFrame();
 
-	}
+    }
 
-	private void doChangeTheme() {
+    private void doChangeTheme() {
 
-		try {			
-			
-			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {				
+	try {
 
-				if ("Nimbus".equals(info.getName())) {
-					UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
+	    for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| javax.swing.UnsupportedLookAndFeelException ex) {
-
-			throw new RuntimeException(ex);
-
+		if ("Nimbus".equals(info.getName())) {
+		    UIManager.setLookAndFeel(info.getClassName());
+		    break;
 		}
+	    }
+
+	} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+		| javax.swing.UnsupportedLookAndFeelException ex) {
+
+	    throw new RuntimeException(ex);
 
 	}
 
-	public void doCreateFrame() {		
+    }
 
-		try {
-			
-			SwingUtilities.invokeAndWait(() -> {
-				
-				Engine e = new Engine();
+    public void doCreateFrame() {
 
-				new FrameAnimation(e);
+	try {
 
-				new FrameAction(e);
+	    SwingUtilities.invokeAndWait(() -> {
 
-				new FrameListener(e);
+		Engine e = new Engine();
 
-			});
-		} catch (InvocationTargetException | InterruptedException ex) {
+		new FrameAnimation(e);
 
-			throw new RuntimeException(ex);
-		}
+		new FrameAction(e);
 
+		new FrameListener(e);
+
+	    });
+	} catch (InvocationTargetException | InterruptedException ex) {
+
+	    throw new RuntimeException(ex);
 	}
 
-	public static void main(String... args) {
-		new Start();
-	}
+    }
+
+    public static void main(String... args) {
+
+	new Start();
+    }
 
 }

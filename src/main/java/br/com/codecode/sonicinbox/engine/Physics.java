@@ -8,121 +8,123 @@ import java.util.Observer;
 import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.enums.ConfigPhysics;
 import br.com.codecode.sonicinbox.interfaces.Physicable;
+
 /**
  * This Class Apply Physics on Physicable Characters
+ * 
  * @author felipe
  * @see Physicable
  * @see Observable
  * @see Runnable
- * @see Observer  
+ * @see Observer
  * @since 1.0
  * @version 1.1
  */
 public final class Physics extends Observable implements Runnable, Observer {
 
-	private final float gravity = ConfigPhysics.GRAVITY.getValue();
+    private final float gravity = ConfigPhysics.GRAVITY.getValue();
 
-	private boolean on;
+    private boolean on;
 
-	protected Thread thread;	
-	
-	private Physicable physicable;
+    protected Thread thread;
 
-	private Physics() {
+    private Physicable physicable;
 
-		thread = new Thread(Start.tgrpEngine, this, "Physics Thread");
+    private Physics() {
 
-		addObserver(this);
+	thread = new Thread(Start.tgrpEngine, this, "Physics Thread");
 
-	}
+	addObserver(this);
 
-	public Physics(Physicable physicable,boolean on) {
+    }
 
-		this();		
-		
-		this.physicable = physicable;
-		
-		this.on = on;
-	}
+    public Physics(Physicable physicable, boolean on) {
 
-	private float doCalculateSpeed(float acceleration, float mass) {
+	this();
 
-		float res;
+	this.physicable = physicable;
 
-		res = acceleration * mass;
+	this.on = on;
+    }
 
-		setChanged();
+    private float doCalculateSpeed(float acceleration, float mass) {
 
-		notifyObservers(res);
+	float res;
 
-		return res;
-	}
+	res = acceleration * mass;
 
-	public void doApplyPhysics(Physicable physicable) {
-		
-		doCalculateSpeed(physicable.getAcceleration(), physicable.getMass());
+	setChanged();
 
-		if (physicable.getSpeed() > 0 && physicable.getSpeed() < 60) {
+	notifyObservers(res);
 
-			physicable.setAcceleration((int) (physicable.getAcceleration() - (physicable.getResistance() / 10)));
+	return res;
+    }
 
-		} else if (physicable.getSpeed() > 60 && physicable.getSpeed() < 100) {
+    public void doApplyPhysics(Physicable physicable) {
 
-			physicable.setAcceleration((int) (physicable.getAcceleration() - (physicable.getResistance() / 3)));
+	doCalculateSpeed(physicable.getAcceleration(), physicable.getMass());
 
-		} else if (physicable.getSpeed() > 100 && physicable.getSpeed() < 160) {
+	if (physicable.getSpeed() > 0 && physicable.getSpeed() < 60) {
 
-			physicable.setAcceleration((int) (physicable.getAcceleration() - (physicable.getResistance() / 2)));
+	    physicable.setAcceleration((int) (physicable.getAcceleration() - (physicable.getResistance() / 10)));
 
-		} else if (physicable.getSpeed() > 160) {
+	} else if (physicable.getSpeed() > 60 && physicable.getSpeed() < 100) {
 
-			physicable.setAcceleration((int) (physicable.getAcceleration() - physicable.getResistance()));
+	    physicable.setAcceleration((int) (physicable.getAcceleration() - (physicable.getResistance() / 3)));
 
-		}
+	} else if (physicable.getSpeed() > 100 && physicable.getSpeed() < 160) {
+
+	    physicable.setAcceleration((int) (physicable.getAcceleration() - (physicable.getResistance() / 2)));
+
+	} else if (physicable.getSpeed() > 160) {
+
+	    physicable.setAcceleration((int) (physicable.getAcceleration() - physicable.getResistance()));
 
 	}
 
-	public float getGravity() {
-		return gravity;
+    }
+
+    public float getGravity() {
+
+	return gravity;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
+	physicable.setSpeed((float) arg);
+    }
+
+    public boolean isOn() {
+
+	return on;
+    }
+
+    public void setOn(boolean on) {
+
+	this.on = on;
+    }
+
+    @Override
+    public void run() {
+
+	while (isOn()) {
+
+	    if (physicable != null)
+
+		doApplyPhysics(physicable);
+
+	    try {
+
+		Thread.sleep(FPS.getValue());
+
+	    } catch (InterruptedException ex) {
+
+		throw new RuntimeException(ex);
+	    }
+
 	}
 
-	
-
-	@Override
-	public void update(Observable o, Object arg) {
-		physicable.setSpeed((float) arg);
-	}
-
-	public boolean isOn() {
-		return on;
-	}
-
-	public void setOn(boolean on) {
-		this.on = on;
-	}
-
-
-	@Override
-	public void run() {
-
-		while (isOn()) {
-			
-			if(physicable != null)			
-
-			doApplyPhysics(physicable);			
-
-			try {
-				
-				Thread.sleep(FPS.getValue());
-
-			} catch (InterruptedException ex) {
-
-				throw new RuntimeException(ex);
-			}
-
-		}
-
-	}
-
+    }
 
 }

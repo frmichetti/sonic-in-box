@@ -10,214 +10,218 @@ import br.com.codecode.sonicinbox.enums.ConfigEngine;
 import br.com.codecode.sonicinbox.enums.Orientation;
 import br.com.codecode.sonicinbox.motion.Sonic;
 
-public final class EventListener implements KeyListener, Runnable {	
+public final class EventListener implements KeyListener, Runnable {
 
-	private boolean on;
+    private boolean on;
 
-	protected Thread thread;
+    protected Thread thread;
 
-	private Sonic sonic;
-	
-	private StringBuffer lastkeypress;
+    private Sonic sonic;
 
-	private EventListener() {
+    private StringBuffer lastkeypress;
 
-		thread = new Thread(Start.tgrpEngine, this, "EventListener Thread");
+    private EventListener() {
 
-	}
+	thread = new Thread(Start.tgrpEngine, this, "EventListener Thread");
 
-	public EventListener(Engine engine, boolean on) {
-		this();		
-		this.sonic = engine.sonic;
-		this.lastkeypress = engine.lastkeypress;		
-		this.on = on;
-	}
+    }
 
-	@Override
-	public void keyTyped(KeyEvent e){}
+    public EventListener(Engine engine, boolean on) {
+	this();
+	this.sonic = engine.sonic;
+	this.lastkeypress = engine.lastkeypress;
+	this.on = on;
+    }
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		
-		if(sonic != null)
+    @Override
+    public void keyTyped(KeyEvent e) {
 
-		if (sonic.isAi()) {
+    }
 
-			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+    @Override
+    public void keyPressed(KeyEvent e) {
 
-				if (sonic.isSuperSonic()) {
+	if (sonic != null)
 
-					sonic.setSuperSonic(false);
+	    if (sonic.isAi()) {
 
-				} else {
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 
-					sonic.setSuperSonic(true);
-				}
+		    if (sonic.isSuperSonic()) {
 
-			}
-			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-				
-				lastkeypress.delete(0, 30);
-				
-				lastkeypress.append("RIGHT");			
-				
-				FrameAction.btnRight.setVisible(false);
-				
-				delay();
+			sonic.setSuperSonic(false);
 
-				if (sonic.getAction() == Action.STOP && sonic.getOrientation() == Orientation.LEFT) {
-				
-					sonic.setOrientation(Orientation.RIGHT);
-					
-					sonic.doSpeedUp();
-					
-				} else if (sonic.getAction() == Action.MOVE && sonic.getOrientation() != Orientation.RIGHT) {
+		    } else {
 
-					sonic.doBrakeUp();
+			sonic.setSuperSonic(true);
+		    }
 
-				} else {
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 
-					sonic.doSpeedUp();
-				}
+		    lastkeypress.delete(0, 30);
 
-			}
+		    lastkeypress.append("RIGHT");
 
-			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-								
-				lastkeypress.delete(0, 30);
-				
-				lastkeypress.append("LEFT");
-				
-				FrameAction.btnLeft.setVisible(false);
+		    FrameAction.btnRight.setVisible(false);
 
-				delay();
-				
-				if (sonic.getAction() == Action.STOP && sonic.getOrientation() == Orientation.RIGHT) {
-				
-					sonic.setOrientation(Orientation.LEFT);
-					
-					sonic.doSpeedUp();
-					
-				} else if (sonic.getAction() == Action.MOVE && sonic.getOrientation() != Orientation.LEFT) {
+		    delay();
 
-					sonic.doBrakeUp();
+		    if (sonic.getAction() == Action.STOP && sonic.getOrientation() == Orientation.LEFT) {
 
-				} else {
+			sonic.setOrientation(Orientation.RIGHT);
 
-					sonic.doSpeedUp();
-				}
+			sonic.doSpeedUp();
 
-			}
-			if (e.getKeyCode() == KeyEvent.VK_UP) {
-				
-				lastkeypress.delete(0, 30);
-				
-				lastkeypress.append("UP");
-				
-				FrameAction.btnUp.setVisible(false);
-				
-				if (sonic.getSpeed() == 0) {
-				
-					sonic.setAction(Action.LOOK);
-					
-					sonic.setAction(Action.LOOKING);
-				}
+		    } else if (sonic.getAction() == Action.MOVE && sonic.getOrientation() != Orientation.RIGHT) {
 
-			}
+			sonic.doBrakeUp();
 
-			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-								
-				lastkeypress.delete(0, 30);
-				
-				lastkeypress.append("DOWN");
-				
-				FrameAction.btnDown.setVisible(false);
-				
-				if (sonic.getSpeed() == 0) {
-					
-					sonic.setAction(Action.DOWN);
-					
-					sonic.setAction(Action.DOWNED);
-					
-				} else {
-					
-					sonic.doSpin(sonic.getAnimeSpeed());
-				}
+		    } else {
 
-			}
+			sonic.doSpeedUp();
+		    }
 
 		}
 
-	}
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		
-		if(sonic != null)
-			
-		if (sonic.isAi()) {
-			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-				lastkeypress.delete(0, lastkeypress.length());
-				FrameAction.btnRight.setVisible(true);
+		    lastkeypress.delete(0, 30);
 
-			}
+		    lastkeypress.append("LEFT");
 
-			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-				lastkeypress.delete(0, lastkeypress.length());
-				FrameAction.btnLeft.setVisible(true);
+		    FrameAction.btnLeft.setVisible(false);
 
-			}
+		    delay();
 
-			if (e.getKeyCode() == KeyEvent.VK_UP) {
-				lastkeypress.delete(0, lastkeypress.length());
-				FrameAction.btnUp.setVisible(true);
-				sonic.doStop();
+		    if (sonic.getAction() == Action.STOP && sonic.getOrientation() == Orientation.RIGHT) {
 
-			}
+			sonic.setOrientation(Orientation.LEFT);
 
-			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-				lastkeypress.delete(0, lastkeypress.length());
-				FrameAction.btnDown.setVisible(true);
-				sonic.doStop();
+			sonic.doSpeedUp();
 
-			}
-		}
+		    } else if (sonic.getAction() == Action.MOVE && sonic.getOrientation() != Orientation.LEFT) {
 
-	}
+			sonic.doBrakeUp();
 
-	public boolean isOn() {
-		return on;
-	}
+		    } else {
 
-	public void setOn(boolean on) {
-		this.on = on;
-	}
-
-	private void delay() {
-		int i = 0;
-
-		if (sonic.getSpeed() == 0) {
-
-			do {
-				i++;
-			} while (i < 7_000);
+			sonic.doSpeedUp();
+		    }
 
 		}
-	}   
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
 
+		    lastkeypress.delete(0, 30);
 
-	@Override
-	public void run() {
-		while (true) {
-			try {
-				Thread.sleep(ConfigEngine.FPS.getValue());
+		    lastkeypress.append("UP");
 
-			} catch (InterruptedException ex) {
-				throw new RuntimeException(ex);
-			}
+		    FrameAction.btnUp.setVisible(false);
+
+		    if (sonic.getSpeed() == 0) {
+
+			sonic.setAction(Action.LOOK);
+
+			sonic.setAction(Action.LOOKING);
+		    }
 
 		}
-	}
 
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+
+		    lastkeypress.delete(0, 30);
+
+		    lastkeypress.append("DOWN");
+
+		    FrameAction.btnDown.setVisible(false);
+
+		    if (sonic.getSpeed() == 0) {
+
+			sonic.setAction(Action.DOWN);
+
+			sonic.setAction(Action.DOWNED);
+
+		    } else {
+
+			sonic.doSpin(sonic.getAnimeSpeed());
+		    }
+
+		}
+
+	    }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+	if (sonic != null)
+
+	    if (sonic.isAi()) {
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		    lastkeypress.delete(0, lastkeypress.length());
+		    FrameAction.btnRight.setVisible(true);
+
+		}
+
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		    lastkeypress.delete(0, lastkeypress.length());
+		    FrameAction.btnLeft.setVisible(true);
+
+		}
+
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+		    lastkeypress.delete(0, lastkeypress.length());
+		    FrameAction.btnUp.setVisible(true);
+		    sonic.doStop();
+
+		}
+
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+		    lastkeypress.delete(0, lastkeypress.length());
+		    FrameAction.btnDown.setVisible(true);
+		    sonic.doStop();
+
+		}
+	    }
+
+    }
+
+    public boolean isOn() {
+
+	return on;
+    }
+
+    public void setOn(boolean on) {
+
+	this.on = on;
+    }
+
+    private void delay() {
+
+	int i = 0;
+
+	if (sonic.getSpeed() == 0) {
+
+	    do {
+		i++;
+	    } while (i < 7_000);
+
+	}
+    }
+
+    @Override
+    public void run() {
+
+	while (true) {
+	    try {
+		Thread.sleep(ConfigEngine.FPS.getValue());
+
+	    } catch (InterruptedException ex) {
+		throw new RuntimeException(ex);
+	    }
+
+	}
+    }
 
 }
