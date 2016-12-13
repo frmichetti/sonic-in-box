@@ -12,11 +12,12 @@ import javax.swing.JFrame;
 import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.enums.ConfigEngine;
 import br.com.codecode.sonicinbox.enums.Orientation;
+import br.com.codecode.sonicinbox.interfaces.Syncronizeable;
 import br.com.codecode.sonicinbox.motion.Sonic;
 import br.com.codecode.sonicinbox.util.MyPath;
 import br.com.codecode.sonicinbox.util.Size;
 
-public final class Engine extends JFrame implements Runnable {
+public final class Engine extends JFrame implements Runnable, Syncronizeable {
 
     private static final long serialVersionUID = -5571398930053263036L;
 
@@ -24,9 +25,7 @@ public final class Engine extends JFrame implements Runnable {
 
     private Graphics2D bbg2d;
 
-    private EventListener eventListener;
-    
-    private final int FPS = ConfigEngine.FPS.getValue();
+    private EventListener eventListener;    
 
     private Graphics g, bbg;
 

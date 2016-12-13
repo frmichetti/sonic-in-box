@@ -1,6 +1,5 @@
 package br.com.codecode.sonicinbox.motion;
 
-import static br.com.codecode.sonicinbox.enums.ConfigEngine.FPS;
 import static br.com.codecode.sonicinbox.enums.SonicIndex.BREAKUP;
 import static br.com.codecode.sonicinbox.enums.SonicIndex.DASH;
 import static br.com.codecode.sonicinbox.enums.SonicIndex.DOWN;
@@ -24,8 +23,9 @@ import static br.com.codecode.sonicinbox.enums.SuperSonicIndex.SS_WALK;
 import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.enums.Action;
 import br.com.codecode.sonicinbox.interfaces.Animated;
+import br.com.codecode.sonicinbox.interfaces.Syncronizeable;
 
-public class Animation implements Runnable {
+public class Animation implements Runnable, Syncronizeable {
 
     private int animeSpeed;
 
@@ -320,7 +320,7 @@ public class Animation implements Runnable {
 
 	    try {
 
-		Thread.sleep(FPS.getValue());
+		Thread.sleep(FPS);
 
 	    } catch (InterruptedException ex) {
 		throw new RuntimeException(ex);

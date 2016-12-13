@@ -9,13 +9,13 @@ import java.util.concurrent.TimeUnit;
 
 import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.enums.Action;
-import br.com.codecode.sonicinbox.enums.ConfigEngine;
 import br.com.codecode.sonicinbox.enums.ConfigSonic;
 import br.com.codecode.sonicinbox.enums.ConfigSuperSonic;
 import br.com.codecode.sonicinbox.enums.Orientation;
 import br.com.codecode.sonicinbox.interfaces.Animated;
 import br.com.codecode.sonicinbox.interfaces.Moveable;
 import br.com.codecode.sonicinbox.interfaces.Physicable;
+import br.com.codecode.sonicinbox.interfaces.Syncronizeable;
 
 /**
  * Sonic Character
@@ -30,7 +30,7 @@ import br.com.codecode.sonicinbox.interfaces.Physicable;
  * @see Observer
  * @see Runnable
  */
-public final class Sonic extends Observable implements Animated, Moveable, Physicable, Observer, Runnable {
+public final class Sonic extends Observable implements Animated, Moveable, Physicable, Observer, Runnable, Syncronizeable {
 
     private float acceleration, mass, resistance, speed;
 
@@ -40,9 +40,7 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 
     private Animation animation;
 
-    private int animeSpeed;
-
-    private String from;
+    private int animationSpeed;    
 
     private Movimentation movimentation;
 
@@ -76,7 +74,7 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 
 	this.orientation = Orientation.RIGHT;
 
-	this.animeSpeed = 5;
+	this.animationSpeed = 5;
 
 	this.action = Action.STOP;
 
@@ -89,9 +87,8 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
     public Sonic(String from, boolean ai) {
 	this();
 	this.ai = ai;
-	this.from = from;
 
-	doLoadSprites();
+	doLoadSprites(from);
 
 	ExecutorService executor = Executors.newFixedThreadPool(2);
 
@@ -172,7 +169,7 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 	return this;
     }
 
-    private void doLoadSprites() {
+    private void doLoadSprites(String from) {
 
 	sprites = new Sprites(from);
 
@@ -339,7 +336,7 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
     @Override
     public int getAnimationSpeed() {
 
-	return animeSpeed;
+	return animationSpeed;
     }
 
     @Override
@@ -441,11 +438,11 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 	    {
 		try {
 
-		    Thread.sleep(ConfigEngine.FPS.getValue());
+		    Thread.sleep(FPS);
 
 		} catch (InterruptedException ex) {
 
-		    throw new RuntimeException("Failed to Stop " + thread.getName(), ex);
+		    throw new RuntimeException(ex);
 
 		}
 
@@ -455,12 +452,12 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
     }
 
     @Override
-    public void setAcceleration(float acceleration) {
+    public synchronized void setAcceleration(float acceleration) {
 
 	this.acceleration = acceleration;
     }
 
-    public void setAction(Action action) {
+    public synchronized void setAction(Action action) {
 
 	this.action = action;
     }
@@ -823,9 +820,9 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
     }
 
     @Override
-    public void setAnimationSpeed(int animeSpeed) {
+    public void setAnimationSpeed(int animationSpeed) {
 
-	this.animeSpeed = animeSpeed;
+	this.animationSpeed = animationSpeed;
     }
 
     public void setH(int H) {
@@ -894,7 +891,7 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 
 	try {
 
-	    Thread.sleep(ConfigEngine.FPS.getValue());
+	    Thread.sleep(FPS);
 
 	} catch (InterruptedException ex) {
 

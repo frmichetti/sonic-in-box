@@ -2,11 +2,11 @@ package br.com.codecode.sonicinbox.motion;
 
 import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.enums.Action;
-import br.com.codecode.sonicinbox.enums.ConfigEngine;
 import br.com.codecode.sonicinbox.enums.Orientation;
 import br.com.codecode.sonicinbox.interfaces.Moveable;
+import br.com.codecode.sonicinbox.interfaces.Syncronizeable;
 
-public class Movimentation implements Runnable {
+public class Movimentation implements Runnable, Syncronizeable {
 
     protected Thread thread;
 
@@ -147,7 +147,7 @@ public class Movimentation implements Runnable {
 
 	    try {
 
-		Thread.sleep(ConfigEngine.FPS.getValue());
+		Thread.sleep(FPS);
 
 	    } catch (InterruptedException ex) {
 		throw new RuntimeException(ex);

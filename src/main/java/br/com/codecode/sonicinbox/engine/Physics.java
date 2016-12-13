@@ -1,13 +1,12 @@
 package br.com.codecode.sonicinbox.engine;
 
-import static br.com.codecode.sonicinbox.enums.ConfigEngine.FPS;
-
 import java.util.Observable;
 import java.util.Observer;
 
 import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.enums.ConfigPhysics;
 import br.com.codecode.sonicinbox.interfaces.Physicable;
+import br.com.codecode.sonicinbox.interfaces.Syncronizeable;
 
 /**
  * This Class Apply Physics on Physicable Characters
@@ -20,7 +19,7 @@ import br.com.codecode.sonicinbox.interfaces.Physicable;
  * @since 1.0
  * @version 1.1
  */
-public final class Physics extends Observable implements Runnable, Observer {
+public final class Physics extends Observable implements Runnable, Observer , Syncronizeable{
 
     private final float gravity = ConfigPhysics.GRAVITY.getValue();
 
@@ -116,7 +115,7 @@ public final class Physics extends Observable implements Runnable, Observer {
 
 	    try {
 
-		Thread.sleep(FPS.getValue());
+		Thread.sleep(FPS);
 
 	    } catch (InterruptedException ex) {
 
