@@ -4,118 +4,135 @@ import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.enums.Action;
 import br.com.codecode.sonicinbox.enums.ConfigEngine;
 import br.com.codecode.sonicinbox.enums.Orientation;
+import br.com.codecode.sonicinbox.interfaces.Moveable;
 
 public class Movimentation implements Runnable {
 
-    private Thread t;
+    protected Thread thread;
 
-    private Sonic sonic;
+    private Moveable moveable;
 
     private Movimentation() {
-	t = new Thread(Start.tgrpSonic, this, "Movimentation Thread");
+	thread = new Thread(Start.tgrpSonic, this, "Movimentation Thread");
     }
 
-    public Movimentation(Sonic sonic) {
+    public Movimentation(Moveable moveable) {
 	this();
-	this.sonic = sonic;
+	this.moveable = moveable;
     }
 
     private void doLimitScreen() {
 
-	if (sonic.getX() <= -140) {
+	if (moveable.getX() <= -140) {
 
-	    sonic.setX(900);
+	    moveable.setX(900);
 
-	} else if (sonic.getX() >= 900) {
+	} else if (moveable.getX() >= 900) {
 
-	    sonic.setX(-150);
+	    moveable.setX(-150);
 	}
     }
 
-    private void doMove(Sonic sonic) {
-
-	if (sonic.getAction() == Action.STOP) {
-
-	} else {
-	    int i = 1;
-
-	    if (sonic.getOrientation() == Orientation.RIGHT) {
-		i = 1;
-
-	    } else {
-		i = (i * (-1));
-
-	    }
-
-	    if (sonic.isAi() && sonic.getAcceleration() > 1) {
-
-		if (sonic.getSpeed() > 20 && sonic.getSpeed() < 60) {
-
-		    sonic.setX(sonic.getX() + (5 * i));
-
-		} else if (sonic.getSpeed() > 60 && sonic.getSpeed() < 100) {
-
-		    sonic.setX(sonic.getX() + (10 * i));
-
-		} else if (sonic.getSpeed() > 100 && sonic.getSpeed() < 10_000) {
-
-		    sonic.setX(sonic.getX() + (15 * i));
-
-		} else if (sonic.getSpeed() > 10_000 && sonic.getSpeed() < 20_000) {
-
-		    sonic.setX(sonic.getX() + (16 * i));
-
-		} else if (sonic.getSpeed() > 20_000 && sonic.getSpeed() < 30_000) {
-
-		    sonic.setX(sonic.getX() + (17 * i));
-
-		} else if (sonic.getSpeed() > 30_000 && sonic.getSpeed() < 40_000) {
-
-		    sonic.setX(sonic.getX() + (17 * i));
-
-		} else if (sonic.getSpeed() > 40_000 && sonic.getSpeed() < 50_000) {
-
-		    sonic.setX(sonic.getX() + (18 * i));
-
-		} else if (sonic.getSpeed() > 50_000 && sonic.getSpeed() < 60_000) {
-
-		    sonic.setX(sonic.getX() + (18 * i));
-
-		} else if (sonic.getSpeed() > 60_000 && sonic.getSpeed() < 70_000) {
-
-		    sonic.setX(sonic.getX() + (19 * i));
-
-		} else if (sonic.getSpeed() > 70_000 && sonic.getSpeed() < 80_000) {
-
-		    sonic.setX(sonic.getX() + (20 * i));
-
-		} else if (sonic.getSpeed() > 80_000 && sonic.getSpeed() < 90_000) {
-
-		    sonic.setX(sonic.getX() + (21 * i));
-
-		} else if (sonic.getSpeed() > 90_000 && sonic.getSpeed() < 100_000) {
-
-		    sonic.setX(sonic.getX() + (21 * i));
-
-		} else if (sonic.getSpeed() > 100_000 && sonic.getSpeed() < 110_000) {
-
-		    sonic.setX(sonic.getX() + (22 * i));
-
-		} else if (sonic.getSpeed() > 110_000 && sonic.getSpeed() < 120_000) {
-
-		    sonic.setX(sonic.getX() + (23 * i));
-
-		} else if (sonic.getSpeed() > 120_000 && sonic.getSpeed() < 130_000) {
-
-		    sonic.setX(sonic.getX() + (24 * i));
+    private void doMove() {
+	
+	if(moveable instanceof Sonic){
+	    
+	    Sonic s = (Sonic) moveable;
+	    
+	    if (s.getAction() == Action.STOP) {
 
 		} else {
-		    sonic.setX(sonic.getX() + (25 * i));
-		}
+		    int i = 1;
 
-		doLimitScreen();
+		    if (s.getOrientation() == Orientation.RIGHT) {
+			i = 1;
 
-	    }
+		    } else {
+			i = (i * (-1));
+
+		    }
+
+		    if (s.isAi() && s.getAcceleration() > 1) {
+
+			if (s.getSpeed() > 20 && s.getSpeed() < 60) {
+
+			    s.setX(s.getX() + (5 * i));
+
+			} else if (s.getSpeed() > 60 && s.getSpeed() < 100) {
+
+			    s.setX(s.getX() + (10 * i));
+
+			} else if (s.getSpeed() > 100 && s.getSpeed() < 10_000) {
+
+			    s.setX(s.getX() + (15 * i));
+
+			} else if (s.getSpeed() > 10_000 && s.getSpeed() < 20_000) {
+
+			    s.setX(s.getX() + (16 * i));
+
+			} else if (s.getSpeed() > 20_000 && s.getSpeed() < 30_000) {
+
+			    s.setX(s.getX() + (17 * i));
+
+			} else if (s.getSpeed() > 30_000 && s.getSpeed() < 40_000) {
+
+			    s.setX(s.getX() + (17 * i));
+
+			} else if (s.getSpeed() > 40_000 && s.getSpeed() < 50_000) {
+
+			    s.setX(s.getX() + (18 * i));
+
+			} else if (s.getSpeed() > 50_000 && s.getSpeed() < 60_000) {
+
+			    s.setX(s.getX() + (18 * i));
+
+			} else if (s.getSpeed() > 60_000 && s.getSpeed() < 70_000) {
+
+			    s.setX(s.getX() + (19 * i));
+
+			} else if (s.getSpeed() > 70_000 && s.getSpeed() < 80_000) {
+
+			    s.setX(s.getX() + (20 * i));
+
+			} else if (s.getSpeed() > 80_000 && s.getSpeed() < 90_000) {
+
+			    s.setX(s.getX() + (21 * i));
+
+			} else if (s.getSpeed() > 90_000 && s.getSpeed() < 100_000) {
+
+			    s.setX(s.getX() + (21 * i));
+
+			} else if (s.getSpeed() > 100_000 && s.getSpeed() < 110_000) {
+
+			    s.setX(s.getX() + (22 * i));
+
+			} else if (s.getSpeed() > 110_000 && s.getSpeed() < 120_000) {
+
+			    s.setX(s.getX() + (23 * i));
+
+			} else if (s.getSpeed() > 120_000 && s.getSpeed() < 130_000) {
+
+			    s.setX(s.getX() + (24 * i));
+
+			} else {
+			    s.setX(s.getX() + (25 * i));
+			}	
+
+			doLimitScreen();
+
+		    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	}
+
+	
 	}
 
     }
@@ -125,15 +142,15 @@ public class Movimentation implements Runnable {
 
 	while (true) {
 
-	    if (sonic != null)
-		doMove(sonic);
+	    if (moveable != null)
+		doMove();
 
 	    try {
 
 		Thread.sleep(ConfigEngine.FPS.getValue());
 
 	    } catch (InterruptedException ex) {
-		throw new RuntimeException("Failed to Stop " + t.getName(), ex);
+		throw new RuntimeException(ex);
 	    }
 	}
 

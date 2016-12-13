@@ -50,9 +50,9 @@ public final class FrameListener extends JFrame implements Runnable, Observer {
 
     public FrameListener(Engine engine) {
 	this();
-	this.sonic = engine.sonic;
+	this.sonic = engine.getSonic();
 
-	super.addKeyListener(engine.event);
+	super.addKeyListener(engine.getEventListener());
 	this.sonic.addObserver(this);
     }
 

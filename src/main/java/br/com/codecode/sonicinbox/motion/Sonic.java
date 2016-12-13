@@ -13,6 +13,8 @@ import br.com.codecode.sonicinbox.enums.ConfigEngine;
 import br.com.codecode.sonicinbox.enums.ConfigSonic;
 import br.com.codecode.sonicinbox.enums.ConfigSuperSonic;
 import br.com.codecode.sonicinbox.enums.Orientation;
+import br.com.codecode.sonicinbox.interfaces.Animated;
+import br.com.codecode.sonicinbox.interfaces.Moveable;
 import br.com.codecode.sonicinbox.interfaces.Physicable;
 
 /**
@@ -22,11 +24,13 @@ import br.com.codecode.sonicinbox.interfaces.Physicable;
  * @since 1.0
  * @version 3.0
  * @see Observable
+ * @see Animated
+ * @see Moveable
  * @see Physicable
  * @see Observer
  * @see Runnable
  */
-public final class Sonic extends Observable implements Physicable, Observer, Runnable {
+public final class Sonic extends Observable implements Animated, Moveable, Physicable, Observer, Runnable {
 
     private float acceleration, mass, resistance, speed;
 
@@ -94,7 +98,7 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 	executor.execute(movimentation);
 
 	executor.execute(animation);
-	
+
 	executor.shutdown();
     }
 
@@ -230,7 +234,7 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
     public Sonic doRun(int speed) {
 
 	if (getAction() == Action.MOVE) {
-	    setAnimeSpeed(speed);
+	    setAnimationSpeed(speed);
 	    setChanged();
 	    notifyObservers(Action.RUN);
 	} else if (!isAi()) {
@@ -256,7 +260,7 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
     public Sonic doSpin(int speed) {
 
 	if (getAction() == Action.MOVE && getSpeed() > 100) {
-	    setAnimeSpeed(speed);
+	    setAnimationSpeed(speed);
 	    setChanged();
 	    notifyObservers(Action.SPIN);
 	} else if (!isAi()) {
@@ -309,7 +313,7 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
     public Sonic doWalk(int speed) {
 
 	if (getAction() == Action.MOVE) {
-	    setAnimeSpeed(speed);
+	    setAnimationSpeed(speed);
 	    setChanged();
 	    notifyObservers(Action.WALK);
 	} else if (!isAi()) {
@@ -326,21 +330,25 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 	return acceleration;
     }
 
-    public Enum<?> getAction() {
+    @Override
+    public Enum<? extends Action> getAction() {
 
 	return action;
     }
 
-    public int getAnimeSpeed() {
+    @Override
+    public int getAnimationSpeed() {
 
 	return animeSpeed;
     }
 
+    @Override
     public int getCurrentFrame() {
 
 	return animation.getCurrentFrame();
     }
 
+    @Override
     public int getFinalFrame() {
 
 	return animation.getFinalFrame();
@@ -356,6 +364,7 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 	return sprites.getImage(index);
     }
 
+    @Override
     public int getInitFrame() {
 
 	return animation.getInitFrame();
@@ -400,11 +409,13 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 	return W;
     }
 
+    @Override
     public int getX() {
 
 	return X;
     }
 
+    @Override
     public int getY() {
 
 	return Y;
@@ -465,11 +476,7 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 
 	    switch ((Action) getAction()) {
 
-		case STOP: {
-
-		    assert (getAction() != Action.MOVE) : "Parado com Velocidade > 0, Velocidade == " + getSpeed();
-		}
-		    break;
+		case STOP: {} break;
 
 		case WAIT: {
 
@@ -815,7 +822,8 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 
     }
 
-    public void setAnimeSpeed(int animeSpeed) {
+    @Override
+    public void setAnimationSpeed(int animeSpeed) {
 
 	this.animeSpeed = animeSpeed;
     }
@@ -851,7 +859,7 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
     public Sonic setSuperSonic(boolean superSonic) {
 
 	this.superSonic = superSonic;
-	
+
 	if (this.superSonic) {
 	    mass = ConfigSuperSonic.MASS.getValue();
 	    resistance = ConfigSuperSonic.RESISTENCE.getValue();
@@ -867,11 +875,13 @@ public final class Sonic extends Observable implements Physicable, Observer, Run
 	this.W = W;
     }
 
+    @Override
     public void setX(int X) {
 
 	this.X = X;
     }
 
+    @Override
     public void setY(int Y) {
 
 	this.Y = Y;

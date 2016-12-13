@@ -3,40 +3,30 @@ package br.com.codecode.sonicinbox.engine;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.console.FrameAction;
 import br.com.codecode.sonicinbox.enums.Action;
-import br.com.codecode.sonicinbox.enums.ConfigEngine;
 import br.com.codecode.sonicinbox.enums.Orientation;
 import br.com.codecode.sonicinbox.motion.Sonic;
 
-public final class EventListener implements KeyListener, Runnable {
+public final class EventListener implements KeyListener {
 
     private boolean on;
-
-    protected Thread thread;
 
     private Sonic sonic;
 
     private StringBuffer lastkeypress;
 
-    private EventListener() {
-
-	thread = new Thread(Start.tgrpEngine, this, "EventListener Thread");
-
-    }
+    private EventListener(){}
 
     public EventListener(Engine engine, boolean on) {
 	this();
-	this.sonic = engine.sonic;
-	this.lastkeypress = engine.lastkeypress;
+	this.sonic = engine.getSonic();
+	this.lastkeypress = engine.getLastkeypress();
 	this.on = on;
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -143,7 +133,7 @@ public final class EventListener implements KeyListener, Runnable {
 
 		    } else {
 
-			sonic.doSpin(sonic.getAnimeSpeed());
+			sonic.doSpin(sonic.getAnimationSpeed());
 		    }
 
 		}
@@ -209,19 +199,6 @@ public final class EventListener implements KeyListener, Runnable {
 
 	}
     }
-
-    @Override
-    public void run() {
-
-	while (true) {
-	    try {
-		Thread.sleep(ConfigEngine.FPS.getValue());
-
-	    } catch (InterruptedException ex) {
-		throw new RuntimeException(ex);
-	    }
-
-	}
-    }
+    
 
 }

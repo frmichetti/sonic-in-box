@@ -23,6 +23,7 @@ import static br.com.codecode.sonicinbox.enums.SuperSonicIndex.SS_WALK;
 
 import br.com.codecode.sonicinbox.Start;
 import br.com.codecode.sonicinbox.enums.Action;
+import br.com.codecode.sonicinbox.interfaces.Animated;
 
 public class Animation implements Runnable {
 
@@ -34,9 +35,9 @@ public class Animation implements Runnable {
 
     private int finalFrame;
 
-    private Thread thread;
+    protected Thread thread;
 
-    private Sonic sonic;
+    private Animated animated;
 
     private Animation() {
 
@@ -44,18 +45,18 @@ public class Animation implements Runnable {
 
     }
 
-    public Animation(Sonic sonic) {
+    public Animation(Animated animated) {
 	this();
-	this.sonic = sonic;
+	this.animated = animated;
     }
 
-    private void doChangeFrames(int initFrame, int finalFrame, int animeSpeed) {
+    private void doChangeFrames(int initFrame, int finalFrame, int animationSpeed) {
 
 	this.initFrame = initFrame;
 
 	this.finalFrame = finalFrame;
 
-	sonic.setAnimeSpeed(animeSpeed);
+	animated.setAnimationSpeed(animationSpeed);
 
 	if (this.currentFrame < initFrame) {
 	    this.currentFrame = initFrame;
@@ -63,13 +64,13 @@ public class Animation implements Runnable {
 
     }
 
-    private void doAnimate(Sonic sonic) {
+    private void doAnimate() {
 
 	doSwitchAction();
 
 	animeSpeed++;
 
-	if (animeSpeed > sonic.getAnimeSpeed()) {
+	if (animeSpeed > animated.getAnimationSpeed()) {
 
 	    currentFrame++;
 
@@ -85,179 +86,187 @@ public class Animation implements Runnable {
     }
 
     private void doSwitchAction() {
+	
+	if(animated instanceof Sonic){
+	    
+	    Sonic s = (Sonic) animated;
+	    
+	    switch ((Action) s.getAction()) {
 
-	switch ((Action) sonic.getAction()) {
+		    case STOP: {
 
-	    case STOP: {
+			if (s.isSuperSonic()) {
 
-		if (sonic.isSuperSonic()) {
+			    doChangeFrames(SS_STOP.getInit(), SS_STOP.getEnd(), (s.isAi() ? 5 : s.getAnimationSpeed()));
+			} else {
 
-		    doChangeFrames(SS_STOP.getInit(), SS_STOP.getEnd(), (sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
-		} else {
+			    doChangeFrames(STOP.getInit(), STOP.getEnd(), (s.isAi() ? 5 : s.getAnimationSpeed()));
 
-		    doChangeFrames(STOP.getInit(), STOP.getEnd(), (sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
+			}
+
+		    }
+			break;
+
+		    case WAIT: {
+
+			if (s.isSuperSonic()) {
+
+			    doChangeFrames(SS_WAIT.getInit(), SS_WAIT.getEnd(), (s.isAi() ? 5 : s.getAnimationSpeed()));
+			} else {
+
+			    doChangeFrames(WAIT.getInit(), WAIT.getEnd(), (s.isAi() ? 5 : s.getAnimationSpeed()));
+
+			}
+
+		    }
+			break;
+
+		    case DOWN: {
+
+			if (s.isSuperSonic()) {
+
+			} else {
+			    doChangeFrames(DOWN.getInit(), DOWN.getEnd(), (s.isAi() ? 5 : s.getAnimationSpeed()));
+			}
+
+		    }
+			break;
+
+		    case DOWNED: {
+
+			if (s.isSuperSonic()) {
+
+			    doChangeFrames(SS_DOWNED.getInit(), SS_DOWNED.getEnd(), (s.isAi() ? 5 : s.getAnimationSpeed()));
+
+			} else {
+
+			    doChangeFrames(DOWNED.getInit(), DOWNED.getEnd(), (s.isAi() ? 5 : s.getAnimationSpeed()));
+
+			}
+		    }
+			break;
+
+		    case LOOK: {
+
+			if (s.isSuperSonic()) {
+
+			} else {
+
+			    doChangeFrames(LOOK.getInit(), LOOK.getEnd(), (s.isAi() ? 5 : s.getAnimationSpeed()));
+			}
+
+		    }
+			break;
+
+		    case LOOKING: {
+
+			if (s.isSuperSonic()) {
+
+			} else {
+
+			    doChangeFrames(LOOKING.getInit(), LOOKING.getEnd(), (s.isAi() ? 5 : s.getAnimationSpeed()));
+
+			}
+
+		    }
+			break;
+
+		    case BRAKEUP: {
+
+			if (s.isSuperSonic()) {
+
+			} else {
+			    doChangeFrames(BREAKUP.getInit(), BREAKUP.getEnd(), (s.isAi() ? 7 : s.getAnimationSpeed()));
+			}
+
+		    }
+			break;
+
+		    case WALK: {
+			if (s.isSuperSonic()) {
+
+			    doChangeFrames(SS_WALK.getInit(), SS_WALK.getEnd(), s.getAnimationSpeed());
+
+			} else {
+
+			    doChangeFrames(WALK.getInit(), WALK.getEnd(), s.getAnimationSpeed());
+
+			}
+		    }
+			break;
+
+		    case RUN: {
+			if (s.isSuperSonic()) {
+
+			    doChangeFrames(SS_RUN.getInit(), SS_RUN.getEnd(), s.getAnimationSpeed());
+
+			} else {
+
+			    doChangeFrames(RUN.getInit(), RUN.getEnd(), s.getAnimationSpeed());
+			}
+		    }
+
+			break;
+
+		    case SPIN: {
+
+			if (s.isSuperSonic()) {
+
+			} else {
+
+			    doChangeFrames(SPIN.getInit(), SPIN.getEnd(), s.getAnimationSpeed());
+
+			}
+
+		    }
+			break;
+
+		    case TRANSFORM: {
+
+			doChangeFrames(TRANSFORM.getInit(), TRANSFORM.getEnd(), (s.isAi() ? 5 : s.getAnimationSpeed()));
+
+		    }
+			break;
+
+		    case PUSH: {
+
+			if (s.isSuperSonic()) {
+			    doChangeFrames(SS_PUSH.getInit(), SS_PUSH.getEnd(), (s.isAi() ? 9 : s.getAnimationSpeed()));
+			} else {
+			    doChangeFrames(PUSH.getInit(), PUSH.getEnd(), (s.isAi() ? 9 : s.getAnimationSpeed()));
+			}
+
+		    }
+			break;
+
+		    case DASH: {
+			if (s.isSuperSonic()) {
+
+			} else {
+
+			    doChangeFrames(DASH.getInit(), DASH.getEnd(), s.getAnimationSpeed());
+
+			}
+		    }
+			break;
+
+		    case SPEEDUP:
+			break;
+
+		    case MOVE:
+			break;
+
+		    case JUMP:
+			break;
+
+		    default:
+			break;
 
 		}
-
-	    }
-		break;
-
-	    case WAIT: {
-
-		if (sonic.isSuperSonic()) {
-
-		    doChangeFrames(SS_WAIT.getInit(), SS_WAIT.getEnd(), (sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
-		} else {
-
-		    doChangeFrames(WAIT.getInit(), WAIT.getEnd(), (sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
-
-		}
-
-	    }
-		break;
-
-	    case DOWN: {
-
-		if (sonic.isSuperSonic()) {
-
-		} else {
-		    doChangeFrames(DOWN.getInit(), DOWN.getEnd(), (sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
-		}
-
-	    }
-		break;
-
-	    case DOWNED: {
-
-		if (sonic.isSuperSonic()) {
-
-		    doChangeFrames(SS_DOWNED.getInit(), SS_DOWNED.getEnd(), (sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
-
-		} else {
-
-		    doChangeFrames(DOWNED.getInit(), DOWNED.getEnd(), (sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
-
-		}
-	    }
-		break;
-
-	    case LOOK: {
-
-		if (sonic.isSuperSonic()) {
-
-		} else {
-
-		    doChangeFrames(LOOK.getInit(), LOOK.getEnd(), (sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
-		}
-
-	    }
-		break;
-
-	    case LOOKING: {
-
-		if (sonic.isSuperSonic()) {
-
-		} else {
-
-		    doChangeFrames(LOOKING.getInit(), LOOKING.getEnd(), (sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
-
-		}
-
-	    }
-		break;
-
-	    case BRAKEUP: {
-
-		if (sonic.isSuperSonic()) {
-
-		} else {
-		    doChangeFrames(BREAKUP.getInit(), BREAKUP.getEnd(), (sonic.isAi() ? 7 : sonic.getAnimeSpeed()));
-		}
-
-	    }
-		break;
-
-	    case WALK: {
-		if (sonic.isSuperSonic()) {
-
-		    doChangeFrames(SS_WALK.getInit(), SS_WALK.getEnd(), sonic.getAnimeSpeed());
-
-		} else {
-
-		    doChangeFrames(WALK.getInit(), WALK.getEnd(), sonic.getAnimeSpeed());
-
-		}
-	    }
-		break;
-
-	    case RUN: {
-		if (sonic.isSuperSonic()) {
-
-		    doChangeFrames(SS_RUN.getInit(), SS_RUN.getEnd(), sonic.getAnimeSpeed());
-
-		} else {
-
-		    doChangeFrames(RUN.getInit(), RUN.getEnd(), sonic.getAnimeSpeed());
-		}
-	    }
-
-		break;
-
-	    case SPIN: {
-
-		if (sonic.isSuperSonic()) {
-
-		} else {
-
-		    doChangeFrames(SPIN.getInit(), SPIN.getEnd(), sonic.getAnimeSpeed());
-
-		}
-
-	    }
-		break;
-
-	    case TRANSFORM: {
-
-		doChangeFrames(TRANSFORM.getInit(), TRANSFORM.getEnd(), (sonic.isAi() ? 5 : sonic.getAnimeSpeed()));
-
-	    }
-		break;
-
-	    case PUSH: {
-
-		if (sonic.isSuperSonic()) {
-		    doChangeFrames(SS_PUSH.getInit(), SS_PUSH.getEnd(), (sonic.isAi() ? 9 : sonic.getAnimeSpeed()));
-		} else {
-		    doChangeFrames(PUSH.getInit(), PUSH.getEnd(), (sonic.isAi() ? 9 : sonic.getAnimeSpeed()));
-		}
-
-	    }
-		break;
-
-	    case DASH: {
-		if (sonic.isSuperSonic()) {
-
-		} else {
-
-		    doChangeFrames(DASH.getInit(), DASH.getEnd(), sonic.getAnimeSpeed());
-
-		}
-	    }
-		break;
-
-	    case SPEEDUP:
-		break;
-
-	    case MOVE:
-		break;
-
-	    case JUMP:
-		break;
-
-	    default:
-		break;
-
+	    
 	}
+
+	
 
     }
 
@@ -299,27 +308,22 @@ public class Animation implements Runnable {
     public void setFrameFinal(int finalFrame) {
 
 	this.finalFrame = finalFrame;
-    }
-
-    public Thread getThread() {
-
-	return thread;
-    }
+    }  
 
     @Override
     public void run() {
 
 	while (true) {	   
 	   
-	    if(sonic != null)
-		doAnimate(sonic);
+	    if(animated != null)
+		doAnimate();
 
 	    try {
 
 		Thread.sleep(FPS.getValue());
 
 	    } catch (InterruptedException ex) {
-		throw new RuntimeException("Failed to Stop " + thread.getName() + " " + ex);
+		throw new RuntimeException(ex);
 	    }
 	}
 

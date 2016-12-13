@@ -20,29 +20,29 @@ public final class Engine extends JFrame implements Runnable {
 
     private static final long serialVersionUID = -5571398930053263036L;
 
-    private Thread thread;
-
-    private final int windowWidth = ConfigEngine.WIDTH.getValue();
-
-    private final int windowHeight = ConfigEngine.HEIGHT.getValue();
-
-    private final int FPS = ConfigEngine.FPS.getValue();
-
-    public StringBuffer lastkeypress;
-
-    public Sonic sonic;
-
-    public EventListener event;
-
-    public Music music;
-
-    private Physics physics;
-
-    private Graphics g, bbg;
+    private BufferedImage backBuffer;
 
     private Graphics2D bbg2d;
 
-    private BufferedImage backBuffer;
+    private EventListener eventListener;
+    
+    private final int FPS = ConfigEngine.FPS.getValue();
+
+    private Graphics g, bbg;
+
+    private StringBuffer lastkeypress;
+    
+    private Music music;
+    
+    private Physics physics;
+
+    private Sonic sonic;
+    
+    private Thread thread;
+
+    private final int windowHeight = ConfigEngine.HEIGHT.getValue();
+
+    private final int windowWidth = ConfigEngine.WIDTH.getValue();
 
     public Engine() {
 
@@ -76,27 +76,15 @@ public final class Engine extends JFrame implements Runnable {
 
 	music = new Music(MyPath.MUSICS_RELATIVE);
 
-	event = new EventListener(this, true);
+	eventListener = new EventListener(this, true);
 
-	super.addKeyListener(event);
+	super.addKeyListener(eventListener);
 
 	super.setVisible(true);
 
 	doInitGraphics();
 
 	start();
-
-    }
-
-    private void doInitGraphics() {
-
-	g = getGraphics();
-
-	backBuffer = new BufferedImage(windowWidth, windowHeight, BufferedImage.TYPE_INT_RGB);
-
-	bbg = backBuffer.getGraphics();
-
-	bbg2d = (Graphics2D) backBuffer.getGraphics();
 
     }
 
@@ -128,21 +116,60 @@ public final class Engine extends JFrame implements Runnable {
 	g.drawImage(backBuffer, 0, 0, this);
     }
 
-    private void doShowInfoPhysics(boolean show, int x, int y) {
+    private void doInitGraphics() {
+
+	g = getGraphics();
+
+	backBuffer = new BufferedImage(windowWidth, windowHeight, BufferedImage.TYPE_INT_RGB);
+
+	bbg = backBuffer.getGraphics();
+
+	bbg2d = (Graphics2D) backBuffer.getGraphics();
+
+    }
+
+    private void doShowBaseLines(boolean show) {
 
 	if (show) {
 
-	    bbg2d.drawString("-----------Thread Physics------------", x, y += 20);
+	    if (sonic.getOrientation() == Orientation.RIGHT) {
 
-	    bbg2d.drawString("Acceleration : " + String.valueOf(sonic.getAcceleration()), x, y += 20);
+		bbg2d.draw3DRect(sonic.getX(), sonic.getY(), sonic.getW(), sonic.getH(), false);
 
-	    bbg2d.drawString("Speed : " + String.valueOf(sonic.getSpeed()), x, y += 20);
+		bbg2d.drawLine(sonic.getX() + 150, sonic.getY() + 150, (this.getWidth() / 2), (this.getHeight() / 2));
 
-	    bbg2d.drawString("Mass : " + String.valueOf(sonic.getMass()), x, y += 20);
+	    } else {
 
-	    bbg2d.drawString("Resistance : " + String.valueOf(sonic.getResistance()), x, y += 20);
+		bbg2d.draw3DRect(sonic.getX(), sonic.getY(), sonic.getW(), sonic.getH(), false);
 
-	    bbg2d.drawString("Gravity : " + String.valueOf(physics.getGravity()), x, y += 20);
+		bbg2d.drawLine(sonic.getX() + 150, sonic.getY() + 150, (this.getWidth() / 2), (this.getHeight() / 2));
+
+	    }
+	}
+
+    }
+
+    private void doShowCopyrights() {
+
+	bbg2d.drawString(" - is Hiring ? Mail Me - frmichetti@gmail.com - by Felipe Rodrigues Michetti", 550,
+		this.getHeight() - 25);
+
+	bbg2d.drawString("Sonic by Sega", this.getWidth() - 200, this.getHeight() - 10);
+    }
+
+    private void doShowInfoAnimation(boolean show, int x, int y) {
+
+	if (show) {
+
+	    bbg2d.drawString("---------Thread Animation------------", x, y += 20);
+
+	    bbg2d.drawString("Init Frame : " + String.valueOf(sonic.getInitFrame()), x, y += 20);
+
+	    bbg2d.drawString("End Frame : " + String.valueOf(sonic.getFinalFrame()), x, y += 20);
+
+	    bbg2d.drawString("Current Frame : " + String.valueOf(sonic.getCurrentFrame()), x, y += 20);
+
+	    bbg2d.drawString("Anime Speed : " + String.valueOf(sonic.getAnimationSpeed()), x, y += 20);
 	}
 
     }
@@ -164,19 +191,43 @@ public final class Engine extends JFrame implements Runnable {
 
     }
 
-    private void doShowInfoAnimation(boolean show, int x, int y) {
+    private void doShowInfoFPS(boolean show) {
 
 	if (show) {
 
-	    bbg2d.drawString("---------Thread Animation------------", x, y += 20);
+	    bbg2d.drawString("FPS", 970, 50);
 
-	    bbg2d.drawString("Init Frame : " + String.valueOf(sonic.getInitFrame()), x, y += 20);
+	    bbg2d.drawString(String.valueOf(FPS), 1000, 50);
+	}
 
-	    bbg2d.drawString("End Frame : " + String.valueOf(sonic.getFinalFrame()), x, y += 20);
+    }
 
-	    bbg2d.drawString("Current Frame : " + String.valueOf(sonic.getCurrentFrame()), x, y += 20);
+    private void doShowInfoListener(boolean show) {
 
-	    bbg2d.drawString("Anime Speed : " + String.valueOf(sonic.getAnimeSpeed()), x, y += 20);
+	if (show) {
+
+	    bbg2d.drawString("-------------Key Listener-------------", 220, 640);
+
+	    bbg2d.drawString(lastkeypress.toString(), 270, 660);
+	}
+
+    }
+
+    private void doShowInfoPhysics(boolean show, int x, int y) {
+
+	if (show) {
+
+	    bbg2d.drawString("-----------Thread Physics------------", x, y += 20);
+
+	    bbg2d.drawString("Acceleration : " + String.valueOf(sonic.getAcceleration()), x, y += 20);
+
+	    bbg2d.drawString("Speed : " + String.valueOf(sonic.getSpeed()), x, y += 20);
+
+	    bbg2d.drawString("Mass : " + String.valueOf(sonic.getMass()), x, y += 20);
+
+	    bbg2d.drawString("Resistance : " + String.valueOf(sonic.getResistance()), x, y += 20);
+
+	    bbg2d.drawString("Gravity : " + String.valueOf(physics.getGravity()), x, y += 20);
 	}
 
     }
@@ -206,49 +257,6 @@ public final class Engine extends JFrame implements Runnable {
 
     }
 
-    private void doShowInfoListener(boolean show) {
-
-	if (show) {
-
-	    bbg2d.drawString("-------------Key Listener-------------", 220, 640);
-
-	    bbg2d.drawString(lastkeypress.toString(), 270, 660);
-	}
-
-    }
-
-    private void doShowInfoFPS(boolean show) {
-
-	if (show) {
-
-	    bbg2d.drawString("FPS", 970, 50);
-
-	    bbg2d.drawString(String.valueOf(FPS), 1000, 50);
-	}
-
-    }
-
-    private void doShowBaseLines(boolean show) {
-
-	if (show) {
-
-	    if (sonic.getOrientation() == Orientation.RIGHT) {
-
-		bbg2d.draw3DRect(sonic.getX(), sonic.getY(), sonic.getW(), sonic.getH(), false);
-
-		bbg2d.drawLine(sonic.getX() + 150, sonic.getY() + 150, (this.getWidth() / 2), (this.getHeight() / 2));
-
-	    } else {
-
-		bbg2d.draw3DRect(sonic.getX(), sonic.getY(), sonic.getW(), sonic.getH(), false);
-
-		bbg2d.drawLine(sonic.getX() + 150, sonic.getY() + 150, (this.getWidth() / 2), (this.getHeight() / 2));
-
-	    }
-	}
-
-    }
-
     private void doShowSonic(boolean show) {
 
 	if (show) {
@@ -268,12 +276,24 @@ public final class Engine extends JFrame implements Runnable {
 
     }
 
-    private void doShowCopyrights() {
+    public EventListener getEventListener() {
+    
+        return eventListener;
+    }
 
-	bbg2d.drawString(" - is Hiring ? Mail Me - frmichetti@gmail.com - by Felipe Rodrigues Michetti", 550,
-		this.getHeight() - 25);
+    public StringBuffer getLastkeypress() {
+    
+        return lastkeypress;
+    }
 
-	bbg2d.drawString("Sonic by Sega", this.getWidth() - 200, this.getHeight() - 10);
+    public Music getMusic() {
+
+	return music;
+    }
+
+    public Sonic getSonic() {
+    
+        return sonic;
     }
 
     @Override
@@ -294,6 +314,11 @@ public final class Engine extends JFrame implements Runnable {
 	}
     }
 
+    public void setLastkeypress(StringBuffer lastkeypress) {
+    
+        this.lastkeypress = lastkeypress;
+    }
+
     private void start() {
 
 	ExecutorService executor = Executors.newFixedThreadPool(3);
@@ -302,9 +327,12 @@ public final class Engine extends JFrame implements Runnable {
 
 	executor.execute(physics);
 
-	executor.execute(music);
+	executor.execute(getMusic());
+	
+	executor.shutdown();
 
 	thread.start();
     }
+ 
 
 }

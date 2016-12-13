@@ -70,10 +70,10 @@ public final class FrameAction extends JFrame implements Runnable, Observer {
 
     public FrameAction(Engine engine) {
 	this();
-	this.sonic = engine.sonic;
-	this.music = engine.music;
+	this.sonic = engine.getSonic();
+	this.music = engine.getMusic();
 
-	super.addKeyListener(engine.event);
+	super.addKeyListener(engine.getEventListener());
 
 	this.sonic.addObserver(this);
 
