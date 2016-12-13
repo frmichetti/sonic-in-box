@@ -1187,9 +1187,9 @@ public final class FrameAnimation extends JFrame implements Runnable, Observer {
     @Override
     public void update(Observable o, Object arg) {
 	
-	if (o instanceof Physicable) {
-	    
-	    
+	if(o != null)
+	
+	if (o instanceof Physicable) {	    
 	    
 	    switch ((Action) arg) {
 		

@@ -146,6 +146,8 @@ public final class FrameListener extends JFrame implements Runnable, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+	
+	if(o != null)
 
 	if (o instanceof Physicable) {
 	    
