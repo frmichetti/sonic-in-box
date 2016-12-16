@@ -25,31 +25,56 @@ import br.com.codecode.sonicinbox.enums.Action;
 import br.com.codecode.sonicinbox.interfaces.Animated;
 import br.com.codecode.sonicinbox.interfaces.Syncronizeable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Animation.
+ */
 public class Animation implements Runnable, Syncronizeable {
 
+    /** The anime speed. */
     private int animeSpeed;
 
+    /** The init frame. */
     private int initFrame;
 
+    /** The current frame. */
     private int currentFrame;
 
+    /** The final frame. */
     private int finalFrame;
 
+    /** The thread. */
     protected Thread thread;
 
+    /** The animated. */
     private Animated animated;
 
+    /**
+     * Instantiates a new animation.
+     */
     private Animation() {
 
 	thread = new Thread(Start.tgrpSonic, this, "Animation Thread");
 
     }
 
+    /**
+     * Instantiates a new animation.
+     *
+     * @param animated the animated
+     */
     public Animation(Animated animated) {
 	this();
 	this.animated = animated;
     }
 
+    /**
+     * Do change frames.
+     *
+     * @param initFrame the init frame
+     * @param finalFrame the final frame
+     * @param animationSpeed the animation speed
+     */
     private void doChangeFrames(int initFrame, int finalFrame, int animationSpeed) {
 
 	this.initFrame = initFrame;
@@ -64,6 +89,9 @@ public class Animation implements Runnable, Syncronizeable {
 
     }
 
+    /**
+     * Do animate.
+     */
     private void doAnimate() {
 
 	doSwitchAction();
@@ -85,6 +113,9 @@ public class Animation implements Runnable, Syncronizeable {
 
     }
 
+    /**
+     * Do switch action.
+     */
     private void doSwitchAction() {
 	
 	if(animated instanceof Sonic){
@@ -270,46 +301,89 @@ public class Animation implements Runnable, Syncronizeable {
 
     }
 
+    /**
+     * Gets the anime speed.
+     *
+     * @return the anime speed
+     */
     public int getAnimeSpeed() {
 
 	return animeSpeed;
     }
 
+    /**
+     * Sets the anime speed.
+     *
+     * @param animeSpeed the new anime speed
+     */
     public void setAnimeSpeed(int animeSpeed) {
 
 	this.animeSpeed = animeSpeed;
     }
 
+    /**
+     * Gets the inits the frame.
+     *
+     * @return the inits the frame
+     */
     public int getInitFrame() {
 
 	return initFrame;
     }
 
+    /**
+     * Sets the inits the frame.
+     *
+     * @param initFrame the new inits the frame
+     */
     public void setInitFrame(int initFrame) {
 
 	this.initFrame = initFrame;
     }
 
+    /**
+     * Gets the current frame.
+     *
+     * @return the current frame
+     */
     public int getCurrentFrame() {
 
 	return currentFrame;
     }
 
+    /**
+     * Sets the current frame.
+     *
+     * @param currentFrame the new current frame
+     */
     public void setCurrentFrame(int currentFrame) {
 
 	this.currentFrame = currentFrame;
     }
 
+    /**
+     * Gets the final frame.
+     *
+     * @return the final frame
+     */
     public int getFinalFrame() {
 
 	return finalFrame;
     }
 
+    /**
+     * Sets the frame final.
+     *
+     * @param finalFrame the new frame final
+     */
     public void setFrameFinal(int finalFrame) {
 
 	this.finalFrame = finalFrame;
     }  
 
+    /* (non-Javadoc)
+     * @see java.lang.Runnable#run()
+     */
     @Override
     public void run() {
 

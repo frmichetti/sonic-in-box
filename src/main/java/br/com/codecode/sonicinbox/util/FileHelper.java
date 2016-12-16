@@ -6,12 +6,26 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FileHelper.
+ */
 public class FileHelper {    
     
+    /**
+     * Instantiates a new file helper.
+     */
     private FileHelper(){}
 
+    /** The f. */
     private static File f;
 
+    /**
+     * Gets the files.
+     *
+     * @param path the path
+     * @return the files
+     */
     public static File[] getFiles(Path path) {
 
 	f = path.toFile();
@@ -23,6 +37,12 @@ public class FileHelper {
 	return null;
     }
 
+    /**
+     * Gets the files.
+     *
+     * @param caminho the caminho
+     * @return the files
+     */
     public static File[] getFiles(String caminho) {
 
 	f = new File(caminho);
@@ -35,6 +55,13 @@ public class FileHelper {
 
     }
 
+    /**
+     * Gets the files.
+     *
+     * @param path the path
+     * @return the files
+     * @throws URISyntaxException the URI syntax exception
+     */
     public static File[] getFiles(URL path) throws URISyntaxException {
 
 	f = new File(path.toURI());
@@ -46,6 +73,12 @@ public class FileHelper {
 	return null;
     }
 
+    /**
+     * Gets the files.
+     *
+     * @param path the path
+     * @return the files
+     */
     public static File[] getFiles(URI path) {
 
 	f = new File(path);

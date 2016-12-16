@@ -6,21 +6,38 @@ import br.com.codecode.sonicinbox.enums.Orientation;
 import br.com.codecode.sonicinbox.interfaces.Moveable;
 import br.com.codecode.sonicinbox.interfaces.Syncronizeable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Movimentation.
+ */
 public class Movimentation implements Runnable, Syncronizeable {
 
+    /** The thread. */
     protected Thread thread;
 
+    /** The moveable. */
     private Moveable moveable;
 
+    /**
+     * Instantiates a new movimentation.
+     */
     private Movimentation() {
 	thread = new Thread(Start.tgrpSonic, this, "Movimentation Thread");
     }
 
+    /**
+     * Instantiates a new movimentation.
+     *
+     * @param moveable the moveable
+     */
     public Movimentation(Moveable moveable) {
 	this();
 	this.moveable = moveable;
     }
 
+    /**
+     * Do limit screen.
+     */
     private void doLimitScreen() {
 
 	if (moveable.getX() <= -140) {
@@ -33,6 +50,9 @@ public class Movimentation implements Runnable, Syncronizeable {
 	}
     }
 
+    /**
+     * Do move.
+     */
     private void doMove() {
 	
 	if(moveable instanceof Sonic){
@@ -137,6 +157,9 @@ public class Movimentation implements Runnable, Syncronizeable {
 
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Runnable#run()
+     */
     @Override
     public void run() {
 

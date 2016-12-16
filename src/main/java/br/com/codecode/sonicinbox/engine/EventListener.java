@@ -8,16 +8,40 @@ import br.com.codecode.sonicinbox.enums.Action;
 import br.com.codecode.sonicinbox.enums.Orientation;
 import br.com.codecode.sonicinbox.motion.Sonic;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The listener interface for receiving event events.
+ * The class that is interested in processing a event
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addEventListener<code> method. When
+ * the event event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see EventEvent
+ */
 public final class EventListener implements KeyListener {
 
+    /** The on. */
     private boolean on;
 
+    /** The sonic. */
     private Sonic sonic;
 
+    /** The lastkeypress. */
     private StringBuffer lastkeypress;
 
+    /**
+     * Instantiates a new event listener.
+     */
     private EventListener(){}
 
+    /**
+     * Instantiates a new event listener.
+     *
+     * @param engine the engine
+     * @param on the on
+     */
     public EventListener(Engine engine, boolean on) {
 	this();
 	this.sonic = engine.getSonic();
@@ -25,9 +49,15 @@ public final class EventListener implements KeyListener {
 	this.on = on;
     }
 
+    /* (non-Javadoc)
+     * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
+     */
     @Override
     public void keyTyped(KeyEvent e) {}
 
+    /* (non-Javadoc)
+     * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+     */
     @Override
     public void keyPressed(KeyEvent e) {
 
@@ -142,6 +172,9 @@ public final class EventListener implements KeyListener {
 
     }
 
+    /* (non-Javadoc)
+     * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+     */
     @Override
     public void keyReleased(KeyEvent e) {
 
@@ -177,16 +210,29 @@ public final class EventListener implements KeyListener {
 
     }
 
+    /**
+     * Checks if is on.
+     *
+     * @return true, if is on
+     */
     public boolean isOn() {
 
 	return on;
     }
 
+    /**
+     * Sets the on.
+     *
+     * @param on the new on
+     */
     public void setOn(boolean on) {
 
 	this.on = on;
     }
 
+    /**
+     * Delay.
+     */
     private void delay() {
 
 	int i = 0;

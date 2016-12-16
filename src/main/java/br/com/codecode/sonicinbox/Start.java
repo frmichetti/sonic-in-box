@@ -10,12 +10,21 @@ import br.com.codecode.sonicinbox.console.FrameAnimation;
 import br.com.codecode.sonicinbox.console.FrameListener;
 import br.com.codecode.sonicinbox.engine.Engine;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Start.
+ */
 public final class Start {
 
+    /** The tgrp sonic. */
     public static ThreadGroup tgrpEngine, tgrpSonic;
 
+    /** The t. */
     private Thread t;
 
+    /**
+     * Instantiates a new start.
+     */
     public Start() {
 
 	tgrpEngine = new ThreadGroup("Engine Threads");
@@ -36,6 +45,9 @@ public final class Start {
 
     }
 
+    /**
+     * Do change theme.
+     */
     private void doChangeTheme() {
 
 	try {
@@ -57,6 +69,9 @@ public final class Start {
 
     }
 
+    /**
+     * Do create frame.
+     */
     public void doCreateFrame() {
 
 	try {
@@ -79,6 +94,11 @@ public final class Start {
 
     }
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
     public static void main(String... args) {
 
 	new Start();

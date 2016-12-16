@@ -17,32 +17,51 @@ import br.com.codecode.sonicinbox.motion.Sonic;
 import br.com.codecode.sonicinbox.util.MyPath;
 import br.com.codecode.sonicinbox.util.Size;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Engine.
+ */
 public final class Engine extends JFrame implements Runnable, Syncronizeable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -5571398930053263036L;
 
+    /** The back buffer. */
     private BufferedImage backBuffer;
 
+    /** The bbg 2 d. */
     private Graphics2D bbg2d;
 
+    /** The event listener. */
     private EventListener eventListener;    
 
+    /** The bbg. */
     private Graphics g, bbg;
 
+    /** The lastkeypress. */
     private StringBuffer lastkeypress;
     
+    /** The music. */
     private Music music;
     
+    /** The physics. */
     private Physics physics;
 
+    /** The sonic. */
     private Sonic sonic;
     
+    /** The thread. */
     private Thread thread;
 
+    /** The window height. */
     private final int windowHeight = ConfigEngine.HEIGHT.getValue();
 
+    /** The window width. */
     private final int windowWidth = ConfigEngine.WIDTH.getValue();
 
+    /**
+     * Instantiates a new engine.
+     */
     public Engine() {
 
 	super("Sonic in Box v3 [Demo]");
@@ -87,6 +106,9 @@ public final class Engine extends JFrame implements Runnable, Syncronizeable {
 
     }
 
+    /**
+     * Do draw graphics.
+     */
     public void doDrawGraphics() {
 
 	bbg.setColor(new Color(0, 128, 128, 255));
@@ -115,6 +137,9 @@ public final class Engine extends JFrame implements Runnable, Syncronizeable {
 	g.drawImage(backBuffer, 0, 0, this);
     }
 
+    /**
+     * Do init graphics.
+     */
     private void doInitGraphics() {
 
 	g = getGraphics();
@@ -127,6 +152,11 @@ public final class Engine extends JFrame implements Runnable, Syncronizeable {
 
     }
 
+    /**
+     * Do show base lines.
+     *
+     * @param show the show
+     */
     private void doShowBaseLines(boolean show) {
 
 	if (show) {
@@ -148,6 +178,9 @@ public final class Engine extends JFrame implements Runnable, Syncronizeable {
 
     }
 
+    /**
+     * Do show copyrights.
+     */
     private void doShowCopyrights() {
 
 	bbg2d.drawString(" - is Hiring ? Mail Me - frmichetti@gmail.com - by Felipe Rodrigues Michetti", 550,
@@ -156,6 +189,13 @@ public final class Engine extends JFrame implements Runnable, Syncronizeable {
 	bbg2d.drawString("Sonic by Sega", this.getWidth() - 200, this.getHeight() - 10);
     }
 
+    /**
+     * Do show info animation.
+     *
+     * @param show the show
+     * @param x the x
+     * @param y the y
+     */
     private void doShowInfoAnimation(boolean show, int x, int y) {
 
 	if (show) {
@@ -173,6 +213,13 @@ public final class Engine extends JFrame implements Runnable, Syncronizeable {
 
     }
 
+    /**
+     * Do show info coordinates.
+     *
+     * @param show the show
+     * @param x the x
+     * @param y the y
+     */
     private void doShowInfoCoordinates(boolean show, int x, int y) {
 
 	if (show) {
@@ -190,6 +237,11 @@ public final class Engine extends JFrame implements Runnable, Syncronizeable {
 
     }
 
+    /**
+     * Do show info FPS.
+     *
+     * @param show the show
+     */
     private void doShowInfoFPS(boolean show) {
 
 	if (show) {
@@ -201,6 +253,11 @@ public final class Engine extends JFrame implements Runnable, Syncronizeable {
 
     }
 
+    /**
+     * Do show info listener.
+     *
+     * @param show the show
+     */
     private void doShowInfoListener(boolean show) {
 
 	if (show) {
@@ -212,6 +269,13 @@ public final class Engine extends JFrame implements Runnable, Syncronizeable {
 
     }
 
+    /**
+     * Do show info physics.
+     *
+     * @param show the show
+     * @param x the x
+     * @param y the y
+     */
     private void doShowInfoPhysics(boolean show, int x, int y) {
 
 	if (show) {
@@ -231,6 +295,13 @@ public final class Engine extends JFrame implements Runnable, Syncronizeable {
 
     }
 
+    /**
+     * Do show info status.
+     *
+     * @param show the show
+     * @param x the x
+     * @param y the y
+     */
     private void doShowInfoStatus(boolean show, int x, int y) {
 
 	if (show) {
@@ -256,6 +327,11 @@ public final class Engine extends JFrame implements Runnable, Syncronizeable {
 
     }
 
+    /**
+     * Do show sonic.
+     *
+     * @param show the show
+     */
     private void doShowSonic(boolean show) {
 
 	if (show) {
@@ -275,26 +351,49 @@ public final class Engine extends JFrame implements Runnable, Syncronizeable {
 
     }
 
+    /**
+     * Gets the event listener.
+     *
+     * @return the event listener
+     */
     public EventListener getEventListener() {
     
         return eventListener;
     }
 
+    /**
+     * Gets the lastkeypress.
+     *
+     * @return the lastkeypress
+     */
     public StringBuffer getLastkeypress() {
     
         return lastkeypress;
     }
 
+    /**
+     * Gets the music.
+     *
+     * @return the music
+     */
     public Music getMusic() {
 
 	return music;
     }
 
+    /**
+     * Gets the sonic.
+     *
+     * @return the sonic
+     */
     public Sonic getSonic() {
     
         return sonic;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Runnable#run()
+     */
     @Override
     public void run() {
 
@@ -313,11 +412,19 @@ public final class Engine extends JFrame implements Runnable, Syncronizeable {
 	}
     }
 
+    /**
+     * Sets the lastkeypress.
+     *
+     * @param lastkeypress the new lastkeypress
+     */
     public void setLastkeypress(StringBuffer lastkeypress) {
     
         this.lastkeypress = lastkeypress;
     }
 
+    /**
+     * Start.
+     */
     private void start() {
 
 	ExecutorService executor = Executors.newFixedThreadPool(3);

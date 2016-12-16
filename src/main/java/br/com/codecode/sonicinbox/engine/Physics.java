@@ -8,27 +8,35 @@ import br.com.codecode.sonicinbox.enums.ConfigPhysics;
 import br.com.codecode.sonicinbox.interfaces.Physicable;
 import br.com.codecode.sonicinbox.interfaces.Syncronizeable;
 
+// TODO: Auto-generated Javadoc
 /**
- * This Class Apply Physics on Physicable Characters
- * 
+ * This Class Apply Physics on Physicable Characters.
+ *
  * @author felipe
+ * @version 1.1
  * @see Physicable
  * @see Observable
  * @see Runnable
  * @see Observer
  * @since 1.0
- * @version 1.1
  */
 public final class Physics extends Observable implements Runnable, Observer , Syncronizeable{
 
+    /** The gravity. */
     private final float gravity = ConfigPhysics.GRAVITY.getValue();
 
+    /** The on. */
     private boolean on;
 
+    /** The thread. */
     protected Thread thread;
 
+    /** The physicable. */
     private Physicable physicable;
 
+    /**
+     * Instantiates a new physics.
+     */
     private Physics() {
 
 	thread = new Thread(Start.tgrpEngine, this, "Physics Thread");
@@ -37,6 +45,12 @@ public final class Physics extends Observable implements Runnable, Observer , Sy
 
     }
 
+    /**
+     * Instantiates a new physics.
+     *
+     * @param physicable the physicable
+     * @param on the on
+     */
     public Physics(Physicable physicable, boolean on) {
 
 	this();
@@ -46,6 +60,13 @@ public final class Physics extends Observable implements Runnable, Observer , Sy
 	this.on = on;
     }
 
+    /**
+     * Do calculate speed.
+     *
+     * @param acceleration the acceleration
+     * @param mass the mass
+     * @return the float
+     */
     private float doCalculateSpeed(float acceleration, float mass) {
 
 	float res;
@@ -59,6 +80,11 @@ public final class Physics extends Observable implements Runnable, Observer , Sy
 	return res;
     }
 
+    /**
+     * Do apply physics.
+     *
+     * @param physicable the physicable
+     */
     public void doApplyPhysics(Physicable physicable) {
 
 	doCalculateSpeed(physicable.getAcceleration(), physicable.getMass());
@@ -83,27 +109,48 @@ public final class Physics extends Observable implements Runnable, Observer , Sy
 
     }
 
+    /**
+     * Gets the gravity.
+     *
+     * @return the gravity
+     */
     public float getGravity() {
 
 	return gravity;
     }
 
+    /* (non-Javadoc)
+     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+     */
     @Override
     public void update(Observable o, Object arg) {
 
 	physicable.setSpeed((float) arg);
     }
 
+    /**
+     * Checks if is on.
+     *
+     * @return true, if is on
+     */
     public boolean isOn() {
 
 	return on;
     }
 
+    /**
+     * Sets the on.
+     *
+     * @param on the new on
+     */
     public void setOn(boolean on) {
 
 	this.on = on;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Runnable#run()
+     */
     @Override
     public void run() {
 

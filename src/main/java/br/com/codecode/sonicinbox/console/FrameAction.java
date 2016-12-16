@@ -30,28 +30,45 @@ import br.com.codecode.sonicinbox.interfaces.Physicable;
 import br.com.codecode.sonicinbox.motion.Sonic;
 import br.com.codecode.sonicinbox.util.Size;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FrameAction.
+ */
 public final class FrameAction extends JFrame implements Runnable, Observer {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1370653725906464274L;
 
+    /** The btn brake. */
     private JButton btnAccelerate, btnBrake;
 
+    /** The btn up. */
     public static JButton btnDown, btnLeft, btnRight, btnUp;
 
+    /** The lbl speed. */
     private JLabel lblTitle, lblSpeed;
 
+    /** The progress bar. */
     private JProgressBar progressBar;
 
+    /** The toggle music. */
     private JToggleButton toggleAi, toggleSuperSonic, toggleMusic;
 
+    /** The separator. */
     private JSeparator separator;
 
+    /** The sonic. */
     private Sonic sonic;
 
+    /** The music. */
     private Music music;
 
+    /** The thread. */
     private Thread thread;
 
+    /**
+     * Instantiates a new frame action.
+     */
     private FrameAction() {
 
 	thread = new Thread(this);
@@ -67,6 +84,11 @@ public final class FrameAction extends JFrame implements Runnable, Observer {
 	thread.start();
     }
 
+    /**
+     * Instantiates a new frame action.
+     *
+     * @param engine the engine
+     */
     public FrameAction(Engine engine) {
 	this();
 	this.sonic = engine.getSonic();
@@ -78,6 +100,12 @@ public final class FrameAction extends JFrame implements Runnable, Observer {
 
     }
 
+    /**
+     * Do control buttons.
+     *
+     * @param ai the ai
+     * @param buttons the buttons
+     */
     private void doControlButtons(boolean ai, JButton... buttons) {
 
 	if (buttons.length > 0)
@@ -88,6 +116,9 @@ public final class FrameAction extends JFrame implements Runnable, Observer {
 
     }
 
+    /**
+     * Do refresh component.
+     */
     private void doRefreshComponent() {	
 
 	toggleSuperSonic.setSelected(sonic.isSuperSonic());
@@ -97,6 +128,9 @@ public final class FrameAction extends JFrame implements Runnable, Observer {
 	toggleMusic.setSelected(music.isOn());
     }
 
+    /**
+     * Inits the components.
+     */
     private void initComponents() {
 
 	btnAccelerate = new JButton();
@@ -354,11 +388,21 @@ public final class FrameAction extends JFrame implements Runnable, Observer {
 	pack();
     }
 
+    /**
+     * JTB N AI action performed.
+     *
+     * @param evt the evt
+     */
     private void JTBN_AIActionPerformed(ActionEvent evt) {
 
 	sonic.setAi(toggleAi.isSelected());
     }
 
+    /**
+     * BT N acelerar action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_AcelerarActionPerformed(ActionEvent evt) {
 
 	if (sonic.isAi()) {
@@ -366,11 +410,21 @@ public final class FrameAction extends JFrame implements Runnable, Observer {
 	}
     }
 
+    /**
+     * JT B musica action performed.
+     *
+     * @param evt the evt
+     */
     private void JTB_MusicaActionPerformed(ActionEvent evt) {
 
 	music.setOn(toggleMusic.isSelected());
     }
 
+    /**
+     * JTB N super sonic action performed.
+     *
+     * @param evt the evt
+     */
     private void JTBN_SuperSonicActionPerformed(ActionEvent evt) {
 
 	if (toggleSuperSonic.isSelected()) {
@@ -380,6 +434,11 @@ public final class FrameAction extends JFrame implements Runnable, Observer {
 	}
     }
 
+    /**
+     * BT N freiar action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_FreiarActionPerformed(ActionEvent evt) {
 
 	if (sonic.isAi()) {
@@ -387,6 +446,9 @@ public final class FrameAction extends JFrame implements Runnable, Observer {
 	}
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Runnable#run()
+     */
     @Override
     public void run() {
 
@@ -405,6 +467,11 @@ public final class FrameAction extends JFrame implements Runnable, Observer {
 	}
     }
 
+    /**
+     * Do update speed.
+     *
+     * @param speed the speed
+     */
     private void doUpdateSpeed(int speed) {
 
 	progressBar.setValue(speed);
@@ -413,6 +480,9 @@ public final class FrameAction extends JFrame implements Runnable, Observer {
 
     }
 
+    /* (non-Javadoc)
+     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+     */
     @Override
     public void update(Observable o, Object arg) {
 	

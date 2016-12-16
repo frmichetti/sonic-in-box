@@ -1,12 +1,17 @@
 package br.com.codecode.sonicinbox.enums;
 
+// TODO: Auto-generated Javadoc
 /**
- * Possible Orientations
- * 
+ * Possible Orientations.
+ *
  * @author felipe
- * @since 1.0
  * @version 1.0
+ * @since 1.0
  */
 public enum Orientation {
-    RIGHT, LEFT;
+    
+    /** The right. */
+    RIGHT, 
+ /** The left. */
+ LEFT;
 }

@@ -26,10 +26,16 @@ import br.com.codecode.sonicinbox.enums.Orientation;
 import br.com.codecode.sonicinbox.interfaces.Physicable;
 import br.com.codecode.sonicinbox.motion.Sonic;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FrameAnimation.
+ */
 public final class FrameAnimation extends JFrame implements Runnable, Observer {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -7339748933268786433L;
 
+    /** The btn transform. */
     private JButton btnDowned, btnDown, btnWalkZero, btnWalkOne, btnWalkTwo, btnWalkThree, btnWalkFour, btnWalkFive,
 	    btnWalkSix, btnWalkSeven, btnRunZero, btnRunOne, btnRunTwo, btnRunThree, btnRunFour, btnRunFive, btnRunSix,
 	    btnRunSeven, btnDashZero, btnDashOne, btnDashTwo, btnDashThree, btnDashFour, btnDashFive, btnDashSix,
@@ -37,14 +43,21 @@ public final class FrameAnimation extends JFrame implements Runnable, Observer {
 	    btnSpinThree, btnSpinFour, btnSpinFive, btnSpinSix, btnSpinSeven, btnLooking, btnLook, btnStop,
 	    btnTransform;
 
+    /** The jp orientation. */
     private JPanel jpAction, jpWalk, jpRun, jpDash, jpSpin, jpOrientation;
 
+    /** The slider animation. */
     private JSlider sliderAnimation;
 
+    /** The sonic. */
     private Sonic sonic;
 
+    /** The thread. */
     private Thread thread;
 
+    /**
+     * Instantiates a new frame animation.
+     */
     private FrameAnimation() {
 
 	thread = new Thread(this);
@@ -61,6 +74,11 @@ public final class FrameAnimation extends JFrame implements Runnable, Observer {
 
     }
 
+    /**
+     * Instantiates a new frame animation.
+     *
+     * @param engine the engine
+     */
     public FrameAnimation(Engine engine) {
 	this();
 	this.sonic = engine.getSonic();
@@ -70,6 +88,12 @@ public final class FrameAnimation extends JFrame implements Runnable, Observer {
 
     }
 
+    /**
+     * Do control buttons.
+     *
+     * @param enabled the enabled
+     * @param buttons the buttons
+     */
     private void doControlButtons(boolean enabled, JButton... buttons) {
 
 	if (buttons.length > 0)
@@ -82,6 +106,9 @@ public final class FrameAnimation extends JFrame implements Runnable, Observer {
 	sliderAnimation.setEnabled(!enabled);
     }
 
+    /**
+     * Do refresh components.
+     */
     private void doRefreshComponents() {
 
 	if (sonic.getOrientation() == Orientation.RIGHT) {
@@ -103,6 +130,9 @@ public final class FrameAnimation extends JFrame implements Runnable, Observer {
 	}
     }
 
+    /**
+     * Inits the components.
+     */
     private void initComponents() {
 
 	jpRun = new JPanel();
@@ -943,226 +973,449 @@ public final class FrameAnimation extends JFrame implements Runnable, Observer {
 	pack();
     }
 
+    /**
+     * BT N esperar action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_EsperarActionPerformed(ActionEvent evt) {
 
 	sonic.doWait();
     }
 
+    /**
+     * BT N olhar action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_OlharActionPerformed(ActionEvent evt) {
 
 	sonic.doLook();
     }
 
+    /**
+     * BT N abaixar action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_AbaixarActionPerformed(ActionEvent evt) {
 
 	sonic.doDown();
     }
 
+    /**
+     * BT N transformar action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_TransformarActionPerformed(ActionEvent evt) {
 
 	sonic.doTransform();
     }
 
+    /**
+     * BT N andar 1 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Andar1ActionPerformed(ActionEvent evt) {
 
 	sonic.doWalk(1).setAnimationSpeed(1);
     }
 
+    /**
+     * BT N correr 1 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Correr1ActionPerformed(ActionEvent evt) {
 
 	sonic.doRun(1).setAnimationSpeed(1);
     }
 
+    /**
+     * BT N girar 0 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Girar0ActionPerformed(ActionEvent evt) {
 
 	sonic.doSpin(0).setAnimationSpeed(0);
     }
 
+    /**
+     * BT N correr 2 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Correr2ActionPerformed(ActionEvent evt) {
 
 	sonic.doRun(2).setAnimationSpeed(2);
     }
 
+    /**
+     * BT N correr 3 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Correr3ActionPerformed(ActionEvent evt) {
 
 	sonic.doRun(3).setAnimationSpeed(3);
     }
 
+    /**
+     * BT N correr 4 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Correr4ActionPerformed(ActionEvent evt) {
 
 	sonic.doRun(4).setAnimationSpeed(4);
     }
 
+    /**
+     * BT N correr 5 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Correr5ActionPerformed(ActionEvent evt) {
 
 	sonic.doRun(5).setAnimationSpeed(5);
     }
 
+    /**
+     * BT N andar 2 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Andar2ActionPerformed(ActionEvent evt) {
 
 	sonic.doWalk(2).setAnimationSpeed(2);
     }
 
+    /**
+     * BT N andar 3 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Andar3ActionPerformed(ActionEvent evt) {
 
 	sonic.doWalk(3).setAnimationSpeed(3);
     }
 
+    /**
+     * BT N andar 4 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Andar4ActionPerformed(ActionEvent evt) {
 
 	sonic.doWalk(4).setAnimationSpeed(4);
     }
 
+    /**
+     * BT N andar 5 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Andar5ActionPerformed(ActionEvent evt) {
 
 	sonic.doWalk(5).setAnimationSpeed(5);
     }
 
+    /**
+     * BT N girar 1 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Girar1ActionPerformed(ActionEvent evt) {
 
 	sonic.doSpin(1).setAnimationSpeed(1);
     }
 
+    /**
+     * BT N girar 2 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Girar2ActionPerformed(ActionEvent evt) {
 
 	sonic.doSpin(2).setAnimationSpeed(2);
     }
 
+    /**
+     * BT N girar 3 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Girar3ActionPerformed(ActionEvent evt) {
 
 	sonic.doSpin(3).setAnimationSpeed(3);
     }
 
+    /**
+     * BT N girar 4 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Girar4ActionPerformed(ActionEvent evt) {
 
 	sonic.doSpin(4).setAnimationSpeed(4);
     }
 
+    /**
+     * BT N parar action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_PararActionPerformed(ActionEvent evt) {
 
 	sonic.doStop();
     }
 
+    /**
+     * BT N esquerda action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_EsquerdaActionPerformed(ActionEvent evt) {
 
 	sonic.setOrientation(Orientation.LEFT);
     }
 
+    /**
+     * BT N direita action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_DireitaActionPerformed(ActionEvent evt) {
 
 	sonic.setOrientation(Orientation.RIGHT);
     }
 
+    /**
+     * JSL D vel animacao state changed.
+     *
+     * @param evt the evt
+     */
     private void JSLD_VelAnimacaoStateChanged(ChangeEvent evt) {
 
 	sonic.setAnimationSpeed(sliderAnimation.getValue());
     }
 
+    /**
+     * BT N correr 0 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Correr0ActionPerformed(ActionEvent evt) {
 
 	sonic.doRun(0).setAnimationSpeed(0);
     }
 
+    /**
+     * BT N correr 6 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Correr6ActionPerformed(ActionEvent evt) {
 
 	sonic.doRun(6).setAnimationSpeed(6);
     }
 
+    /**
+     * BT N correr 7 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Correr7ActionPerformed(ActionEvent evt) {
 
 	sonic.doRun(7).setAnimationSpeed(7);
     }
 
+    /**
+     * BT N andar 7 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Andar7ActionPerformed(ActionEvent evt) {
 
 	sonic.doWalk(7).setAnimationSpeed(7);
     }
 
+    /**
+     * BT N andar 6 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Andar6ActionPerformed(ActionEvent evt) {
 
 	sonic.doWalk(6).setAnimationSpeed(6);
     }
 
+    /**
+     * BT N andar 0 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Andar0ActionPerformed(ActionEvent evt) {
 
 	sonic.doWalk(0).setAnimationSpeed(0);
     }
 
+    /**
+     * BT N girar 5 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Girar5ActionPerformed(ActionEvent evt) {
 
 	sonic.doSpin(5).setAnimationSpeed(5);
     }
 
+    /**
+     * BT N girar 6 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Girar6ActionPerformed(ActionEvent evt) {
 
 	sonic.doSpin(6).setAnimationSpeed(6);
     }
 
+    /**
+     * BT N girar 7 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Girar7ActionPerformed(ActionEvent evt) {
 
 	sonic.doSpin(7).setAnimationSpeed(7);
     }
 
+    /**
+     * BT N dash 0 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Dash0ActionPerformed(ActionEvent evt) {
 
 	sonic.doDash(0).setAnimationSpeed(0);
     }
 
+    /**
+     * BT N dash 1 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Dash1ActionPerformed(ActionEvent evt) {
 
 	sonic.doDash(1).setAnimationSpeed(1);
     }
 
+    /**
+     * BT N dash 2 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Dash2ActionPerformed(ActionEvent evt) {
 
 	sonic.doDash(2).setAnimationSpeed(2);
     }
 
+    /**
+     * BT N dash 3 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Dash3ActionPerformed(ActionEvent evt) {
 
 	sonic.doDash(3).setAnimationSpeed(3);
     }
 
+    /**
+     * BT N dash 4 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Dash4ActionPerformed(ActionEvent evt) {
 
 	sonic.doDash(4).setAnimationSpeed(4);
     }
 
+    /**
+     * BT N dash 5 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Dash5ActionPerformed(ActionEvent evt) {
 
 	sonic.doDash(5).setAnimationSpeed(5);
     }
 
+    /**
+     * BT N dash 6 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Dash6ActionPerformed(ActionEvent evt) {
 
 	sonic.doDash(6).setAnimationSpeed(6);
     }
 
+    /**
+     * BT N dash 7 action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_Dash7ActionPerformed(ActionEvent evt) {
 
 	sonic.doDash(7).setAnimationSpeed(7);
     }
 
+    /**
+     * BT N abaixado action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_AbaixadoActionPerformed(ActionEvent evt) {
 
 	sonic.doDowned();
     }
 
+    /**
+     * BT N olhando action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_OlhandoActionPerformed(ActionEvent evt) {
 
 	sonic.doLooking();
     }
 
+    /**
+     * BT N freiando action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_FreiandoActionPerformed(ActionEvent evt) {
 
 	sonic.doBrakeUp();
     }
 
+    /**
+     * BT N empurrando action performed.
+     *
+     * @param evt the evt
+     */
     private void BTN_EmpurrandoActionPerformed(ActionEvent evt) {
 
 	sonic.doPush();
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Runnable#run()
+     */
     @Override
     public void run() {
 
@@ -1184,6 +1437,9 @@ public final class FrameAnimation extends JFrame implements Runnable, Observer {
 	   
     }
 
+    /* (non-Javadoc)
+     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+     */
     @Override
     public void update(Observable o, Object arg) {
 	

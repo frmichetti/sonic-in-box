@@ -1,14 +1,31 @@
 package br.com.codecode.sonicinbox.enums;
 
+// TODO: Auto-generated Javadoc
 /**
- * Possible Actions
- * 
+ * Possible Actions.
+ *
  * @author felipe
- * @since 1.0
  * @version 1.0
+ * @since 1.0
  */
 public enum Action {
 
-    STOP, WAIT, MOVE, WALK, RUN, DOWN, DOWNED, DASH, JUMP, SPIN, LOOK, LOOKING, PUSH, TRANSFORM, SPEEDUP, BRAKEUP;
+    /** The stop. */
+    STOP, /** The wait. */
+ WAIT, /** The move. */
+ MOVE, /** The walk. */
+ WALK, /** The run. */
+ RUN, /** The down. */
+ DOWN, /** The downed. */
+ DOWNED, /** The dash. */
+ DASH, /** The jump. */
+ JUMP, /** The spin. */
+ SPIN, /** The look. */
+ LOOK, /** The looking. */
+ LOOKING, /** The push. */
+ PUSH, /** The transform. */
+ TRANSFORM, /** The speedup. */
+ SPEEDUP, /** The brakeup. */
+ BRAKEUP;
 
 }

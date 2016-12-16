@@ -10,27 +10,42 @@ import javax.sound.midi.Sequencer;
 
 import br.com.codecode.sonicinbox.Start;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Music.
+ */
 public final class Music implements Runnable {
 
+    /** The music title screen. */
     @SuppressWarnings("unused")
     private final String MUSIC_TITLE_SCREEN = "title-screen.mid";
 
+    /** The music aquatic ruin zone. */
     @SuppressWarnings("unused")
     private final String MUSIC_AQUATIC_RUIN_ZONE = "aquatic-ruin-zone-2-.mid";
 
+    /** The music final boss. */
     @SuppressWarnings("unused")
     private final String MUSIC_FINAL_BOSS = "final-boss.mid";
 
+    /** The music chemical plant. */
     private final String MUSIC_CHEMICAL_PLANT = "chemical-plant-zone-13-.mid";
 
+    /** The on. */
     private boolean on;
 
+    /** The player. */
     private Sequencer player;
 
+    /** The thread. */
     private Thread thread;
 
+    /** The current URL. */
     private String currentURL;
 
+    /**
+     * Instantiates a new music.
+     */
     private Music() {
 
 	thread = new Thread(Start.tgrpEngine, this, "Music Thread");
@@ -40,11 +55,22 @@ public final class Music implements Runnable {
 	on = true;
     }
 
+    /**
+     * Instantiates a new music.
+     *
+     * @param from the from
+     */
     public Music(String from) {
 	this();
 	this.currentURL = from;
     }
 
+    /**
+     * Do play midi.
+     *
+     * @param from the from
+     * @param loop the loop
+     */
     public void doPlayMidi(String from, int loop) {
 
 	Sequence midi = null;
@@ -70,6 +96,9 @@ public final class Music implements Runnable {
 
     }
 
+    /**
+     * Resume.
+     */
     public void resume() {
 
 	if (player.isOpen() && player.isRunning()) {
@@ -80,11 +109,21 @@ public final class Music implements Runnable {
 	}
     }
 
+    /**
+     * Checks if is on.
+     *
+     * @return true, if is on
+     */
     public boolean isOn() {
 
 	return on;
     }
 
+    /**
+     * Sets the on.
+     *
+     * @param on the new on
+     */
     public void setOn(boolean on) {
 
 	this.on = on;
@@ -99,6 +138,9 @@ public final class Music implements Runnable {
 	}
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Runnable#run()
+     */
     @Override
     public void run() {
 

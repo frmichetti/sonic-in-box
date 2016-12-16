@@ -10,19 +10,35 @@ import javax.swing.JProgressBar;
 
 import br.com.codecode.sonicinbox.enums.ConfigSonic;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Sprites.
+ */
 public final class Sprites implements Runnable {
 
+    /** The file pattern. */
     public final String filePattern = "sprite_%s.png";
 
+    /** The frames. */
     private ImageIcon[] frames;
 
+    /** The progress bar. */
     private JProgressBar progressBar = new JProgressBar(0, ConfigSonic.MAX_SPRITES.getValue() - 1);
 
+    /** The from. */
     private String from;
 
+    /**
+     * Instantiates a new sprites.
+     */
     private Sprites() {
     };
 
+    /**
+     * Instantiates a new sprites.
+     *
+     * @param from the from
+     */
     public Sprites(String from) {
 
 	this();
@@ -35,6 +51,11 @@ public final class Sprites implements Runnable {
 
     }
 
+    /**
+     * Do load sprites.
+     *
+     * @param from the from
+     */
     private void doLoadSprites(String from) {
 
 	DecimalFormat df = new DecimalFormat("0.##");
@@ -71,11 +92,20 @@ public final class Sprites implements Runnable {
 
     }
 
+    /**
+     * Gets the image.
+     *
+     * @param index the index
+     * @return the image
+     */
     public Image getImage(int index) {
 
 	return frames[index].getImage();
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Runnable#run()
+     */
     @Override
     public void run() {
 

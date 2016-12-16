@@ -17,11 +17,11 @@ import br.com.codecode.sonicinbox.interfaces.Moveable;
 import br.com.codecode.sonicinbox.interfaces.Physicable;
 import br.com.codecode.sonicinbox.interfaces.Syncronizeable;
 
+// TODO: Auto-generated Javadoc
 /**
- * Sonic Character
- * 
+ * Sonic Character.
+ *
  * @author felipe
- * @since 1.0
  * @version 3.0
  * @see Observable
  * @see Animated
@@ -29,31 +29,46 @@ import br.com.codecode.sonicinbox.interfaces.Syncronizeable;
  * @see Physicable
  * @see Observer
  * @see Runnable
+ * @since 1.0
  */
 public final class Sonic extends Observable implements Animated, Moveable, Physicable, Observer, Runnable, Syncronizeable {
 
+    /** The speed. */
     private float acceleration, mass, resistance, speed;
 
+    /** The action. */
     private Action action;
 
+    /** The ai. */
     private boolean ai;
 
+    /** The animation. */
     private Animation animation;
 
+    /** The animation speed. */
     private int animationSpeed;    
 
+    /** The movimentation. */
     private Movimentation movimentation;
 
+    /** The orientation. */
     private Orientation orientation;
 
+    /** The sprites. */
     private Sprites sprites;
 
+    /** The super sonic. */
     private boolean superSonic;
 
+    /** The thread. */
     private Thread thread;
 
+    /** The h. */
     private int X, Y, W, H;
 
+    /**
+     * Instantiates a new sonic.
+     */
     private Sonic() {
 
 	super.addObserver(this);
@@ -84,6 +99,12 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 
     }
 
+    /**
+     * Instantiates a new sonic.
+     *
+     * @param from the from
+     * @param ai the ai
+     */
     public Sonic(String from, boolean ai) {
 	this();
 	this.ai = ai;
@@ -99,6 +120,11 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 	executor.shutdown();
     }
 
+    /**
+     * Do brake up.
+     *
+     * @return the sonic
+     */
     public Sonic doBrakeUp() {
 
 	if (getAction() != Action.STOP && getAction() != Action.SPEEDUP && getSpeed() > 10_000
@@ -122,6 +148,12 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 	return this;
     }
 
+    /**
+     * Do dash.
+     *
+     * @param speed the speed
+     * @return the sonic
+     */
     public Sonic doDash(int speed) {
 
 	if (getAction() == Action.DASH && getSpeed() == 0) {
@@ -135,6 +167,11 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 
     }
 
+    /**
+     * Do down.
+     *
+     * @return the sonic
+     */
     public Sonic doDown() {
 
 	if (getAction() == Action.DOWN && getSpeed() == 0) {
@@ -149,6 +186,11 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 
     }
 
+    /**
+     * Do downed.
+     *
+     * @return the sonic
+     */
     public Sonic doDowned() {
 
 	if (getAction() == Action.DOWNED && getSpeed() == 0) {
@@ -162,6 +204,11 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 	return this;
     }
 
+    /**
+     * Do jump.
+     *
+     * @return the sonic
+     */
     public Sonic doJump() {
 
 	setChanged();
@@ -169,6 +216,11 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 	return this;
     }
 
+    /**
+     * Do load sprites.
+     *
+     * @param from the from
+     */
     private void doLoadSprites(String from) {
 
 	sprites = new Sprites(from);
@@ -189,6 +241,11 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 
     }
 
+    /**
+     * Do look.
+     *
+     * @return the sonic
+     */
     public Sonic doLook() {
 
 	if (getAction() == Action.LOOK && getSpeed() == 0) {
@@ -202,6 +259,11 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 
     }
 
+    /**
+     * Do looking.
+     *
+     * @return the sonic
+     */
     public Sonic doLooking() {
 
 	if (getAction() == Action.LOOKING && getSpeed() == 0) {
@@ -216,6 +278,11 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 
     }
 
+    /**
+     * Do push.
+     *
+     * @return the sonic
+     */
     public Sonic doPush() {
 
 	if (getAction() == Action.STOP) {
@@ -228,6 +295,12 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 	return this;
     }
 
+    /**
+     * Do run.
+     *
+     * @param speed the speed
+     * @return the sonic
+     */
     public Sonic doRun(int speed) {
 
 	if (getAction() == Action.MOVE) {
@@ -243,6 +316,11 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 
     }
 
+    /**
+     * Do speed up.
+     *
+     * @return the sonic
+     */
     public Sonic doSpeedUp() {
 
 	if (getAction() != Action.BRAKEUP && getAcceleration() <= 1_700) {
@@ -254,6 +332,12 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 
     }
 
+    /**
+     * Do spin.
+     *
+     * @param speed the speed
+     * @return the sonic
+     */
     public Sonic doSpin(int speed) {
 
 	if (getAction() == Action.MOVE && getSpeed() > 100) {
@@ -269,6 +353,11 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 
     }
 
+    /**
+     * Do stop.
+     *
+     * @return the sonic
+     */
     public Sonic doStop() {
 
 	if (getAction() != Action.STOP && getSpeed() == 0) {
@@ -281,6 +370,11 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 	return this;
     }
 
+    /**
+     * Do transform.
+     *
+     * @return the sonic
+     */
     public Sonic doTransform() {
 
 	if (getAction() == Action.TRANSFORM && !isSuperSonic() && getSpeed() == 0) {
@@ -294,6 +388,11 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 	return this;
     }
 
+    /**
+     * Do wait.
+     *
+     * @return the sonic
+     */
     public Sonic doWait() {
 
 	if (getAction() == Action.WAIT && getSpeed() == 0) {
@@ -307,6 +406,12 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 	return this;
     }
 
+    /**
+     * Do walk.
+     *
+     * @param speed the speed
+     * @return the sonic
+     */
     public Sonic doWalk(int speed) {
 
 	if (getAction() == Action.MOVE) {
@@ -321,113 +426,190 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 	return this;
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Physicable#getAcceleration()
+     */
     @Override
     public float getAcceleration() {
 
 	return acceleration;
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Animated#getAction()
+     */
     @Override
     public Enum<? extends Action> getAction() {
 
 	return action;
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Animated#getAnimationSpeed()
+     */
     @Override
     public int getAnimationSpeed() {
 
 	return animationSpeed;
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Animated#getCurrentFrame()
+     */
     @Override
     public int getCurrentFrame() {
 
 	return animation.getCurrentFrame();
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Animated#getFinalFrame()
+     */
     @Override
     public int getFinalFrame() {
 
 	return animation.getFinalFrame();
     }
 
+    /**
+     * Gets the h.
+     *
+     * @return the h
+     */
     public int getH() {
 
 	return H;
     }
 
+    /**
+     * Gets the image.
+     *
+     * @param index the index
+     * @return the image
+     */
     public Image getImage(int index) {
 
 	return sprites.getImage(index);
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Animated#getInitFrame()
+     */
     @Override
     public int getInitFrame() {
 
 	return animation.getInitFrame();
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Physicable#getMass()
+     */
     @Override
     public float getMass() {
 
 	return mass;
     }
 
+    /**
+     * Gets the movimentation.
+     *
+     * @return the movimentation
+     */
     public Movimentation getMovimentation() {
 
 	return movimentation;
     }
 
+    /**
+     * Gets the orientation.
+     *
+     * @return the orientation
+     */
     public Orientation getOrientation() {
 
 	return orientation;
 
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Physicable#getResistance()
+     */
     @Override
     public float getResistance() {
 
 	return resistance;
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Physicable#getSpeed()
+     */
     @Override
     public float getSpeed() {
 
 	return speed;
     }
 
+    /**
+     * Gets the thread.
+     *
+     * @return the thread
+     */
     public Thread getThread() {
 
 	return thread;
     }
 
+    /**
+     * Gets the w.
+     *
+     * @return the w
+     */
     public int getW() {
 
 	return W;
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Moveable#getX()
+     */
     @Override
     public int getX() {
 
 	return X;
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Moveable#getY()
+     */
     @Override
     public int getY() {
 
 	return Y;
     }
 
+    /**
+     * Checks if is ai.
+     *
+     * @return true, if is ai
+     */
     public boolean isAi() {
 
 	return ai;
     }
 
+    /**
+     * Checks if is super sonic.
+     *
+     * @return true, if is super sonic
+     */
     public boolean isSuperSonic() {
 
 	return superSonic;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Runnable#run()
+     */
     @Override
     public void run() {
 
@@ -451,22 +633,40 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 	}
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Physicable#setAcceleration(float)
+     */
     @Override
     public synchronized void setAcceleration(float acceleration) {
 
 	this.acceleration = acceleration;
     }
 
+    /**
+     * Sets the action.
+     *
+     * @param action the new action
+     */
     public synchronized void setAction(Action action) {
 
 	this.action = action;
     }
 
+    /**
+     * Sets the ai.
+     *
+     * @param ai the new ai
+     */
     public void setAi(boolean ai) {
 
 	this.ai = ai;
     }
 
+    /**
+     * Sets the ai.
+     *
+     * @param ai the new ai
+     */
     private void setAI(boolean ai) {
 
 	if (isAi()) {
@@ -819,40 +1019,68 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Animated#setAnimationSpeed(int)
+     */
     @Override
     public void setAnimationSpeed(int animationSpeed) {
 
 	this.animationSpeed = animationSpeed;
     }
 
+    /**
+     * Sets the h.
+     *
+     * @param H the new h
+     */
     public void setH(int H) {
 
 	this.H = H;
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Physicable#setMass(float)
+     */
     @Override
     public void setMass(float mass) {
 
 	this.mass = mass;
     }
 
+    /**
+     * Sets the orientation.
+     *
+     * @param orientation the new orientation
+     */
     public void setOrientation(Orientation orientation) {
 
 	this.orientation = orientation;
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Physicable#setResistance(float)
+     */
     @Override
     public void setResistance(float resistance) {
 
 	this.resistance = resistance;
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Physicable#setSpeed(float)
+     */
     @Override
     public synchronized void setSpeed(float speed) {
 
 	this.speed = speed;
     }
 
+    /**
+     * Sets the super sonic.
+     *
+     * @param superSonic the super sonic
+     * @return the sonic
+     */
     public Sonic setSuperSonic(boolean superSonic) {
 
 	this.superSonic = superSonic;
@@ -867,23 +1095,37 @@ public final class Sonic extends Observable implements Animated, Moveable, Physi
 	return this;
     }
 
+    /**
+     * Sets the w.
+     *
+     * @param W the new w
+     */
     public void setW(int W) {
 
 	this.W = W;
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Moveable#setX(int)
+     */
     @Override
     public void setX(int X) {
 
 	this.X = X;
     }
 
+    /* (non-Javadoc)
+     * @see br.com.codecode.sonicinbox.interfaces.Moveable#setY(int)
+     */
     @Override
     public void setY(int Y) {
 
 	this.Y = Y;
     }
 
+    /* (non-Javadoc)
+     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+     */
     @Override
     public void update(Observable o, Object arg) {
 

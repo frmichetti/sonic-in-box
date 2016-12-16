@@ -19,18 +19,38 @@ import br.com.codecode.sonicinbox.interfaces.Physicable;
 import br.com.codecode.sonicinbox.motion.Sonic;
 import br.com.codecode.sonicinbox.util.Size;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The listener interface for receiving frame events.
+ * The class that is interested in processing a frame
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addFrameListener<code> method. When
+ * the frame event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see FrameEvent
+ */
 public final class FrameListener extends JFrame implements Runnable, Observer {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -8266452496408906017L;
 
+    /** The progress. */
     private JProgressBar progress;
 
+    /** The j label 1. */
     private JLabel lblAccelation, jLabel1;
 
+    /** The sonic. */
     private Sonic sonic;
 
+    /** The thread. */
     private Thread thread;
 
+    /**
+     * Instantiates a new frame listener.
+     */
     private FrameListener() {
 
 	thread = new Thread(this);
@@ -47,6 +67,11 @@ public final class FrameListener extends JFrame implements Runnable, Observer {
 
     }
 
+    /**
+     * Instantiates a new frame listener.
+     *
+     * @param engine the engine
+     */
     public FrameListener(Engine engine) {
 	this();
 	this.sonic = engine.getSonic();
@@ -55,6 +80,9 @@ public final class FrameListener extends JFrame implements Runnable, Observer {
 	this.sonic.addObserver(this);
     }
 
+    /**
+     * Inits the components.
+     */
     private void initComponents() {
 
 	progress = new JProgressBar();
@@ -116,11 +144,17 @@ public final class FrameListener extends JFrame implements Runnable, Observer {
 	pack();
     }
 
+    /**
+     * Do refresh components.
+     */
     private void doRefreshComponents() {
 
 	
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Runnable#run()
+     */
     @Override
     public void run() {
 
@@ -136,6 +170,11 @@ public final class FrameListener extends JFrame implements Runnable, Observer {
 	}
     }
 
+    /**
+     * Do update speed.
+     *
+     * @param speed the speed
+     */
     private void doUpdateSpeed(int speed) {
 
 	progress.setValue(speed);
@@ -144,6 +183,9 @@ public final class FrameListener extends JFrame implements Runnable, Observer {
 	
     }
 
+    /* (non-Javadoc)
+     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+     */
     @Override
     public void update(Observable o, Object arg) {
 	
