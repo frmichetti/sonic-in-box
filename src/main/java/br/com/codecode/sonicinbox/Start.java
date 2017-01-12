@@ -14,7 +14,7 @@ import br.com.codecode.sonicinbox.engine.Engine;
 /**
  * The Class Start.
  */
-public final class Start {
+public class Start {
 
     /** The tgrp sonic. */
     public static ThreadGroup tgrpEngine, tgrpSonic;

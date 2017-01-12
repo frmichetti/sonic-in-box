@@ -25,11 +25,11 @@ import br.com.codecode.sonicinbox.util.Size;
  * The class that is interested in processing a frame
  * event implements this interface, and the object created
  * with that class is registered with a component using the
- * component's <code>addFrameListener<code> method. When
+ * component's <code>addFrameListener</code> method. When
  * the frame event occurs, that object's appropriate
  * method is invoked.
  *
- * @see FrameEvent
+ * 
  */
 public final class FrameListener extends JFrame implements Runnable, Observer {
 
