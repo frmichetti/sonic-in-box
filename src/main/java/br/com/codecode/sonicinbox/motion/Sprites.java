@@ -69,7 +69,7 @@ public final class Sprites implements Runnable {
 	    try {
 
 		frames[c] = new ImageIcon(ImageIO.read(
-			ClassLoader.class.getResourceAsStream(String.format(from + filePattern, String.valueOf(c)))));
+			Sprites.class.getResourceAsStream(String.format(from + filePattern, String.valueOf(c)))));
 
 	    } catch (IOException ex) {
 

@@ -79,7 +79,7 @@ public final class Music implements Runnable {
 
 	    player = MidiSystem.getSequencer();
 
-	    midi = MidiSystem.getSequence(ClassLoader.class.getResourceAsStream(from));
+	    midi = MidiSystem.getSequence(Music.class.getResourceAsStream(from));
 
 	    player.open();
 

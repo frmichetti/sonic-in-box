@@ -30,7 +30,7 @@ public class TestMyPaths {
 
 	    System.out.println(path);
 
-	    icon = new ImageIcon(ImageIO.read(ClassLoader.class.getResourceAsStream(path)));
+	    icon = new ImageIcon(ImageIO.read(TestMyPaths.class.getResourceAsStream(path)));
 
 	    Assert.assertNotNull(icon);
 

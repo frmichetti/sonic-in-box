@@ -14,10 +14,10 @@ public final class MyPath {
     private MyPath(){}
 
     /** The Constant MUSICS_RELATIVE. */
-    public final static String MUSICS_RELATIVE = "/META-INF/lib/musics/";
+    public final static String MUSICS_RELATIVE = "/lib/musics/";
 
     /** The Constant SPRITES_RELATIVE. */
-    public final static String SPRITES_RELATIVE = "/META-INF/lib/sprites/";
+    public final static String SPRITES_RELATIVE = "/lib/sprites/";
 
     /** The Constant FILE_SEPARATOR. */
     public final static String FILE_SEPARATOR = FileSystems.getDefault().getSeparator();
